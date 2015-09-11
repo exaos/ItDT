@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StatDataML>
+
+  <description>
+    <title>Stomach Contents of Atlantic Cod</title>
+    <source>Canadian Department of Fisheries 
+and Oceans</source>
+    <date>2006-10-19</date>
+    <comment>
+      The data are measurements made on the stomach contents
+      of Atlantic Cod.
+
+      The data set described herein
+      is provided in a colon-delimited ASCII text file format.
+
+      This is a small sample from a larger data set with
+      more stomach contents and more variables.
+    </comment>
+  </description>
+
+  <dataset>
+    <list>
+      <dimension>
+        <dim size="9">
+          <e>region</e>
+          <e>shipType</e>
+          <e>shipID</e>
+          <e>trip</e>
+          <e>set</e>
+          <e>fishID</e>
+          <e>fishLength</e>
+          <e>preyMass</e>
+          <e>preyType</e>
+        </dim>
+      </dimension>
+      <listdata>
+        <array>
+          <dimension>
+            <dim size="10000" name="region"></dim>
+          </dimension>
+          <type>
+            <categorical>
+              <label code="NGSL">Northern Gulf of St Lawrence</label>
+              <label code="SGSL">Southern Gulf of St Lawrence</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="shipType"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer />
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="shipID"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer />
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="trip"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer />
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="set"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <real />
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="fishID"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer />
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="fishLength"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <real>
+                <min>0</min>
+              </real>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="preyMass"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <real>
+                <min>0</min>
+              </real>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="10000" name="preyType"></dim>
+          </dimension>
+          <type>
+            <character />
+          </type>
+          <textdata />
+        </array>
+      </listdata>
+    </list>
+  </dataset>
+</StatDataML>

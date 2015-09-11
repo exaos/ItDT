@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StatDataML>
+
+  <description>
+    <title>Network Packets at the University of Auckland</title>
+    <source>Neville Brownlee</source>
+    <date>2007-07-04</date>
+    <comment>
+      The data are measurements made on each packet of information that passes 
+      through the University of Auckland Internet Gateway.
+      These measurement include a timestamp that represents
+      the time at which the packet reached the network location,
+      and the size of the packet, as a number of bytes.  
+
+      The data set described herein
+      is provided in a space-delimited ASCII text file format.
+      This is a very small sample of just 46 packets.
+    </comment>
+  </description>
+
+  <dataset>
+    <list>
+      <dimension>
+        <dim size="2">
+          <e>timestamp</e>
+          <e>size</e>
+        </dim>
+      </dimension>
+      <listdata>
+        <array>
+          <dimension>
+            <dim size="46" name="timestamp"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="46" name="size"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+      </listdata>
+    </list>
+  </dataset>
+</StatDataML>

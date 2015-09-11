@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StatDataML>
+
+  <description>
+    <title>Demographics for 1000 Indian Mothers</title>
+    <source>Deepankar Basu</source>
+    <date>2007-10-30</date>
+    <comment>
+      The data originated from the Demographic and Health Survey
+      program.  An SPSS file containing data for 1000 mothers
+      was provided by Deepankar Basu.  The data set described herein
+      is provided in a space-delimited ASCII text file format.
+
+      This data set contains demographic information for
+      1000 Indian mothers, including
+      age, years of education, social status, and whether the
+      mother has employment outside the home.  
+      There is also information about the gender of any children
+      that the mother has
+      and a count of how many of the children are currently alive.
+    </comment>
+  </description>
+
+  <dataset>
+    <list>
+      <dimension>
+        <dim size="20">
+          <e>cord1</e>
+          <e>cord2</e>
+          <e>cord3</e>
+          <e>cord4</e>
+          <e>cord5</e>
+          <e>cord6</e>
+          <e>cord7</e>
+          <e>cord8</e>
+          <e>cord9</e>
+          <e>cord10</e>
+          <e>cord11</e>
+          <e>cord12</e>
+          <e>cord13</e>
+          <e>cord14</e>
+          <e>age</e>
+          <e>edu</e>
+          <e>alive</e>
+          <e>middle</e>
+          <e>poor</e>
+          <e>work</e>
+        </dim>
+      </dimension>
+      <listdata>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord1"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord2"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord3"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord4"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord5"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord6"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord7"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord8"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord9"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord10"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord11"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">boy</label>
+              <label code="2">girl</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord12"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">no</label>
+              <label code="1">yes</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord13"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">no</label>
+              <label code="1">yes</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="cord14"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">no</label>
+              <label code="1">yes</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="age"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="edu"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="alive"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="middle"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">no</label>
+              <label code="1">yes</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="poor"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">no</label>
+              <label code="1">yes</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="1000" name="work"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">no</label>
+              <label code="1">yes</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+      </listdata>
+    </list>
+  </dataset>
+</StatDataML>

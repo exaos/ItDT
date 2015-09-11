@@ -1,0 +1,521 @@
+Introduction to Data Technologies
+
+Paul Murrell
+
+Contents
+
+List of Figures
+
+List of Tables
+
+Preface
+
+1 Introduction  
+1.1 Case study: Point Nemo
+
+2 Writing Computer Code
+2.1 Case study: Point Nemo (continued)
+2.2 Syntax  
+2.2.1 HTML syntax  
+2.2.2 Escape sequences  
+2.3 Semantics  
+2.3.1 HTML semantics  
+2.4 Writing code  
+2.4.1 Text editors  
+2.4.2 Important features of a text editor  
+2.4.3 Layout of code  
+2.4.4 Indenting code  
+2.4.5 Long lines of code  
+2.4.6 Whitespace  
+2.4.7 Documenting code  
+2.4.8 HTML comments  
+2.5 Checking code   
+2.5.1 Checking HTML code  
+2.5.2 Reading error information  
+2.5.3 Reading documentation  
+2.6 Running code   
+2.6.1 Running HTML code  
+2.6.2 Debugging code  
+2.7 The DRY principle  
+2.7.1 Cascading Style Sheets  
+2.8 Further reading  
+
+3 HTML  
+3.1 HTML syntax  
+3.1.1 HTML comments  
+3.1.2 HTML entities  
+3.2 HTML semantics  
+3.2.1 Common HTML elements  
+3.2.2 Common HTML attributes  
+3.3 Further reading  
+
+4 CSS
+4.1 CSS syntax   
+4.2 CSS semantics   
+4.2.1 CSS selectors  
+4.2.2 CSS properties  
+4.3 Linking CSS to HTML  
+4.4 CSS tips  
+4.5 Further reading  
+
+5 Data Storage
+5.1 Case study: YBC7289  
+5.2 Plain text formats  
+5.2.1 Computer memory  
+5.2.2 Files and formats  
+5.2.3 Case study: Point Nemo (continued)   
+5.2.4 Advantages and disadvantages  
+5.2.5 CSV files  
+5.2.6 Line endings  
+5.2.7 Text encodings  
+5.2.8 Case study: The Data Expo  
+5.3 Binary formats   
+5.3.1 More on computer memory   
+5.3.2 Case study: Point Nemo (continued)  
+5.3.3 NetCDF  
+5.3.4 PDF documents   
+5.3.5 Other types of data  
+5.4 Spreadsheets  
+5.4.1 Spreadsheet formats   
+5.4.2 Spreadsheet software   
+5.4.3 Case study: Over the limit  
+5.5 XML  
+5.5.1 XML syntax  
+5.5.2 XML design  
+5.5.3 XML schema  
+5.5.4 Case study: Point Nemo (continued)  
+5.5.5 Advantages and disadvantages  
+5.6 Databases  
+5.6.1 The database data model  
+5.6.2 Database notation  
+5.6.3 Database design  
+5.6.4 Flashback: The DRY principle  
+5.6.5 Case study: The Data Expo (continued)  
+5.6.6 Advantages and disadvantages  
+5.6.7 Flashback: Database design and XML design  
+5.6.8 Case study: The Data Expo (continued)  
+5.6.9 Database software  
+5.7 Further reading 
+
+6 XML  
+6.1 XML syntax  
+6.2 Document Type Definitions   
+6.2.1 Element declarations  
+6.2.2 Attribute declarations    
+6.2.3 Including a DTD  
+6.2.4 An example  
+6.3 Further reading 
+
+7 Data Queries  
+7.1 Case study: TheDataExpo(continued) 
+7.2 Querying databases  
+7.2.1 SQL syntax  
+7.2.2 Case study: The Data Expo (continued)  
+7.2.3 Collations   
+7.2.4 Querying several tables: Joins  
+7.2.5 Case study: Commonwealth swimming  
+7.2.6 Cross joins  
+7.2.7 Inner joins  
+7.2.8 Case study: The Data Expo (continued)  
+7.2.9 Subqueries  
+7.2.10 Outer joins  
+7.2.11 Case study: Commonwealth swimming (continued)  
+7.2.12 Self joins  
+7.2.13 Case study: The Data Expo (continued)  
+7.2.14 Running SQL code  
+7.3 Querying XML   
+7.3.1 XPath syntax   
+7.3.2 Case study: Point Nemo (continued)  
+7.4 Further reading  
+
+8 SQL
+8.1 SQL syntax  
+8.2 SQL queries  
+8.2.1 Selecting columns  
+8.2.2 Specifying tables: The FROMc lause  
+8.2.3 Selecting rows: The WHERE clause  
+8.2.4 Sorting results: The ORDERBY clause  
+8.2.5 Aggregating results: The GROUP BY clause  
+8.2.6 Subqueries  
+8.3 Other SQL commands  
+8.3.1 Defining tables  
+8.3.2 Populating tables  
+8.3.3 Modifying data  
+8.3.4 Deleting data  
+8.4 Further reading  
+
+9 Data Processing  
+9.1 Case study: The Population Clock  
+9.2 The Renvironment 
+9.2.1 The command line  
+9.2.2 The workspace  
+9.2.3 Packages  
+9.3 The R language  
+9.3.1 Expressions  
+9.3.2 Constant values  
+9.3.3 Arithmetic  
+9.3.4 Conditions  
+9.3.5 Function calls  
+9.3.6 Symbols and assignment  
+9.3.7 Keywords  
+9.3.8 Flashback: Writing for an audience  
+9.3.9 Naming variables  
+9.4 Data types and data structures  
+9.4.1 Case study: Counting candy  
+9.4.2 Vectors  
+9.4.3 Factors  
+9.4.4 Dataframes  
+9.4.5 Lists  
+9.4.6 Matrices and arrays  
+9.4.7 Flashback: Numbers in computer memory  
+9.5 Subsetting  
+9.5.1 Assigning to a subset  
+9.5.2 Subsetting factors   
+9.6 More on data structures  
+9.6.1 The recycling rule  
+9.6.2 Type coercion  
+9.6.3 Attributes  
+9.6.4 Classes  
+9.6.5 Dates 
+9.6.6 Formulas  
+9.6.7 Exploring objects  
+9.6.8 Generic functions  
+9.7 Data import/export  
+9.7.1 The working directory 
+9.7.2 Specifying files 
+9.7.3 Textformats  
+9.7.4 Case study: Point Nemo (continued)  
+9.7.5 Binary formats  
+9.7.6 Spreadsheets  
+9.7.7 XML  
+9.7.8 Databases  
+9.7.9 Case study: The Data Expo (continued)  
+9.8 Datamanipulation  
+9.8.1 Case study: New Zealand schools  
+9.8.2 Transformations  
+9.8.3 Sorting  
+9.8.4 Tables of counts  
+9.8.5 Aggregation  
+9.8.6 Case study: NCEA  
+9.8.7 The “apply” functions 
+9.8.8 Merging   
+9.8.9 Flashback: Database joins  
+9.8.10 Splitting   
+9.8.11 Reshaping  
+9.8.12 Casestudy: Utilities  
+9.9 Text processing  
+9.9.1 Case study: The longest placename  
+9.9.2 Regular expressions  
+9.9.3 Case study: Rusty wheat  
+9.10 Data display  
+9.10.1 Case study: Point Nemo (continued)  
+9.10.2 Converting to text   
+9.10.3 Results for reports  
+9.11 Programming  
+9.11.1 Case study: The Data Expo (continued)  
+9.11.2 Control flow   
+9.11.3 Writing functions  
+9.11.4 Flashback: Writing functions, writing code, and the DRY principle  
+9.11.5 Flashback: Debugging  
+9.12 Other software  
+
+10 R 
+10.1 R syntax  
+10.1.1 Constants  
+10.1.2 Arithmetic operators  
+10.1.3 Logical operators  
+10.1.4 Function calls  
+10.1.5 Symbols and assignment  
+10.1.6 Loops  
+10.1.7 Conditional expressions  
+10.2 Data types and data structures   
+10.3 Functions   
+10.3.1 Session management   
+10.3.2 Generating vectors   
+10.3.3 Numeric functions  
+10.3.4 Comparisons  
+10.3.5 Type coercion  
+10.3.6 Exploring data structures  
+10.3.7 Subsetting  
+10.3.8 Data import/export   
+10.3.9 Transformations  
+10.3.10 Sorting  
+10.3.11 Tables of counts  
+10.3.12 Aggregation  
+10.3.13 The “apply” functions   
+10.3.14 Merging  
+10.3.15 Splitting  
+10.3.16 Reshaping  
+10.3.17 Text processing  
+10.3.18 Datadisplay  
+10.3.19 Debugging  
+10.4 Getting help  
+10.5 Packages  
+10.6 Searching for functions  
+10.7 Further reading  
+
+11 Regular Expressions  
+11.1 Literals   
+11.2 Metacharacters  
+11.2.1 Character sets  
+11.2.2 Anchors  
+11.2.3 Alternation  
+11.2.4 Repetitions  
+11.2.5 Grouping  
+11.2.6 Backreferences   
+11.3 Further reading  
+
+12 Conclusion
+
+Attributions 
+
+Bibliography
+
+Index
+
+List of Figures
+
+1.1 The NASA Live Access Server web site   
+1.2 Output from the NASA Live AccessS erver  
+
+2.1 A simple webpage   
+2.2 HTML code for a simple webpage  
+2.3 A minimal HTML document  
+2.4 Useful features of a text editor  
+2.5 Using whitespace to layout code   
+2.6 A broken HTML document  
+2.7 HTML Tidy output   
+2.8 HTML code with CSS style element  
+2.9 HTML code with CSS link element   
+2.10 CSS code for a simple web page 
+
+3.1 A minimal HTML document  
+
+5.1 YBC7289  
+5.2 Point Nemo surface temperatures as plain text  
+5.3 A hierarchical data example  
+5.4 Point Nemo surface temperatures as CSV  
+5.5 Geographic locations of the Data Expo data  
+5.6 Data Expo surface temperatures as plain text  
+5.7 Point Nemo temperatures in netCDF format  
+5.8 The header of the Point Nemo netCDF format  
+5.9 The temperature values in the Point Nemo netCDF format
+5.10 Point Nemo surface temperatures as CSV (raw bytes)
+5.11 A spreads heet of vehicle speed data  
+5.12 Three spreadsheets of vehicle speed data  
+5.13 Point Nemo surface temperature as plain text and XML  
+5.14 Point Nemo surface temperature in another XML format 
+5.15 A hierarchical data example  
+5.16 Point Nemo surface temperature as XML  
+5.17 A DTD for the Point Nemo XML document 
+5.18 A book data set  
+5.19 Data Expo surface temperatures as plain text  
+
+6.1 A well-formed and valid XML document  
+
+7.1 Data Expo air pressure measurements   
+7.2 Data Expo surface temperatures for one location 
+7.3 Data Expo surface temperatures for two locations 
+7.4 Data Expo surface temperatures for all locations 
+7.5 New Zealand swimmers at the Commonwealth Games Data
+7.6 Expo surface temperatures on land per year 
+7.7 Point Nemo surface temperature as XML 
+
+8.1 SQL code to create the Data Expo database
+
+9.1 Computer hardware components  
+9.2 The World Population Clock  
+9.3 HTML code for the World Population Clock 
+9.4 The R command line interface  
+9.5 Point Nemo surface temperatures as plain text  
+9.6 Point Nemo surface temperatures in CSV format  
+9.7 Point Nemo surface temperatures as an Excel spreadsheet  
+9.8 Point Nemo surface temperatures as XML  
+9.9 The New Zealand schools dataset  
+9.10 The NCEA dataset  
+9.11 The “apply” functions  
+9.12 The Utilities dataset as plain text   
+9.13 Utilities energy usage by month  
+9.14 Text processing functions   
+9.15 The Rusty Wheat data set  
+9.16 A simple webpage  
+9.17 Data Expo near-surface air temperature as plain text
+
+10.1 The help page for Sys.sleep()
+
+List of Tables
+
+3.1 Some common HTML entities
+
+6.1 The predefined XML entities
+
+8.1 Some common SQL datatypes
+
+9.1 The Candy dataset
+
+11.1 Some POSIX regular expression character classes
+
+Preface
+
+Conducting research is a bit like parenting.
+
+Raising a child involves a lot of cleaning and tidying, setting standards, and maintaining order, all of which goes completely unnoticed and for which the parent receives absolutely no credit.
+
+Similarly, producing a bright, shiny result from the raw beginnings of a research project involves a lot of work that is almost never seen or acknowledged. Data sets never pop into existence in a fully mature and reliable state; they must be cleaned and massaged into an appropriate form. Just getting the data ready for analysis often represents a significant component of a research project.
+
+Another thing that parenting and the “dirty jobs” of research have in common is that nobody gets taught how to do it. Parents just learn on the job and researchers typically have to do likewise when it comes to learning how to manage their data.
+
+The aim of this book is to provide important information about how to work with research data, including ideas and techniques for performing the important behind-the-scenes tasks that take up so much time and effort, but typically receive little attention in formal education.
+
+The focus of this book is on computational tools. The intention is to improve the awareness of what sorts of tasks can be achieved and to describe the correct approach to performing these tasks. There is also an emphasis on working with data technologies by typing computer code at a keyboard, rather than using a mouse to select menus and dialog boxes.
+
+This book will not turn the reader into a web designer, or a database administrator, or a software engineer. However, this book contains information on how to publish information via the world wide web, how to access information stored in different formats, and how to write small programs to automate simple, repetitive tasks. A great deal of information on these topics already exists in books and on the internet; the value of this book is in collecting only the important subset of this information that is necessary to begin applying these technologies within a research setting.
+
+Who should read this book?
+
+This is an introductory computing book. It was originally developed as support for a second-year university course for statistics students and assumes no background in computing other than the ability to use a keyboard and mouse, and the ability to locate documents (or files) within folders (or directories). This means that it is suitable for anyone who is not confident about his or her computer literacy.
+
+However, the book should also serve as a quick start on unfamiliar topics even for an experienced computer user, as long as the reader is not offended by over-simplified explanations of familiar material.
+
+The book is also directed mainly at educating individual researchers. The tools and techniques, at the level they are described in this book, are of most use for the activities of a a single researcher or the activities of a small research team.
+
+For people involved in managing larger projects, expert data management assistance is advisable. Nevertheless, a familiarity with the topics in this book will be very useful for communicating with experts and understanding the important issues.
+
+In summary, this book is primarily aimed at research students and individual researchers with little computing experience, but it is hoped that it will also be of use to a broader audience.
+
+Writing code
+
+The icon below was captured from the desktop of a computer running Microsoft Windows XP.
+
+Is this document a Microsoft Office Excel spreadsheet?
+
+Many computer users would say that it is. After all, it has got the little Excel image on it and it even says Microsoft Office Excel right below the name of the file. And if we double-clicked on this file, Excel would start up and open the file.
+
+However, this file is not an Excel spreadsheet. It is a plain text file in a
+
+Comma-Separated Values (CSV) format. In fact, the name of the file is not “final”, but “final.csv”. Excel can open this file, but so can thousands of other computer programs.
+
+The computer protects us from this gritty detail by not showing the .csv suffix on the filename and it provides the convenience of automatically using Excel to open the file, rather than asking us what program to use.
+
+Is this somehow a bad thing?
+
+Yes, it is.
+
+A computer user who only works with this sort of interface learns that this sort of file is only for use with Excel. The user becomes accustomed to the computer dictating what the user is able to do with a file.
+
+It is important that users understand that we are able to dictate to the computer what should be done with a file. A CSV file can be viewed and modified using software such as Microsoft Notepad, but this may not occur to a user who is used to being told to use Excel.
+
+Another example is that many computer users have been led to believe that the only way to view a web page is with Internet Explorer, when in fact there are many different web browsers and it is possible to access web pages using other kinds of software as well.
+
+For the majority of computer users, interaction with a computer is limited to clicking on web page hyperlinks, selecting menus, and filling in dialog boxes. The problem with this approach to computing is that it gives the impression that the user is controlled by the computer. The computer interface places limits on what the user can do.
+
+The truth is of course exactly the opposite. It is the computer user who has control and can tell the computer exactly what to do. The standard desktop PC is actually a “universal computing machine”. It can do (almost) anything!
+
+Learning to interact with a computer by writing computer code places users in their rightful position of power.
+
+Computer code also has the huge advantage of providing an accurate record of the tasks that were performed. This serves both as a reminder of what was done and a recipe that allows others to replicate what was done.
+
+For these reasons, this book focuses on computer languages as tools for data management.
+
+Open standards and open source
+
+This book almost exclusively describes technologies that are described by open standards or that are implemented in open source software, or both.
+
+For a technology to be an open standard, it must be described by a public document that provides enough information so that anyone can write software to work with technology. In addition, the description must not be subject to patents or other restrictions of use. Ideally, the document is published and maintained by an international, non-profit organization. In practice, the important consequence is that the technology is not bound to a single software product.
+
+This is in contrast to proprietary technologies, where the definitive description of the technology is not made available and is only officially supported by a single software product.
+
+Open source software is software for which the source code is publicly available. This makes it possible, through scrutiny of the source code if necessary, to understand how a software product works. It also means that, if necessary, the behavior of the software can be modified. In practice, the important consequence is that the software is not bound to a single software developer.
+
+This is in contrast to proprietary software, where the software is only available from a single developer, the software is a “black-box”, and changes, including corrections of errors, can only be made by that software developer.
+
+The obvious advantage of using open standards and open source software is that the reader need not purchase any expensive proprietary software in order to benefit from the information in this book, but that is not the primary reason for this choice.
+
+The main reason for selecting open standards and open source software is that this is the only way to ensure that we know, or can find out, where our data are on the computer and what happens to our data when we manipulate the data with software, and it is the only way to guarantee that we can have free access to our data now and in the future.
+
+The significance of these points is demonstrated by the growing list of governments and public institutions that are switching to open standards and open source software for storing and working with information. In particular, for the storage of public records, it does not make sense to lock the information up in a format that cannot be accessed except by proprietary software. Similarly, for the dissemination and reproducibility of research, it makes sense to fully disclose a complete description of how an analysis was conducted in addition to publishing the research results.
+
+How this book is organized
+
+This book is designed to be accessible and practical, with an emphasis on useful, applicable information. To this end, each topic is introduced via one or more case studies, which helps to motivate the need for the relevant ideas and tools. Practical examples are used to demonstrate the most important points and there is a deliberate avoidance of minute detail. Separate reference chapters then provide a more structured and detailed description for a particular technology, which is more useful for finding specific information once the big picture has been obtained. These reference chapters are still not exhaustive, so pointers to further reading are also provided.
+
+The main topics are organized into four core chapters, with supporting reference chapters, as described below.
+
+Chapter 2: Writing Computer Code
+
+This chapter discusses how to write computer code, using the HyperText Markup Language, HTML, as a concrete example. A number of important ideas and terminology are introduced for working with any computer language, and it includes guidelines and advice on the practical aspects of how to write computer code in a disciplined way. HTML provides a way to produce documents that can be viewed in a web browser and published on the world wide web.
+
+Chapters 3 and 4 provide support in the form of reference material for HTML and Cascading Style Sheets.
+
+Chapter 5: Data Storage
+
+This chapter covers a variety of data storage topics, starting with a range of different file formats, which includes a brief discussion of how data values are stored in computer memory, moving on to a discussion of the eXtensible Markup Language, XML, and ending up with the structure and design issues of relational databases.
+
+Chapter 6 provides reference material for XML and the Document Type Definition language.
+
+Chapter 7: Data Queries
+
+This chapter focuses on accessing data, with a major focus on extracting data from a relational database using the Structured Query Language, SQL. There is also a brief mention of the XPath language for accessing data in XML documents.
+
+Chapter 8 provides reference material for SQL, including additional uses of SQL for creating and modifying relational databases.
+
+Chapter 9: Data Processing
+
+This chapter is by far the largest. It covers a number of tools and techniques for searching, sorting, and tabulating data, plus several ways to manipulate data to change the data into new forms. This chapter introduces some very basic programming concepts and introduces the R language for statistical computing.
+
+Chapter 10 provides reference material for R and Chapter 11 provides reference material for regular expressions, which is a language for processing text data.
+
+Chapter 12 provides a brief wrap-up of the main ideas in the book.
+
+There is an overall progression through the book from writing simple computer code with straightforward computer languages to more complex tasks with more sophisticated languages. The core chapters also build on each other to some extent. For example, Chapter 9 assumes that the reader has a good understanding of data storage formats and is comfortable writing computer code. Furthermore, examples and case studies are carried over between different chapters in an attempt to illustrate how the different technologies need to be combined over the lifetime of a data set. There are also occasional “flashbacks” to a previous topic to make explicit connections between similar ideas that reoccur in different settings. In this way, the book is set up to be read in order from start to finish.
+
+However, every effort has been made to ensure that individual chapters can be read on their own. Where necessary, figures are reproduced and descriptions are repeated so that it is not necessary to jump back and forth within the book in order to acquire a complete understanding of a particular section.
+
+Much of the information in this book will require practice in order to gain a full understanding. The reader is encouraged to make use of the exercises on the book’s web site.
+
+The web site
+
+There is an accompanying web site for this book at:
+
+http://www.stat.auckland.ac.nz/∼paul/ItDT/
+
+This site includes complete PDF and HTML versions of the book, code and data sets used in the case studies, and a suite of exercises.
+
+Software
+
+The minimum software requirements for making use of the information in this book are the following open source products:
+
+Mozilla’s Firefox web browser
+    http://www.mozilla.com/en-US/products/firefox/
+
+The SQLite database engine
+    http://www.sqlite.org/
+
+The R language and environment 
+	http://www.r-project.org/
+
+About the license
+
+This work is licensed under a Creative Commons license, specifically the Attribution-Noncommercial-Share Alike 3.0 New Zealand License. This means that it is legal to make and share copies of this work with anyone, as long as you do not do so for commercial gain.
+
+The main idea is that anyone may make copies of this work, for example, for personal or educational purposes, but only the publisher of the print version is allowed to sell copies.
+
+For more information about the motivation behind this license, please see the book web site.
+
+Acknowledgements
+
+Many people have helped in the creation of this book, in a variety of ways.
+
+First of all, thanks to those who have provided useful comments, suggestions, and corrections on the manuscript, particularly the anonymous reviewers. I am also indebted to those who have donated data sets for use in the case studies within this book and for use in the exercises that are available from the book web site. Because I expect these lists to grow over time, the names of these contributors are all posted on the book web site.
+
+Another vote of thanks must go to the authors of the images that I have used in various places throughout the book. In most cases, I have had no direct contact with these authors because they have generously released their work under permissive licenses that allow their work to be shared and reused. The full list of attributions for these works is given on page 429.
+
+I would also like to acknowledge Kurt Hornik and Achim Zeileis from the Computational Statistics group of the Department of Statistics and Mathematics at the Wirtschaftsuniversitat Wien in Vienna for providing me with a productive environment during the latter half of 2007 to work on this book. Thanks also to my host institution, the University of Auckland.
+
+Last, and most, thank you, Ju.
+
+Paul Murrell 
+The University of Auckland 
+New Zealand
+
+This manuscript was generated with LATEX, gawk, make, latex2html, GIMP, ghostscript, ImageMagick, Sweave, R, SQLite, and GNU/Linux.

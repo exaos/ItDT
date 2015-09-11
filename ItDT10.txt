@@ -1,0 +1,593 @@
+10
+R
+R is a popular programming language and interactive environment for pro- cessing and analyzing data.
+This chapter provides brief reference information for the R language. See Section 9.2 for a brief introduction to the R software environment that is used to run R code.
+10.1 R syntax
+R code consists of one or more expressions. This section describes several
+different sorts of expressions.
+10.1.1 Constants
+The simplest type of expression is just a constant value. The most common constant values in R are numbers and text. There are various ways to enter numbers, including using scientific notation and hexadecimal syntax. Text must be surrounded by double-quotes or single-quotes, and special characters may be included within text using various escape sequences. The help pages ?NumericConstants and ?Quotes provide a detailed description of the various possibilities.
+Any constant not starting with a number and not within quotes is a symbol.
+There are a number of reserved symbols with predefined meanings: NA (miss- ing value), NULL (an empty data structure), NaN (Not a Number), Inf and -Inf ([minus] infinity), TRUE and FALSE, and the symbols used for control flow as described below.
+Section 10.1.5 will describe how to create new symbols. 393
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 394 — #420 i
+10.1.2 Arithmetic operators
+R has all of the standard arithmetic operators such as addition (+), subtrac- tion (-), division (/), multiplication (*), and exponentiation (^). R also has operators for integer division (%/%) and remainder on integer division (%%; also known as modulo arithmetic).
+10.1.3 Logical operators
+The comparison operators <, >, <=, >=, ==, and != are used to determine whether values in one vector are larger or smaller or equal to the values in another vector. The %in% operator determines whether each value in the left operand can be matched with one of the values in the right operand. The result of these operators is a logical vector.
+The logical operators || (or) and && (and) can be used to combine two logical values and produce another logical value as the result. The operator ! (not) negates a logical value. These operators allow complex conditions to be constructed.
+The operators | and & are similar, but they combine two logical vectors. The comparison is performed element by element, so the result is also a logical vector.
+Section 10.3.4 describes several functions that perform comparisons.
+10.1.4 Function calls
+A function call is an expression of the form:
+functionName(arg1, arg2)
+A function can have any number of arguments, including zero. Every argu-
+ment has a name.
+Arguments can be specified by position or by name (name overrides posi- tion). Arguments may have a default value, which they will take if no value is supplied for the argument in the function call.
+All of the following function calls are equivalent (they all generate a numeric vector containing the integers 1 to 10):
+                 seq(1, 10)             # positional arguments
+ii ii
+￼￼￼￼￼￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 395 — #421 i
+￼￼￼seq(from=1, to=10)
+seq(to=10, from=1)
+seq(1, 10, by=1)
+# named arguments
+# names trump position
+# 'by' argument has default
+Section 10.3 provides details about a number of important functions for basic data processing.
+10.1.5 Symbols and assignment
+Anything not starting with a digit, that is not a special keyword, is treated as a symbol. Values may be assigned to symbols using the <- operator; otherwise, any expression involving a symbol will produce the value that has been previously assigned to that symbol.
+> x <- 1:10
+>x
+[1] 1 2 3 4 5 6 7 8 9 10
+10.1.6 Loops
+A loop is used to repeatedly run a group of expressions.
+A for loop runs expressions a fixed number of times. It has the following general form:
+for (symbol in sequence) { expressions
+}
+The expressions are run once for each element in the sequence, with the relevant element of the sequence assigned to the symbol.
+A while loop runs expressions until a condition is met. It has the following general form:
+while (condition) { expressions
+}
+ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 396 — #422 i
+The while loop repeats until the condition is FALSE. The condition is an expression that should produce a single logical value.
+10.1.7 Conditional expressions
+A conditional expression is used to make expressions contingent on a con- dition.
+A conditional expression in R has the following form:
+if (condition) { expressions
+}
+The condition is an expression that should produce a single logical value, and the expressions are only run if the result of the condition is TRUE.
+The curly braces are not necessary, but it is good practice to always include them; if the braces are omitted, only the first complete expression following the condition is run.
+It is also possible to have an else clause.
+if (condition) { trueExpressions
+} else {
+falseExpressions
+}
+10.2 Data types and data structures
+Individual values are either character values (text), numeric values (num- bers), or logical values (TRUE or FALSE). R also supports complex values with an imaginary component.
+There is a distinction within numeric values between integers and real values, but integer values tend to be coerced to real values if anything is done to them. If an integer is required, it is best to use a function that explicitly generates integer values, such as as.integer().
+On a 32-bit operating system, in an English locale, a character value uses 1 byte per character; an integer uses 4 bytes, as does a logical value; and a real
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 397 — #423 i
+number uses 8 bytes. The function object.size() returns the approximate number of bytes used by an R data structure in memory.
+           > object.size(1:1000)
+           4040 bytes
+           > object.size(as.numeric(1:1000))
+           8040 bytes
+The simplest data structure in R is a vector. All elements of a vector must have the same basic type. Most operators and many functions accept vector arguments and return a vector result.
+Matrices and arrays are multidimensional analogues of the vector. All ele- ments must have the same type.
+Data frames are collections of vectors where each vector must have the same length, but different vectors can have different types. This data structure is the standard way to represent a data set in R.
+Lists are like vectors that can have different types of data structures in each component. In the simplest case, each component of a list may be a vector of values. Like the data frame, each component can be a vector of a different basic type, but for lists there is no requirement that each component has the same size. More generally, the components of a list can be more complex data structures, such as matrices, data frames, or even other lists. Lists can be used to efficiently represent hierarchical data in R.
+10.3 Functions
+This section provides a list of some of the functions that are useful for working with data in R. The descriptions of these functions are very brief and only some of the arguments to each function are mentioned. For a complete description of the function and its arguments, the relevant function help page should be consulted (see Section 10.4).
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 398 — #424 i
+10.3.1 Session management
+This section describes some functions that are useful for querying and con- trolling the R software environment during an interactive session.
+ls()
+                 rm(...)
+                 rm(list)
+Delete one or more symbols (the value that was assigned to the symbol is no longer accessible). The symbols to delete are specified by name or as a list of names.
+To delete all symbols in the current session, use rm(list=ls()) (care- fully).
+                 options(...)
+Set a global option for the R session by specifying a new value with an appropriate argument name in the form optionName=optionValue or query the current setting for an option by specifying "optionName".
+Typing options() with no arguments returns a list of all current option settings.
+q()
+Exit the current R session. 10.3.2 Generating vectors
+c(...)
+Create a new vector by concatenating or combining the values (or vectors of values) given as arguments. All values must be of the same type (or they will be coerced to the same type).
+This function can also be used to concatenate lists.
+                 seq(from, to, by)
+                 seq(from, to, length.out)
+                 seq(from, to, along.with)
+Generate a sequence of numbers from the value from to (not greater than) the value to in steps of by, or for a total of length.out values, or so that the sequence has the same length as along.with.
+The function seq_len(n) is faster for producing the sequence from 1 to n and seq_along(x) is faster for producing the sequence from 1 to
+ii ii
+￼￼￼￼￼List the symbols that have had values assigned to them during the current session.
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 399 — #425 i
+the number of values in x. These may be useful for producing very long sequences.
+The colon operator, :, provides a short-hand syntax for sequences of integer values in steps of 1. The expression from:to is equivalent to seq(from, to).
+           rep(x, times)
+           rep(x, each)
+           rep(x, length.out)
+Repeat all values in a vector times times, or each value in the vector each times, or all values in the vector until the total number of values is length.out.
+append(x, values, after)
+Insert the values into the vector x at the position specified by after.
+unlist(x)
+Convert a list structure into a vector by concatenating all components of the list. This is especially useful when a function call returns a list where each component is a vector.
+rev(x)
+Reverse the elements of a vector.
+unique(x)
+Remove any duplicated values from x.
+10.3.3 Numeric functions
+sum(..., na.rm=FALSE)
+Sum the value of all arguments. If NA values are included, the result is NA (unless na.rm=TRUE).
+mean(x)
+Calculate the arithmetic mean of the values in x.
+           max(..., na.rm=FALSE)
+           min(..., na.rm=FALSE)
+           range(..., na.rm=FALSE)
+Calculate the minimum, maximum, or range of all values in all argu- ments.
+The functions which.min() and which.max() return the index of the minimum or maximum value within a vector.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 400 — #426 i
+diff(x)
+Calculate the difference between successive values of x. The result contains one fewer values than there are in x.
+           cumsum(x)
+           cumprod(x)
+The cumulative sum or cumulative product of the values in x.
+10.3.4 Comparisons
+identical(x, y)
+Tests whether x and y are equivalent down to the details of their representation in computer memory.
+all.equal(target, current, tolerance)
+Tests whether target and current differ by only a tiny amount, where
+“tiny” is defined by tolerance). This is useful for testing whether numeric values are equal.
+match(x, table)
+Determine the location of each element of x in the set of values in table. The result is a numeric index the same length as x.
+The %in% operator is similar (x %in% table), but returns a logical vector the same length as x reporting whether each element of x was found in table.
+The pmatch() function performs partial matching (whereas match() is exact).
+           is.null(x)
+           is.na(x)
+           is.infinite(x)
+           is.nan(x)
+These functions should be used to test for the special values NULL, NA, Inf, and NaN.
+           any(...)
+           all(...)
+Test whether all or any values in one or more logical vectors are TRUE. The result is a single logical value.
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 401 — #427 i
+10.3.5 Type coercion
+                 as.character(x)
+                 as.logical(x)
+                 as.numeric(x)
+                 as.integer(x)
+Convert the data structure x to a vector of the appropriate type. as.Date(x, format)
+                 as.Date(x, origin)
+Convert character values or numeric values to Date values.
+Character values are converted automatically if they are in ISO 8601 format; otherwise, it may be necessary to describe the date format via the format argument. The help page for the strftime() function describes the syntax for specifying date formats.
+When converting numeric values, a reference date must be provided, via the origin argument.
+The Sys.Date() function returns today’s date as a date value.
+The months() function resolves date values just to month names.
+There are also functions for weekdays() and quarters().
+                 floor(x)
+                 ceiling(x)
+                 round(x, digits)
+Round a numeric vector, x, to digits decimal places or to an in- teger value. floor() returns largest integer not greater than x and ceiling() returns smallest integer not less than x.
+signif(x, digits)
+Round a numeric vector, x, to digits significant digits.
+10.3.6 Exploring data structures
+                 attributes(x)
+                 attr(x, which)
+Extract a list of all attributes, or just the attributes named in the character vector which, from the data structure x.
+ii ii
+￼￼￼￼￼￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 402 — #428 i
+           names(x)
+           rownames(x)
+           colnames(x)
+           dimnames(x)
+Extract the names attribute from a vector or list, or the row names or column names from a two-dimensional data structure, or the list of names for all dimensions of an array.
+summary(object)
+Produces a summary of object. The information displayed will de- pend on the class of object.
+length(x)
+The number of elements in a vector, or the number of components in a list. Also works for data frames and matrices, though the result may be less intuitive; it gives the number of columns for a data frame and the total number of values in a matrix.
+           dim(x)
+           nrow(x)
+           ncol(x)
+The dimensions of a matrix, array, or data frame. nrow() and ncol() are specifically for two-dimensional data structures, but dim() will also work for higher-dimensional structures.
+           head(x, n=6)
+           tail(x, n=6)
+Return just the first or last n elements of a data structure; the first elements of a vector, the first few rows of a data frame, and so on.
+class(x)
+Return the class of the data structure x.
+str(object)
+Display a summarized, low-level view of a data structure. Typically, the output is less pretty and more detailed than the output from summary().
+10.3.7 Subsetting
+Subsetting is generally performed via the square bracket operator, [ (e.g., candyCounts[1:4]). In general, the result is of the same class as the original data structure that is being subsetted. The subset may be a numeric vector,
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 403 — #429 i
+a character vector (names), or a logical vector (the same length as the original data structure).
+When subsetting data structures with more than one dimension—e.g., data frames, matrices, or arrays—the subset may be several vectors, separated by commas (e.g., candy[1:4, 4]).
+The double square bracket operator, [[, selects only one component of a data structure. This is typically used to extract a component from a list.
+subset(x, subset, select)
+Extract the rows of the data frame x that satisfy the condition in subset and the columns that are named in select.
+An important special case of subsetting for statistical data sets is the issue of removing missing values from a data set. The function na.omit() can be used to remove all rows containing missing values from a data frame.
+10.3.8 Data import/export
+R provides general functions for working with the file system.
+           getwd()
+           setwd(dir)
+Get the current working directory or set it to dir. This is where R will look for files (or start looking for files).
+list.files(path, pattern)
+List the names of files in the directory given by path, filtering results with the specified pattern (a regular expression).
+For Linux users who are used to using filename globs with the ls shell command, this use of regular expressions for filename patterns can cause confusion. Such users may find the glob2rx() function helpful.
+The complete names of the files, including the path, can be obtained by specifying full.names=TRUE. Given a full filename, consisting of a path and a filename, basename() strips off the path to leave just the filename, and dirname() strips off the filename to leave just the path.
+           file.path(...)
+Given the names of nested directories, combine them using an appro- priate separator to form a path.
+           file.choose()
+Interactively select a file (on Windows, using a dialog box interface).
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 404 — #430 i
+           file.exists()
+           file.remove()
+           file.rename()
+           file.copy()
+           dir.create()
+These functions perform the standard file manager tasks of copying, deleting, and renaming files and creating new directories.
+There are a number of functions for reading data from external text files into R.
+readLines(con)
+Read the text file specified by the filename or path given by con. The file specification can also be a URL. The result is a character vector with one element for each line in the file.
+read.table(file, header=FALSE, skip=0, sep="")
+Read the text file specified by the character value in file, treating each line of text as a case in a data set that contains values for each variable in the data set, with values separated by the character value in sep. Ignore the first skip lines in the file. If header is TRUE, treat the first line of the file as variable names.
+The default behavior is to treat columns that contain only numbers as numeric and to treat everything else as a factor. The arguments as.is and stringsAsFactors can be used to produce character vari- ables rather than factors. The colClasses argument provides further control over the type of each column.
+This function can be slow on large files because of the work it does to determine the type of values in each column.
+The result of this function is a data frame.
+           read.fwf(file, widths)
+Read a text file in fixed-width format. The name of the file is specified by file and widths is a numeric vector specifying the width of each column of values.
+The result is a data frame.
+read.csv(file)
+A front end for read.table() with default argument settings designed for reading a text file in CSV format.
+The result is a data frame.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 405 — #431 i
+read.delim(file)
+A front end for read.table() with default argument settings designed for reading a tab-delimited text file.
+The result is a data frame.
+           scan(file, what)
+Read data from a text file and produce a vector of values. The type of the value provided for the argument what determines how the values in the text file are interpreted. If this argument is a list, then the result is a list of vectors, each of a type corresponding to the relevant component of what.
+This function is more flexible and faster than read.table() and its kin, but the result may be less convenient to work with.
+In most cases, these functions that read a data set from a text file produce a data frame as the result. The functions automatically determine the data type for each column of the data frame, treating anything that is not a number as a factor, but arguments are provided to explicitly specify the data types for columns. Where names of columns are provided in the text file, these functions may modify the names so that they do not cause syntax problems, but again arguments are provided to stop these modifications from happening.
+The XML package provides functions for reading and manipulating XML documents.
+The package foreign contains various functions for reading data from ex- ternal files in the various binary formats of popular statistical programs. Other popular scientific binary formats can also be read using an appropri- ate package, e.g., ncdf for the netCDF format.
+Most of the functions for reading files have a corresponding function to write the relevant format.
+           writeLines(text, con)
+Write a character vector to a text file. Each element of the character vector is written as a separate line in the file.
+write.table(x, file, sep=" ")
+Write a data frame to a text file using a delimited format. The sep argument allows control over the delimiter.
+The function write.csv() provides useful defaults for producing files in CSV format.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 406 — #432 i
+sink(file)
+Redirect R output to a text file. Instead of displaying output on the screen, output is saved into a file. The redirection is terminated by calling sink() with no arguments.
+The function capture.output() provides a convenient way to redirect output for a single R expression.
+Most of these functions read or write an entire file worth of data in one go. For large data sets, it is also possible to read or write data in smaller pieces. The functions file() and close() allow a file to be held open while reading or writing. Functions that read from files typically have an argument that specifies a number of lines or bytes of information to read, and functions that write to files typically provide an append argument to ensure that previous content is not overwritten.
+One important case not mentioned so far is the export and import of data in an R-specific format, which is useful for sharing data between colleagues who all use R.
+save(..., file)
+Save the symbols named in ... (and their values), in an R-specific format, to the specified file.
+load(file)
+Load R symbols (and their values) from the specified file (that has been created by a previous call to save()).
+           dump(list, file)
+Write out a text representation of the R data structures named in the character vector list. The data structures can be recreated in R by calling source() on the file.
+source(file)
+Parse and evaluate the R code in file. This can be used to read data from a file created by dump() or much more generally to run any R code that has been stored in a file.
+10.3.9 Transformations
+           transform(data, ...)
+Redefine existing columns within a data frame and append new columns to a data frame.
+Each argument in ... is of the form columnName=columnValue.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 407 — #433 i
+ifelse(test, yes, no)
+The test argument is a logical vector. This function creates a new vector consisting of the values in the vector yes when the correspond- ing element of test is TRUE and the values in no when test is FALSE.
+The switch() function is similar, but allows for more than two values in test.
+cut(x, breaks)
+Transform the continuous vector x into a factor. The breaks argument can be an integer that specifies how many different levels to break x into, or it can be a vector of interval boundaries that are used to cut x into different levels.
+An additional labels argument allows labels to be specified for the levels of the new factor.
+10.3.10 Sorting
+           sort(x, decreasing=FALSE)
+Sort the elements of a vector. Character values are sorted alphabeti- cally (which may depend on the locale or language setting).
+           order(..., decreasing=FALSE)
+Determine an ordering based on the elements of one or more vec- tors. In the simple case of a single vector, sort(x) is equivalent to x[order(x)]. The advantage of this function is that it can be used to reorder more than just a single vector, plus it can produce an ordering from more than one vector; it can break ties in one variable using the values from another variable.
+10.3.11 Tables of counts
+table(...)
+Generate table of counts for one or more factors. The result is a "table" data structure, with as many dimensions as there are argu- ments.
+The margin.table() function reduces a table to marginal totals, prop.table() converts table counts to proportions of marginal to- tals, and addmargins() adds margin totals to an existing table.
+xtabs(formula, data)
+Similar to table() except factors to cross-tabulate are expressed in a formula. Symbols in the formula will be searched for in the data frame given by the data argument.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 408 — #434 i
+ftable(...)
+Similar to table() except that the result is always a two-dimensional "ftable" data structure, no matter how many factors are used. This makes for a more readable display.
+10.3.12 Aggregation
+aggregate(x, by, FUN)
+Call the function FUN for each subset of x defined by the grouping factors in the list by. It is possible to apply the function to multiple variables (x can be a data frame) and it is possible to group by multiple factors (the list by can have more than one component). The result is a data frame. The names used in the by list are used for the relevant columns in the result. If x is a data frame, then the names of the variables in the data frame are used for the relevant columns in the result.
+10.3.13 The “apply” functions
+           apply(X, MARGIN, FUN, ...)
+Call a function on each row or each column of a data frame or matrix. The function FUN is called for each row of the matrix X, if MARGIN=1; if MARGIN=2, the function is called for each column of X. All other arguments are passed as arguments to FUN.
+The data structure that is returned depends on the value returned by FUN. In the simplest case, where FUN returns a single value, the result is a vector with one value per row (or column) of the original matrix X.
+sweep(x, MARGIN, STATS, FUN="-")
+If MARGIN=1, for row i of x, subtract element i of STATS. For example, subtract row averages from all rows.
+More generally, call the function FUN with row i of x as the first argu- ment and element i of STATS as the second argument.
+If MARGIN=2, call FUN for each column of x rather than for each row.
+tapply(X, INDEX, FUN, ...)
+Call a function once for each subset of the vector X, where the subsets correspond to unique values of the factor INDEX. The INDEX argument can be a list of factors, in which case the subsets are unique combina- tions of the levels of these factors.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 409 — #435 i
+The result depends on how many factors are given in INDEX. For the simple case where there is only one factor and FUN returns a single value, the result is a vector.
+lapply(X, FUN, ...)
+Call the function FUN once for each component of the list X. The result is a list. Additional arguments are passed on to each call to FUN.
+sapply(X, FUN, ...)
+Similar to lapply(), but will simplify the result to a vector if possible (e.g., if all components of X are vectors and FUN returns a single value).
+mapply(FUN, ..., MoreArgs)
+A “multivariate” apply. Similar to lapply(), but will call the function FUN on the first element of each of the supplied arguments, then on the second element of each argument, and so on. MoreArgs is a list of arguments to pass to each call to FUN.
+rapply(object, f)
+A “recursive” apply. Calls the function f on each component of the list object, but if a component is itself a list, then f is called on each component of that list as well, and so on.
+10.3.14 Merging
+rbind(...)
+Create a new data frame by combining two or more data frames that have the same columns. The result is the union of the rows of the original data frames. This function also works for matrices.
+cbind(...)
+Create a new data frame by combining two or more data frames that have the same number of rows. The result is the union of the columns of the original data frames. This function also works for matrices.
+merge(x, y)
+Create a new data frame by combining two data frames in a database join operation. The two data frames will usually have different columns, though they will typically share at least one column, which is used to match the rows. Additional arguments allow the matching column to be specified explicitly.
+The default join is an inner join on columns that x and y have in common. Additional arguments allow for the equivalent of inner joins and outer joins.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 410 — #436 i
+10.3.15 Splitting
+split(x, f)
+Split a vector or data frame, x, into a list of smaller vectors or data frames. The factor f is used to determine which elements of the origi- nal vector or which rows of the original matrix end up in each subset.
+unsplit(value, f)
+Combine a list of vectors into a single vector. The factor f determines the order in which the elements of the vectors are combined.
+This function can also be used to combine a list of data frames into a single data frame (as long as the data frames have the same number of columns); in this case, f determines the order in which the rows of the data frames are combined.
+10.3.16 Reshaping
+stack(x)
+Stack the existing columns of data frame x together into a single col- umn and add a new column that identifies which original column each value came from.
+aperm(a, perm)
+Reorder the dimensions of an array. The perm argument specifies the order of the dimensions.
+The special case of transposing a matrix is provided by the t() func- tion.
+Functions from the reshape package: melt(data, measure.var)
+           melt(data, id.var)
+Convert the data, typically a data frame, into “long” form, where there is a row for every measurement or “dependent” value. The measure.var argument gives the names or numeric indices of the vari- ables that contain measurements. All other variables are treated as labels characterizing the measurements (typically factors). Alterna- tively, the id.var argument specifies the label variables and all others are treated as measurements.
+In the resulting data frame, there is a new, single column of measure- ments with the name value and an additional variable of identifying labels, named variable.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 411 — #437 i
+cast(data, formula)
+Given data in a long form, i.e., produced by melt(), restructure the data according to the given formula. In the new arrangement, vari- ables mentioned on the left-hand side of the formula vary across rows and variables mentioned on the right-hand side vary across columns.
+In a simple repeated-measures scenario consisting of measurements at two time points, the data may consist of a variable of subject IDs plus two variables containing measurements at the two time points.
+                > library(reshape)
+                > wide <- data.frame(ID=1:3,
+￼￼￼> wide
+  ID         T1  T2
+1  1 -0.5148497 145
+2  2 -2.3372321 143
+3  3  2.0103460 158
+T1=rnorm(3),
+T2=sample(100:200, 3))
+If we melt the data, we produce a data frame with a column named ID, a column named variable with values T1 or T2, and a column named value, containing all of the measurements.
+> long <- melt(wide,
+                id.var=c("ID"),
+                measure.var=c("T1", "T2"))
+> long
+  ID variable       value
+1  1
+2  2
+3  3
+4  1
+5  2
+6  3
+T1  -0.5148497
+T1  -2.3372321
+T1   2.0103460
+T2 145.0000000
+T2 143.0000000
+T2 158.0000000
+This form can be recast back to the original wide form as follows.
+ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 412 — #438 i
+                > cast(long, ID ~ variable)
+                  ID         T1  T2
+                1  1 -0.5148497 145
+                2  2 -2.3372321 143
+                3  3  2.0103460 158
+The function recast() combines a melt and cast in a single operation.
+10.3.17 Text processing
+nchar(x)
+Count the number of characters in each element of the character vector x. The result is a numeric vector the same length as x.
+grep(pattern, x)
+Search for the regular expression pattern in the character vector x. The result is a numeric vector identifying which elements of x matched the pattern. If there are no matches, the result has length zero.
+The function agrep() allows for approximate matching.
+regexpr(pattern, text)
+Similar to grep() except that the result is a numeric vector containing the character location of the match within each element of text (-1 if there is no match). The result also has an attribute, match.length, containing the length of the match.
+gregexpr(pattern, text)
+Similar to regexpr(), except that the result is the locations (and lengths) of all matches within each piece of text. The result is a list.
+gsub(pattern, replacement, x)
+Search for the regular expression pattern in the character vector x and replace all matches with the character value in replacement. The result is a vector containing the modified text.
+The g stands for “global” so all matches are replaced; there is a sub() function that just replaces the first match.
+The functions toupper() and tolower() convert character values to all uppercase or all lowercase.
+substr(x, start, stop)
+For each character value in x, return a subset of the text consisting of
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 413 — #439 i
+the characters at positions start through stop, inclusive. The first character is at position 1.
+The function substring() works very similarly, with the extra con- venience that the end character defaults to the end of the text.
+More specialized text subsetting is provided by the strtim() function, which removes characters from the end of text to enforce a maximum length, and abbreviate(), which reduces text to a given length by removing characters in such a way that each piece of text remains unique.
+strsplit(x, split)
+For each character value in x, break the text into separate character values, using split as the delimiter. The result is a list, with one character vector component for each element of the original vector x.
+paste(..., sep, collapse)
+Combine text, placing the character value sep in between. The result is a character vector the same length as the longest of the arguments, so shorter arguments are recycled. If the collapse argument is not NULL, the result vector is then collapsed to a single character value, with the text collapse placed in between each element of the result.
+10.3.18 Data display
+print(x)
+This function generates most of the output that we see on the screen. The important thing to note is that this function is generic, so the output will depend on the class of x. For different classes there are also different arguments to control the way the output is formatted. For example, there is a digits argument that controls the number of significant digits that are printed for numeric values, and there is a quote argument that controls whether double-quotes are printed around character values.
+format(x)
+The usefulness of this function is to produce a character representation of a data structure where all values have a similar format; for example, all numeric values are formatted to have the same number of characters in total.
+sprintf(fmt, ...)
+Generates a character vector using the template given by fmt. This is a character value with special codes embedded. Each special code
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 414 — #440 i
+provides a placeholder for values supplied as further arguments to the sprintf() function and the special code controls the formatting of the values. The help page for this function contains a description of the special codes and their meanings.
+The usefulness of this function is to obtain fine control over formatting that is not available in print() or format().
+           strwrap(x, width)
+Break long pieces of text, by inserting newlines, so that each line is less than the given width.
+cat(..., sep=" ", fill=FALSE)
+Displays the values in ... on screen. This function converts its ar- guments to character vectors if necessary and performs no additional formatting of the text it is given.
+The fill argument can be used to control when to start a new line of output, and the sep argument specifies text to place between argu- ments.
+10.3.19 Debugging
+The functions from the previous section are useful to display intermediate results from within a loop or function.
+debug(fun)
+Following a call to this function, the function fun will be run one expression at a time, rather than all at once. After each expression, the values of symbols used within the function can be explored by typing the symbol name. Typing ‘n’ (or just hitting Enter) runs the next expression; ‘c’ runs all remaining expressions; and ‘Q’ quits from the function.
+10.4 Getting help
+The help() function is special in that it provides information about other functions. This function displays a help page, which is online documenta- tion that describes what a function does. This includes an explanation of all of the arguments to the function and a description of the result produced by the function. Figure 10.1 shows the beginning of the help page for the Sys.sleep() function, which is obtained by typing help(Sys.sleep).
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 415 — #441 i
+￼￼￼￼￼Sys.sleep                package:base            R Documentation
+Suspend Execution for a Time Interval
+Description:
+     Suspend execution of R expressions for a given number of
+     seconds
+Usage:
+     Sys.sleep(time)
+Arguments:
+    time: The time interval to suspend execution for, in seconds.
+Details:
+     Using this function allows R to be given very low priority
+     and hence not to interfere with more important foreground
+     tasks. A typical use is to allow a process launched from R
+     to set itself up and read its input files before R execution
+     is resumed.
+Figure 10.1: The beginning of the help page for the function Sys.sleep() as displayed within an xterm on a Linux system. This help page is displayed by the expression help(Sys.sleep).
+ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 416 — #442 i
+A special shorthand using the question mark character, ?, is provided for getting the help page for a function. Instead of typing help(Sys.sleep), it is also possible to simply type ?Sys.sleep.
+There is also a web interface to the help system, which is initiated by typing help.start().
+Many help pages also have a set of examples to demonstrate the proper use of the function, and these examples can be run using the example() function.
+10.5 Packages
+R functions are organized into collections of functions called packages. A number of packages are installed with R by default and several packages are loaded automatically in every R session. The search() function shows which packages are currently available, as shown below:
+￼￼￼> search()
+[1] ".GlobalEnv"        "package:stats"
+[4] "package:grDevices" "package:utils"
+[7] "package:methods"   "Autoloads"
+"package:graphics"
+"package:datasets"
+"package:base"
+The top line of the help page for a function shows which package the function comes from. For example, Sys.sleep() comes from the base package (see Figure 10.1).
+Other packages may be loaded using the library() function. For example, the foreign package provides functions for reading in data sets that have been stored in the native format of a different statistical software system. In order to use the read.spss() function from this package, the foreign package must be loaded as follows:
+> library(foreign)
+The search() function confirms that the foreign package is now loaded
+and all of the functions from that package are now available.
+ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 417 — #443 i
+> search()
+            [1] ".GlobalEnv"        "package:foreign"   "package:stats"
+            [4] "package:graphics"  "package:grDevices" "package:utils"
+            [7] "package:datasets"  "package:methods"   "Autoloads"
+           [10] "package:base"
+There are usually 25 packages distributed with R. Over a thousand other packages are available for download from the web via the Comprehensive R Archive Network (CRAN), http://cran.r-project.org. These packages must first be installed before they can be loaded. A new package can be installed using the install.packages() function (on Windows, there is an option on the Packages menu).
+10.6 Searching for functions
+Given the name of a function, it is not difficult to find out what that function does and how to use the function by reading the function’s help page. A more difficult job is to find the name of a function that will perform a particular task.
+The help.search() function can be used to search for functions relating to a keyword within the current R installation. The RSiteSearch() function performs a more powerful and comprehensive web-based search of functions in almost all known R packages, R mailing list archives, and the main R manuals. This is based on Jonathan Baron’s search site, http://finzi. psych.upenn.edu/search.html. There is also a Google customized search available, http://www.rseek.org, which provides a convenient categoriza- tion of the search results. This was set up and is maintained by Sasha Goodman.
+Another problem that arises is that, while information on a single function is easy to obtain, it can be harder to discover how several related functions work together. One way to get a broader overview of functions in a package is to read a package vignette (see the vignette() function). There are also overviews of certain areas of research or application provided by CRAN Task Views (one of the main links on the CRAN web site) and there is a growing list of books on R (see the home page of the R Project).
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 418 — #444 i
+10.7 Further reading
+The Home Page of the R Project
+                     http://www.r-project.org/
+The starting point for finding information about R. Includes manuals, particularly “An Introduction to R” and “R Data Import/Export”, and FAQ’s.
+CRAN—the Comprehensive R Archive Network
+                     http://cran.r-project.org/
+Where to download R and the various add-on packages for R.
+R News
+                     http://cran.r-project.org/doc/Rnews/
+The newsletter of the R Project. Issue 4(1) has an excellent article on working with dates in R.
+Introductory Statistics with R by Peter Dalgaard
+2nd Edition (2008) Springer.
+Introduction to using R for basic statistical analysis.
+Data Manipulation with R by Phil Spector
+(2008) Springer.
+Broad coverage of data manipulation functions in R.
+R Coding Conventions
+http://google-styleguide.googlecode.com/svn/trunk/google-r-style. html
+An unofficial set of guidelines for laying out R code and choosing sym-
+bol names for R code.
+￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 419 — #445 i

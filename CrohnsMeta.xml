@@ -1,0 +1,3198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StatDataML>
+
+  <description>
+    <title>Crohn's Disease Data</title>
+    <source>Sharon Browning</source>
+    <date>2008-02-11</date>
+    <comment>
+      These data are genetic sequences for 387 individuals
+      from a study of 
+      Crohn's disease, which is an inflammatory bowel disease
+      (Daly et al., 2001a, Nature Genetics,
+      29, 223-228).
+
+      The data are in a text-based LINKAGE format.
+    </comment>
+  </description>
+
+  <dataset>
+    <list>
+      <dimension>
+        <dim size="212">
+          <e>pedigree</e>
+          <e>ID</e>
+          <e>parentA</e>
+          <e>parentB</e>
+          <e>gender</e>
+          <e>status</e>
+          <e>marker1A</e>
+          <e>marker1B</e>
+          <e>marker2A</e>
+          <e>marker2B</e>
+          <e>marker3A</e>
+          <e>marker3B</e>
+          <e>marker4A</e>
+          <e>marker4B</e>
+          <e>marker5A</e>
+          <e>marker5B</e>
+          <e>marker6A</e>
+          <e>marker6B</e>
+          <e>marker7A</e>
+          <e>marker7B</e>
+          <e>marker8A</e>
+          <e>marker8B</e>
+          <e>marker9A</e>
+          <e>marker9B</e>
+          <e>marker10A</e>
+          <e>marker10B</e>
+          <e>marker11A</e>
+          <e>marker11B</e>
+          <e>marker12A</e>
+          <e>marker12B</e>
+          <e>marker13A</e>
+          <e>marker13B</e>
+          <e>marker14A</e>
+          <e>marker14B</e>
+          <e>marker15A</e>
+          <e>marker15B</e>
+          <e>marker16A</e>
+          <e>marker16B</e>
+          <e>marker17A</e>
+          <e>marker17B</e>
+          <e>marker18A</e>
+          <e>marker18B</e>
+          <e>marker19A</e>
+          <e>marker19B</e>
+          <e>marker20A</e>
+          <e>marker20B</e>
+          <e>marker21A</e>
+          <e>marker21B</e>
+          <e>marker22A</e>
+          <e>marker22B</e>
+          <e>marker23A</e>
+          <e>marker23B</e>
+          <e>marker24A</e>
+          <e>marker24B</e>
+          <e>marker25A</e>
+          <e>marker25B</e>
+          <e>marker26A</e>
+          <e>marker26B</e>
+          <e>marker27A</e>
+          <e>marker27B</e>
+          <e>marker28A</e>
+          <e>marker28B</e>
+          <e>marker29A</e>
+          <e>marker29B</e>
+          <e>marker30A</e>
+          <e>marker30B</e>
+          <e>marker31A</e>
+          <e>marker31B</e>
+          <e>marker32A</e>
+          <e>marker32B</e>
+          <e>marker33A</e>
+          <e>marker33B</e>
+          <e>marker34A</e>
+<e>marker34B</e>
+<e>marker35A</e>
+<e>marker35B</e>
+<e>marker36A</e>
+<e>marker36B</e>
+<e>marker37A</e>
+<e>marker37B</e>
+<e>marker38A</e>
+<e>marker38B</e>
+<e>marker39A</e>
+<e>marker39B</e>
+<e>marker40A</e>
+<e>marker40B</e>
+<e>marker41A</e>
+<e>marker41B</e>
+<e>marker42A</e>
+<e>marker42B</e>
+<e>marker43A</e>
+<e>marker43B</e>
+<e>marker44A</e>
+<e>marker44B</e>
+<e>marker45A</e>
+<e>marker45B</e>
+<e>marker46A</e>
+<e>marker46B</e>
+<e>marker47A</e>
+<e>marker47B</e>
+<e>marker48A</e>
+<e>marker48B</e>
+<e>marker49A</e>
+<e>marker49B</e>
+<e>marker50A</e>
+<e>marker50B</e>
+<e>marker51A</e>
+<e>marker51B</e>
+<e>marker52A</e>
+<e>marker52B</e>
+<e>marker53A</e>
+<e>marker53B</e>
+<e>marker54A</e>
+<e>marker54B</e>
+<e>marker55A</e>
+<e>marker55B</e>
+<e>marker56A</e>
+<e>marker56B</e>
+<e>marker57A</e>
+<e>marker57B</e>
+<e>marker58A</e>
+<e>marker58B</e>
+<e>marker59A</e>
+<e>marker59B</e>
+<e>marker60A</e>
+<e>marker60B</e>
+<e>marker61A</e>
+<e>marker61B</e>
+<e>marker62A</e>
+<e>marker62B</e>
+<e>marker63A</e>
+<e>marker63B</e>
+<e>marker64A</e>
+<e>marker64B</e>
+<e>marker65A</e>
+<e>marker65B</e>
+<e>marker66A</e>
+<e>marker66B</e>
+<e>marker67A</e>
+<e>marker67B</e>
+<e>marker68A</e>
+<e>marker68B</e>
+<e>marker69A</e>
+<e>marker69B</e>
+<e>marker70A</e>
+<e>marker70B</e>
+<e>marker71A</e>
+<e>marker71B</e>
+<e>marker72A</e>
+<e>marker72B</e>
+<e>marker73A</e>
+<e>marker73B</e>
+<e>marker74A</e>
+<e>marker74B</e>
+<e>marker75A</e>
+<e>marker75B</e>
+<e>marker76A</e>
+<e>marker76B</e>
+<e>marker77A</e>
+<e>marker77B</e>
+<e>marker78A</e>
+<e>marker78B</e>
+<e>marker79A</e>
+<e>marker79B</e>
+<e>marker80A</e>
+<e>marker80B</e>
+<e>marker81A</e>
+<e>marker81B</e>
+<e>marker82A</e>
+<e>marker82B</e>
+<e>marker83A</e>
+<e>marker83B</e>
+<e>marker84A</e>
+<e>marker84B</e>
+<e>marker85A</e>
+<e>marker85B</e>
+<e>marker86A</e>
+<e>marker86B</e>
+<e>marker87A</e>
+<e>marker87B</e>
+<e>marker88A</e>
+<e>marker88B</e>
+<e>marker89A</e>
+<e>marker89B</e>
+<e>marker90A</e>
+<e>marker90B</e>
+<e>marker91A</e>
+<e>marker91B</e>
+<e>marker92A</e>
+<e>marker92B</e>
+<e>marker93A</e>
+<e>marker93B</e>
+<e>marker94A</e>
+<e>marker94B</e>
+<e>marker95A</e>
+<e>marker95B</e>
+<e>marker96A</e>
+<e>marker96B</e>
+<e>marker97A</e>
+<e>marker97B</e>
+<e>marker98A</e>
+<e>marker98B</e>
+<e>marker99A</e>
+<e>marker99B</e>
+<e>marker100A</e>
+<e>marker100B</e>
+<e>marker101A</e>
+<e>marker101B</e>
+<e>marker102A</e>
+<e>marker102B</e>
+<e>marker103A</e>
+<e>marker103B</e>
+        </dim>
+      </dimension>
+      <listdata>
+        <array>
+          <dimension>
+            <dim size="367" name="pedigree"></dim>
+          </dimension>
+          <type>
+            <character/>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="367" name="ID"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="367" name="parentA"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="367" name="parentB"></dim>
+          </dimension>
+          <type>
+            <numeric>
+              <integer>
+                <min>0</min>
+              </integer>
+            </numeric>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="367" name="gender"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="1">male</label>
+              <label code="2">female</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+        <array>
+          <dimension>
+            <dim size="367" name="status"></dim>
+          </dimension>
+          <type>
+            <categorical mode="unordered">
+              <label code="0">unknown</label>
+              <label code="1">crohns</label>
+              <label code="2">normal</label>
+            </categorical>
+          </type>
+          <textdata />
+        </array>
+<array>
+<dimension>
+<dim size="367" name="marker1A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker1B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker2A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker2B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker3A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker3B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker4A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker4B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker5A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker5B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker6A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker6B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker7A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker7B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker8A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker8B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker9A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker9B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker10A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker10B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker11A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker11B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker12A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker12B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker13A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker13B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker14A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker14B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker15A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker15B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker16A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker16B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker17A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker17B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker18A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker18B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker19A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker19B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker20A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker20B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker21A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker21B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker22A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker22B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker23A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker23B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker24A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker24B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker25A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker25B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker26A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker26B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker27A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker27B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker28A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker28B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker29A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker29B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker30A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker30B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker31A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker31B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker32A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker32B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker33A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker33B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker34A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker34B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker35A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker35B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker36A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker36B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker37A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker37B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker38A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker38B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker39A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker39B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker40A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker40B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker41A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker41B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker42A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker42B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker43A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker43B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker44A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker44B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker45A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker45B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker46A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker46B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker47A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker47B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker48A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker48B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker49A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker49B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker50A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker50B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker51A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker51B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker52A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker52B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker53A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker53B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker54A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker54B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker55A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker55B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker56A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker56B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker57A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker57B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker58A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker58B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker59A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker59B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker60A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker60B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker61A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker61B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker62A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker62B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker63A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker63B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker64A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker64B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker65A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker65B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker66A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker66B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker67A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker67B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker68A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker68B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker69A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker69B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker70A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker70B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker71A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker71B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker72A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker72B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker73A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker73B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker74A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker74B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker75A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker75B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker76A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker76B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker77A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker77B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker78A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker78B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker79A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker79B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker80A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker80B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker81A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker81B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker82A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker82B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker83A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker83B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker84A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker84B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker85A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker85B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker86A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker86B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker87A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker87B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker88A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker88B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker89A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker89B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker90A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker90B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker91A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker91B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker92A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker92B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker93A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker93B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker94A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker94B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker95A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker95B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker96A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker96B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker97A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker97B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker98A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker98B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker99A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker99B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker100A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker100B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker101A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker101B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker102A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker102B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker103A"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+<array>
+<dimension>
+<dim size="367" name="marker103B"></dim>
+</dimension>
+<type>
+<numeric>
+<integer>
+<min>0</min>
+<max>4</max>
+</integer>
+</numeric>
+</type>
+<textdata />
+</array>
+      </listdata>
+    </list>
+  </dataset>
+</StatDataML>

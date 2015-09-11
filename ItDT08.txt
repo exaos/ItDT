@@ -1,0 +1,264 @@
+8 SQL
+The Structured Query Language (SQL) is a language for working with in- formation that has been stored in a database.
+SQL has three parts: the Data Manipulation Language (DML) concerns adding information to a database, modifying the information, and extract- ing information from a database; the Data Definition Language (DDL) is concerned with the structure of a database (creating tables); and the Data Control Language (DCL) is concerned with administration of a database (deciding who gets what sort of access to which parts of the database).
+This chapter is mostly focused on the SELECT command, which is the part of the DML that is used to extract information from a database, but other useful SQL commands are also mentioned briefly in Section 8.3.
+8.1 SQL syntax
+This section is only concerned with the syntax of the SQL SELECT command, which is used to perform a database query.
+Within this chapter, any code written in a sans-serif oblique font represents a general template; that part of the code will vary depending on the database in use and the names of the tables as well as the names of the columns within those tables.
+8.2 SQL queries
+The basic format of an SQL query is this:
+SELECT columns FROM tables
+WHERE row condition
+ORDER BY order by columns
+197
+￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 198 — #224 i
+The SQL keywords, SELECT, FROM, WHERE, and ORDER BY, are traditionally written in uppercase, though this is not necessary.
+The names of tables and columns depend on the database being queried, but they should always start with a letter and only contain letters, digits, and the underscore character, ‘ ’.
+This will select the named columns from the specified tables and return all rows matching the row condition.
+The order of the rows in the result is based on the columns named in the order by columns clause.
+8.2.1 Selecting columns
+The special character * selects all columns; otherwise, only those columns named are included in the result. If more than one column name is given, the column names must be separated by commas.
+SELECT * ...
+SELECT colname ...
+SELECT colname1, colname2 ...
+The column name may be followed by a column alias, which can then be used anywhere within the query in place of the original column name (e.g., in the WHERE clause).
+SELECT colname colalias ...
+If more than one table is included in the query, and the tables share a column with the same name, a column name must be preceded by the relevant table name, with a full stop in between.
+SELECT tablename.colname ...
+￼￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 199 — #225 i
+Functions and operators may be used to produce results that are calculated from the column. The set of functions that is provided varies widely between DBMS, but the normal mathematical operators for addition, subtraction, multiplication, and division, plus a set of basic aggregation functions for maximum value (MAX), minimum value (MIN), summation (SUM), and arith- metic mean (AVG), should always be available.
+SELECT MAX(colname) ...
+SELECT colname1 + colname2 ...
+A column name can also be a constant value (number or text), in which case the value is replicated for every row of the result.
+8.2.2 Specifying tables: The FROM clause
+The FROM clause must contain at least one table and all columns that are referred to in the query must exist in at least one of the tables in the FROM clause.
+If a single table is specified, then the result is all rows of that table, subject to any filtering applied by a WHERE clause.
+SELECT colname FROM tablename
+...
+A table name may be followed by a table alias, which can be used in place of the original table name anywhere else in the query.
+SELECT talias.colname FROM tablename talias ...
+If two tables are specified, separated only by a comma, the result is all possible combinations of the rows of the two tables (a Cartesian product). This is known as a cross join.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 200 — #226 i
+SELECT ...
+FROM table1, table2 ...
+An inner join is created from a cross join by specifying a condition so that only rows that have matching values are returned (typically using a foreign key to match with a primary key). The condition may be specified within the WHERE clause (see Section 8.2.3), or as part of an INNER JOIN syntax as shown below.
+SELECT ...
+FROM table1 INNER JOIN table2
+ON table1.primarykey = table2.foreignkey ...
+An outer join extends the inner join by including in the result rows from one table that have no match in the other table. There are left outer joins (where rows are retained from the table named on the left of the join syntax), right outer joins, and full outer joins (where non-matching rows from both tables are retained).
+SELECT ...
+FROM table1 LEFT OUTER JOIN table2
+ON table1.primarykey = table2.foreignkey ...
+A self join is a join of a table with itself. This requires the use of table aliases.
+SELECT ...
+FROM tablename alias1, tablename alias2 ...
+8.2.3 Selecting rows: The WHERE clause
+By default, all rows from a table, or from a combination of tables, are returned. However, if the WHERE clause is used to specify a condition, then only rows matching that condition will be returned.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 201 — #227 i
+Conditions may involve any column from any table that is included in the query. Conditions usually involve a comparison between a column and a constant value, or a comparison between two columns.
+A constant text value should be enclosed in single-quotes.
+Valid comparison operators include: equality (=), greater-than or less-than (>, <), greater-than or equal-to or less-than or equal-to (>=, <=), and in- equality (!= or <>).
+           SELECT ...
+               FROM ...
+WHERE colname = 0;
+           SELECT ...
+               FROM ...
+WHERE column1 > column2;
+Complex conditions can be constructed by combining simple conditions with logical operators: AND, OR, and NOT. Parentheses should be used to make the order of evaluation explicit.
+           SELECT ...
+               FROM ...
+WHERE column1 = 0 AND column2 != 0;
+           SELECT ...
+               FROM ...
+WHERE NOT (stroke = 'Br' AND (distance = 50 OR
+                           distance = 100));
+For the case where a column can match several possible values, the special IN keyword can be used to specify a range of valid values.
+           SELECT ...
+               FROM ...
+WHERE column1 IN (value1, value2);
+Comparison with text constants can be generalized to allow patterns using
+the special LIKE comparison operator. In this case, within the text constant,
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 202 — #228 i
+the underscore character, _, has a special meaning; it will match any single character. The percent character, %, is also special and it will match any number of characters of any sort.
+           SELECT ...
+               FROM ...
+WHERE stroke LIKE '%stroke';
+8.2.4 Sorting results: The ORDER BY clause
+The order of the columns in the results of a query is based on the order of
+the column names in the query.
+The order of the rows in a result is undetermined unless an ORDER BY clause is included in the query.
+The ORDER BY clause consists of one or more column names. The rows are ordered according to the values in the named columns. The keyword ASC is used to indicate ascending order and DESC is used for descending order.
+           SELECT ...
+               FROM ...
+ORDER BY columnname ASC;
+The results can be ordered by the values in several columns simply by spec- ifying several column names, separated by commas. The results are ordered by the values in the first column, but if several rows in the first column have the same value, those rows are ordered by the values in the second column.
+           SELECT ...
+               FROM ...
+ORDER BY column1 ASC, column2 DESC;
+8.2.5 Aggregating results: The GROUP BY clause
+The aggregation functions MAX, MIN, SUM, and AVG (see Section 8.2.1) all return a single value from a column. If a GROUP BY clause is included in the query, aggregated values are reported for each unique value of the column specified in the GROUP BY clause.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 203 — #229 i
+SELECT column1, SUM(column2) FROM ...
+GROUP BY column1;
+Results can be reported for combinations of unique values of several columns
+simply by naming several columns in the GROUP BY clause.
+SELECT column1, column2, SUM(column3) FROM ...
+GROUP BY column1, column2;
+The GROUP BY clause can include a HAVING sub-clause that works like the WHERE clause but operates on the rows of aggregated results rather than the original rows.
+SELECT column1, SUM(column2) colalias FROM ...
+GROUP BY column1 HAVING colalias > 0;
+8.2.6 Subqueries
+The result of an SQL query may be used as part of a larger query. The subquery is placed within parentheses but otherwise follows the same syntax as a normal query.
+Subqueries can be used in place of table names within the FROM clause and to provide comparison values within a WHERE clause.
+SELECT column1 FROM table1
+WHERE column1 IN
+( SELECT column2 FROM table2
+... );
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 204 — #230 i
+8.3 Other SQL commands
+This section deals with SQL commands that perform other common useful actions on a database.
+We start with entering the data into a database.
+Creating a table proceeds in two steps: first we must define the schema or structure of the table and then we can load rows of values into the table.
+8.3.1 Defining tables
+A table schema is defined using the CREATE command.
+CREATE TABLE tablename (col1name col1type, col2name col2type)
+column constraints;
+This command specifies the name of the table, the name of each column, and the data type to be stored in each column. A common variation is to add NOT NULL after the column data type to indicate that the value of the column can never be NULL. This must usually be specified for primary key columns.
+The set of possible data types available depends on the DBMS being used, but some standard options are shown in Table 8.1.
+The column constraints are used to specify primary and foreign keys for the table.
+CREATE TABLE table1
+(col1name col1type NOT NULL,
+col2name col2type) CONSTRAINT constraint1
+PRIMARY KEY (col1name) CONSTRAINT constraint2
+FOREIGN KEY (col2name) REFERENCES table2 (table2col);
+The primary key constraint specifies which column or columns make up the primary key for the table. The foreign key constraint specifies which column
+ii ii
+￼￼￼￼￼￼￼￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 205 — #231 i
+Table 8.1: Some common SQL data types.
+Type Description
+CHAR(n) Fixed-length text (n characters)
+VARCHAR(n) Variable-length text (maximum n characters) INTEGER Whole number
+REAL Real number
+DATE Calendar date
+or columns in this table act as a foreign key and the constraint specifies the table and the column in that table that the foreign key refers to.
+As concrete examples, the code in Figure 8.1 shows the SQL code that was used to create the database tables date_table, location_table, and measure_table for the Data Expo case study in Section 7.1.
+The primary key of the date_table is the ID column and the primary key of the location_table is its ID column. The (composite) primary key of the measure_table is a combination of the location and date columns. The measure_table also has two foreign keys: the date column acts as a foreign key, referring to the ID column of the date_table, and the location column also acts as a foreign key, referring to the ID column of the location_table.
+8.3.2 Populating tables
+Having generated the table schema, values are entered into the table using the INSERT command.
+INSERT INTO table VALUES (value1, value2);
+There should be as many values as there are columns in the table, with values separated from each other by commas. Text values should be enclosed within single-quotes.
+Most DBMS software also provides a way to read data values into a table from an external (text) file. For example, in SQLite, the special .import command can be used to read values from an external text file.
+￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 206 — #232 i
+           CREATE TABLE date_table
+               (ID    INTEGER NOT NULL,
+                date  DATE,
+                month CHAR(9),
+                year  INTEGER,
+                CONSTRAINT date_table_pk PRIMARY KEY (ID));
+           CREATE TABLE location_table
+               (ID    INTEGER NOT NULL,
+￼￼￼     longitude
+     latitude
+     elevation
+     CONSTRAINT location_table_pk PRIMARY KEY (ID));
+CREATE TABLE measure_table
+REAL,
+REAL,
+REAL,
+    (location
+     date
+     cloudhigh
+     cloudmid
+     cloudlow
+     ozone
+     pressure
+     surftemp
+     temperature REAL,
+     CONSTRAINT measure_table_pk
+         PRIMARY KEY (location, date),
+     CONSTRAINT measure_date_table_fk
+         FOREIGN KEY (date)
+         REFERENCES date_table(ID),
+     CONSTRAINT measure_location_table_fk
+         FOREIGN KEY (location)
+         REFERENCES location_table(ID));
+Figure 8.1: The SQL code used to define the table schema for storing the Data Expo data set in a relational database (see Section 7.1).
+INTEGER NOT NULL,
+INTEGER NOT NULL,
+REAL,
+REAL,
+REAL,
+REAL,
+REAL,
+REAL,
+ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 207 — #233 i
+8.3.3 Modifying data
+Values in a database table may be modified using the UPDATE command.
+UPDATE table
+SET column = value WHERE row condition
+The rows of the specified column, within the specified table, that satisfy the row condition, will be changed to the new value.
+8.3.4 Deleting data
+The DELETE command can be used to remove specific rows from a table. DELETE FROM table
+WHERE row condition;
+The DROP command can be used to completely remove not only the contents of a table but also the entire table schema so that the table no longer exists within the database.
+DROP TABLE table;
+In some DBMS, it is even possible to “drop” an entire database (and all of
+its tables).
+DROP DATABASE database;
+These commands should obviously be used with extreme caution.
+8.4 Further reading
+SQL: The Complete Reference
+by James R. Groff and Paul N. Weinberg
+2nd Edition (2002) McGraw-Hill.
+Like the title says, a complete reference to SQL.
+ii ii
+￼￼￼￼￼￼￼￼￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 208 — #234 i
+Using SQL
+by Rafe Colburn
+Special Edition (1999) Que.
+Still a thorough treatment, but an easier read.
+￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 209 — #235 i

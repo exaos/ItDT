@@ -1,0 +1,151 @@
+11
+Regular Expressions
+Regular expressions provide a very powerful way to describe general patterns in text.
+This chapter only provides a quick reference for regular expressions. See Section 9.9.2 for an explanation of what regular expressions are, what they are useful for, and for more realistic examples of their usage.
+Small examples are provided throughout this chapter in order to demon- strate the meaning of various features of regular expressions. In each case, a regular expression will be used to search for a pattern within the following text:
+           The cat sat on the mat.
+A successful match will be indicated by highlighting the matched letters within the text. For example, if the pattern being searched for is the word "on", the the result will be displayed as shown below, with the pattern on the left and the resulting match(es) on the right.
+"on" ⇒ The cat sat on the mat.
+11.1 Literals
+In a regular expression, any character that is not a metacharacter has its normal literal meaning. This includes the lowercase and uppercase alphabet and the digits, plus some punctuation marks, such as the colon and the exclamation mark. Many other punctuation characters and symbols are metacharacters and have a special meaning.
+For example, the regular expression "cat" means: the letter ‘c’, followed by the letter ‘a’, followed by the letter ‘t’.
+"cat" ⇒ The cat sat on the mat. 419
+￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 420 — #446 i
+11.2 Metacharacters
+The simplest example of a metacharacter is the full stop.
+‘.’
+The full stop character matches any single character of any sort (apart from a newline).
+For example, the regular expression ".at" means: any letter, followed by the letter ‘a’, followed by the letter ‘t’.
+".at" ⇒ The cat sat on the mat. 11.2.1 Character sets
+‘[’ and ‘]’
+Square brackets in a regular expression are used to indicate a character set. A character set will match any character in the set.
+For example, the regular expression "[Tt]he" means: an uppercase ‘T’ or a lowercase ‘t’, followed by the letter ‘h’, followed by the letter ‘e’.
+"[Tt]he" ⇒ The cat sat on the mat.
+Within square brackets, common ranges may be specified by start and end characters, with a dash in between, e.g., 0-9 for the Arabic numerals.
+For example, the regular expression "[a-z]at" means: any (English) lowercase letter, followed by the letter ‘a’, followed by the letter ‘t’.
+"[a-z]at" ⇒ The cat sat on the mat.
+If a hat character appears as the first character within square brackets, the set is inverted so that a match occurs if any character other than the set specified within the square brackets is found.
+For example, the regular expression "[^c]at" means: any letter except ‘c’, followed by the letter ‘a’, followed by the letter ‘t’.
+"[^c]at" ⇒ The cat sat on the mat.
+￼￼￼￼￼￼￼￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 421 — #447 i
+Table 11.1: Some POSIX regular expression character classes.
+￼￼￼￼[:alpha:]
+[:lower:]
+[:upper:]
+[:digit:]
+[:alnum:]
+[:space:]
+[:punct:]
+Alphabetic (only letters) Lowercase letters Uppercase letters
+Digits
+Alphanumeric (letters and digits) White space
+Punctuation
+￼Within square brackets, most metacharacters revert to their literal meaning. For example, [.] means a literal full stop.
+For example, the regular expression "at[.]" means: the letter ‘a’, followed by the letter ‘t’, followed by a full stop.
+"at." ⇒ The cat sat on the mat. "at[.]" ⇒ The cat sat on the mat.
+In POSIX regular expressions, common character ranges can be specified using special character sequences of the form [:keyword:] (see Table 11.1). The advantage of this approach is that the regular expression will work in different languages. For example, [a-z] will not capture all characters in languages that include accented characters, but [[:alpha:]] will.
+For example, the regular expression "[[:lower:]]at" means: any lowercase letter in any language, followed by the letter ‘a’, followed by the letter ‘t’.
+"[[:lower:]]at" ⇒ The cat sat on the mat.
+11.2.2 Anchors
+Anchors do not match characters. Instead, they match zero-length features of a piece of text, such as the start and end of the text.
+‘^’
+The “hat” character matches the start of a piece of text or the start of a line of text. Putting this at the start of a regular expression forces
+￼￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 422 — #448 i
+the match to begin at the start of the text. Otherwise, the pattern can be matched anywhere within the text.
+For example, the regular expression "^[Tt]he" means: at the start of the text an uppercase ‘T’ or a lowercase ‘t’, followed by the letter ‘h’, followed by the letter ‘e’.
+"[Tt]he" ⇒ The cat sat on the mat.
+"^[Tt]he" ⇒ The cat sat on the mat. ‘$’
+The dollar character matches the end of a piece of text. This is useful for ensuring that a match finishes at the end of the text.
+For example, the regular expression "at.$" means: the letter ‘a’, followed by the letter ‘t’, followed by any character, at the end of the text.
+"at." ⇒ The cat sat on the mat. "at.$" ⇒ The cat sat on the mat.
+11.2.3 Alternation
+‘|’
+The vertical bar character subdivides a regular expression into alter- native subpatterns. A match is made if either the pattern to the left of the vertical bar or the pattern to the right of the vertical bar is found.
+For example, the regular expression "cat|sat" means: the letter ‘c’, followed by the letter ‘a’, followed by the letter ‘t’, or the letter ‘s’, followed by the letter ‘a’, followed by the letter ‘t’.
+"cat|sat" ⇒ The cat sat on the mat.
+Pattern alternatives can be made a subpattern within a large regular expres- sion by enclosing the vertical bar and the alternatives within parentheses (see Section 11.2.5 below).
+￼￼￼￼￼￼￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 423 — #449 i
+11.2.4 Repetitions
+Three metacharacters are used to specify how many times a subpattern can repeat. The repetition relates to the subpattern that immediately precedes the metacharacter in the regular expression. By default, this is just the previous character, but if the preceding character is a closing square bracket or a closing parenthesis then the modifier relates to the entire character set or the entire subpattern within the parentheses (see Section 11.2.5 below).
+‘?’
+The question mark means that the subpattern can be missing or it can occur exactly once.
+For example, the regular expression "at[.]?" means: the letter ‘a’, followed by the letter ‘t’, optionally followed by a full stop.
+"at[.]" ⇒ The cat sat on the mat.
+"at[.]?" ⇒ The cat sat on the mat. ‘*’
+The asterisk character means that the subpattern can occur zero or more times.
+‘+’
+The plus character means that the subpattern can occur one or more times.
+For example, the regular expression "[a-z]+" means: any number of (English) lowercase letters in a row.
+"[a-z]+" ⇒ The cat sat on the mat.
+As an example of how regular expressions are “greedy”, the regular expression "c.+t" means: the letter ‘c’, followed by any number of any character at all, followed by the letter ‘t’.
+"c.+t" ⇒ The cat sat on the mat.
+￼￼￼￼￼￼￼￼￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 424 — #450 i
+11.2.5 Grouping
+‘(’ and ‘)’
+Parentheses can be used to define a subpattern within a regular expres- sion. This is useful for providing alternation just within a subpattern of a regular expression and for applying a repetition metacharacter to more than a single character.
+For example, the regular expression "(c|s)at" means: the letter ‘c’ or the letter ‘s’, followed by the letter ‘a’, followed by the letter ‘t’.
+"(c|s)at" ⇒ The cat sat on the mat.
+The regular expression "(.at )+" means one or more repetitions of the following pattern: any letter at all, followed by the letter ‘a’, followed by the letter ‘t’, followed by a space.
+"(.at )+" ⇒ The cat sat on the mat.
+Grouping is also useful for retaining original portions of text when perform-
+ing a search-and-replace operation (see Section 11.2.6).
+11.2.6 Backreferences
+It is possible to refer to previous subpatterns within a regular expression using backreferences.
+‘\n’
+When parentheses are used in a pattern to delimit subpatterns, each subpattern may be referred to using a special escape sequence: \1 refers to the first subpattern (reading from the left), \2 refers to the second subpattern, and so on.
+For example, the regular expression "c(..) s\\1" means: the letter ‘c’, followed by any two letters, followed by a space, followed by the letter ‘s’, followed by whichever two letters followed the letter ‘c’.
+"c(..) s\\1" ⇒ The cat sat on the mat.
+When performing a search-and-replace operation, backreferences may be used to specify that the text matched by a subpattern should be used as part of the replacement text.
+￼￼￼￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 425 — #451 i
+For example, in the first replacement below, the literal text ‘cat’ is replaced with the literal text ‘cot’, but in the second example, any three-letter word ending in ‘at’ is replaced by a three-letter word with the original starting letter but ending in ‘ot’.
+           > gsub("cat", "cot", text)
+           [1] "The cot sat on the mat."
+           > gsub("(.)at", "\\1ot", text)
+           [1] "The cot sot on the mot."
+Notice that, within an R expression, the backslash character must be escaped as usual, so the replacement text referring to the first subpattern would have to written like this: "\\1".
+Some more realistic examples of the use of backreferences are given in Sec- tion 9.9.3.
+11.3 Further reading
+Mastering Regular Expressions
+by Jeffrey Friedl
+3rd Edition (2006) O’Reilly.
+Exhaustive treatment of regular expressions in all their various incar- nations.
+Regular Expression Pocket Reference
+by Tony Stubblebine
+2nd Edition (2007) O’Reilly.
+Quick reference for regular expressions.
+Regular-Expressions.info
+                http://www.regular-expressions.info
+Comprehensive online resource.
+￼￼￼ii ii
+￼￼￼￼
+ii
+i “itdt” — 2013/3/26 — 15:24 — page 426 — #452 i
+￼￼￼￼ii ii
+￼￼￼￼
+￼￼i
+ii
+“itdt” — 2013/3/26 — 15:24 — page 427 — #453 i
