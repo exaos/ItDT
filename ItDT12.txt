@@ -1,22 +1,19 @@
 12 Conclusion
+
 This book has described how a number of important data technologies work and it has provided guidelines on the right way to use those technologies.
+
 We have covered technologies for storing data, accessing data, processing data, and publishing data on the web. We have also focused on writing computer languages.
+
 We have looked at the advantages and disadvantages of different storage options, we have looked at how to design data storage efficiently, and we have discussed how to write good computer code.
+
 There are a number of important ideas to take away from this book.
+
 One of these is that the computer is a very flexible and powerful tool, and it is a tool that is ours to control. Files and documents, especially those in open standard formats, can be manipulated using a variety of software tools, not just one specific piece of software. A programming language is a tool that allows us to manipulate data stored in files and to manipulate data held in RAM in unlimited ways. Even with a basic knowledge of programming, we can perform a huge variety of data processing tasks.
-A related idea is that computer code is the preferred approach to commu- nicating our instructions to the computer. This approach allows us to be precise and expressive, it provides a complete record of our actions, and it allows others to replicate our work.
+
+A related idea is that computer code is the preferred approach to communicating our instructions to the computer. This approach allows us to be precise and expressive, it provides a complete record of our actions, and it allows others to replicate our work.
+
 Writing computer code to process, store, or display data is a task that should be performed with considerable discipline. It is important to develop code in small pieces and in careful stages, and it is important to produce code that is tidy and sensibly structured. This discipline is essential to writing code that will produce the correct result both now and in the future.
-Another important idea is the DRY principle. Information, whether data or computer code, should be organized in such a way that there is only one copy of each important unit of information. We saw this idea most clearly in terms of data storage, in the design of XML documents and in the design of relational databases. But the ideas of organizing information efficiently can influence how we work in many ways. The DRY principle can also be
-427
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 428 — #454 i
-applied to how we write computer code, particularly in the use of loops and functions. It can also be applied to how we collect our code within files and how we organize files within directories or folders.
+
+Another important idea is the DRY principle. Information, whether data or computer code, should be organized in such a way that there is only one copy of each important unit of information. We saw this idea most clearly in terms of data storage, in the design of XML documents and in the design of relational databases. But the ideas of organizing information efficiently can influence how we work in many ways. The DRY principle can also be applied to how we write computer code, particularly in the use of loops and functions. It can also be applied to how we collect our code within files and how we organize files within directories or folders.
+
 The aim of this book is to expose and demystify some of the details and underlying principles of how data technologies work, so that we can unlock the power and potential of the “universal computing machines” that sit on our desktops.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 429 — #455 i
