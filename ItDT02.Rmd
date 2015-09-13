@@ -1,4 +1,13 @@
-2 Writing Computer Code
+---
+title: "ItDT02"
+author: "Robert A. Stevens"
+date: "September 12, 2015"
+output: html_document
+---
+
+*Introduction to Data Technologies* by Paul Murrell
+
+# 2 Writing Computer Code
 
 There are two aims for this chapter: learning how to write computer code and learning a computer language to write code in.
 
@@ -22,7 +31,7 @@ Finally, although HTML is now used for all sorts of commercial and private purpo
 
 The aim of this chapter is to elucidate the process of writing, checking, and running computer code and to provide some guidelines for carrying out these tasks effectively and efficiently.
 
-How this chapter is organized
+**How this chapter is organized**
 
 This chapter begins with an example of a simple web page and gives a quick introduction to how HTML computer code relates to the web pages that we see in a web browser such as Firefox. The main point is to demonstrate that computer code can be used to control what the computer does.
 
@@ -36,29 +45,29 @@ Sections 2.5 and 2.6 look at getting our computer code to work properly. Section
 
 Section 2.7 introduces some more ideas about how to organize code and work efficiently. The Cascading Style Sheets language is introduced to provide some simple demonstrations.
 
-2.1 Case study: Point Nemo (continued)
+## 2.1 Case study: Point Nemo (continued)
 
 Figure 2.1 shows a simple web page that contains a very brief statistical report on the Poles of Inaccessibility data from Chapter 1. The report consists of paragraphs of text and an image (a plot), with different formatting applied to various parts of the text. The report heading is bold and larger than the other text, and the table of numerical summaries is displayed with a monospace font. Part of the heading and part of the supplementary material at the bottom of the page are italicized and also act as hyperlinks; a mouse click on the underlined text in the heading will navigate to the Wikipedia page on the Poles of Inaccessibility and a click on the underlined text at the bottom of the page will navigate to NASA’s Live Access Server home page.
 
 The entire web page in Figure 2.1 is described using HTML. The web page consists of a simple text file called inaccessibility.html that contains HTML code. The HTML code is shown in Figure 2.2.
 
-We do not need to worry about the details of this HTML code yet. What is important is to notice that all of this code is just text. Some of it is the text that makes up the content of the report, and other parts are special HTML keywords that “mark up” the content and describe the nature and purpose of each part of the report. The keywords can be distinguished as the text that is surrounded by angled brackets. For example, the heading at the top of the page consists of two keywords, <h3> and </h3> surrounding the actual text of the heading (see lines 7 to 12).
+We do not need to worry about the details of this HTML code yet. What is important is to notice that all of this code is just text. Some of it is the text that makes up the content of the report, and other parts are special HTML keywords that “mark up” the content and describe the nature and purpose of each part of the report. The keywords can be distinguished as the text that is surrounded by angled brackets. For example, the heading at the top of the page consists of two keywords, \<h3\> and \</h3\> surrounding the actual text of the heading (see lines 7 to 12).
 
 The HTML code is just text, so the overall document is just a text file. We will explore the differences between different sorts of files in more detail in Chapter 5. For now, it is just important to note that HTML code, and any other computer code that we write, should be written using software that creates plain text files. For example, do not write computer code using a word processor, such as Microsoft Word. We will return to this point in Section 2.4.1.
 
-Another feature of the code in Figure 2.2 is that it has a clear structure. For example, for every start tag, there is an end tag; the <head> start tag on line 3 is matched by the </head> closing tag on line 5. This rigid structure is an important feature of computer languages and reflects the fact that there are strict rules to follow for any computer language. It is vital that we observe this structure, but the discipline required will help us to be accurate, clear, and logical in how we think about tasks and in how we communicate our instructions to the computer. As we will see later in this chapter, it is also important that this structure is reflected in the layout of our code (as has been done in Figure 2.2).
+Another feature of the code in Figure 2.2 is that it has a clear structure. For example, for every start tag, there is an end tag; the \<head\> start tag on line 3 is matched by the \</head\> closing tag on line 5. This rigid structure is an important feature of computer languages and reflects the fact that there are strict rules to follow for any computer language. It is vital that we observe this structure, but the discipline required will help us to be accurate, clear, and logical in how we think about tasks and in how we communicate our instructions to the computer. As we will see later in this chapter, it is also important that this structure is reflected in the layout of our code (as has been done in Figure 2.2).
 
 Figure 2.1: A simple web page that displays information about the surface temperature data for the Pacific and Eurasian Poles of Inaccessibility (viewed with the Firefox web browser on Windows XP).
 
 In this chapter we will learn the basics of HTML, with a focus on how the code itself is written and with an emphasis on the correct way to write computer code.
 
-2.2 Syntax
+## 2.2 Syntax
 
 The first thing we need to learn about a computer language is the correct syntax for the language.
 
 Syntax is essentially the punctuation and grammar rules for a computer language. Certain characters and words have special meanings and must appear in a particular order for the computer code to make any sense.
 
-A simple example from line 3 in Figure 2.2 is the piece of HTML code <head>. The < character is special in HTML because it indicates the start of a keyword in HTML. The > character is also special; it marks the end of the keyword. Also, this particular keyword, <head>, must appear at the very start of a piece of HTML code.
+A simple example from line 3 in Figure 2.2 is the piece of HTML code \<head\>. The \< character is special in HTML because it indicates the start of a keyword in HTML. The \> character is also special; it marks the end of the keyword. Also, this particular keyword, \<head\>, must appear at the very start of a piece of HTML code.
 
 These rules and special meanings for specific characters and words make up the syntax for a computer language.
 
@@ -66,7 +75,7 @@ Computers are extremely fussy when it comes to syntax, so computer code will hav
 
 The next section describes the basic syntax rules for the HTML language.
 
-2.2.1 HTML syntax
+### 2.2.1 HTML syntax
 
 HTML has a very simple syntax.
 
@@ -76,62 +85,62 @@ HTML keywords, and content, which is just normal everyday text.
 
 There are a few elements that have to go in every HTML document — Figure 2.3 shows the smallest possible HTML document — and then it is up to the author to decide on the main contents of the web page.
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <title>Poles of Inaccessibility</title>
-  </head>
-  <body>
-    <h3>
-    Temperatures at the Pacific and Eurasian
-    <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility"
-      style="font-style: italic">
-    Poles of Inaccessibility</a>
-    </h3>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+      <head>
+        <title>Poles of Inaccessibility</title>
+      </head>
+      <body>
+        <h3>
+        Temperatures at the Pacific and Eurasian
+        <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility"
+          style="font-style: italic">
+        Poles of Inaccessibility</a>
+        </h3>
+    
+        <hr>
+        <p>
+        The Eurasion Pole of Inaccessibility experiences a much
+        wider range of temperatures than the Pacific Pole of
+        Inaccessibility.
+        </p>
+    
+        <pre>
+        pacific eurasian
+    min     276      252
+    max     283      307
+        </pre>
+    
+        <p>
+        This reflects the fact that large bodies of water tend to
+        absorb and release heat more slowly compared to large
+        land masses.
+        Temperatures also depend on the time of the year and which
+        hemisphere the pole is located in.
+        </p>
+    
+        <img src="poleplot.png">
+    
+        <hr>
+        <p>
+        Source: NASA's
+        <a href="http://mynasadata.larc.nasa.gov/LASintro.html"
+          style="font-style: italic">
+        Live Access Server</a>.
+        </p>
+      </body>
+    </html>
 
-    <hr>
-    <p>
-    The Eurasion Pole of Inaccessibility experiences a much
-    wider range of temperatures than the Pacific Pole of
-    Inaccessibility.
-    </p>
+Figure 2.2: The file inaccessibility.html, which contains the HTML code behind the web page in Figure 2.1. The line numbers (in grey) are just for reference.
 
-    <pre>
-    pacific eurasian
-min     276      252
-max     283      307
-    </pre>
-
-    <p>
-    This reflects the fact that large bodies of water tend to
-    absorb and release heat more slowly compared to large
-    land masses.
-    Temperatures also depend on the time of the year and which
-    hemisphere the pole is located in.
-    </p>
-
-    <img src="poleplot.png">
-
-    <hr>
-    <p>
-    Source: NASA's
-    <a href="http://mynasadata.larc.nasa.gov/LASintro.html"
-      style="font-style: italic">
-    Live Access Server</a>.
-    </p>
-  </body>
-</html>
-
-Figure 2.2: The file inaccessibility.html, which contains the HTML code be- hind the web page in Figure 2.1. The line numbers (in grey) are just for reference.
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <title></title>
-  </head>
-  <body>
-  </body>
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+      <head>
+        <title></title>
+      </head>
+      <body>
+      </body>
+    </html>
 
 Figure 2.3: A minimal HTML document. This is the basic code that must appear in any HTML document. The main content of the web page is described by adding further HTML elements within the body element.
 
@@ -139,61 +148,61 @@ An HTML element consists of a start tag, an end tag and some content in between.
 
 As an example, we will look closely at the title element from line 4 of Figure 2.2.
 
-<title>Poles of Inaccessibility</title>
+    <title>Poles of Inaccessibility</title>
 
 This code is broken down into its separate components below, with one important component labeled and highlighted (underlined) on each row.
 
-start tag: <title>Poles of Inaccessibility</title>
-content:   <title>Poles of Inaccessibility</title>
-end tag:   <title>Poles of Inaccessibility</title>
+    start tag: <title>Poles of Inaccessibility</title>
+    content:   <title>Poles of Inaccessibility</title>
+    end tag:   <title>Poles of Inaccessibility</title>
 
 The greater-than and less-than signs have a special meaning in HTML code; they mark the start and end of HTML tags. All of the characters with a special meaning in this title element are highlighted below.
 
-special characters: <title>Poles of Inaccessibility</title>
+    special characters: <title>Poles of Inaccessibility</title>
 
 Some HTML elements may be empty, which means that they only consist of a start tag (no end tag and no content). An example is the img (short for “image”) element from Figure 2.2, which inserts the plot in the web page.
 
-<img src="poleplot.png">
+    <img src="poleplot.png">
 
 The entire img element consists of this single tag.
 
 There is a fixed set of valid HTML elements and only those elements can be used within HTML code. We will encounter several important elements in this chapter and a more comprehensive list is provided in Chapter 3.
 
-Attributes
+**Attributes**
 
 HTML elements can have one or more attributes, which provide more information about the element. An attribute consists of the attribute name, an equals sign, and the attribute value, which is surrounded by double-quotes. Attributes only appear in the start tag of an element. We have just seen an example in the img element above. The img element has an attribute called src that describes the location of a file containing the picture to be drawn on the web page. In the example above, the attribute is src="poleplot.png".
 
 The components of this HTML element are shown below.
 
-       HTML tag: <img src="poleplot.png">
-   element name: <img src="poleplot.png">
-      attribute: <img src="poleplot.png">
- attribute name: <img src="poleplot.png">
-attribute value: <img src="poleplot.png">
+           HTML tag: <img src="poleplot.png">
+       element name: <img src="poleplot.png">
+          attribute: <img src="poleplot.png">
+     attribute name: <img src="poleplot.png">
+    attribute value: <img src="poleplot.png">
 
 Again, some of the characters in this code are part of the HTML syntax. These special characters are highlighted below.
 
-special characters: <img src="poleplot.png">
+    special characters: <img src="poleplot.png">
 
 Many attributes are optional, and if they are not specified, a default value is provided.
 
-Element order
+**Element order**
 
 HTML tags must be ordered properly. All elements must nest cleanly and some elements are only allowed inside specific other elements. For example, a title element can only be used inside a head element, and the title element must start and end within the head element. The following HTML code is invalid because the title element does not finish within the head element.
 
-<head>
-    <title>
-    Poles of Inaccessibility
-</head>
-    </title>
+    <head>
+        <title>
+        Poles of Inaccessibility
+    </head>
+        </title>
 
 To be correct, the title element must start and end within the head element, as in the code below.
 
-<head>
-    <title>
-    Poles of Inaccessibility
-    </title>
-</head>
+    <head>
+        <title>
+        Poles of Inaccessibility
+        </title>
+    </head>
 
 Finally, there are a few elements that must occur in an HTML document: there must be a DOCTYPE declaration, which states what computer language we are using; there must be a single html element, with a single head element and a single body element inside; and the head element must contain a single title element. Figure 2.3 shows a minimal HTML document.
 
@@ -201,7 +210,7 @@ HTML is defined by a standard, so there is a single, public specification of HTM
 
 These are the basic syntax rules of HTML. With these rules, we can write correct HTML code. In Section 2.3 we will look at the next step, which is what the code will do when we give it to the computer to run.
 
-2.2.2 Escape sequences
+### 2.2.2 Escape sequences
 
 As we have seen in HTML, certain words or characters have a special meaning within the language. These are sometimes called keywords or reserved words to indicate that they are reserved by the language for special use and cannot be used for their normal natural-language purpose.
 
@@ -209,15 +218,15 @@ This means that some words or characters can never be used for their normal, nat
 
 For example, the < character marks the start of a tag in HTML, so this cannot be used for its normal meaning of “less than”.
 
-If we need to have a less-than sign within the content of an HTML element, we have to type &lt; instead. This is an example of what is called an escape sequence.
+If we need to have a less-than sign within the content of an HTML element, we have to type \&lt; instead. This is an example of what is called an escape sequence.
 
-Another special character in HTML is the greater-than sign, >. To produce one of these in the content of an HTML element, we must type &gt;.
+Another special character in HTML is the greater-than sign, >. To produce one of these in the content of an HTML element, we must type \&gt;.
 
-In HTML, there are several escape sequences of this form that all start with an ampersand, &. This means of course that the ampersand is itself a special character, with its own escape sequence, &amp;. A larger list of special characters and escape sequences in HTML is given in Section 3.1.2.
+In HTML, there are several escape sequences of this form that all start with an ampersand, &. This means of course that the ampersand is itself a special character, with its own escape sequence, \&amp;. A larger list of special characters and escape sequences in HTML is given in Section 3.1.2.
 
 We will meet this idea of escape sequences again in the other computer languages that we encounter later in the book.
 
-Recap
+**Recap**
 
 Computer code is just text, but with certain characters or words having special meanings.
 
@@ -231,13 +240,13 @@ HTML consists of elements, which consist of a start tag and an end tag, with con
 
 HTML elements may also have attributes within the start tag.
 
-2.3 Semantics
+## 2.3 Semantics
 
 When we write code in a computer language, we call the meaning of the code — what the computer will do when the code is run — the semantics of the code. Computer code has no defined semantics until it has a correct syntax, so we should always check that our code is free of errors before worrying about whether it does what we want.
 
 Computer languages tend to be very precise, so as long as we get the syntax right, there should be a clear meaning for the code. This is important because it means that we can expect our code to produce the same result on different computers and even with different software.
 
-2.3.1 HTML semantics
+### 2.3.1 HTML semantics
 
 In HTML, tags are used to mark up and identify different parts of a document. When the HTML is viewed in a web browser, different parts of the document are displayed in different ways. For example, headings are typically drawn larger and bolder than normal text and paragraphs are typeset so that the text fills the space available, but with visual gaps from one paragraph to the next.
 
@@ -269,13 +278,13 @@ These are some of the simple HTML elements that can be used to create web pages.
 
 There are many more HTML elements that can be used to create a variety of different effects and Chapter 3 describes a few more of these.
 
-Recap
+**Recap**
 
 The meaning of keywords in a computer language is called the semantics of the language.
 
 A web page is described by placing HTML tags around the content of the page.
 
-2.4 Writing code
+## 2.4 Writing code
 
 Up to this point, we have only looked at HTML code that has already been written. We will now turn our attention to writing new HTML code.
 
@@ -285,7 +294,7 @@ For each step, we will discuss what software we need to do the job as well as pr
 
 In this section, we look at the task of writing computer code. 
 
-2.4.1 Text editors
+### 2.4.1 Text editors
 
 The act of writing code is itself dependent on computer tools. We use software to record and manage our keystrokes in an effective manner. This section discusses what sort of tool should be used to write computer code effectively.
 
@@ -295,7 +304,7 @@ For many people, the most obvious software program for entering text is a word p
 
 The programs that we use to run our code expect to encounter only plain text, so we must use software that creates only text documents, which means we must use a text editor.
 
-2.4.2 Important features of a text editor
+### 2.4.2 Important features of a text editor
 
 For many people, the most obvious program for creating a document that only contains text is Microsoft Notepad. This program has the nice feature that it saves a file as pure text, but its usefulness ends there.
 
@@ -313,7 +322,7 @@ In the absence of everything else, Notepad is better than using a word processor
 
 Figure 2.4 demonstrates some of these ideas by showing the same code in Notepad and Crimson Editor.
 
-2.4.3 Layout of code
+### 2.4.3 Layout of code
 
 There are two important audiences to consider when writing computer code. The obvious one is the computer; it is vitally important that the computer understands what we are trying to tell it to do. This is mostly a matter of getting the syntax of our code right.
 
@@ -325,29 +334,29 @@ One simple but important way that code can be improved for a human audience is t
 
 For example, the following two code chunks are identical HTML code, as far as the computer is concerned. However, they are vastly different to a human reader. Try finding the “title” part of the code. Even without knowing anything about HTML, this is a ridiculously easy task in the second layout, and annoyingly difficult in the first.
 
-<html><head><title>A Minimal HTML
-Document</title></head><body>
-The content goes here!</body>
-
-<html>
-    <head>
-        <title>A Minimal HTML Document</title>
-    </head>
-    <body>
-        The content goes here!
-    </body>
+    <html><head><title>A Minimal HTML
+    Document</title></head><body>
+    The content goes here!</body>
+    
+    <html>
+        <head>
+            <title>A Minimal HTML Document</title>
+        </head>
+        <body>
+            The content goes here!
+        </body>
 
 This demonstrates the basic idea behind laying out code. The changes are entirely cosmetic, but they are extremely effective. It also demonstrates one important layout technique: indenting.
 
-2.4.4 Indenting code
+### 2.4.4 Indenting code
 
 The idea of indenting code is to expose the structure of the code. What this means will vary between computer languages, but in the case of HTML code, a simple rule is to indent the contents of an element.
 
 The following code provides a simple example, where a title element is the content of a head element. The title element is indented (shifted to the right) with respect to the head element.
 
-<head>
-    <title>A Minimal HTML Document</title>
-</head>
+    <head>
+        <title>A Minimal HTML Document</title>
+    </head>
 
 The amount of indenting is a personal choice. The examples here have used 4 spaces, but 2 spaces or even 8 spaces are also common. Whatever indentation is chosen, it is essential that the indenting rule is applied consistently, especially when more than one person might modify the same piece of code.
 
@@ -355,127 +364,127 @@ Exposing structure of code by indenting is important because it makes it easy fo
 
 Another useful result of indenting is that it provides a basic check on the correctness of code. Look again at the simple HTML code example. Does anything look wrong?
 
-<html>
-    <head>
-        <title>A Minimal HTML Document</title>
-    </head>
-    <body>
-        The content goes here!
-    </body>
+    <html>
+        <head>
+            <title>A Minimal HTML Document</title>
+        </head>
+        <body>
+            The content goes here!
+        </body>
 
-Even without knowing anything about HTML, the lack of symmetry in the layout suggests that there is something missing at the bottom of this piece of code. In this case, indenting has alerted us to the fact that there is no end </html> tag.
+Even without knowing anything about HTML, the lack of symmetry in the layout suggests that there is something missing at the bottom of this piece of code. In this case, indenting has alerted us to the fact that there is no end \</html\> tag.
 
-2.4.5 Long lines of code
+### 2.4.5 Long lines of code
 
 Another situation where indenting should be applied is when a line of computer code becomes very long. It is a bad idea to have a single line of code that is wider than the screen on which the code is being viewed (so that we have to scroll across the window to see all of the code). When this happens, the code should be split across several lines (most computer languages do not notice the difference). Here is an example of a line of HTML code that is too long.
 
-<img src="poleplot.png" alt="A plot of temperatures over time">
+    <img src="poleplot.png" alt="A plot of temperatures over time">
 
 Here is the code again, split across several lines. It is important that the subsequent lines of code are indented so that they are visually grouped with the first line.
 
-<img src="poleplot.png"
-     alt="A plot of temperatures over time">
+    <img src="poleplot.png"
+         alt="A plot of temperatures over time">
 
 In the case of a long HTML element, a reasonable approach is to left-align the start of all attributes within the same tag (as shown above).
 
-2.4.6 Whitespace
+### 2.4.6 Whitespace
 
 Whitespace refers to empty gaps in computer code. Like indenting, white-space is useful for making code easy for humans to read, but it has no effect on the semantics of the code. Wouldyouwriteinyournativelanguagewithout- puttingspacesbetweenthewords?
 
 Indenting is a form of whitespace that always appears at the start of a line, but whitespace is effective within and between lines of code as well. For example, the following code is too dense and therefore is difficult to read.
 
-<table border="1"width="100%" bgcolor="#CCCCCC">
+    <table border="1"width="100%" bgcolor="#CCCCCC">
 
 This modification of the code, with extra spaces, is much easier on the eye.
 
-<table border="1" width="100%" bgcolor="#CCCCCC">
+    <table border="1" width="100%" bgcolor="#CCCCCC">
 
 Figure 2.5 shows two code chunks that demonstrate the usefulness of blank lines between code blocks to help expose the structure, particularly in large pieces of code.
 
 Again, exactly when to use spaces or blank lines depends on personal style.
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"> 
-<html>
-    <head>
-        <title>Poles of Inaccessibility</title>
-    </head> 
-    <body>
-        <h3>
-        Temperatures at the Pacific and Eurasian Poles of Inaccessibility
-        </h3>
-        <hr>
-        <p>
-        The Eurasion Pole of Inaccessibility experiences 
-        a much wider range of temperatures than the
-        Pacific Pole of Inaccessibility.
-        </p>
-        <pre>
-    pacific eurasian 
-min     276      252 
-max     283      307
-        </pre>
-        <p>
-        This reflects the fact that large bodies of
-        water tend to absorb and release heat more
-        slowly compared to large land masses.
-        Temperatures also depend on the time of the year 
-        and which hemisphere the pole is located in.
-        </p>
-        <img src="poleplot.png">
-        <hr>
-        <p style="font-style: italic">
-        Source: NASA's
-        <a href="http://mynasadata.larc.nasa.gov/"> 
-        Live Access Server</a>.
-        </p>
-    </body> 
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"> 
+    <html>
+        <head>
+            <title>Poles of Inaccessibility</title>
+        </head> 
+        <body>
+            <h3>
+            Temperatures at the Pacific and Eurasian Poles of Inaccessibility
+            </h3>
+            <hr>
+            <p>
+            The Eurasion Pole of Inaccessibility experiences 
+            a much wider range of temperatures than the
+            Pacific Pole of Inaccessibility.
+            </p>
+            <pre>
+        pacific eurasian 
+    min     276      252 
+    max     283      307
+            </pre>
+            <p>
+            This reflects the fact that large bodies of
+            water tend to absorb and release heat more
+            slowly compared to large land masses.
+            Temperatures also depend on the time of the year 
+            and which hemisphere the pole is located in.
+            </p>
+            <img src="poleplot.png">
+            <hr>
+            <p style="font-style: italic">
+            Source: NASA's
+            <a href="http://mynasadata.larc.nasa.gov/"> 
+            Live Access Server</a>.
+            </p>
+        </body> 
+    </html>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"> 
-<html>
-    <head>
-        <title>Poles of Inaccessibility</title>
-    </head> 
-    <body>
-        <h3>
-        Temperatures at the Pacific and Eurasian 
-        Poles of Inaccessibility
-        </h3>
-
-        <hr>
-        <p>
-        The Eurasion Pole of Inaccessibility experiences 
-        a much wider range of temperatures than the
-        Pacific Pole of Inaccessibility.
-        </p>
-
-        <pre> 
-    pacific eurasian
-min     276      252 
-max     283      307 
-        </pre>
-
-        <p>
-        This reflects the fact that large bodies of
-        water tend to absorb and release heat more
-        slowly compared to large land masses.
-        Temperatures also depend on the time of the year 
-        and which hemisphere the pole is located in.
-        </p>
-
-        <img src="poleplot.png">
-
-        <hr>
-        <p style="font-style: italic">
-        Source: NASA's
-        <a href="http://mynasadata.larc.nasa.gov/"> Live Access Server</a>.
-        </p>
-    </body> 
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"> 
+    <html>
+        <head>
+            <title>Poles of Inaccessibility</title>
+        </head> 
+        <body>
+            <h3>
+            Temperatures at the Pacific and Eurasian 
+            Poles of Inaccessibility
+            </h3>
+    
+            <hr>
+            <p>
+            The Eurasion Pole of Inaccessibility experiences 
+            a much wider range of temperatures than the
+            Pacific Pole of Inaccessibility.
+            </p>
+    
+            <pre> 
+        pacific eurasian
+    min     276      252 
+    max     283      307 
+            </pre>
+    
+            <p>
+            This reflects the fact that large bodies of
+            water tend to absorb and release heat more
+            slowly compared to large land masses.
+            Temperatures also depend on the time of the year 
+            and which hemisphere the pole is located in.
+            </p>
+    
+            <img src="poleplot.png">
+    
+            <hr>
+            <p style="font-style: italic">
+            Source: NASA's
+            <a href="http://mynasadata.larc.nasa.gov/"> Live Access Server</a>.
+            </p>
+        </body> 
+    </html>
 
 Figure 2.5: These two code chunks contain exactly the same code; all that differs is the use of several blank lines (whitespace) in the code on the right, which help to expose the structure of the code for a human reader.
 
-2.4.7 Documenting code
+### 2.4.7 Documenting code
 
 In Section 2.5.3, we discuss the importance of being able to read documentation about a computer language. In this section, we consider the task of writing documentation for our own code.
 
@@ -483,11 +492,11 @@ As with the layout of code, the purpose of documentation is to communicate. The 
 
 Most of what we will have to say about documentation will apply to writing comments — messages written in plain language, embedded in the code, and which the computer ignores.
 
-2.4.8 HTML comments
+### 2.4.8 HTML comments
 
 Here is how to include a comment within HTML code.
 
-<!-- This is a comment -->
+    <!-- This is a comment -->
 
 Anything between the start <!-- and end -->, including HTML tags, is completely ignored by the computer. It is only there to edify a human reader.
 
@@ -495,7 +504,7 @@ Having no comments in code is generally a bad idea, and it is usually the case t
 
 Comments should not just be a repetition of the code. Good uses of comments include: providing a conceptual summary of a block of code; ex- plaining a particularly complicated piece of code; and explaining arbitrary constant values.
 
-Recap
+**Recap**
 
 Computer code should be written using a text editor.
 
@@ -503,7 +512,7 @@ Code should be written tidily so that it is acceptable for a human audience. Cod
 
 Code should include comments, which are ignored by the computer but explain the purpose of the code to a human reader.
 
-2.5 Checking code
+## 2.5 Checking code
 
 Knowing how to write the correct syntax for a computer language is not a guarantee that we will write the correct syntax for a particular piece of code. One way to check whether we have our syntax correct is to stare at it and try to see any errors. However, in this book, such a tedious, manual, and error-prone approach is discouraged because the computer is so much better at this sort of task.
 
@@ -513,7 +522,7 @@ In the case of HTML code, there are many types of software that can check the sy
 
 The software that we will use to demonstrate HTML syntax checking is a piece of software called HTML Tidy.
 
-2.5.1 Checking HTML code
+### 2.5.1 Checking HTML code
 
 HTML Tidy is a program for checking the syntax of HTML code. It can be downloaded from Source Forge [3] or it can be used via one of the online services provided by the World Wide Web Consortium (W3C) [4].
 
@@ -521,29 +530,29 @@ In order to demonstrate the use of HTML Tidy, we will check the syntax of the fo
 
 For simple use of HTML Tidy, the only thing we need to know is the name of the HTML document and where that file is located. For example, the online services provide a button to select the location of an HTML file.
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-    <head>
-        <title>A Minimal HTML Document
-    </head>
-    <body>
-    </body>
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+        <head>
+            <title>A Minimal HTML Document
+        </head>
+        <body>
+        </body>
+    </html>
 
 Figure 2.6: An HTML document that contains one deliberate mistake on line 4 (missing <\title> tag). The line numbers (in grey) are just for reference.
 
-Parsing "broken.html"
-line 5 column 5 - Warning: missing </title> before </head>
-
-Info: Doctype given is "-//W3C//DTD HTML 4.01 Transitional//EN"
-Info: Document content looks like HTML 4.01 Transitional
-1 warning, 0 errors were found!
+    Parsing "broken.html"
+    line 5 column 5 - Warning: missing </title> before </head>
+    
+    Info: Doctype given is "-//W3C//DTD HTML 4.01 Transitional//EN"
+    Info: Document content looks like HTML 4.01 Transitional
+    1 warning, 0 errors were found!
 
 Figure 2.7: Part of the output from running HTML Tidy on the HTML code in Figure 2.6.
 
 To run HTML Tidy locally, the following command would be entered in a command window or terminal.
 
-tidy broken.html
+    tidy broken.html
 
 HTML Tidy checks the syntax of HTML code, reports any problems that it finds, and produces a suggestion of what the correct code should look like.
 
@@ -551,7 +560,7 @@ Figure 2.7 shows part of the output from running HTML Tidy on the simple HTML co
 
 An important skill to develop for writing computer code is the ability to decipher warning and error messages that the computer displays. In this case, there is one error message.
 
-2.5.2 Reading error information
+### 2.5.2 Reading error information
 
 The error (or warning) information provided by computer software is often very terse and technical. Reading error messages is a skill that improves with experience, and it is important to seek out any piece of useful information in a message. Even if the message as a whole does not make sense, if the message can only point us to the correct area within the code, our mistake may become obvious.
 
@@ -559,13 +568,13 @@ In general, when the software checking our code encounters a series of errors, i
 
 The error from HTML Tidy in Figure 2.7 is this:
 
-line 5 column 5 - Warning: missing </title> before </head>
+    line 5 column 5 - Warning: missing </title> before </head>
 
 To an experienced eye, the problem is clear, but this sort of message can be quite opaque for people who are new to writing computer code. A good first step is to make use of the information that is supplied about where the problem has occurred. In this case, we need to find the fifth character on line 5 of our code.
 
 The line of HTML code in question is shown below.
 
-</head>
+    </head>
 
 Column 5 on this line is the < at the start of the closing head tag.
 
@@ -573,9 +582,9 @@ Taken in isolation, it is hard to see what is wrong with this code. However, err
 
 Here is the location of the error message in a slightly broader context.
 
-    <title>A Minimal HTML Document
-</head>
-<body>
+        <title>A Minimal HTML Document
+    </head>
+    <body>
 
 The error message mentions both title and head, so we might guess that we are dealing with these elements. In this case, this case just confirms that we are looking at the right place in our code.
 
@@ -585,7 +594,7 @@ In this case, the solution is simple; we just need to add the missing tag and ch
 
 Unfortunately, not all syntax errors can be resolved as easily as this. When the error is not as obvious, we may have to extract what information we can from the error message and then make use of another important skill: reading the documentation for computer code.
 
-2.5.3 Reading documentation
+### 2.5.3 Reading documentation
 
 The nice thing about learning a computer language is that the rules of grammar are usually quite simple, there are usually very few of them, and they are usually very consistent.
 
@@ -597,13 +606,13 @@ This book provides reference chapters for each of the computer languages that we
 
 These reference chapters are shorter and simpler than the official language documentation, so they should provide a good starting point for finding out a few more details about a language. When this still does not provide the answer, there are pointers to more thorough documentation at the end of each reference chapter.
 
-Recap
+**Recap**
 
 Computer code should be checked for correctness of syntax before it can be expected to run.
 
 Understanding computer error messages and understanding the documentation for a computer language are important skills in themselves that take practice and experience to master.
 
-2.6 Running code
+## 2.6 Running code
 
 We have now discussed how to write code and how to check that the syntax of the code is correct. The final step is to run the code and have the computer produce the result that we want.
 
@@ -611,7 +620,7 @@ As with syntax checking, we need to use software to run the code that we have wr
 
 In the case of HTML, there are many software programs that will run the code, but the most common type is a web browser, such as Internet Explorer or Firefox.
 
-2.6.1 Running HTML code
+### 2.6.1 Running HTML code
 
 All that we need to do to run our HTML code is to open the file containing our code with a web browser. The file does not have to be on another computer on the internet. In most browsers, there is a File menu with an option to open an HTML file on the local computer. We can then see whether the code has produced the result that we want.
 
@@ -623,7 +632,7 @@ The solution to these problems, for this book, has two parts: we will not use a 
 
 If we run HTML code and the result is what we want, we are finished. However, more often than not, the result is not what we want. The next section looks at how to resolve problems in our code.
 
-2.6.2 Debugging code
+### 2.6.2 Debugging code
 
 When we have code that has correct syntax and runs, but does not behave correctly, we say that there is a bug in our code. The process of fixing our code so that it does what we want it to is called debugging the code.
 
@@ -647,13 +656,13 @@ Chapter 3 provides some basic information about common HTML elements and Section
 
 We will discuss specific debugging tools for some languages as we meet them.
 
-Recap
+**Recap**
 
 Computer code should be tested to ensure that it not only works but also that it produces the right result.
 
 If code does not produce the right result, the code should be modified in small, disciplined, and deliberate stages to approach the right result.
 
-2.7 The DRY principle
+## 2.7 The DRY principle
 
 One of the purposes of this book is to introduce and explain various technologies for working with data. We have already met one such technology, HTML, for producing reports on the world wide web.
 
@@ -669,23 +678,23 @@ To understand the DRY principle, consider what happens when we move to a new add
 
 The DRY principle will be very important when we discuss the storage of data (Chapter 5), but it can also be applied to computer code that we write. In the next section, we will look at one example of applying the DRY principle to writing computer code.
 
-2.7.1 Cascading Style Sheets
+### 2.7.1 Cascading Style Sheets
 
 Cascading Style Sheets (CSS) is a language that is used to describe how to display information. It is commonly used with HTML to control the appearance of a web page. In fact, the preferred way to produce a web page is to use HTML to indicate the structure of the information and CSS to specify the appearance.
 
 We will give a brief introduction to CSS and then go on to show how the proper use of CSS demonstrates the DRY principle.
 
-CSS syntax
+**CSS syntax**
 
 We have actually seen two examples of CSS already in the HTML code from the very start of this chapter. The CSS code occurs on lines 10 and 41 of Figure 2.2; these lines, plus their surrounding context, are reproduced below.
 
-<a href="http://wikipedia.org/wiki/Pole_of_inaccessibility"
-  style="font-style: italic">
-Poles of Inaccessibility</a>
-
-<a href="http://mynasadata.larc.nasa.gov/LASintro.html"
-   style="font-style: italic">
-Live Access Server</a>.
+    <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility"
+      style="font-style: italic">
+    Poles of Inaccessibility</a>
+    
+    <a href="http://mynasadata.larc.nasa.gov/LASintro.html"
+       style="font-style: italic">
+    Live Access Server</a>.
 
 In both cases, the CSS code occurs within the start tag of an HTML anchor (a) element. The anchor element has an attribute called style, and the value of that attribute is a CSS property.
 
@@ -703,63 +712,63 @@ The important differences in Figure 2.8 are that there is a style element in the
 
 The new style element in the head of the HTML code is reproduced below.
 
-<style type="text/css">
-  a { font-style: italic; }
-</style>
+    <style type="text/css">
+      a { font-style: italic; }
+    </style>
 
 One important point is that this CSS code no longer just consists of a CSS property. This CSS code is a complete CSS rule, which consists of a selector, plus one or more properties.
 
 The components of this CSS rule are shown below.
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <title>Poles of Inaccessibility</title>
-    <style type="text/css">
-      a { font-style: italic; }
-    </style>
-  </head>
-  <body>
-    <h3>
-    Temperatures at the Pacific and Eurasian
-    <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility">
-    Poles of Inaccessibility</a>
-    </h3>
-    <hr>
-    <p>
-    The Eurasion Pole of Inaccessibility experiences a much
-    wider range of temperatures than the Pacific Pole of
-    Inaccessibility.
-    </p>
-    <pre>
-    pacific eurasian
-min     276      252
-max     283      307
-    </pre>
-    <p>
-    This reflects the fact that large bodies of water tend to absorb and release heat more slowly compared to large
-    land masses.
-    Temperatures also depend on the time of the year and which hemisphere the pole is located in.
-    </p>
-    <img src="poleplot.png">
-    <hr>
-    <p>
-    Source: NASA's
-    <a href="http://mynasadata.larc.nasa.gov/LASintro.html"> 
-    Live Access Server</a>.
-    </p>
-  </body>
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+      <head>
+        <title>Poles of Inaccessibility</title>
+        <style type="text/css">
+          a { font-style: italic; }
+        </style>
+      </head>
+      <body>
+        <h3>
+        Temperatures at the Pacific and Eurasian
+        <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility">
+        Poles of Inaccessibility</a>
+        </h3>
+        <hr>
+        <p>
+        The Eurasion Pole of Inaccessibility experiences a much
+        wider range of temperatures than the Pacific Pole of
+        Inaccessibility.
+        </p>
+        <pre>
+        pacific eurasian
+    min     276      252
+    max     283      307
+        </pre>
+        <p>
+        This reflects the fact that large bodies of water tend to absorb and release heat more slowly compared to large
+        land masses.
+        Temperatures also depend on the time of the year and which hemisphere the pole is located in.
+        </p>
+        <img src="poleplot.png">
+        <hr>
+        <p>
+        Source: NASA's
+        <a href="http://mynasadata.larc.nasa.gov/LASintro.html"> 
+        Live Access Server</a>.
+        </p>
+      </body>
+    </html>
 
 Figure 2.8: The file inaccessibilitystyle.html. This HTML code will produce the same web page as Figure 2.1 when viewed in a web browser. This code is similar to the code in Figure 2.2 except that the CSS code is within a style element in the head element, rather than being within a style attribute within the anchor element.
 
-      selector:  a { font-style: italic; }
-  open bracket:  a { font-style: italic; }
- property name:  a { font-style: italic; }
-         colon:  a { font-style: italic; }
-property value:  a { font-style: italic; }
-    semi-colon:  a { font-style: italic; }
- close bracket:  a { font-style: italic; }
+          selector:  a { font-style: italic; }
+      open bracket:  a { font-style: italic; }
+     property name:  a { font-style: italic; }
+             colon:  a { font-style: italic; }
+    property value:  a { font-style: italic; }
+        semi-colon:  a { font-style: italic; }
+     close bracket:  a { font-style: italic; }
 
 The brackets, the colon, and the semi-colon will be the same for any CSS rule.
 
@@ -777,68 +786,68 @@ Figure 2.9 shows a modification of the code in Figure 2.8 that makes use of this
 
 The important difference this time is that there is a link element in the head element (lines 5 and 6) rather than a style element. This new link element is reproduced below. Most of this element is standard for referencing a file of CSS code; the only piece that is specific to this example is the href attribute, which specifies the name of the file that contains the CSS code.
 
-<link rel="stylesheet" href="reportstyle.css"
-      type="text/css">
+    <link rel="stylesheet" href="reportstyle.css"
+          type="text/css">
 
 This link element tells a web browser to load the CSS code from the file reportstyle.css and apply the rules in that file. The contents of that file are shown in Figure 2.10.
 
 A CSS file can contain one or more CSS rules. In this case, there is just one rule, which applies to anchor elements and says that the text for hyperlinks should be italic.
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <title>Poles of Inaccessibility</title>
-    <link rel="stylesheet" href="reportstyle.css"
-          type="text/css">
-  </head>
-  <body> 
-    <h3>
-    Temperatures at the Pacific and Eurasian
-    <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility">
-    Poles of Inaccessibility</a>
-    </h3>
-    <hr>
-    <p>
-    The Eurasion Pole of Inaccessibility experiences a much
-    wider range of temperatures than the Pacific Pole of
-    Inaccessibility.
-    </p>
-    <pre>
-    pacific eurasian
-min     276      252
-max     283      307
-    </pre>
-    <p>
-    This reflects the fact that large bodies of water tend to absorb and release heat more slowly compared to large
-    land masses.
-    Temperatures also depend on the time of the year and which hemisphere the pole is located in.
-    </p>
-    <img src="poleplot.png">
-    <hr>
-    <p>
-    Source: NASA's
-    <a href="http://mynasadata.larc.nasa.gov/LASintro.html"> Live Access Server</a>.
-    </p>
-  </body>
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+      <head>
+        <title>Poles of Inaccessibility</title>
+        <link rel="stylesheet" href="reportstyle.css"
+              type="text/css">
+      </head>
+      <body> 
+        <h3>
+        Temperatures at the Pacific and Eurasian
+        <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility">
+        Poles of Inaccessibility</a>
+        </h3>
+        <hr>
+        <p>
+        The Eurasion Pole of Inaccessibility experiences a much
+        wider range of temperatures than the Pacific Pole of
+        Inaccessibility.
+        </p>
+        <pre>
+        pacific eurasian
+    min     276      252
+    max     283      307
+        </pre>
+        <p>
+        This reflects the fact that large bodies of water tend to absorb and release heat more slowly compared to large
+        land masses.
+        Temperatures also depend on the time of the year and which hemisphere the pole is located in.
+        </p>
+        <img src="poleplot.png">
+        <hr>
+        <p>
+        Source: NASA's
+        <a href="http://mynasadata.larc.nasa.gov/LASintro.html"> Live Access Server</a>.
+        </p>
+      </body>
+    </html>
 
 Figure 2.9: The file inaccessibilitycss.html. This HTML code will produce the same web page as Figure 2.1 when viewed in a web browser. This code is similar to the code in Figure 2.8 except that the CSS code is within a separate text file called reportstyle.css and there is a link element (rather than a style element) in the head element that refers to the file of CSS code.
 
-a {
-    font-style: italic;
-}
+    a {
+        font-style: italic;
+    }
 
 Figure 2.10: The file reportstyle.css, which contains CSS code to control the appearance of anchor elements within HTML documents. The line numbers (in grey) are just for reference.
 
 The advantage of having a separate file of CSS code like this is that now we can apply the CSS rule not just to all anchor elements in the HTML document inaccessibility.html, but to all anchor elements in any other HTML document as well. For example, if we want this style for all statistical reports that we write, then we can simply include a link element that refers to reportstyle.css in the HTML document for each report. This is a further example of the DRY principle as it applies to computer code; we have one copy of code that can be reused in many different places.
 
-Other CSS rules
+**Other CSS rules**
 
 As mentioned previously, there are many other CSS properties for controlling other aspects of the appearance of elements within a web page. Some of these are described in Chapter 4.
 
 Chapter 4 also describes some more advanced ideas about the selectors within CSS rules. For example, there are ways to specify a selector so that a CSS rule only applies to some anchor elements within an HTML document, rather than all anchor elements within the document.
 
-Recap
+**Recap**
 
 The DRY principle states that there should be only one copy of important information.
 
@@ -846,14 +855,11 @@ Cascading style sheets control the appearance of HTML documents.
 
 By having separate HTML and CSS files, it is easy and efficient to have several different HTML documents with the same general appearance.
 
-2.8 Further reading
+## 2.8 Further reading
 
-Code Complete
-    by Steve McConnell
-    2nd edition (2004) Microsoft Press.
-    Exhaustive discussion of ways of writing good computer code. Includes languages and advanced topics way beyond the scope of this book.
+*Code Complete* by Steve McConnell, 2nd edition (2004) Microsoft Press. Exhaustive discussion of ways of writing good computer code. Includes languages and advanced topics way beyond the scope of this book.
 
-Summary
+## Summary
 
 Writing computer code should be performed with a text editor to produce a plain text file.
 
