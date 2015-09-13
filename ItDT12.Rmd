@@ -1,4 +1,13 @@
-12 Conclusion
+---
+title: "ItDT12"
+author: "Robert A. Stevens"
+date: "September 12, 2015"
+output: html_document
+---
+
+*Introduction to Data Technologies* by Paul Murrell
+
+# 12 Conclusion
 
 This book has described how a number of important data technologies work and it has provided guidelines on the right way to use those technologies.
 
