@@ -1,6 +1,15 @@
-1 Introduction
+---
+title: "ItDT01"
+author: "Robert A. Stevens"
+date: "September 12, 2015"
+output: html_document
+---
 
-1.1 Case study: Point Nemo
+*Introduction to Data Technologies* by Paul Murrell
+
+# 1 Introduction
+
+## 1.1 Case study: Point Nemo
 
 The Live Access Server is one of many services provided by the National Aeronautics and Space Administration (NASA) for gaining access to its enormous repositories of atmospheric and astronomical data. The Live Access Server [1] provides access to atmospheric data from NASA’s fleet of Earth-observing satellites, data that consist of coarsely gridded measurements of major atmospheric variables, such as ozone, cloud cover, pressure, and temperature. NASA provides a web site that allows researchers to select variables of interest, and geographic and temporal ranges, and then to download or view the relevant data (see Figure 1.1). Using this service, we can attempt to answer questions about atmospheric and weather conditions in different parts of the world.
 
@@ -12,21 +21,21 @@ To make our task a little more manageable, for now we will restrict our attentio
 
 In a book on data analysis, we would assume that the data are already in a form that can be conveniently loaded into statistical software, and the emphasis would be on how to analyze these data. However, that is not the focus of this book. Here, we are interested in all of the steps that must be taken before the data can be conveniently loaded into statistical software.
 
-VARIABLE : Mean TS from clear sky composite (kelvin)
-FILENAME : ISCCPMonthly_avg.nc
-FILEPATH : /usr/local/fer_data/data/
-SUBSET   : 48 points (TIME)
-LONGITUDE: 123.8W(-123.8)
-LATITUDE : 48.8S
-           123.8W 
-           23
-16-JAN-1994 00 /  1:  278.9
-16-FEB-1994 00 /  2:  280.0
-16-MAR-1994 00 /  3:  278.9
-16-APR-1994 00 /  4:  278.9
-16-MAY-1994 00 /  5:  277.8
-16-JUN-1994 00 /  6:  276.1
-...
+    VARIABLE : Mean TS from clear sky composite (kelvin)
+    FILENAME : ISCCPMonthly_avg.nc
+    FILEPATH : /usr/local/fer_data/data/
+    SUBSET   : 48 points (TIME)
+    LONGITUDE: 123.8W(-123.8)
+    LATITUDE : 48.8S
+               123.8W 
+               23
+    16-JAN-1994 00 /  1:  278.9
+    16-FEB-1994 00 /  2:  280.0
+    16-MAR-1994 00 /  3:  278.9
+    16-APR-1994 00 /  4:  278.9
+    16-MAY-1994 00 /  5:  277.8
+    16-JUN-1994 00 /  6:  276.1
+    ...
 
 Figure 1.2: The first few lines of plain text output from the Live Access Server for the surface temperature at Point Nemo.
 
@@ -52,19 +61,19 @@ Now we need to get the data into our statistical software. At this point, we enc
 
 In order to read the data into statistical software, we need to be able to express the following information: “skip the first 8 lines”; and “on each row, the values are separated by whitespace (one or more spaces or tabs)”; and “on each row, the date is the first value and the temperature is the last value (ignore the other three values)”. Here is one way to do this for the statistical software package R (Chapter 9 has much more to say about working with data in R):
 
-read.table("PointNemo.txt", skip=8,
-           colClasses=c("character",
-                        "NULL", "NULL", "NULL",
-                        "numeric"),
-           col.names=c("date", "", "", "", "temp"))
+    read.table("PointNemo.txt", skip=8,
+               colClasses=c("character",
+                            "NULL", "NULL", "NULL",
+                            "numeric"),
+               col.names=c("date", "", "", "", "temp"))
 
 This solution may appear complex, especially for anyone not experienced in writing computer code. Partly that is because this is complex information that we need to communicate to the computer and writing code is the best or even the only way to express that sort of information. However, the complexity of writing computer code gains us many benefits. For example, having written this piece of code to load in the data for the Pacific Pole of Inaccessibility, we can use it again, with only a change in the name of the file, to read in the data for the Eurasian Pole of Inaccessibility. That would look like this:
 
-read.table("Eurasia.txt", skip=8,
-           colClasses=c("character",
-                        "NULL", "NULL", "NULL",
-                        "numeric"),
-           col.names=c("date", "", "", "", "temp"))
+    read.table("Eurasia.txt", skip=8,
+               colClasses=c("character",
+                            "NULL", "NULL", "NULL",
+                            "numeric"),
+               col.names=c("date", "", "", "", "temp"))
 
 Imagine if we wanted to load in temperature data in this format from several hundred other locations around the world. Loading in such volumes of data would now be trivial and fast using code like this; performing such a task by selecting menus and filling in dialog boxes hundreds of times does not bear thinking about.
 
@@ -72,11 +81,11 @@ Going back a step, if we wanted to download the data for hundreds of locations a
 
 As well as the web interface to the Live Access Server, it is also possible to make requests by writing code to communicate with the Live Access Server. Here is the code to ask for the temperature data from the Pacific Pole of Inaccessibility:
 
-lasget.pl \
-    -x -123.4 -y -48.9 -t 1994-Jan-1:2001-Sep-30 \
-    -f txt \
-    http://mynasadata.larc.nasa.gov/las-bin/LASserver.pl \
-    ISCCPMonthly_avg_nc ts
+    lasget.pl \
+        -x -123.4 -y -48.9 -t 1994-Jan-1:2001-Sep-30 \
+        -f txt \
+        http://mynasadata.larc.nasa.gov/las-bin/LASserver.pl \
+        ISCCPMonthly_avg_nc ts
 
 Again, that may appear complex, and there is a “start-up” cost involved in learning how to write such code. However, this is the only sane method to obtain large amounts of data from the Live Access Server. Chapters 7 and 9 look at extracting data sets from complex systems and automating tasks that would otherwise be tedious or impossible if performed by hand.
 
@@ -84,7 +93,7 @@ Writing code, as we have seen above, is the only accurate method of communicatin
 
 At this point, we have the tools to access the Point Nemo data in a form that is convenient for conducting the data analysis, but, because this is not a book on data analysis, this is where we stop. The important points for our purposes are how the data are stored, accessed, and processed. These are the topics that will be expanded upon and discussed at length throughout the remainder of this book.
 
-Summary
+## Summary
 
 This book is concerned with the issues and technologies involved with the storage and handling of data sets.
 
