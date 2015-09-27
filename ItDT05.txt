@@ -1,27 +1,37 @@
-5
-Data Storage
+5 Data Storage
+
 Chapter 2 dealt with the ideas and tools that are necessary for producing computer code. In Chapter 2, we were concerned with how we communicate our instructions to the computer.
+
 In this chapter, we move over to the computer’s view of the world for a while and investigate how the computer takes information and stores it.
+
 There are several good reasons why researchers need to know about data storage options. One is that we may not have control over the format in which data is given to us. For example, data from NASA’s Live Access Server is in a format decided by NASA and we are unlikely to be able to convince NASA to provide it in a different format. This says that we must know about different formats in order to gain access to data.
+
 Another common situation is that we may have to transfer data between different applications or between different operating systems. This effec- tively involves temporary data storage, so it is useful to understand how to select an appropriate storage format.
+
 It is also possible to be involved in deciding the format for archiving a data set. There is no overall best storage format; the correct choice will depend on the size and complexity of the data set and what the data set will be used for. It is necessary to gain an overview of the relative merits of all of the data storage options in order to be able to make an informed decision for any particular situation.
+
 In this chapter, we will see a number of different data storage options and we will discuss the strengths and weaknesses of each.
+
 How this chapter is organized
+
 This chapter begins with a case study that is used to introduce some of the important ideas and issues that arise when data is stored electronically. The purpose of this section is to begin thinking about the problems that can arise and to begin establishing some criteria that we can use to compare different data storage options.
+
 The remaining sections each describe one possible approach to data storage: Section 5.2 discusses plain text formats, Section 5.3 discusses binary formats,
-61
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 62 — #88 i
+
 Section 5.4 looks briefly at the special case of spreadsheets, Section 5.5 describes XML, and Section 5.6 addresses relational databases.
+
 In each case, there is an explanation of the relevant technology, including a discussion of how to use the technology in an appropriate way, and there is a discussion of the strengths and weaknesses of each storage option.
+
 5.1 Case study: YBC 7289
+
 Some of the earliest known examples of recorded information come from Mesopotamia, which roughly corresponds to modern-day Iraq, and date from around the middle of the fourth millenium BC. The writing is called cuneiform, which refers to the fact that marks were made in wet clay with a wedge-shaped stylus.
+
 A particularly famous mathematical example of cuneiform is the clay tablet known as YBC 7289.
+
 This tablet is inscribed with a set of numbers using the Babylonian sexages- imal (base-60) system. In this system, an angled symbol, <, represents the value 10 and a vertical symbol, |, represents the value 1. For example, the value 30 is written (roughly) like this: <<<. This value can be seen along the top-left edge of YBC 7289 (see Figure 5.1).
+
 The markings across the center of YBC 7289 consist of four digits: |,
+
 <<||||, <<<<<|, and <. Historians have suggested that these markings
 represent an estimate of the length of the diagonal of a unit square, which
 2 = 1.41421356 (to eight decimal places). The decimal interpretation of the sexagesimal digits is 1+ 24 + 51 + 10 = 1.41421296,
@@ -30,33 +40,35 @@ Storing YBC 7289
 What we are going to do with this ancient clay tablet is to treat it as information that needs to be stored electronically.
 The choice of a clay tablet for recording the information on YBC 7289 was obviously a good one in terms of the durability of the storage medium. Very few electronic media today have an expected lifetime of several thousand years. However, electronic media do have many other advantages.
 The most obvious advantage of an electronic medium is that it is very easy
-￼￼￼￼has a true value of
+has a true value of
 √
-￼￼￼ii ii
+
 60 3600 216000
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 63 — #89 i
-￼￼￼￼￼￼Figure 5.1: Clay tablet YBC 7289 with an overlay to emphasize the markings on its surface. The cuneiform inscriptions demonstrate the derivation of the square root of 2.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 64 — #90 i
+
+Figure 5.1: Clay tablet YBC 7289 with an overlay to emphasize the markings on its surface. The cuneiform inscriptions demonstrate the derivation of the square root of 2.
+
 to make copies. The curators in charge of YBC 7289 would no doubt love to be able to make identical copies of such a precious artifact, but truly identical copies are only really possible for electronic information.
+
 This leads us to the problem of how we produce an electronic record of the tablet YBC 7289. We will consider a number of possibilities in order to introduce some of the issues that will be important when discussing various data storage alternatives throughout this chapter.
+
 A straightforward approach to storing the information on this tablet would be to write a simple textual description of the tablet.
+
            YBC 7289 is a clay tablet with various cuneiform marks on it
            that describe the relationship between the length of the
            diagonal and the length of the sides of a square.
+
 This approach has the advantages that it is easy to create and it is easy for a human to access the information. However, when we store electronic information, we should also be concerned about whether the information is easily accessible for computer software. This essentially means that we should supply clear labels so that individual pieces of information can be retrieved easily. For example, the label of the tablet is something that might be used to identify this tablet from all other cuneiform artifacts, so the label information should be clearly identified.
+
            label: YBC 7289
            description: A clay tablet with various cuneiform marks on it
            that describe the relationship between the length of the
            diagonal and the length of the sides of a square.
+
 Thinking about what sorts of questions will be asked of the data is a good way to guide the design of data storage. Another sort of information that people might go looking for is the set of cuneiform markings that occur on the tablet.
+
 The markings on the tablet are numbers, but they are also symbols, so it would probably be best to record both numeric and textual representations. There are three sets of markings and three values to record for each set; a common way to record this sort of information is with a row of information per set of markings, with three columns of values on each row.
-￼￼￼   <<<
+
+   <<<
      | <<|||| <<<<<| <
 <<<<|| <<||||| <<<|||||
 30
@@ -65,37 +77,39 @@ The markings on the tablet are numbers, but they are also symbols, so it would p
 30
  1.41421296
 42.4263889
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 65 — #91 i
+
 When storing the lines of symbols and numbers, we have spaced out the information so that it is easy, for a human, to see where one sort of value ends and another begins. Again, this information is even more important for the computer. Another option is to use a special character, such as a comma, to indicate the start/end of separate values.
+
            values:
            cuneiform,sexagesimal,decimal
            <<<,30,30
            | <<|||| <<<<<| <,1 24 51 10,1.41421296
            <<<<|| <<||||| <<<|||||,42 25 35,42.4263889
+
 Something else we should add is information about how the values relate to each other. Someone who is unfamiliar with Babylonian history may have difficulty realizing how the three values on each line actually correspond to each other. This sort of encoding information is essential metadata— information about the data values.
+
 encoding: In cuneiform, a '<' stands for 10 and
 a '|' stands for 1. Sexagesimal values are base 60, with
 a sexagesimal point after the first digit; the first digit represents ones, the second digit is sixtieths, the third is three-thousand six-hundredths, and the fourth is two hundred and sixteen thousandths.
+
 The position of the markings on the tablet and the fact that there is also a square, with its diagonals inscribed, are all important information that contribute to a full understanding of the tablet. The best way to capture this information is with a photograph.
+
 In many fields, data consist not just of numbers, but also pictures, sounds, and video. This sort of information creates additional files that are not easily incorporated together with textual or numerical data. The problem becomes not only how to store each individual representation of the information, but also how to organize the information in a sensible way. Something that we could do in this case is include a reference to a file containing a photograph of the tablet.
+
            photo: ybc7289.png
-Information about the source of the data may also be of interest. For ex- ample, the tablet has been dated to sometime between 1800 BC and 1600
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 66 — #92 i
-BC. Little is known of its rediscovery, except that it was acquired in 1912 AD by an agent of J. P. Morgan, who subsequently bequeathed it to Yale University. This sort of metadata is easy to record as a textual description.
+
+Information about the source of the data may also be of interest. For ex- ample, the tablet has been dated to sometime between 1800 BC and 1600 BC. Little is known of its rediscovery, except that it was acquired in 1912 AD by an agent of J. P. Morgan, who subsequently bequeathed it to Yale University. This sort of metadata is easy to record as a textual description.
+
            medium: clay tablet
            history: Created between 1800 BC and 1600 BC, purchased by
            J.P. Morgan 1912, bequeathed to Yale University.
+
 The YBC in the tablet’s label stands for the Yale Babylonian Collection. This tablet is just one item within one of the largest collections of cuneiforms in the world. In other words, there are a lot of other sources of data very similar to this one.
+
 This has several implications for how we should store information about YBC 7298. First of all, we should store the information about this tablet in the same way that information is stored for other tablets in the collection so that, for example, a researcher can search for all tablets created in a certain time period. We should also think about the fact that some of the infor- mation that we have stored for YBC 7289 is very likely to be in common with all items in the collection. For example, the explanation of the sexa- gesimal system will be the same for other tablets from the same era. With this in mind, it does not make sense to record the encoding information for every single tablet. It would make sense to record the encoding information once, perhaps in a separate file, and just refer to the appropriate encoding information within the record for an individual tablet.
+
 A complete version of the information that we have recorded so far might look like this:
+
            label: YBC 7289
            description: A clay tablet with various cuneiform marks on it
            that describe the relationship between the length of the
@@ -110,26 +124,27 @@ A complete version of the information that we have recorded so far might look li
            <<<,30,30
            | <<|||| <<<<<| <,1 24 51 10,1.41421296
            <<<<|| <<||||| <<<|||||,42 25 35,42.4263889
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 67 — #93 i
+
 Is this the best possible way to store information about YBC 7289? Almost certainly not. Some problems with this approach include the fact that storing information as text is often not the most efficient approach and the fact that it would be difficult and slow for a computer to extract individual pieces of information from a free-form text format like this. However, the choice of an appropriate format also depends on how the data will be used.
+
 The options discussed so far have only considered a couple of the possible text representations of the data. Another whole set of options to consider is binary formats. For example, the photograph and the text and numeric information could all be included in a single file. The most likely solu- tion in practice is that this information resides in a relational database of information that describes the entire Yale Babylonian Collection.
+
 This chapter will look at the decisions involved in choosing a format for storing information, we will discuss a number of standard data storage for- mats, and we will acquire the technical knowledge to be able to work with the different formats.
+
 We start in Section 5.2 with plain text formats. This is followed by a discussion of binary formats in Section 5.3, and in Section 5.4, we look at the special case of spreadsheets. In Section 5.5, we look at XML, a computer language for storing data, and in Section 5.6, we discuss relational databases.
+
 5.2 Plain text formats
+
 The simplest way to store information in computer memory is as a single file with a plain text format.
+
 Plain text files can be thought of as the lowest common denominator of stor- age formats; they might not be the most efficient or sophisticated solution, but we can be fairly certain that they will get the job done.
+
 The basic conceptual structure of a plain text format is that the data are arranged in rows, with several values stored on each row.
+
 It is common for there to be several rows of general information about the data set, or metadata, at the start of the file. This is often referred to as a file header.
+
 A good example of a data set in a plain text format is the surface tempera- ture data for the Pacific Pole of Inaccessibility (see Section 1.1). Figure 5.2 shows how we would normally see this sort of plain text file if we view it in a text editor or a web browser.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 68 — #94 i
+
                          VARIABLE : Mean TS from clear sky composite (kelvin)
                          FILENAME : ISCCPMonthly_avg.nc
                          FILEPATH : /usr/local/fer_data/data/
@@ -144,80 +159,90 @@ ii
              16-MAY-1994 00 /  5:  277.8
              16-JUN-1994 00 /  6:  276.1
              ...
+
 Figure5.2: ThefirstfewlinesoftheplaintextoutputfromtheLiveAccessServer for the surface temperature at Point Nemo. This is a reproduction of Figure 1.2.
+
 This file has 8 lines of metadata at the start, followed by 48 lines of the core data values, with 2 values, a date and a temperature, on each row.
+
 There are two main sub-types of plain text format, which differ in how separate values are identified within a row:
+
 Delimited formats:
 In a delimited format, values within a row are separated by a special character, or delimiter. For example, it is possible to view the file in Figure 5.2 as a delimited format, where each line after the header consists of two fields separated by a colon (the character ‘:’ is the delimiter). Alternatively, if we used whitespace (one or more spaces or tabs) as the delimiter, there would be five fields, as shown below.
-￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 69 — #95 i
+
 Fixed-width formats:
 In a fixed-width format, each value is allocated a fixed number of characters within every row. For example, it is possible to view the file in Figure 5.2 as a fixed-width format, where the first value uses the first 20 characters and the second value uses the next 8 characters. Alternatively, there are five values on each row using 12, 3, 2, 6, and 5 characters respectively, as shown in the diagram below.
-￼￼￼￼At the lowest level, the primary characteristic of a plain text format is that all of the information in the file, even numeric information, is stored as text.
+
+At the lowest level, the primary characteristic of a plain text format is that all of the information in the file, even numeric information, is stored as text.
+
 We will spend the next few sections at this lower level of detail because it will be helpful in understanding the advantages and disadvantages of plain text formats for storing data, and because it will help us to differentiate plain text formats from binary formats later on in Section 5.3.
+
 The first things we need to establish are some fundamental ideas about computer memory.
+
 5.2.1 Computer memory
+
 The most fundamental unit of computer memory is the bit. A bit can be a tiny magnetic region on a hard disk, a tiny dent in the reflective material on a CD or DVD, or a tiny transistor on a memory stick. Whatever the physical implementation, the important thing to know about a bit is that, like a switch, it can only take one of two values: it is either “on” or “off”.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 70 — #96 i
-￼￼￼￼A collection of 8 bits is called a byte and (on the majority of computers today) a collection of 4 bytes, or 32 bits, is called a word.
+
+A collection of 8 bits is called a byte and (on the majority of computers today) a collection of 4 bytes, or 32 bits, is called a word.
+
 5.2.2 Files and formats
+
 A file is simply a block of computer memory.
-A file can be as small as just a few bytes or it can be several gigabytes in
-size (thousands of millions of bytes).
+
+A file can be as small as just a few bytes or it can be several gigabytes in size (thousands of millions of bytes).
+
 A file format is a way of interpreting the bytes in a file. For example, in the simplest case, a plain text format means that each byte is used to represent a single character.
+
 In order to visualize the idea of file formats, we will display a block of memory in the format shown below. This example shows the first 24 bytes from the PDF file for this book.
+
  0  :  00100101 01010000 01000100 01000110  |  %PDF
  4  :  00101101 00110001 00101110 00110100  |  -1.4
  8  :  00001010 00110101 00100000 00110000  |  .5 0
 12  :  00100000 01101111 01100010 01101010  |   obj
 16  :  00001010 00111100 00111100 00100000  |  .<<
 20  :  00101111 01010011 00100000 00101111  |  /S /
+
 This display has three columns. On the left is a byte offset that indicates the memory location within the file for each row. The middle column displays the raw memory contents of the file, which is just a series of 0’s and 1’s. The right hand column displays an interpretation of the bytes. This display is split across several rows just so that it will fit onto the printed page. A block of computer memory is best thought of as one long line of 0’s and 1’s.
-In this example, we are interpreting each byte of memory as a single charac- ter, so for each byte in the middle column, there is a corresponding character
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 71 — #97 i
-in the right-hand column. As specific examples, the first byte, 00100101, is being interpreted as the percent character, %, and and the second byte, 01010000, is being interpreted as the letter P.
+
+In this example, we are interpreting each byte of memory as a single charac- ter, so for each byte in the middle column, there is a corresponding character in the right-hand column. As specific examples, the first byte, 00100101, is being interpreted as the percent character, %, and and the second byte, 01010000, is being interpreted as the letter P.
+
 In some cases, the byte of memory does not correspond to a printable char- acter, and in those cases we just display a full stop. An example of this is byte number nine (the first byte on the third row of the display).
+
 Because the binary code for computer memory takes up so much space, we will also sometimes display the central raw memory column using hexadeci- mal (base 16) code rather than binary. In this case, each byte of memory is just a pair of hexadecimal digits. The first 24 bytes of the PDF file for this book are shown again below, using hexadecimal code for the raw memory.
+
 0 : 255044462d312e340a352030 | %PDF-1.4.50 12 : 206f626a0a3c3c202f53202f | obj.<</S/
 5.2.3 Case study: Point Nemo (continued)
+
 We will now look at a low level at the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1), which is in a plain text format. To emphasize the format of this information in computer memory, the first 48 bytes of the file are displayed below. This display should be compared with Figure 5.2, which shows what we would normally see when we view the plain text file in a text editor or web browser.
+
 0 : 202020202020202020202020 |
 12 : 205641524941424c45203a20 | VARIABLE: 24 : 4d65616e2054532066726f6d | MeanTSfrom 36 : 20636c65617220736b792063 | clearskyc
+
 This display clearly demonstrates that the Point Nemo information has been stored as a series of characters. The empty space at the start of the first line is a series of 13 spaces, with each space stored as a byte with the hexadecimal value 20. The letter V at the start of the word VARIABLE has been stored as a byte with the value 56.
+
 To further emphasize the character-based nature of a plain text format, another part of the file is shown below as raw computer memory, this time focusing on the part of the file that contains the core data—the dates and temperature values.
+
 336 : 2031362d4a414e2d31393934203030 | 16-JAN-199400
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 72 — #98 i
 351 : 202f2020313a20203237382e390d0a | / 1: 278.9.. 366 : 2031362d4645422d31393934203030 | 16-FEB-199400 381 : 202f2020323a20203238302e300d0a | / 2: 280.0..
+
 The second line of this display shows that the number 278.9 is stored in this file as five characters—the digits 2, 7, 8, followed by a full stop, then the digit 9—with one byte per character. Another small detail that may not have been clear from previous views of these data is that each line starts with a space, represented by a byte with the value 20.
+
 We will contrast this sort of format with other ways of storing the informa- tion later in Section 5.3. For now, we just need to be aware of the simplicity of the memory usage in such a plain text format and the fact that everything is stored as a series of characters in a plain text format.
+
 The next section will look at why these features can be both a blessing and a curse.
+
 5.2.4 Advantages and disadvantages
+
 The main advantage of plain text formats is their simplicity: we do not require complex software to create or view a text file and we do not need esoteric skills beyond being able to type on a keyboard, which means that it is easy for people to view and modify the data.
+
 The simplicity of plain text formats means that virtually all software pack- ages can read and write text files and plain text files are portable across different computer platforms.
+
 The main disadvantage of plain text formats is also their simplicity. The basic conceptual structure of rows of values can be very inefficient and in- appropriate for data sets with any sort of complex structure.
+
 The low-level format of storing everything as characters, with one byte per character, can also be very inefficient in terms of the amount of computer memory required.
+
 Consider a data set collected on two families, as depicted in Figure 5.3. What would this look like as a plain text file, with one row for all of the information about each person in the data set? One possible fixed-width format is shown below. In this format, each row records the information for one person. For each person, there is a column for the father’s name (if known), a column for the mother’s name (if known), the person’s own name, his or her age, and his or her gender.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 73 — #99 i
-￼￼￼John
+
+John
         Julia
 Julia   Jack
 Julia   Jill
@@ -227,46 +252,52 @@ David 45 male
                Debbie    42  female
 David  Debbie  Donald    16  male
 David  Debbie  Dianne    12  female
+
 This format for storing these data is not ideal for two reasons. Firstly, it is not efficient; the parent information is repeated over and over again. This repetition is also undesirable because it creates opportunities for errors and inconsistencies to creep in. Ideally, each individual piece of information would be stored exactly once; if more than one copy exists, then it is possible for the copies to disagree. The DRY principle (Section 2.7) applies to data as well as code.
+
 The second problem is not as obvious, but is arguably much more important. The fundamental structure of most plain text file formats means that each line of the file contains exactly one record or case in the data set. This works well when a data set only contains information about one type of object, or, put another way, when the data set itself has a “flat” structure.
+
 The data set of family members does not have a flat structure. There is information about two different types of object, parents and children, and these objects have a definite relationship between them. We can say that the data set is hierarchical or multi-level or stratified (as is obvious from the view of the data in Figure 5.3). Any data set that is obtained using a non-trivial study design is likely to have a hierarchical structure like this.
+
 In other words, a plain text file format does not allow for sophisticated data models. A plain text format is unable to provide an appropriate represen- tation of a complex data structure. Later sections will provide examples of storage formats that are capable of storing complex data structures.
+
 Another major weakness of free-form text files is the lack of information within the file itself about the structure of the file. For example, plain text files do not usually contain information about which special character is being used to separate fields in a delimited file, or any information about the widths of fields with a fixed-width format. This means that the computer cannot automatically determine where different fields are within each row of a plain text file, or even how many fields there are.
+
 John
 John
 John   Julia   John jnr   2  male
 6  male
 4  female
-ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 74 — #100 i
-￼￼￼￼￼￼Figure 5.3: An example of hierarchical data: a family tree containing data on parents (grey) and children (white).
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 75 — #101 i
+
+Figure 5.3: An example of hierarchical data: a family tree containing data on parents (grey) and children (white).
+
 A fixed-width format avoids this problem, but enforcing a fixed length for fields can create other difficulties if we do not know the maximum possible length for all variables. Also, if the values for a variable can have very different lengths, a fixed-width format can be inefficient because we store lots of empty space for short values.
+
 The simplicity of plain text files make it easy for a computer to read a file as a series of characters, but the computer cannot easily distinguish individual data values from the series of characters. Even worse, the computer has no way of telling what sort of data is stored in each field. Does the series of characters represent a number, or text, or some more complex value such as a date?
+
 In practice, a human must supply additional information about a plain text file before the computer can successfully determine where the different fields are within a plain text file and what sort of value is stored in each field.
+
 5.2.5 CSV files
+
 The Comma-Separated Value (CSV) format is a special case of a plain text format. Although not a formal standard, CSV files are very common and are a quite reliable plain text delimited format that at least solves the problem of where the fields are in each row of the file.
+
 The main rules for the CSV format are:
+
 Comma-delimited:
 Each field is separated by a comma (i.e., the character , is the delim- iter).
+
 Double-quotes are special:
 Fields containing commas must be surrounded by double-quotes (i.e., the " character is special).
+
 Double-quote escape sequence:
 Fields containing double-quotes must be surrounded by double-quotes and each embedded double-quote must be represented using two double- quotes (i.e., within double-quotes, "" is an escape sequence for a literal double-quote).
+
 Header information
+
 There can be a single header line containing the names of the fields.
+
 CSV files are a common way to transfer data from a spreadsheet to other software.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 76 — #102 i
+
             date,temp
              16-JAN-1994,278.9
              16-FEB-1994,280
@@ -275,73 +306,90 @@ ii
              16-MAY-1994,277.8
              16-JUN-1994,276.1
              ...
+
 Figure 5.4: The first few lines of the plain text output from the Live Access Server for the surface temperature at Point Nemo in Comma-Separated Value (CSV) format. On each line, there are two data values, a date and a temperature value, separated from each other by a comma. The first line provides a name for each column of data values.
+
 Figure 5.4 shows what the Point Nemo temperature data might look like in a CSV format. Notice that most of the metadata cannot be included in the file when using this format.
+
 5.2.6 Line endings
+
 A common feature of plain text files is that data values are usually arranged in rows, as we have seen in Figures 5.2 and 5.4.
+
 We also know that plain text files are, at the low level of computer memory, just a series of characters.
+
 How does the computer know where one line ends and the next line starts?
+
 The answer is that the end of a line in a text file is indicated by a special character (or two special characters). Most software that we use to view text files does not explicitly show us these characters. Instead, the software just starts a new line.
+
 To demonstrate this idea, two lines from the file pointnemotemp.txt are reproduced below (as they appear when viewed in a text editor or web browser).
+
             16-JAN-1994 00 /  1:  278.9
             16-FEB-1994 00 /  2:  280.0
+
 The section of computer memory used to store these two lines is shown below.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 77 — #103 i
+
 336 : 2031362d4a414e2d31393934203030 | 16-JAN-199400 351 : 202f2020313a20203237382e390d0a | / 1: 278.9.. 366 : 2031362d4645422d31393934203030 | 16-FEB-199400 381 : 202f2020323a20203238302e300d0a | / 2: 280.0..
+
 The feature to look for is the section of two bytes immediately after each temperature value. These two bytes have the values 0d and 0a, and this is the special byte sequence that is used to indicate the end of a line in a plain text file.
+
 As mentioned above, these bytes are not explicitly shown by most software that we use to view the text file. The software detects this byte sequence and starts a new line in response.
+
 So why do we need to know about the special byte sequence at all? Because, unfortunately, this is not the only byte sequence used to signal the end of the line. The sequence 0d 0a is common for plain text files that have been created on a Windows system, but for plain text files created on a Mac OS X or Linux system, the sequence is likely to be just 0a.
+
 Many computer programs will allow for this possibility and cope automat- ically, but it can be a source of problems. For example, if a plain text file that was created on Linux is opened using Microsoft Notepad, the entire file is treated as if it is one long row, because Notepad expects to see 0d 0a for a line ending and the file will only contain 0a at the end of each line.
+
 5.2.7 Text encodings
+
 We have identified two features of plain text formats so far: all data is stored as a series of characters and each character is stored in computer memory using a single byte.
+
 The second part, concerning how a single character is stored in computer memory, is called a character encoding.
+
 Up to this point we have only considered the simplest possible character encoding. When we only have the letters, digits, special symbols, and punc- tuation marks that appear on a standard (US) English keyboard, then we can use a single byte to store each character. This is called an ASCII en- coding (American Standard Code for Information Interchange).
+
 An encoding that uses a single byte (8 bits) per character can cope with up to 256 (28) different characters, which is plenty for a standard English keyboard.
-Many other languages have some characters in common with English but
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 78 — #104 i
-also have accented characters, such as  ́e and o ̈. In each of these cases, it is still possible to use an encoding that represents each possible character in the language with a single byte. However, the problem is that different encodings may use the same byte value for a different character. For ex- ample, in the Latin1 encoding, for Western European languages, the byte value f1 represents the character n ̃, but in the Latin2 encoding, for Eastern European languages, the byte value f1 represents the character n ́. Because of this ambiguity, it is important to know what encoding was used when the text was stored.
+
+Many other languages have some characters in common with English but also have accented characters, such as  ́e and o ̈. In each of these cases, it is still possible to use an encoding that represents each possible character in the language with a single byte. However, the problem is that different encodings may use the same byte value for a different character. For ex- ample, in the Latin1 encoding, for Western European languages, the byte value f1 represents the character n ̃, but in the Latin2 encoding, for Eastern European languages, the byte value f1 represents the character n ́. Because of this ambiguity, it is important to know what encoding was used when the text was stored.
+
 The situation is much more complex for written languages in some Asian and Middle Eastern countries that use several thousand different characters (e.g., Japanese Kanji ideographs). In order to store text in these languages, it is necessary to use a multi-byte encoding scheme where more than one byte is used to store each character.
+
 UNICODE is an attempt to allow computers to work with all of the char- acters in all of the languages of the world. Every character has its own number, called a “code point”, often written in the form U+xxxxxx, where every x is a hexadecimal digit. For example, the letter ‘A’ is U+000041 and the letter ‘o ̈’ is U+0000F6.
+
 There are two main “encodings” that are used to store a UNICODE code point in memory. UTF-16 always uses two bytes per character of text and UTF-8 uses one or more bytes, depending on which characters are stored. If the text is only ASCII, UTF-8 will only use one byte per character.
+
 For example, the text “just testing” is shown below saved via Microsoft’s Notepad with a plain text format, but using three different encodings: ASCII, UTF-16, and UTF-8.
+
 0 : 6a7573742074657374696e67 | justtesting
+
 The ASCII format contains exactly one byte per character.
+
 0 : fffe6a007500730074002000 | ..j.u.s.t.. 12 : 740065007300740069006e00 | t.e.s.t.i.n. 24 : 67 00 | g.
+
 The UTF-16 format differs from the ASCII format in two ways. For every byte in the ASCII file, there are now two bytes, one containing the hexadec- imal code we saw before followed by a byte containing all zeroes. There are also two additional bytes at the start. These are called a byte order mark (BOM) and indicate the order of the two bytes that make up each letter in the text, which is used by software when reading the file.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 79 — #105 i
+
 0 : efbbbf6a7573742074657374 | ...justtest 12 : 696e67 | ing
+
 The UTF-8 format is mostly the same as the ASCII format; each letter has only one byte, with the same binary code as before because these are all common English letters. The difference is that there are three bytes at the start to act as a BOM. Notepad writes a BOM like this at the start of UTF-8 files, but not all software does this.
+
 In summary, a plain text format always stores all data values as a series of characters. However, the number of bytes used to store each character in computer memory depends on the character encoding that is used.
+
 This encoding is another example of additional information that may have to be provided by a human before the computer can read data correctly from a plain text file, although many software packages will cope with different encodings automatically.
+
 5.2.8 Case study: The Data Expo
+
 The American Statistical Association (ASA) holds an annual conference called the Joint Statistical Meetings (JSM).
+
 One of the events sometimes held at this conference is a Data Exposition, where contestants are provided with a data set and must produce a poster demonstrating a comprehensive analysis of the data. For the Data Expo at the 2006 JSM,1 the data were geographic and atmospheric measures that were obtained from NASA’s Live Access Server (see Section 1.1).
+
 The variables in the data set are: elevation, temperature (surface and air), ozone, air pressure, and cloud cover (low, mid, and high). With the excep- tion of elevation, all variables are monthly averages, with observations for January 1995 to December 2000. The data are measured at evenly spaced geographic locations on a very coarse 24 by 24 grid covering Central America (see Figure 5.5).
+
 The data were downloaded from the Live Access Server in a plain text format with one file for each variable, for each month; this produced 72 files per atmospheric variable, plus 1 file for elevation, for a total of 505 files. Figure 5.6 shows the start of one of the surface temperature files.
+
 This data set demonstrates a number of advantages and limitations of a plain text format for storing data. First of all, the data is very straightforward
+
 1 http://stat- computing.org/dataexpo/2006/
-￼￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 80 — #106 i
-￼￼￼￼￼￼Figure 5.5: The geographic locations at which Live Access Server atmospheric data were obtained for the 2006 JSM Data Expo.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 81 — #107 i
+
+Figure 5.5: The geographic locations at which Live Access Server atmospheric data were obtained for the 2006 JSM Data Expo.
+
                          VARIABLE : Mean TS from clear sky composite (kelvin)
                          FILENAME : ISCCPMonthly_avg.nc
                          FILEPATH : /usr/local/fer_dsets/data/
@@ -356,120 +404,155 @@ ii
              26.2N / 47:  292.2  293.2  287.8  287.8  285.8  288.8  291.7  ...
              23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
              ...
+
 Figure 5.6: The first few lines of output from the Live Access Server for the surface temperature of the earth for January 1995, over a coarse 24 by 24 grid of locations covering Central America.
+
 to access because it does not need sophisticated software. It is also easy for a human to view the data and understand what is in each file.
+
 However, the file format provides a classic demonstration of the typical lack of standardized structure in plain text files. For example, the raw data values only start on the eighth line of the file, but there is no indication of that fact within the file itself. This is not an issue for a human viewing the file, but a computer has no chance of detecting this structure automat- ically. Second, the raw data are arranged in a matrix, corresponding to a geographic grid of locations, but again there is no inherent indication of this structure. For example, only a human can tell that the first 11 characters on each line of raw data are row labels describing latitude.
+
 The “header” part of the file (the first seven lines) contains metadata, in- cluding information about which variable is recorded in the file and the units used for those measurements. This is very important and useful informa- tion, but again it is not obvious (for a computer) which bits are labels and which bits are information, let alone what sort of information is in each bit.
-Finally, there is the fact that the data reside in 505 separate files. This is essentially an admission that plain text files are not suited to data sets with anything beyond a simple two-dimensional matrix-like structure. In this case, the temporal dimension—the fact that data are recorded at multiple time points—and the multivariate nature of the data—the fact that multiple variables are recorded—leads to there being separate files for each variable and for each time point. Having the data spread across many files creates
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 82 — #108 i
-issues in terms of the naming of files, for example, to ensure that all files from the same date, but containing different variables, can be easily located. There is also a reasonable amount of redundancy, with metadata and labels repeated many times over in different files.
+
+Finally, there is the fact that the data reside in 505 separate files. This is essentially an admission that plain text files are not suited to data sets with anything beyond a simple two-dimensional matrix-like structure. In this case, the temporal dimension—the fact that data are recorded at multiple time points—and the multivariate nature of the data—the fact that multiple variables are recorded—leads to there being separate files for each variable and for each time point. Having the data spread across many files creates issues in terms of the naming of files, for example, to ensure that all files from the same date, but containing different variables, can be easily located. There is also a reasonable amount of redundancy, with metadata and labels repeated many times over in different files.
+
 We will look at another way to store this information in Section 5.6.5.
+
 Recap
+
 A plain text format is a simple, lowest-common-denominator storage format.
+
 Data in a plain text format are usually arranged in rows, with several values on each row.
+
 Values within a row are separated from each other by a delimiter or each value is allocated a fixed number of characters within a row.
+
 The CSV format is a comma-delimited format.
+
 All data values in a plain text file are stored as a series of characters. Even numbers are stored as characters.
+
 Each character is stored in computer memory as one or two bytes.
+
 The main problem with plain text files is that the file itself contains no information about where the data values are within the file and no informa- tion about whether the data values represent numbers or text, or something more complex.
+
 5.3 Binary formats
+
 In this section we will consider the option of storing data using a binary format. The purpose of this section is to understand the structure of binary formats and to consider the benefits and drawbacks of using a binary format to store data.
+
 A binary format is a more complex storage solution than a plain text format, but it will typically provide faster and more flexible access to the data and use up less memory.
+
 A file with a binary format is simply a block of computer memory, just like a file with a plain text format. The difference lies in how the bytes of computer memory are used.
+
 In order to understand the difference, we need to learn a bit more about how computer memory works.
-￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 83 — #109 i
+
 5.3.1 More on computer memory
+
 We already know that one way to use a byte of computer memory is to interpret it as a character. This is what plain text formats do.
+
 However, there are many other ways that we can make use of a byte of memory. One particularly straightforward use is to interpret the byte as an integer value.
+
 A sequence of memory bits can be interpreted as a binary (base 2) number. For example, the byte 00000001 can represent the value 1, 00000010 can represent the value 2, 00000011 the value 3, and so on.
+
 With 8 bits in a byte, we can store 256 (28) different integers (e.g., from 0 up to 255).
+
 This is one way that binary formats can differ from plain text formats. If we want to store the value 48 in a plain text format, we must use two bytes, one for the digit 4 and one for the digit 8. In a binary format, we could instead just use one byte and store the binary representation of 48, which is 00110000.
+
 One limitation of representing a number in computer memory this way is that we cannot store large integers, so in practice, a binary format will store an integer value using two bytes (for a maximum value of 216 = 65, 535) or four bytes (maximum of 232 = 4, 294, 967, 295). If we need to store negative numbers, we can use 1 bit for the sign. For example, using two bytes per integer, we can get a range of -32,767 to 32,767 (±215 − 1).
+
 Another way to interpret a byte of computer memory is as a real number. This is not as straightforward as for integers, but we do retain the basic idea that each pattern of bits corresponds to a different number.
+
 In practice, a minimum of 4 bytes is used to store real numbers. The follow- ing example of raw computer memory shows the bit patterns corresponding to the numbers 0.1 to 0.5, where each number is stored as a real number using 4 bytes per number.
+
                   0  :  11001101 11001100 11001100 00111101  |  0.1
                   4  :  11001101 11001100 01001100 00111110  |  0.2
                   8  :  10011010 10011001 10011001 00111110  |  0.3
                  12  :  11001101 11001100 11001100 00111110  |  0.4
                  16  :  00000000 00000000 00000000 00111111  |  0.5
-The correspondence between the bit patterns and the real numbers being stored is far from intuitive, but this is another common way to make use of
-ii ii
-￼￼￼￼￼￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 84 — #110 i
-bytes of memory.
+
+The correspondence between the bit patterns and the real numbers being stored is far from intuitive, but this is another common way to make use of bytes of memory.
+
 As with integers, there is a maximum real number that can be stored using four bytes of memory. In practice, it is common to use eight bytes per real number, or even more. With 8 bytes per real number, the range is a little over ±10307.
+
 However, there is another problem with storing real numbers this way. Re- call that, for integers, the first state can represent 0, the second state can represent 1, the third state can represent 2, and so on. With k bits, we can only go as high as the integer 2k − 1, but at least we know that we can account for all of the integers up to that point.
+
 Unfortunately, we cannot do the same thing for real numbers. We could say that the first state represents 0, but what does the second state represent? 0.1? 0.01? 0.00000001? Suppose we chose 0.01, so the first state represents 0, the second state represents 0.01, the third state represents 0.02, and so on. We can now only go as high as 0.01 × (2k − 1), and we have missed all of the numbers between 0.01 and 0.02 (and all of the numbers between 0.02 and 0.03, and infinitely many others).
-This is another important limitation of storing information on a computer:
-there is a limit to the precision that we can achieve when we store real
-numbers this way. Most real values cannot be stored exactly on a computer.
-Examples of this problem include not only exotic values such as transcen-
-dental numbers (e.g., π and e), but also very simple everyday values such
-as 1 or even 0.1. Fortunately, this is not as dreadful as it sounds, because 3
-even if the exact value cannot be stored, a value very very close to the true value can be stored. For example, if we use eight bytes to store a real num- ber, then we can store the distance of the earth from the sun to the nearest millimeter.
+
+This is another important limitation of storing information on a computer: there is a limit to the precision that we can achieve when we store real numbers this way. Most real values cannot be stored exactly on a computer.
+
+Examples of this problem include not only exotic values such as transcendental numbers (e.g., π and e), but also very simple everyday values such as 1 or even 0.1. Fortunately, this is not as dreadful as it sounds, because 3 even if the exact value cannot be stored, a value very very close to the true value can be stored. For example, if we use eight bytes to store a real num- ber, then we can store the distance of the earth from the sun to the nearest millimeter.
+
 In summary, when information is stored in a binary format, the bytes of computer memory can be used in a variety of ways. To drive the point home even further, the following displays show exactly the same block of computer memory interpreted in three different ways.
+
 First, we treat each byte as a single character.
+
 0 : 74657374 | test
+
 Next, we interpret the memory as two, two-byte integers.
+
 0 : 74657374 | 2597229811
+
 Finally, we can also interpret the memory as a single, four-byte real number.
-￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 85 — #111 i
+
            0  :  74 65 73 74  |  7.713537e+31
+
 Which one of these is the correct interpretation? It depends on which par- ticular binary format has been used to store the data.
+
 The characteristic feature of a binary format is that there is not a simple rule for determining how many bits or how many bytes constitute a basic unit of information.
+
 It is necessary for there to be a description of the rules for the binary format that states what information is stored and how many bits or bytes are used for each piece of information.
+
 Binary formats are consequently much harder to write software for, which results in there being less software available to do the job.
+
 Given that a description is necessary to have any chance of reading a bi- nary format, proprietary formats, where the file format description is kept private, are extremely difficult to deal with. Open standards become more important than ever.
+
 The main point is that we require specific software to be able to work with data in a binary format. However, on the positive side, binary formats are generally more efficient and faster than text-based formats. In the next sec- tion, we will look at an example of a binary format and use it to demonstrate some of these ideas.
+
 5.3.2 Case study: Point Nemo (continued)
+
 In this example, we will use the Point Nemo temperature data (see Section 1.1) again, but this time with the data stored in a binary format called netCDF.
+
 The first 60 bytes of the netCDF format file are shown in Figure 5.7, with each byte interpreted as a single character.
+
 We will learn more about this format below. For now, the only point to make is that, while we can see that some of the bytes in the file appear to be text values, it is not clear from this raw display of the data, where the text data starts and ends, what values the non-text bytes represent, and what each value is for.
+
 Compared to a plain text file, this is a complete mess and we need software that understands the netCDF format in order to extract useful values from the file.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 86 — #112 i
+
 0 : 43444601000000000000000a | CDF......... 12 : 000000010000000454696d65 | ........Time 24 : 000000300000000000000000 | ...0........ 36 : 0000000b0000000200000004 | ............ 48 : 54696d650000000100000000 | Time........
+
 Figure 5.7: The first 60 bytes of the netCDF format file that contains the surface temperatures at Point Nemo. The data are shown here as unstructured bytes to demonstrate that, without knowledge of the structure of the binary format, there is no way to determine where the different data values reside or what format the values have been stored in (apart from the fact that there is obviously some text values in the file).
+
 5.3.3 NetCDF
+
 The Point Nemo temperature data set has been stored in a format called network Common Data Form (netCDF).2 In this section, we will learn a little bit about the netCDF format in order to demonstrate some general features of binary formats.
+
 NetCDF is just one of a huge number of possible binary formats. It is a useful one to know because it is widely used and it is an open standard.
+
 The precise bit patterns in the raw computer memory examples shown in this section are particular to this data set and the netCDF data format. Any other data set and any other binary format would produce completely different representations in memory. The point of looking at this example is that it provides a concrete demonstration of some useful general features of binary formats.
+
 The first thing to note is that the structure of binary formats tends to be much more flexible than a text-based format. A binary format can use any number of bytes, in any order.
+
 Like most binary formats, the structure of a netCDF file consists of header information, followed by the raw data itself. The header information in- cludes information about how many data values have been stored, what sorts of values they are, and where within the file the header ends and the data values begin.
+
 Figure 5.8 shows a structured view of the start of the netCDF format for the Point Nemo temperature data. This should be contrasted with the unstructured view in Figure 5.7.
+
 2 http://www.unidata.ucar.edu/software/netcdf/
-￼￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 87 — #113 i
-￼￼￼￼￼0 : 434446 3 : 01
+
+0 : 434446 3 : 01
 | CDF | 1
 4 : 12 :
 20 :
+
 Figure 5.8:
 the surface temperatures at Point Nemo, with the structure of the netCDF format revealed so that separate data fields can be observed. The first three bytes are characters, the fourth byte is a single-byte integer, the next sixteen bytes are four-byte integers, and the last four bytes are characters. This structured display should be compared to the unstructured bytes shown in Figure 5.7.
+
 The netCDF file begins with three bytes that are interpreted as characters, specifically the three characters ‘C’, ‘D’, and ‘F’. This start to the file indi- cates that this is a netCDF file. The fourth byte in the file is a single-byte integer and specifies which version of netCDF is being used, in this case, version 1, or the “classic” netCDF format. This part of the file will be the same for any (classic) netCDF file.
+
 The next sixteen bytes in the file are all four-byte integers and the four bytes after that are each single-byte characters again. This demonstrates the idea of binary formats, where values are packed into memory next to each other, with different values using different numbers of bytes.
+
 Another classic feature of binary formats is that the header information con- tains pointers to the location of the raw data within the file and information about how the raw data values are stored. This information is not shown in Figure 5.8, but in this case, the raw data is located at byte 624 within the file and each temperature value is stored as an eight-byte real number.
+
 Figure 5.9 shows the raw computer memory starting at byte 624 that con- tains the temperature values within the netCDF file. These are the first eight temperature values from the Point Nemo data set in a binary format.
+
 In order to emphasize the difference in formats, the display below shows the raw computer memory from the plain text format of the Point Nemo data set. Compare these five bytes, which store the number 278.9 as five characters, with the first eight bytes in Figure 5.9, which store the same number as an eight-byte real number.
-ii ii
+
 000000000000000a 0000000100000004
 54696d65
 | |
@@ -477,132 +560,164 @@ ii ii
 0 10 14
 Time
 The start of the header information in the netCDF file that contains
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 88 — #114 i
+
 624 : 40716e6666666666 | 278.9 632 : 4071800000000000 | 280.0 640 : 40716e6666666666 | 278.9 648 : 40716e6666666666 | 278.9 656 : 40715ccccccccccd | 277.8 664 : 407141999999999a | 276.1 672 : 407141999999999a | 276.1 680 : 407139999999999a | 275.6
 ...
+
 Figure 5.9: The block of bytes within the Point Nemo netCDF file that contains the surface temperature values. Each temperature values is an eight-byte real number.
+
 359 : 3237382e39 | 278.9
+
 The section of the file shown in Figure 5.9 also allows us to discuss the issue of speed of access to data stored in a binary format.
+
 The fundamental issue is that it is possible to calculate the location of a data value within the file. For example, if we want to access the fifth temperature value, 277.8, within this file, we know with certainty, because the header information has told us, that this value is 8 bytes long and it starts at byte number 656: the offset of 624, plus 4 times 8 bytes (the size of each temperature value).
+
 Contrast this simple calculation with finding the fifth temperature value in a text-based format like the CSV format for the Point Nemo temperature data. The raw bytes representing the first few lines of the CSV format are shown in Figure 5.10.
+
 The fifth temperature value in this file starts at byte 98 within the file, but there is no simple way to calculate that fact. The only way to find that value is to start at the beginning of the file and read one character at a time until we have counted six commas (the field separators in a CSV file). Similarly, because not all data values have the same length, in terms of number of bytes of memory, the end of the data value can only be found by continuing to read characters until we find the end of the line (in this file, the byte 0a).
+
 The difference is similar to finding a particular scene in a movie on a DVD disc compared to a VHS tape.
+
 In general, it is possible to jump directly to a specific location within a
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 89 — #115 i
+
 0 : 646174652c74656d700a20 | date,temp. 11 : 31362d4a414e2d31393934 | 16-JAN-1994 22 : 2c3237382e390a2031362d | ,278.9.16- 33 : 4645422d313939342c3238 | FEB-1994,28 44 : 300a2031362d4d41522d31 | 0.16-MAR-1 55 : 3939342c3237382e390a20 | 994,278.9. 66 : 31362d4150522d31393934 | 16-APR-1994 77 : 2c3237382e390a2031362d | ,278.9.16- 88 : 4d41592d313939342c3237 | MAY-1994,27 99 : 372e380a2031362d4a554e | 7.8.16-JUN
 110 : 2d313939342c3237362e31 | -1994,276.1
+
 Figure 5.10: A block of bytes from the start of the Point Nemo CSV file that contains the surface temperature values. Each character in the file occupies one byte.
+
 binary format file, whereas it is necessary to read a text-based format from the beginning and one character at a time. This feature of accessing binary formats is called random access and it is generally faster than the typical sequential access of text files.
+
 This example is just provided to give a demonstration of how it is possible for access to be faster to data stored in a binary file. This does not mean that access speeds are always faster and it certainly does not mean that access speed should necessarily be the deciding factor when choosing a data format. In some situations, a binary format will be a good choice because data can be accessed quickly.
+
 5.3.4 PDF documents
+
 It is worthwhile briefly mentioning Adobe’s Portable Document Format (PDF) because so many documents, including research reports, are now published in this binary format.
+
 While PDF is not used directly as a data storage format, it is common for a report in PDF format to contain tables of data, so this is one way in which data may be received.
-Unfortunately, extracting data from a table in a PDF document is not straightforward. A PDF document is primarily a description of how to display information. Any data values within a PDF document will be hope- lessly entwined with information about how the data values should be dis-
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 90 — #116 i
-played.
+Unfortunately, extracting data from a table in a PDF document is not straightforward. A PDF document is primarily a description of how to display information. Any data values within a PDF document will be hopelessly entwined with information about how the data values should be displayed.
+
 One simple way to extract the data values from a PDF document is to use the text selection tool in a PDF viewer, such as Adobe Reader, to cut- and-paste from the PDF document to a text format. However, there is no guarantee that data values extracted this way will be arranged in tidy rows and columns.
+
 5.3.5 Other types of data
+
 So far, we have seen how numbers and text values can be stored in computer memory. However, not all data values are simple numbers or text values.
+
 For example, consider the date value March 1st 2006. How should that be stored in memory?
+
 The short answer is that any value can be converted to either a number or a piece of text and we already know how to store those sorts of values. However, the decision of whether to use a numeric or a textual representation for a data value is not always straightforward.
+
 Consider the problem of storing information on gender. There are (usually) only two possible values: male and female.
+
 One way to store this information would be as text: “male”and“female”. However, that approach would take up at least 4 to 6 bytes per observation. We could do better, in terms of the amount of memory used, by storing the information as an integer, with 1 representing male and 2 representing female, thereby only using as little as one byte per observation. We could do even better by using just a single bit per observation, with “on” representing male and “off” representing female.
+
 On the other hand, storing the text value “male” is much less likely to lead to confusion than storing the number 1 or by setting a bit to“on”; it is much easier to remember or intuit that the text “male” corresponds to the male gender.
+
 An ideal solution would be to store just the numbers, so that we use up less memory, but also record the mapping that relates the value 1 to the male gender.
+
 Dates
-The most common ways to store date values are as either text, such as “March 1 2006”, or as a number, for example, the number of days since the
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 91 — #117 i
-first day of January, 1970.
+
+The most common ways to store date values are as either text, such as “March 1 2006”, or as a number, for example, the number of days since the first day of January, 1970.
+
 The advantage of storing a date as a number is that certain operations, such as calculating the number of days between two dates, becomes trivial. The problem is that the stored value only makes sense if we also know the reference date.
+
 Storing dates as text avoids the problem of having to know a reference date, but a number of other complications arise.
+
 One problem with storing dates as text is that the format can differ be- tween different countries. For example, the second month of the year is called February in English-speaking countries, but something else in other countries. A more subtle and dangerous problem arises when dates are writ- ten in formats like this: 01/03/06. In some countries, that is the first of March 2006, but in other countries it is the third of January 2006.
+
 The solution to these problems is to use the international standard for ex- pressing dates, ISO 8601. This standard specifies that a date should con- sist of four digits indicating the year, followed by two digits indicating the month, followed by two digits indicating the day, with dashes in between each component. For example, the first day of March 2006 is written: 2006- 03-01.
+
 Dates (a particular day) are usually distinguished from date-times, which specify not only a particular day, but also the hour, second, and even frac- tions of a second within that day. Date-times are more complicated to work with because they depend on location; mid-day on the first of March 2006 happens at different times for different countries (in different time zones). Daylight savings time just makes things worse.
+
 ISO 8601 includes specifications for adding time information, including a time zone, to a date. As with simple dates, it is also common to store date- times as numbers, for example, as the number of seconds since the beginning of 1970.
+
 Money
+
 There are two major issues with storing monetary values. The first is that the currency should be recorded; NZ$1.00 is very different from US$1.00. This issue applies, of course, to any value with a unit, such as temperature, weight, and distances.
+
 The second issue with storing monetary values is that values need to be recorded exactly. Typically, we want to keep values to exactly two decimal places at all times. Monetary data may be stored in a special format to allow for this emphasis on accuracy.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 92 — #118 i
+
 Metadata
+
 In most situations, a single data value in isolation has no inherent meaning. We have just seen several explicit examples: a gender value stored as a number only makes sense if we also know which number corresponds to which gender; a date stored as a number of days only makes sense if we know the reference date to count from; monetary values, temperatures, weights, and distances all require a unit to be meaningful.
+
 The information that provides the context for a data value is an example of metadata.
+
 Other examples of metadata include information about how data values were collected, such as where data values were recorded and who recorded them.
+
 How should we store this information about the data values?
+
 The short answer is that each piece of metadata is just itself a data value, so, in terms of computer memory, each individual piece of metadata can be stored as either a number or as text.
+
 The larger question is how to store the metadata so that it is somehow connected to the raw data values. Deciding what data format to use for a particular data set should also take into account whether and how effectively metadata can be included alongside the core data values.
+
 Recap
+
 A block of bytes in computer memory can be interpreted in many ways. A binary format specifies how each byte or set of bytes in a file should be interpreted.
+
 Extremely large numbers cannot be stored in computer memory using stan- dard representations, and there is a limit to the precision with which real numbers can be stored.
+
 Binary formats tend to use up less memory and provide faster access to data compared to text-based formats.
+
 It is necessary to have specific software to work with a binary format, so it can be more expensive and it can be harder to share data.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 93 — #119 i
+
 5.4 Spreadsheets
+
 It is important to mention spreadsheets as a storage option because spread- sheets are very widely used. However, it is also important to make a distinc- tion between spreadsheet software, such as Microsoft Excel, and a spread- sheet format that is used to store a spreadsheet in computer memory, such as a Microsoft Excel workbook.
+
 Spreadsheet software can be a very useful tool for viewing and exploring data, but using a spreadsheet format as the primary storage format for a data set is often not the best option.
+
 5.4.1 Spreadsheet formats
+
 One problem with spreadsheet formats is that they are specific to a partic- ular piece of software.
+
 For many people, a spreadsheet means a Microsoft Excel workbook. Until recently, Excel workbooks used a proprietary binary format, which implied that the Microsoft Excel software was necessary to make use of an Excel workbook. In practice, the Excel binary format was decoded and imple- mented by a number of different projects and the specification of the Mi- crosoft Excel binary format is now publicly available, so Excel spreadsheets, particularly simple spreadsheets that contain only data, can be opened by a number of different software programs.
+
 The latest versions of Excel store workbooks in an XML-based format called Open Office XML (OOXML), which promises a greater potential for working with Excel spreadsheets using other software. However, there is considerable controversy over the format and, at the time of writing it is not clear whether Excel workbooks in this format will be useable with software other than Microsoft Office products.
+
 Excel is by far the most common spreadsheet software, but many other spreadsheet programs exist, notably the Open Office Calc software, which is an open source alternative and stores spreadsheets in an XML-based open standard format called Open Document Format (ODF). This allows the data to be accessed by a wider variety of software.
+
 However, even ODF is not ideal as a storage format for a research data set because spreadsheet formats contain not only the data that is stored in the spreadsheet, but also information about how to display the data, such as fonts and colors, borders and shading.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 94 — #120 i
+
 Another problem with storing a data set in a spreadsheet is that a lot of unnecessary additional information is stored in the file. For example, infor- mation about the borders and shading of cells is also stored in a spreadsheet file. The spreadsheet may also include formulas to calculate cell values, im- ages (charts), and more. Storing a data set in a Microsoft Excel workbook format is almost as bad as writing computer code using Microsoft Word (see Section 2.4.1).
+
 In these ways, a spreadsheet format is less appropriate than a plain text or binary data format because it contains information that is not relevant to the data set and because the data can only be accessed using specific software.
+
 In some spreadsheet formats, there are also limits on the numbers of columns and rows, so very large data sets simply cannot be accommodated.
+
 5.4.2 Spreadsheet software
+
 Spreadsheet software is useful because it displays a data set in a nice rect- angular grid of cells. The arrangement of cells into distinct columns shares the same benefits as fixed-width format text files: it makes it very easy for a human to view and navigate within the data.
+
 Most spreadsheet software also offers useful standard tools for manipulating the data. For example, it is easy to sort the data by a particular column. It is also possible to enter formulas into the cells of a spreadsheet so that, for example, sums and averages of columns may be obtained easily. In Excel, pivot tables (complex, interactive cross-tabulations) are a popular tool.
+
 However, because most spreadsheet software provides facilities to import a data set from a wide variety of formats, these benefits of the spreadsheet software can be enjoyed without having to suffer the negatives of using a spreadsheet format for data storage. For example, it is possible to store the data set in a CSV format and use spreadsheet software to view or explore the data.
+
 Furthermore, while spreadsheet software is very powerful and flexible, it is also quite lenient; it imposes very little discipline on the user. This tends to make it easy to introduce errors into a spreadsheet. We will see a more rigorous approach that provides powerful data manipulations in Section 5.6 on relational databases.
+
 Finally, data exploration in spreadsheet software is typically conducted via menus and dialog boxes, which leaves no record of the steps taken. In chapter 9, we will look at writing computer code to explore data sets instead.
-￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 95 — #121 i
+
 5.4.3 Case study: Over the limit
+
 A study conducted by researchers from the Psychology Department at the University of Auckland3 looked at whether informative road signs had any effect on the speed at which vehicles travelled along a busy urban road in Auckland.
+
 Data were collected for several days during a baseline period and for several days when each of five different signs were erected beside the road, for a total of six experimental stages. At each stage, the vehicle speeds were also collected for traffic travelling in the opposite direction along the road, to provide a set of “control” observations.
+
 The data were collected by the Waitakere City Council via detectors buried in the road and were delivered to the researchers in the form of Excel spread- sheets. Figure 5.11 shows a section of one of these spreadsheets.
+
 As we have discussed, spreadsheets are not an ideal data storage format, but this is an example where the researchers had no control over the format in which data are provided. This is why it is important to have some knowledge of a variety of data storage formats.
+
 This figure demonstrates the fact that spreadsheet software displays the spreadsheet cells in a rectangular grid, which is very convenient for viewing the raw values in the data set. While it is not a replacement for proper data validation, taking a look at the raw values within a data set is never a bad thing.
+
 Figure 5.11 also shows that it is straightforward to include metadata in a spreadsheet (cells A1 to A3) because each cell in the spreadsheet can contain any sort of value. On the other hand, just like in plain text formats, there is no way to indicate the special role of these cells; nothing in the file indicates where the real data begin.
+
 Spreadsheets inherently provide a rows-and-columns view of the data, which, as we saw with plain text files, is not the most efficient way to represent data with a hierarchical structure.
+
 3Wrapson, W., Harr ́e, N, Murrell, P. (2006) Reductions in driver speed using posted feedback of speeding information: Social comparison or implied surveillance? Accident Analysis and Prevention. 38, 1119–1126.
-ii ii
-￼￼￼￼￼￼￼The Lada Riva is one of the highest-selling car models of all time and the only model to be found on every continent in the world.
-￼￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 96 — #122 i
+
+The Lada Riva is one of the highest-selling car models of all time and the only model to be found on every continent in the world.
+
 ABCDEFGHIJK
-￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼1
+1
 2
 3
 4
@@ -625,19 +740,21 @@ ABCDEFGHIJK
 Figure 5.11: format.
 Parrs Cross Road from Seymour Road, Daily Speed Monday 13/03/00
 Speed (KPH)
-￼￼￼￼Hour End
+Hour End
 0 − 30 30 − 40 40 − 50 50 − 60 60 − 70 70 − 80 80 − 90 90−100 100−110 110−200
 0114261520000 01713520000 0012512000 0032221000 0054201000 028281730000 04451103931000 2237781710000 0265842600000 10531601600000 213431254520000 51719844710430000 020441513510000 03691542800000 34811641200000 27106160900000 5343006298410000 0 12 225 460 80 6 0 0 0 1 3 13 128 313 68 4 1 2 0 0 6 18 180 353 62 1 0 0 0 1 6 11 133 383 84 3 0 0 1 0
 12 16 196 329 55 3 0 0 0 0 5 28 156 351 74 1 0 0 0 0
+
 Part of the vehicle speed data, as it was delivered, in a spreadsheet
-￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼In this case, the rows of the spreadsheet represent different times of the day and the columns represent different speed ranges. The actual data values are counts of the number of vehicles travelling within each speed range, within each time period. The spreadsheet shown in Figure 5.11 represents data from a single day of the study on one side of the road. How are the data for other days and data from the other side of the road stored?
+
+In this case, the rows of the spreadsheet represent different times of the day and the columns represent different speed ranges. The actual data values are counts of the number of vehicles travelling within each speed range, within each time period. The spreadsheet shown in Figure 5.11 represents data from a single day of the study on one side of the road. How are the data for other days and data from the other side of the road stored?
+
 Another nice feature of most spreadsheet formats is that they allow for multiple sheets within a document. This effectively provides a 3-dimensional cube of data cells, rather than just a 2-dimensional table of cells. The vehicle speed study made use of this feature to store the data from each day on a separate sheet, so that all of the data from one stage of the experiment and on one side of the road are stored in a single spreadsheet.
+
 Figure 5.12 shows three sheets, representing three days’ worth of data, within one of the spreadsheet files.
+
 However, each experimental stage of the study was stored in a separate spreadsheet file, for a total of 12 spreadsheets. Once a data set becomes split across multiple files like this, there are issues of ensuring that all files retain the same structure, and there are issues with expressing the relationships between the separate files. For example, how do we know which files relate
-ii ii
-￼￼￼￼
-￼i
-“itdt” — 2013/3/26 — 15:24 — page 97 — #123
+
 ABCDEFGHIJK
 i
 ii
@@ -810,45 +927,53 @@ K
 121 117 11
 0 0 0
 30 45 29
-Figure 5.12: Three of the sheets in
-sheet records speed data for one side of the road, for one day of the experiment.
+
+Figure 5.12: Three of the sheets in sheet records speed data for one side of the road, for one day of the experiment.
+
 to the same side of the road?
+
 In this case, the names of the files can be used to differentiate between the side of the road and the experimental stage, but this naming scheme needs to be documented and explained somewhere. The problem is that there is no formal support for the person storing the data to express the structure of the data set. We will see better ways to resolve this problem in the next section on relational databases.
+
 Another important problem is that spreadsheet cells are able to act inde- pendently of each other. Although the data in Figure 5.11 appear to have a useful structure, with each data value clearly associated with a time period and a speed range, this is in fact an illusion. The spreadsheet software does not, by default, place any significance on the fact that the values in row 6 all correspond to the time period from midnight to 1:00 a.m. Every cell in the spreadsheet is free to take any value regardless of which row or column it resides in.
-This problem can be seen by looking at the time values in column A. To the human observer, it is clear that this column of values (apart from the
-the vehicle speed data spreadsheet. Each
-ii ii
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 98 — #124 i
+
+This problem can be seen by looking at the time values in column A. To the human observer, it is clear that this column of values (apart from the the vehicle speed data spreadsheet. Each
+
 first three rows) corresponds to time intervals. However, the spreadsheet data model does not enforce any such constraint on the data, as the value in row 17 clearly shows. All of the values up to that point (rows 6 through 16) have been time values, but row 17 contains the value 7-8. To human eyes this is clearly the time period 7:00 a.m. to 8:00 a.m., but any software trying to read this column of values will almost certainly fail to make that intuitive leap.
+
 This particular problem is a feature of this particular data set, but the general problem pertaining to all spreadsheets is that the flexible value-per- cell data model allows this sort of thing to happen and the consequence is that additional data cleaning is necessary before the raw data in the spreadsheet can be used for analysis.
+
 It is a little unfair to point out these problems with a spreadsheet format example because most of these problems also exist for plain text files. The main point is that the spreadsheet format does not provide a great deal beyond much simpler format options and it introduces new problems of its own.
-￼￼￼￼Recap
+
+Recap
+
 Spreadsheet software is a useful tool for viewing and exploring data.
+
 A spreadsheet storage format does allow for a 3-dimensional cube of data rather than just a 2-dimensional table of data, but it requires specific software and is less efficient because it stores extraneous infor- mation.
+
 5.5 XML
+
 One of the main problems with plain text formats is that there is no infor- mation within the file itself to describe the location of the data values.
+
 One solution to this problem is to provide a recognizable label for each data value within the file.
+
 This section looks at the eXtensible Markup Language, XML, which provides a formal way to provide this sort of labeling or “markup” for data.
+
 Data stored in an XML document is stored as characters, just like in a plain text format, but the information is organized within the file in a much more sophisticated manner.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 99 — #125 i
+
 As a simple example to get us started, Figure 5.13 shows the surface tem- perature data at the Pacific Pole of Inaccessibility (see Section 1.1) in two different formats: an XML format and the original plain text format.
+
 The major difference between these two storage formats is that, in the XML version, every single data value is distinctly labeled. This means that, for ex- ample, even without any background explanation of this data set, we could easily identify the “temperature” values within the XML file. By contrast, the same task would be impossible with the plain text format, unless addi- tional information is provided about the data set and the arrangement of the values within the file. Importantly, the XML format allows a computer to perform this task completely automatically because it could detect the values with a label of temperature within the XML file.
+
 One fundamental similarity between these formats is that they are both just text. This is an important and beneficial property of XML; we can read it and manipulate it without any special skills or any specialized software.
+
 XML is a storage format that is still based on plain text but does not suffer from many of the problems of plain text files because it adds flexibility, rigor, and standardization.
+
 Many of the benefits of XML arise from the fact that it is a computer language. When we store a data set in XML format, we are writing computer code that expresses the data values to the computer. This is a huge step beyond free-form plain text files because we are able to communicate much more about the data set to the computer. However, the cost is that we need to learn the rules of XML so that we can communicate the data correctly.
+
 In the next few sections, we will focus on the details of XML. In Section 5.5.1, we will look briefly at the syntax rules of XML, which will allow us to store data correctly in an XML format. We will see that there is a great degree of choice when using XML to store a data set, so in Sections 5.5.2 and 5.5.3, we will discuss some ideas about how to store data sensibly in an XML format—some uses of XML are better than others. In Section 5.5.5 we will return to a more general discussion of how XML formats compare to other storage formats.
+
 The information in this section will be useful whether we are called upon to create an XML document ourselves or whether we just have to work with a data set that someone else has chosen to store in an XML format.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 100 — #126 i
+
             <?xml version="1.0"?>
             <temperatures>
                 <variable>Mean TS from clear sky composite (kelvin)</variable>
@@ -879,22 +1004,25 @@ ii
              16-MAY-1994 00 /  5:  277.8
              16-JUN-1994 00 /  6:  276.1
              ...
+
 Figure 5.13: The first few lines of the surface temperature at Point Nemo in two formats: an XML format (top) and the original plain text format (bottom).
-￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 101 — #127 i
+
 5.5.1 XML syntax
+
 As we saw in Chapter 2, the first thing we need to know about a computer language are the syntax rules, so that we can write code that is correct.
+
 We will use the XML format for the Point Nemo temperature data (Figure 5.13) to demonstrate some of the basic rules of XML syntax.
+
 The XML format of the data consists of two parts: XML markup and the actual data itself. For example, the information about the latitude at which these data were recorded is stored within XML tags, <latitude> and </latitude>. The combination of tags and content is together described as an XML element.
+
 <latitude>48.8S</latitude>
 element: <latitude>48.8S</latitude>
-￼￼￼￼￼￼start tag: data value: end tag:
+start tag: data value: end tag:
 <latitude>48.8S</latitude>
 <latitude>48.8S</latitude>
 <latitude>48.8S</latitude>
-￼￼￼Each temperature measurement in the XML file is contained within a case element, with the date and temperature data recorded as attributes of the element. The values of attributes must be contained within double-quotes.
+
+Each temperature measurement in the XML file is contained within a case element, with the date and temperature data recorded as attributes of the element. The values of attributes must be contained within double-quotes.
 <case date="16-JAN-1994"
       temperature="278.9" />
 element name: attribute name: attribute value: attribute name: attribute value:
@@ -903,67 +1031,85 @@ element name: attribute name: attribute value: attribute name: attribute value:
 <case date="16-JAN-1994"
       temperature="278.9" />
       temperature="278.9" />
-￼￼￼￼￼This should look very familiar because these are exactly the same notions of elements and attributes that we saw in HTML documents in Chapter 2. However, there are some important differences between XML syntax and HTML syntax. For example, XML is case-sensitive so the names in the start and end tags for an element must match exactly. Some other differences are detailed below.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 102 — #128 i
+
+This should look very familiar because these are exactly the same notions of elements and attributes that we saw in HTML documents in Chapter 2. However, there are some important differences between XML syntax and HTML syntax. For example, XML is case-sensitive so the names in the start and end tags for an element must match exactly. Some other differences are detailed below.
+
 XML document structure
+
 The first line of an XML document must be a declaration that the file is an XML document and which version of XML is being used.
+
            <?xml version="1.0"?>
+
 The declaration can also include information about the encoding of the XML document (see Section 5.2.7), which is important for any software that needs to read the document.
+
            <?xml version="1.0" encoding="UTF-8"?>
+
 Unlike HTML, where there is a fixed set of allowed elements, an XML document can include elements with any name whatsoever, as long as the elements are all nested cleanly and there is only one outer element, called the root element, that contains all other elements in the document.
+
 In the example XML document in Figure 5.13, there is a single temperatures element, with all other elements, e.g., variable and case elements, nested within that.
+
 Elements can be empty, which means that they consist only of a start tag (no content and no end tag), but these empty elements must end with />, rather than the normal >. The code below shows an example of an empty case element.
+
                <case date="16-JAN-1994" temperature="278.9" />
+
 Although it is possible to use any element and attribute names in an XML document, in practice, data sets that are to be shared will adhere to an agreed-upon set of elements. We will discuss how an XML document can be restricted to a fixed set of elements later on in Section 5.5.3.
+
 Code layout
+
 Because XML is a computer language, there is a clear structure within the XML code. As discussed in Section 2.4.3, we should write XML code using techniques such as indenting so that the code is easy for people to read and understand.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 103 — #129 i
+
 Escape sequences
+
 As with HTML, the characters <, >, and & (among others) are special and must be replaced with special escape sequences, &lt;, &gt;, and &amp; respectively.
-These escape sequences can be very inconvenient when storing data values, so it is also possible to mark an entire section of an XML document as “plain text” by placing it within a special CDATA section, within which all
-characters lose their special meaning.
+
+These escape sequences can be very inconvenient when storing data values, so it is also possible to mark an entire section of an XML document as “plain text” by placing it within a special CDATA section, within which all characters lose their special meaning.
+
 As an example, shown below is one of the data values that we wanted to store for the clay tablet YBC 7289 in Section 5.1. These represent the markings that are etched into the clay tablet.
+
            | <<|||| <<<<<| <
+
 If we wanted to store this data within an XML document, we would have to escape every one of the < symbols. The following code shows what the data would look like within an XML document.
+
            | &lt;&lt;|||| &lt;&lt;&lt;&lt;&lt;| &lt;
+
 The special CDATA syntax allows us to avoid having to use these escape sequences. The following code shows what the XML code would look like within an XML document within a CDATA section.
+
            <![CDATA[
              | <<|||| <<<<<| <
 ]]>
+
 Checking XML syntax
+
 There are many software packages that can read XML and most of these will report any problems with XML syntax.
+
 The W3C Markup Validation Service4 can be used to perform an explicit check on an XML document online. Alternatively, the libxml software library5 can be installed on a local computer. This software includes a
+
 4 http://validator.w3.org/ 5 http://xmlsoft.org/
-￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 104 — #130 i
+
 command-line tool called xmllint for checking XML syntax. For simple use of xmllint, the only thing we need to know is the name of the XML document and where that file is located. Given an XML document called xmlcode.xml, the following command could be entered in a command win- dow or terminal to check the syntax of the XML code in the file.
+
            xmllint xmlcode.xml
+
 There is no general software that “runs” XML code because the code does not really “do” anything. The XML markup is just there to describe a set of data. However, we will see how to retrieve the data from an XML document later in Sections 7.3.1 and 9.7.7.
+
 5.5.2 XML design
+
 Although there are syntax rules that any XML document must follow, we still have a great deal of flexibility in how we choose to mark up a particular data set. It is possible to use any element names and any attribute names that we like.
+
 For example, in Figure 5.13, each set of measurements, a date plus a temper- ature reading, is stored within a case element, using date and temperature attributes. The first set of measurements in this format is repeated below.
+
            <case date="16-JAN-1994" temperature="278.9" />
+
 It would still be correct syntax to store these measurements using different element and attribute names, as in the code below.
+
            <record time="16-JAN-1994" temp="278.9" />
+
 It is important to choose names for elements and attributes that are mean- ingful, but in terms of XML syntax, there is no single best answer.
+
 When we store a data set as XML, we have to decide which elements and attributes to use to store the data. We also have to consider how elements nest within each other, if at all. In other words, we have to decide upon a design for the XML document.
+
 In this section, we will look at some of these questions and consider some solutions for how to design an XML document.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 105 — #131 i
+
             <?xml version="1.0"?>
             <temperatures>
                 <variable>Mean TS from clear sky composite (kelvin)</variable>
@@ -982,7 +1128,9 @@ ii
 ...
                 </cases>
             </temperatures>
+
 Figure 5.14: The first few lines of the surface temperature at Point Nemo in an alternative XML format. This format should be compared with the XML format in Figure 5.13.
+
 Even if, in practice, we are not often faced with the prospect of designing an XML format, this discussion will be useful in understanding why an XML document that we encounter has a particular structure. It will also be useful as an introduction to similar design ideas that we will discuss when we get to relational databases in Section 5.6.
 Marking up data
 The first XML design issue is to make sure that each value within a data set can be clearly identified. In other words, it should be trivial for a computer to extract each individual value. This means that every single value should be either the content of an element or the value of an attribute. The XML document shown in Figure 5.13 demonstrates this idea.
