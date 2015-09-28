@@ -1,4 +1,14 @@
-4 CSS
+---
+title: "ItDT04"
+author: "Robert A. Stevens"
+date: "September 27, 2015"
+output: html_document
+self_contained: no
+---
+
+*Introduction to Data Technologies* by Paul Murrell
+
+# 4 CSS
 
 Cascading Style Sheets (CSS) is a language used to specify the appearance of web pages—fonts, colors, and how the material is arranged on the page.
 
@@ -6,7 +16,7 @@ CSS is run when it is linked to some HTML code (see Section 4.3) and that HTML c
 
 The information in this chapter describes CSS level 1, which is a W3C Recommendation.
 
-4.1 CSS syntax
+## 4.1 CSS syntax
 
 CSS code consists of one or more rules.
 
@@ -14,85 +24,84 @@ Each CSS rule consists of a selector and, within brackets, one or more propertie
 
 The selector specifies which HTML elements the rule applies to and the properties control the way that those HTML elements are displayed. An example of a CSS rule is shown below:
 
-a {
-    color: white;
-}
+    a {
+        color: white;
+    }
 
 The code a is the selector and the property is color, with the value white.
 
-selector:        a {
-property name:       color: white;
-property value:      color: white;
-                 }
+    selector:       a 
+    property name:  color
+    property value: white
 
 Just as for HTML, it is important to check CSS code for correct syntax. Most browsers will silently ignore errors in CSS code. For example, if a CSS property is not spelled correctly, it will just appear not to be working in the browser. The W3C provides an online validation service (see Section 4.5).
 
-4.2 CSS semantics
+## 4.2 CSS semantics
 
 There are a number of ways to specify the CSS selector, which determines the HTML elements that will be affected by a specific rule.
 
-4.2.1 CSS selectors
+### 4.2.1 CSS selectors
 
 Within a CSS rule, the selector specifies which HTML elements will be affected by the rule.
 
-Element selectors:
+#### Element selectors:
 
 The selector is just the name of an HTML element. All elements of this type in the linked HTML code will be affected by the rule. An example is shown below:
 
-a {
-    color: white;
-}
+    a {
+        color: white;
+    }
 
 This rule will apply to all anchor (a) elements within the linked HTML code.
 
 The same rule may be applied to more than one type of element at once, by specifying several element names, separated by commas. For example, the following rule would apply to both a elements and p elements.
 
-p, a {
-    color: white;
-}
+    p, a {
+        color: white;
+    }
 
-Contextual selectors:
+#### Contextual selectors:
 
 The selector is several element names, separated by spaces. This allows a CSS rule to be applied to an element only when the element is contained within another type of element. For example, the following rule will only apply to anchors that are within paragraphs (not, for example, to anchors that are within headings).
 
-p a {
-    color: white;
-}
+    p a {
+        color: white;
+    }
 
 Contrast this to the previous CSS specifier where the element names are separated by a comma.
 
-Class selectors:
+#### Class selectors:
 
 The selector contains a full stop (.) and the part after the full stop describes the name of a class. All elements that have a class attribute with the appropriate value will be affected by the rule. An example is shown below:
 
-p.footer {
-    font-style: italic;
-}
+    p.footer {
+        font-style: italic;
+    }
 
 This rule will apply to any paragraph (p) element that has the attribute class = "footer". It will not apply to other p elements. It will not apply to other HTML elements, even if they have the attribute class = "footer".
 
 If no HTML element name is specified, the rule will apply to all HTML elements with the appropriate class. An example is shown below:
 
-.figure {
-    margin-left: auto;
-    margin-right: auto;
-}
+    .figure {
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 This rule will apply to any HTML element that has the attribute class = "figure".
 
-ID selectors:
+#### ID selectors:
 
 The selector contains a hash character (#). The rule will apply to all elements that have an appropriate id attribute. This type of rule can be used to control the appearance of exactly one element. An example is shown below:
 
-p#footer {
-    font-style: italic;
-}
+    p#footer {
+        font-style: italic;
+    }
 
 This rule will apply to the paragraph (p) element that has the attribute id = "footer". There can only be one such element within a piece of HTML code because the id attribute must be unique for all elements. This means that the HTML element name is redundant and can be left out. The rule below has the same effect as the previous rule:
 
-#footer {
-    font-style: italic;
-}
+    #footer {
+        font-style: italic;
+    }
 
 It is possible for CSS rules to conflict, i.e., for there to be more than one rule for the same element.
 
@@ -100,45 +109,45 @@ In general, a more specific rule, e.g., a class selector, will override a less s
 
 Rules are also usually inherited, except where it would not make sense. For example, if there is a rule that makes the text italic for the body of an HTML document, then all p elements within the body will have italic text, unless another rule specifies otherwise. However, a rule controlling the margins of the body would not be applied to the margins of the p elements (i.e., the body would be indented within the page, but the paragraphs would not be indented within the body as well, unless they specified margins themselves).
 
-4.2.2 CSS properties
+### 4.2.2 CSS properties
 
 This section describes some of the common CSS properties, including the values that each property can take.
 
-font-family:
+#### font-family:
 
 This property controls the overall font family (the general style) for text within an element. The value can be a generic font type, for example, monospace or serif, or it can be a specific font family name, for example, Courier or Times. If a specific font is specified, it is usually a good idea to also include (after a comma) a generic font as well in case the person viewing the result does not have the specific font on their computer. An example is shown below:
 
-font-family:  Times, serif
+    font-family:  Times, serif
 
 This means that a Times font will be used if it is available; otherwise, the browser will choose a serif font that is available.
 
-font-style:, font-weight:, and font-size:
+#### font-style:, font-weight:, and font-size:
 
 These properties control the detailed appearance of text. The style can be normal or italic, the weight can be normal or bold, and the size can be large or small.
 
 There are a number of relative values for size (they go down to xx-small and up to xx-large), but it is also possible to specify an absolute size, such as 24pt.
 
-color: and background-color:
+#### color: and background-color:
 
 These properties control the foreground color (e.g., for displaying text), and the background color for an element.
 
 For specifying the color value, there are a few basic color names, e.g., black, white, red, green, and blue, but for anything else it is necessary to specify a red-green-blue (RGB) triplet. This consists of an amount of red, an amount of green, and an amount of blue. The amounts can be specified as percentages so that, for example, rgb(0%, 0%, 0%) is black and rgb(100%, 100%, 100%) is white, and Ferrari red is rgb(83%, 13%, 20%).
 
-text-align:
+#### text-align:
 
 This property controls the alignment of text within an element, with possible values left, right, center, or justify. This property only makes sense for block-level elements.
 
-width: and height:
+#### width: and height:
 
 These properties provide explicit control of the width or height of an element. By default, these are the amount of space required for the element. For example, a paragraph of text expands to fill the width of the page and uses as many lines as necessary, while an image has an intrinsic size (number of pixels in each direction).
 
 Explicit widths or heights can be either percentages (of the parent element) or an absolute value. Absolute values must include a unit, e.g., in for inches, cm for centimeters, or px for pixels. For example, within a web page that is 800 pixels wide on a screen that has a resolution of 100 dots-per-inch (dpi), to make a paragraph of text half the width of the page, the following three specifications are identical:
 
-p { width: 50% }
-p { width: 4in }
-p { width: 400px }
+    p { width: 50% }
+    p { width: 4in }
+    p { width: 400px }
 
-border-width:, border-style:, and border-color:
+#### border-width:, border-style:, and border-color:
 
 These properties control the appearance of borders around an element.
 
@@ -146,91 +155,90 @@ Borders are only drawn if the border-width is greater than zero. Valid border st
 
 These properties affect all borders, but there are other properties that affect only the top, left, right, or bottom border of an element. For example, it is possible to produce a horizontal line at the top of a paragraph by using just the border-top-width property.
 
-margin:
+#### margin:
 
 This property controls the space around the outside of the element (between this element and neighboring elements). The size of margins can be expressed using units, as for the width and height properties.
 
 This property affects all margins (top, left, right, and bottom). There are properties, e.g., margin-top, for controlling individual margins instead.
 
-padding:
+#### padding:
 
 This property controls the space between the border of the element and the element’s contents. Values are specified as they are for margins. There are also specific properties, e.g., padding-top, for individual control of the padding on each side of the element.
 
-display:
+#### display:
 
 This property controls how the element is arranged relative to other elements. A value of block means that the element is like a self-contained paragraph (typically, with an empty line before it and an empty line after it). A value of inline means that the element is just placed beside whatever was the previous element (like words in a sentence). The value none means that the element is not displayed at all.
 
 Most HTML elements are either intrinsically block-level or inline, so some uses of this property will not make sense.
 
-whitespace:
+#### whitespace:
 
 This property controls how whitespace in the content of an element is treated. By default, any amount of whitespace in HTML code collapses down to just a single space when displayed, and the browser decides when a new line is required. A value of pre for this property forces all whitespace within the content of an element to be displayed (especially all spaces and all new lines).
 
-float:
+#### float:
 
 This property can be used to allow text (or other inline elements) to wrap around another element (such as an image). The value right means that the element (e.g., image) “floats” to the right of the web page and other content (e.g., text) will fill in the gap to the left. The value left works analogously.
 
-clear:
+#### clear:
 
 This property controls whether floating elements are allowed beside an element. The value both means that the element will be placed below any previous floating elements. This can be used to have the effect of turning off text wrapping.
 
-4.3 Linking CSS to HTML
+## 4.3 Linking CSS to HTML
 
 CSS code can be linked to HTML code in one of three ways. These are described below in increasing order of preference.
 
-Inline CSS:
+#### Inline CSS:
 
 The simplest approach is to include CSS code within the style attribute of an HTML element. An example is shown below:
 
-<p style="font-style: italic">
+    <p style="font-style: italic">
 
 Here, CSS is used to control the appearance of text within this paragraph only.
 
 This approach is actively discouraged because it leads to many copies of the same CSS code within a single piece of HTML code.
 
-Embedded CSS:
+#### Embedded CSS:
 
 It is also possible to include CSS code within a style element within the head element of HTML code. An example of this is shown below:
 
-<html>
-    <head>
-        <style> 
-            p {
-                font-style: italic;
-            }
-        </style> 
-    ...
+    <html>
+        <head>
+            <style> 
+                p {
+                    font-style: italic;
+                }
+            </style> 
+        ...
 
 In this case, the appearance of text within all paragraphs is controlled with a single CSS rule.
 
 This approach is better because rules are not attached to each individual HTML element. However, this is still not ideal because any reuse of the CSS code with other HTML code requires copying the CSS code (which violates the DRY principle).
 
-External CSS:
+#### External CSS:
 
 The third approach is to write CSS code in a separate file and refer to the CSS file from the HTML code, using a link element within the head element. An example is shown below:
 
-<link rel="stylesheet" href="csscode.css"
-      type="text/css">
+    <link rel="stylesheet" href="csscode.css" type="text/css">
 
 This line would go within a file of HTML code and it refers to CSS code within a file called csscode.css.
 
 This approach allows, for example, control over the appearance of text within all paragraphs for multiple HTML files at once.
 
-4.4 CSS tips
+## 4.4 CSS tips
 
 In some cases, it is not immediately obvious how to perform some basic formatting tasks with CSS. This section provides pointers for a few of the most common of these situations.
 
-Indenting:
+#### Indenting:
 
 In HTML, whitespace and line breaks in the HTML source are generally ignored, so adding spaces or tabs at the start of the line in HTML code has no effect on the output.
 
 Indenting text away from the left hand edge of the page can be achieved with CSS using either margin or padding properties.
 
-Centering:
+#### Centering:
 
 An element may be centered on the page (more precisely, within its containing element) by setting both the margin-left and margin-right properties to auto.
 
-Floating text:
+#### Floating text:
 
 It is easy to start having text flow around another element, such as an image, by specifying something like float: right for the image element. However, it is not as obvious how to stop elements from floating next to each other.
 
@@ -238,31 +246,18 @@ This is what the clear property is useful for. In particular, clear: both is use
 
 Another way to get nice results is to make use of other people’s CSS code. For example, the Yahoo! User Interface Library (YUI) [1] provides a variety of page layouts via CSS, though there is still the learning curve of how to use YUI itself.
 
-4.5 Further reading
+## 4.5 Further reading
 
-The W3C CSS Level 1 Specification
-    http://www.w3.org/TR/CSS1
-    The formal and official definition of CSS (level 1). Quite technical.
+*The W3C CSS Level 1 Specification*. The formal and official definition of CSS (level 1). Quite technical. http://www.w3.org/TR/CSS1
 
-Adding a Touch of Style
-    by Dave Raggett
-    http://www.w3.org/MarkUp/Guide/Style.html
-    An introductory tutorial to CSS by one of the original designers of HTML.
+*Adding a Touch of Style* by Dave Raggett. An introductory tutorial to CSS by one of the original designers of HTML. http://www.w3.org/MarkUp/Guide/Style.html
 
-The Web Design Group’s CSS web site
-    http://htmlhelp.com/reference/css/
-    A more friendly, user-oriented description of CSS.
+*The Web Design Group’s CSS web site*. A more friendly, user-oriented description of CSS. http://htmlhelp.com/reference/css/
 
-The w3schools CSS Tutorial
-    http://www.w3schools.com/css/
-    A tutorial-based introduction to CSS.
+*The w3schools CSS Tutorial*. A tutorial-based introduction to CSS. http://www.w3schools.com/css/
 
-The W3C CSS Validation Service
-    http://jigsaw.w3.org/css-validator/
-    A syntax checker for CSS code.
+*The W3C CSS Validation Service*. A syntax checker for CSS code. http://jigsaw.w3.org/css-validator/
 
-CSS Zen Garden
-    http://www.csszengarden.com/
-    A web site that demonstrates and evangelizes the flexibility and power of CSS beautifully.
+*CSS Zen Garden*. A web site that demonstrates and evangelizes the flexibility and power of CSS beautifully. http://www.csszengarden.com/
 
 [1] http://developer.yahoo.com/yui/
