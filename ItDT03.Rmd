@@ -1,45 +1,54 @@
-3 HTML
+---
+title: "ItDT03"
+author: "Robert A. Stevens"
+date: "September 27, 2015"
+output: html_document
+---
+
+*Introduction to Data Technologies* by Paul Murrell
+
+# 3 HTML
 
 HTML is a computer language used to create web pages. HTML code can be run by opening the file containing the code with any web browser.
 
 The information in this chapter describes HTML 4.01, which is a W3C Recommendation.
 
-3.1 HTML syntax
+## 3.1 HTML syntax
 
 HTML code consists of HTML elements.
 
-An element consists of a start tag, followed by the element content, followed by an end tag. A start tag is of the form <elementName> and an end tag is of the form </elementName>. The example code below shows a title element; the start tag is <title>, the end tag is </title>, and the content is the text: Poles of Inaccessibility.
+An element consists of a start tag, followed by the element content, followed by an end tag. A start tag is of the form \<elementName\> and an end tag is of the form \</elementName\>. The example code below shows a title element; the start tag is \<title\>, the end tag is \</title\>, and the content is the text: Poles of Inaccessibility.
 
-           <title>Poles of Inaccessibility</title>
-start tag: content: end tag:
-<title>Poles of Inaccessibility</title>
-<title>Poles of Inaccessibility</title>
-<title>Poles of Inaccessibility</title>
+    <title>Poles of Inaccessibility</title>
+    
+    start tag: <title>
+    content:   Poles of Inaccessibility
+    end tag:   </title>
 
 Some elements are empty, which means that they consist of only a start tag (no content and no end tag). The following code shows an hr element, which is an example of an empty element.
 
-<hr>
+    <hr>
 
-An element may have one or more attributes. Attributes appear in the start tag and are of the form attributeName="attributeValue". The code below shows the start tag for an img element, with an attribute called src. The value of the attribute in this example is "poleplot.png".
+An element may have one or more attributes. Attributes appear in the start tag and are of the form attributeName = "attributeValue". The code below shows the start tag for an img element, with an attribute called src. The value of the attribute in this example is "poleplot.png".
 
-            <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-            <html>
-                <head>
-                    <title></title>
-                </head>
-                <body>
-                </body>
-</html>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+        <head>
+            <title></title>
+        </head>
+        <body>
+        </body>
+    </html>
 
 Figure 3.1: A minimal HTML document. This is the basic code that must appear in any HTML document. The main content of the web page is described by adding further HTML elements within the body element.
 
-<img src="poleplot.png">
-HTML tag: element name: attribute: attribute name: attribute value:
-<img src="poleplot.png">
-<img src="poleplot.png">
-<img src="poleplot.png">
-<img src="poleplot.png">
-<img src="poleplot.png">
+    <img src="poleplot.png">
+    
+    HTML tag:        <img src="poleplot.png">
+    element name:    img
+    attribute:       src="poleplot.png"
+    attribute name:  src
+    attribute value: poleplot.png
 
 There is a fixed set of valid HTML elements (Section 3.2.1 provides a list of some common elements) and each element has its own set of possible attributes.
 
@@ -47,33 +56,28 @@ Certain HTML elements are compulsory. An HTML document must include a DOCTYPE de
 
 Section 3.2.1 describes each of the common elements in a little more detail, including any important attributes and which elements may be placed inside which other elements.
 
-3.1.1 HTML comments
+### 3.1.1 HTML comments
 
-Comments in HTML code are anything within <!-- and -->. All characters, including HTML tags, lose their special meaning within an HTML comment.
+Comments in HTML code are anything within \<!-- and --\>. All characters, including HTML tags, lose their special meaning within an HTML comment.
 
 Table 3.1: Some common HTML entities.
-Character Description
-< less-than sign
-> greater-than sign & ampersand
-π Greek letter pi
-μ Greek letter mu e Euro symbol
-£ British pounds © copyright symbol
-HTML entities
-Entity
-&lt;
-&gt;
-&amp;
-&pi;
-&mu;
-&euro;
-&pound;
-&copy;
 
-3.1.2
+Character  Description        Entity
+---------  -----------------  -------
+<          less-than sign     \&lt;
+>          greater-than sign  \&gt;
+&          ampersand          \&amp;
+π          Greek letter pi    \&pi;
+μ          Greek letter mu    \&mu;
+€          Euro symbol        \&euro;
+£          British pounds     \&pound;
+©          copyright symbol   \&copy;
+
+### 3.1.2 HTML entities
 
 The less-than and greater-than characters used in HTML tags are special characters and must be escaped to obtain their literal meaning. These escape sequences in HTML are called entities. All entities start with an ampersand so the ampersand is also special and must be escaped. Entities provide a way to include some other special characters and symbols within HTML code as well. Table 3.1 shows some common HTML entities.
 
-3.2 HTML semantics
+## 3.2 HTML semantics
 
 The primary purpose of HTML tags is to specify the structure of a web page.
 
@@ -81,62 +85,63 @@ Elements are either block-level or inline. A block-level element is like a parag
 
 The content of an element may be other elements or plain text. There is a limit on which elements may be nested within other elements (see Section 3.2.1).
 
-3.2.1 Common HTML elements
+### 3.2.1 Common HTML elements
 
 This section briefly describes the important behavior, attributes, and rules for each of the common HTML elements.
 
-<html>
+#### \<html\>
 
 The html element must contain exactly one head element followed by exactly one body element.
 
-<head>
+#### \<head\>
 
 The head element is only allowed within the html element. It must contain exactly one title element. It may also contain link elements to refer to external CSS files and/or style elements for inline CSS rules. It has no attributes of interest.
 
-<title>
+#### \<title\>
 
 The title element must be within the head element and must only contain text. This element provides information for the computer to use to identify the web page rather than for display, though it is often displayed in the title bar of the browser window. It has no attributes.
 
-<link>
+#### \<link\>
 
 This is an empty element that must reside in the head element. It can be used to specify an external CSS file, in which case the important attributes are: rel, which should have the value "stylesheet"; href, which specifies the location of a file containing CSS code (can be a URL); and type, which should have the value "text/css". The media attribute may also be used to distinguish between a style sheet for display on "screen" as opposed to display in "print".
 
-An example of a link element is shown below. <link rel="stylesheet" href="csscode.css"
-                            type="text/css">
+An example of a link element is shown below. 
+
+    <link rel="stylesheet" href="csscode.css" type="text/css">
 
 Other sorts of links are also possible, but are beyond the scope of this book.
 
-<body>
+#### \<body\>
 
 The body element is only allowed within the html element. It should only contain one or more block-level elements, but most browsers will also allow inline elements. Various appearance-related attributes are possible, but CSS should be used instead.
 
-<p>
+#### \<p\>
 
 This is a block-level element that can appear within most other block-level elements. It should only contain inline elements (words and images). The content is automatically typeset as a paragraph (i.e., the browser automatically decides where to break lines).
 
-<img>
+#### \<img\>
 
 This is an empty, inline element (i.e., images are treated like words in a sentence). It can be used within almost any other element. Important attributes are src, to specify the file containing the image (this may be a URL, i.e., an image anywhere on the web), and alt to specify alternative text for non-graphical browsers.
 
-<a>
+#### \<a\>
 
 The a element is known as an anchor. It is an inline element that can go inside any other element. It can contain any other inline element (except another anchor). Its important attributes are: href, which means that the anchor is a hypertext link and the value of the attribute specifies a destination (when the content of the anchor is clicked on, the browser navigates to this destination); and name, which means that the anchor is the destination for a hyperlink.
 
 The value of an href attribute can be: a URL, which specifies a separate web page to navigate to; something of the form #target, which specifies an anchor within the same document that has an attribute name = "target"; or a combination, which specifies an anchor within a separate document. For example, the following URL specifies the top of the W3C page for HTML 4.01.
 
-                href="http://www.w3.org/TR/html401/"
+     href="http://www.w3.org/TR/html401/"
 
 The URL below specifies the table of contents further down that web page.
 
-                href="http://www.w3.org/TR/html401/#minitoc"
+     href="http://www.w3.org/TR/html401/#minitoc"
 
-<h1> ... <h6>
+#### \<h1\> ... \<h6\>
 
 These are block-level elements that denote that the contents are a section heading. They can appear within almost any other block-level element, but can only contain inline elements. They have no attributes of interest.
 
 These elements should be used to indicate the section structure of a document, not for their default display properties. CSS should be used to achieve the desired weight and size of the text in general.
 
-<table>, <tr>, and <td>
+#### \<table\>, \<tr\>, and \<td\>
 
 A table element contains one or more tr elements, each of which contains one or more td elements (so td elements can only appear within tr elements, and tr elements can only appear within a table element). A table element may appear within almost any other block-level element. In particular, a table can be nested within the td element of another table.
 
@@ -152,22 +157,45 @@ It is tempting to use tables to arrange content on a web page, but it is recomme
 
 The code below shows an example of a table with three rows and three columns and the image below the code shows what the result looks like in a web browser.
 
-                <table border="1">
-                    <tr>
-                        <td></td> <td>pacific</td> <td>eurasian</td>
-                    </tr>
-                    <tr>
-                        <td>min</td> <td>276</td> <td>258</td>
-</tr> <tr>
-                        <td>max</td> <td>283</td> <td>293</td>
-                    </tr>
+    <table border="1">
+        <tr>
+            <td></td> <td>pacific</td> <td>eurasian</td>
+        </tr>
+        <tr>
+            <td>min</td> <td>276</td> <td>258</td>
+        </tr> 
+        <tr>
+            <td>max</td> <td>283</td> <td>293</td>
+        </tr>
+    </table>
+
+<table border="1">
+    <tr>
+        <td></td> <td>pacific</td> <td>eurasian</td>
+    </tr>
+    <tr>
+        <td>min</td> <td>276</td> <td>258</td>
+    </tr> 
+    <tr>
+        <td>max</td> <td>283</td> <td>293</td>
+    </tr>
 </table>
 
 It is also possible to construct more complex tables with separate thead, tbody, and tfoot elements to group rows within the table (i.e., these three elements can go inside a table element, with tr elements inside them).
 
-<hr>
-<br>
-<ul>, <ol>, and <li>
+#### \<hr\>
+
+This is an empty element that produces a horizontal line. It can appear within almost any block-level element. It has no attributes of interest.
+
+This entire element can be replaced by CSS control of borders.
+
+#### \<br\>
+
+This is an empty element that forces a new line or line-break. It can be put anywhere. It has no attributes of interest.
+
+This element should be used sparingly. In general, text should be broken into lines by the browser to fit the available space.
+
+#### \<ul\>, \<ol\>, and \<li\>
 
 These elements create lists. The li element generates a list item and appears within either a ul element, for a bullet-point list, or an ol element, for a numbered list.
 
@@ -177,73 +205,66 @@ These elements have no attributes of interest. CSS can be used to control the st
 
 The code below shows an ordered list with two items and the image below the code shows what the result looks like in a web browser.
 
-This is an empty element that produces a horizontal line. It can appear within almost any block-level element. It has no attributes of interest.
+    <ol> 
+        <li>
+        <p>
+        Large bodies of water tend to
+        absorb and release heat more slowly
+        compared to large land masses.
+        </p>
+        </li>
+        <li>
+        <p>
+        Temperatures vary differently over time
+        depending on which hemisphere the pole
+        is located in.
+        </p>
+        </li>
+    </ol>
 
-This entire element can be replaced by CSS control of borders.
-
-This is an empty element that forces a new line or line-break. It can be put anywhere. It has no attributes of interest.
-
-This element should be used sparingly. In general, text should be broken into lines by the browser to fit the available space.
-
-<ol> <li>
-                    <p>
-                    Large bodies of water tend to
-                    absorb and release heat more slowly
-                    compared to large land masses.
-                    </p>
-                    </li>
-                    <li>
-                    <p>
-                    Temperatures vary differently over time
-                    depending on which hemisphere the pole
-                    is located in.
-                    </p>
-                    </li>
+<ol> 
+    <li>
+    <p>
+    Large bodies of water tend to absorb and release heat more slowly compared to large land masses.
+    </p>
+    </li>
+    <li>
+    <p>
+    Temperatures vary differently over time depending on which hemisphere the pole is located in.
+    </p>
+    </li>
 </ol>
 
 It is also possible to produce “definition” lists, where each item has a heading. Use a dl element for the overall list with a dt element to give the heading and a dd element to give the definition for each item.
 
-<pre>
+#### \<pre\>
 
 This is a block-level element that displays any text content exactly as it appears in the source code. It is useful for displaying computer code or computer output. It has no attributes of interest.
 
 It is possible to have other elements within a pre element. Like the hr element, this element can usually be replaced by CSS styling.
 
-<div> and <span>
+#### \<div\> and \<span\>
 
 These are generic block-level and inline elements (respectively). They have no attributes of interest.
 
 These can be used as “blank” elements with no predefined appearance properties. Their appearance can then be fully specified via CSS. In theory, any other HTML element can be emulated using one of these elements and appropriate CSS properties. In practice, the standard HTML elements are more convenient for their default behavior and these elements are used for more exotic situations.
 
-3.2.2 Common HTML attributes
+### 3.2.2 Common HTML attributes
 
 Almost all elements may have a class attribute, so that a CSS style specified in the head element can be associated with that element. Similarly, all elements may have an id attribute, which can be used to associate a CSS style. The value of all id attributes within a piece of HTML code must be unique.
 
 All elements may also have a style attribute, which allows “inline” CSS rules to be specified within the element’s start tag.
 
-3.3 Further reading
+## 3.3 Further reading
 
-The W3C HTML 4.01 Specification
-                http://www.w3.org/TR/html401/
-The formal and official definition of HTML. Quite technical.
+*The W3C HTML 4.01 Specification*. The formal and official definition of HTML. Quite technical. http://www.w3.org/TR/html401/
 
-Getting started with HTML
-by Dave Raggett
-                http://www.w3.org/MarkUp/Guide/
-An introductory tutorial to HTML by one of the original designers of the language.
+*Getting started with HTML* by Dave Raggett. An introductory tutorial to HTML by one of the original designers of the language. http://www.w3.org/MarkUp/Guide/
 
-The Web Design Group’s HTML 4 web site
-                http://htmlhelp.com/reference/html40/
-A more friendly, user-oriented description of HTML.
+*The Web Design Group’s HTML 4 web site*. A more friendly, user-oriented description of HTML. http://htmlhelp.com/reference/html40/
 
-The w3schools HTML Tutorial
-                http://www.w3schools.com/html/
-A quick, basic tutorial-based introduction to HTML.
+*The w3schools HTML Tutorial*. A quick, basic tutorial-based introduction to HTML. http://www.w3schools.com/html/
 
-HTML Tidy
-                http://www.w3.org/People/Raggett/tidy/
-A description of HTML Tidy, including links to online versions.
+*HTML Tidy*. A description of HTML Tidy, including links to online versions. http://www.w3.org/People/Raggett/tidy/
 
-The W3C Validation Service
-                http://validator.w3.org/
-A more sophisticated validation service than HTML Tidy.
+*The W3C Validation Service*. A more sophisticated validation service than HTML Tidy. http://validator.w3.org/
