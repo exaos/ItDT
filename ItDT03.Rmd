@@ -63,7 +63,7 @@ Comments in HTML code are anything within \<!-- and --\>. All characters, includ
 Table 3.1: Some common HTML entities.
 
 Character  Description        Entity  
----------  -----------------  -------  
+---------- ------------------ --------   
 <          less-than sign     \&lt;  
 >          greater-than sign  \&gt;  
 &          ampersand          \&amp;  
