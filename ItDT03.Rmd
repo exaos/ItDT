@@ -62,15 +62,15 @@ Comments in HTML code are anything within \<!-- and --\>. All characters, includ
 
 Table 3.1: Some common HTML entities.
 
-Character  Description        Entity
----------  -----------------  -------
-<          less-than sign     \&lt;
->          greater-than sign  \&gt;
-&          ampersand          \&amp;
-π          Greek letter pi    \&pi;
-μ          Greek letter mu    \&mu;
-€          Euro symbol        \&euro;
-£          British pounds     \&pound;
+Character  Description        Entity  
+---------  -----------------  -------  
+<          less-than sign     \&lt;  
+>          greater-than sign  \&gt;  
+&          ampersand          \&amp;  
+π          Greek letter pi    \&pi;  
+μ          Greek letter mu    \&mu;  
+€          Euro symbol        \&euro;  
+£          British pounds     \&pound;  
 ©          copyright symbol   \&copy;
 
 ### 3.1.2 HTML entities
