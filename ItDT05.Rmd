@@ -1,0 +1,10 @@
+---
+title: "ItDT05"
+author: "Robert A. Stevens"
+date: "October 6, 2015"
+output: html_document
+---
+
+*Introduction to Data Technologies* by Paul Murrell
+
+
