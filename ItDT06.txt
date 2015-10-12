@@ -1,198 +1,238 @@
 6 XML
+
 XML (the eXtensible Markup Language) is a data description language that can be used for storing data. It is particularly useful as a format for sharing information between different software systems.
-The information in this chapter describes XML 1.0, which is a W3C Rec- ommendation.
+
+The information in this chapter describes XML 1.0, which is a W3C Recommendation.
+
 Within this chapter, any code written in a sans-serif oblique font represents a general template; that part of the code will vary depending on the names of the elements and the names of the attributes that are used to store a particular data set.
+
 6.1 XML syntax
+
 The first line of an XML document should be a declaration that this is an XML document, including the version of XML being used.
-           <?xml version="1.0"?>
+
+<?xml version="1.0"?>
+
 It is also useful to include a statement of the encoding used in the file.
-           <?xml version="1.0" encoding="UTF-8"?>
+
+<?xml version="1.0" encoding="UTF-8"?>
+
 The main content of an XML document consists entirely of XML elements. An element usually consists of a start tag and an end tag, with plain text content or other XML elements in between.
+
 A start tag is of the form <elementName> and an end tag has the form </elementName >.
+
 The following code shows an example of an XML element.
-           <filename>ISCCPMonthly_avg.nc</filename>
-149
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 150 — #176 i
-￼￼￼The components
-element: start tag: content: end tag:
-of this XML element are shown below.
-  <filename>ISCCPMonthly_avg.nc</filename>
-  <filename>ISCCPMonthly_avg.nc</filename>
-  <filename>ISCCPMonthly_avg.nc</filename>
-  <filename>ISCCPMonthly_avg.nc</filename>
-￼￼￼￼The start tag may include attributes of the form attrName="attrValue". The attribute value must be enclosed within double-quotes.
+
+<filename>ISCCPMonthly_avg.nc</filename>
+
+The components of this XML element are shown below.
+
+  element: <filename>ISCCPMonthly_avg.nc</filename>
+start tag: <filename>
+  content: ISCCPMonthly_avg.nc
+  end tag: </filename>
+
+The start tag may include attributes of the form attrName="attrValue". The attribute value must be enclosed within double-quotes.
+
 The names of XML elements and XML attributes are case-sensitive.
+
 It is also possible to have an empty element, which consists of a single tag,
 with attributes. In this case, the tag has the form <elementName />.
+
 The following code shows an example of an empty XML element with two
 attributes.
+
 <case date="16-JAN-1994"
       temperature="278.9" />
+
 The components of this XML element are shown below.
-element name: attribute name: attribute value: attribute name: attribute value:
-<case date="16-JAN-1994"
-<case date="16-JAN-1994"
-<case date="16-JAN-1994"
-      temperature="278.9" />
-      temperature="278.9" />
-￼￼￼￼￼XML elements may be nested; an XML element may have other XML ele- ments as its content. An XML document must have a single root element, which contains all other XML elements in the document.
+
+   element name: case 
+ attribute name: date
+attribute value: 16-JAN-1994
+ attribute name: temperature
+attribute value: 278.9
+
+XML elements may be nested; an XML element may have other XML elements as its content. An XML document must have a single root element, which contains all other XML elements in the document.
+
 The following code shows a very small, but complete, XML document. The root element of this document is the temperatures element. The filename and case elements are nested within the temperatures element.
+
 <?xml version="1.0"?>
 <temperatures>
     <filename>ISCCPMonthly_avg.nc</filename>
     <case date="16-JAN-1994"
           temperature="278.9"/>
 </temperatures>
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 151 — #177 i
+
 Table 6.1: The predefined XML entities.
-￼￼￼￼Character Description
-< less-than sign
-> greater-than sign & ampersand
-" quotation mark ’ apostrophe
-Entity
-&lt;
-&gt;
-&amp;
-&quot;
-&apos;
-￼￼A comment in XML is anything between the delimiters <!-- and -->.
+
+Character Description       Entity
+<         less-than sign    &lt;
+>         greater-than sign &gt;
+&         ampersand         &amp;
+"         quotation mark    &quot;
+’         apostrophe        &apos;
+
+A comment in XML is anything between the delimiters <!-- and -->.
+
 For the benefit of human readers, the contents of an XML element are usually indented. However, whitespace is preserved within XML so this is not always possible when including plain text content.
+
 In XML code, certain characters, such as the greater-than and less-than signs, have special meanings. Table 6.1 lists these special characters and also gives the escape sequence required to produce the normal, literal meaning of the characters.
+
 A special syntax is provided for escaping an entire section of plain text content for the case where many such special characters are included. Any text between the delimiters <![CDATA[ and ]]> is treated as literal.
+
 6.2 Document Type Definitions
+
 An XML document that obeys the rules of the previous section is described as well-formed.
+
 It is also possible to specify additional rules for the structure and content of an XML document, via a schema for the document. If the document is well-formed and also obeys the rules given in a schema, then the document is described as valid.
-The Document Type Definition language (DTD) is a language for describ- ing the schema for an XML document. DTD code consists of element declarations and attribute declarations.
-ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 152 — #178 i
+
+The Document Type Definition language (DTD) is a language for describing the schema for an XML document. DTD code consists of element declarations and attribute declarations.
+
 6.2.1 Element declarations
+
 An element declaration should be included for every different type of element that will occur in an XML document. Each declaration describes what content is allowed inside a particular element. An element declaration is of the form:
+
 <!ELEMENT elementName elementContents>
+
 The elementContents specifies whether an element can contain plain text, or other elements (and if so, which elements, in what order), or whether the element must be empty. Some possible values are shown below.
+
 EMPTY
 The element is empty.
+
 ANY
+The element may contain anything (other elements, plain text, or both).
+
 (#PCDATA)
 The element may contain plain text.
+
 (elementA)
 The element must contain exactly one elementA element. The paren- theses, ( and ), are essential in this example and all others below.
+
 (elementA*)
 The element may contain zero or more elementA elements. The aster- isk, *, indicates “zero or more”.
+
 (elementA+)
 The element must contain one or more elementA elements. The plus sign, +, indicates “one or more”.
+
 (elementA?)
-The element must contain zero or one elementA elements. The ques- tion mark, ?, indicates “zero or one”.
+The element must contain zero or one elementA elements. The question mark, ?, indicates “zero or one”.
+
 (elementA,elementB )
 The element must contain exactly one elementA element and exactly one elementB element. The element names are separated from each other by commas.
-ii ii
-￼￼￼￼￼The element may contain anything (other elements, plain text, or both).
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 153 — #179 i
+
 (elementA|elementB )
-The element must contain either exactly one elementA element or ex- actly one elementB element. The vertical bar, |, indicates alternatives.
+The element must contain either exactly one elementA element or exactly one elementB element. The vertical bar, |, indicates alternatives.
+
 (#PCDATA|elementA|elementB *)
 The element may contain plain text, or a single elementA element, or zero or more elementB elements. The asterisk, *, is inside the parentheses so only applies to the elementB element.
+
 (#PCDATA|elementA|elementB )*
 The element may contain plain text, plus zero or more occurrences of elementA elements and elementB elements. The asterisk, *, is outside the parentheses so applies to all elements within the parentheses.
+
 6.2.2 Attribute declarations
-An attribute declaration should be included for every different type of ele- ment that can have attributes. The declaration describes which attributes an element may have, what sorts of values the attribute may take, and whether the attribute is optional or compulsory. An attribute declaration is of the form:
+
+An attribute declaration should be included for every different type of element that can have attributes. The declaration describes which attributes an element may have, what sorts of values the attribute may take, and whether the attribute is optional or compulsory. An attribute declaration is of the form:
+
 <!ATTLIST elementName
-attrName attrType attrDefault ...
+    attrName attrType attrDefault 
+    ...
 >
+
 The attrType controls what value the attribute can have. It can have one of the following forms:
+
 CDATA
-The attribute can take any value. Attribute values must always be plain text and escape sequences (XML entities) must be used for spe- cial XML characters (see Table 6.1).
+The attribute can take any value. Attribute values must always be plain text and escape sequences (XML entities) must be used for special XML characters (see Table 6.1).
+
 ID
+The value of this attribute must be unique for all elements of this type in the document (i.e., a unique identifier). This is similar to a primary key in a database table.
+
+The value of an ID attribute must not start with a digit.
+
 IDREF
 The value of this attribute must be the value of some other element’s ID attribute. This is similar to a foreign key in a database table.
-￼￼￼The value of this attribute must be unique for all elements of this type in the document (i.e., a unique identifier). This is similar to a primary key in a database table.
-The value of an ID attribute must not start with a digit.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 154 — #180 i
+
 (option1 |option2 )
 This form provides a list of the possible values for the attribute. The list of options is given, separated by vertical bars, |. This is a good way to limit an attribute to only valid values (e.g., only "male" or "female" for a gender attribute).
+
 <!ATTLIST elementName
-gender (male|female) #REQUIRED>
+    gender (male|female) #REQUIRED>
+
 The attrDefault either provides a default value for the attribute or states whether the attribute is optional or required (i.e., must be specified). It can have one of the following forms:
+
 value
+This is the default value for the attribute.
+
 #IMPLIED
 The attribute is optional. It is valid for elements of this type to contain this attribute, but it is not required.
+
 #REQUIRED
 The attribute is required so it must appear in all elements of this type.
+
 6.2.3 Including a DTD
+
 A DTD can be embedded within an XML document or the DTD can be located within a separate file and referred to from the XML document.
+
 The DTD information is included within a DOCTYPE declaration following the XML declaration. An inline DTD has the form:
-<!DOCTYPE rootElementName [ DTD code
+
+<!DOCTYPE rootElementName [ 
+    DTD code
 ]>
+
 An external DTD stored in a file called file.dtd would be referred to as
 follows:
+
 <!DOCTYPE rootElementName SYSTEM "file.dtd">
+
 The name following the keyword DOCTYPE must match the name of the root
 element in the XML document.
-￼￼￼This is the default value for the attribute.
-ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 155 — #181 i
-           <?xml version="1.0"?>
-           <!DOCTYPE temperatures [
-               <!ELEMENT temperatures (filename, case)>
-               <!ELEMENT filename (#PCDATA)>
-               <!ELEMENT case EMPTY>
-               <!ATTLIST case
-                   date        CDATA  #REQUIRED
-                   temperature CDATA  #IMPLIED>
-            ]>
-           <temperatures>
-               <filename>ISCCPMonthly_avg.nc</filename>
-               <case date="16-JAN-1994"
-                     temperature="278.9"/>
-           </temperatures>
+
+<?xml version="1.0"?>
+<!DOCTYPE temperatures [
+    <!ELEMENT temperatures (filename, case)>
+    <!ELEMENT filename (#PCDATA)>
+    <!ELEMENT case EMPTY>
+    <!ATTLIST case
+        date        CDATA  #REQUIRED
+        temperature CDATA  #IMPLIED>
+]>
+<temperatures>
+    <filename>ISCCPMonthly_avg.nc</filename>
+    <case date="16-JAN-1994"
+          temperature="278.9"/>
+</temperatures>
+
 Figure 6.1: A well-formed and valid XML document, with an embedded DTD. The line numbers (in grey) are just for reference.
+
 6.2.4 An example
+
 Figure 6.1 shows a very small, well-formed and valid XML document with an embedded DTD.
+
 Line 1 is the required XML declaration.
+
 Lines 2 to 9 provide a DTD for the document. This DTD specifies that the root element for the document must be a temperatures element (line 2). The temperatures element must contain one filename element and one case element (line 3). The filename element must contain only plain text (line 4) and the case element must be empty (line 5).
+
 The case element must have a date attribute (line 7) and may also have a temperature attribute (line 8). The values of both attributes can be arbitrary text (CDATA).
+
 The elements within the XML document that mark up the actual data values are on lines 10 to 14.
-￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 156 — #182 i
+
 6.3 Further reading
+
 The W3C XML 1.0 Specification
 http://www.w3.org/TR/2006/REC-xml-20060816/
 The formal and official definition of XML. Quite technical.
+
 The w3schools XML Tutorial
-                      http://www.w3schools.com/xml/
+http://www.w3schools.com/xml/
 Quick, basic tutorial-based introduction to XML.
+
 The w3schools DTD Tutorial
-                      http://www.w3schools.com/dtd/
+http://www.w3schools.com/dtd/
 Quick, basic tutorial-based introduction to DTDs.
+
 The W3C Validation Service
-                      http://validator.w3.org/
+http://validator.w3.org/
 This will check raw XML files as well as HTML documents.
+
 libxml2
 http://xmlsoft.org/
 This software includes a command-line tool, xmllint for checking XML code, including validating it against a DTD.
-￼￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 157 — #183 i
