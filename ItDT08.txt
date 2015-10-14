@@ -1,6 +1,6 @@
 8 SQL
-The Structured Query Language (SQL) is a language for working with in- formation that has been stored in a database.
-SQL has three parts: the Data Manipulation Language (DML) concerns adding information to a database, modifying the information, and extract- ing information from a database; the Data Definition Language (DDL) is concerned with the structure of a database (creating tables); and the Data Control Language (DCL) is concerned with administration of a database (deciding who gets what sort of access to which parts of the database).
+The Structured Query Language (SQL) is a language for working with information that has been stored in a database.
+SQL has three parts: the Data Manipulation Language (DML) concerns adding information to a database, modifying the information, and extracting information from a database; the Data Definition Language (DDL) is concerned with the structure of a database (creating tables); and the Data Control Language (DCL) is concerned with administration of a database (deciding who gets what sort of access to which parts of the database).
 This chapter is mostly focused on the SELECT command, which is the part of the DML that is used to extract information from a database, but other useful SQL commands are also mentioned briefly in Section 8.3.
 8.1 SQL syntax
 This section is only concerned with the syntax of the SQL SELECT command, which is used to perform a database query.
@@ -10,12 +10,7 @@ The basic format of an SQL query is this:
 SELECT columns FROM tables
 WHERE row condition
 ORDER BY order by columns
-197
-￼￼￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 198 — #224 i
+
 The SQL keywords, SELECT, FROM, WHERE, and ORDER BY, are traditionally written in uppercase, though this is not necessary.
 The names of tables and columns depend on the database being queried, but they should always start with a letter and only contain letters, digits, and the underscore character, ‘ ’.
 This will select the named columns from the specified tables and return all rows matching the row condition.
@@ -29,12 +24,8 @@ The column name may be followed by a column alias, which can then be used anywhe
 SELECT colname colalias ...
 If more than one table is included in the query, and the tables share a column with the same name, a column name must be preceded by the relevant table name, with a full stop in between.
 SELECT tablename.colname ...
-￼￼￼￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 199 — #225 i
-Functions and operators may be used to produce results that are calculated from the column. The set of functions that is provided varies widely between DBMS, but the normal mathematical operators for addition, subtraction, multiplication, and division, plus a set of basic aggregation functions for maximum value (MAX), minimum value (MIN), summation (SUM), and arith- metic mean (AVG), should always be available.
+
+Functions and operators may be used to produce results that are calculated from the column. The set of functions that is provided varies widely between DBMS, but the normal mathematical operators for addition, subtraction, multiplication, and division, plus a set of basic aggregation functions for maximum value (MAX), minimum value (MIN), summation (SUM), and arithmetic mean (AVG), should always be available.
 SELECT MAX(colname) ...
 SELECT colname1 + colname2 ...
 A column name can also be a constant value (number or text), in which case the value is replicated for every row of the result.
@@ -46,11 +37,7 @@ SELECT colname FROM tablename
 A table name may be followed by a table alias, which can be used in place of the original table name anywhere else in the query.
 SELECT talias.colname FROM tablename talias ...
 If two tables are specified, separated only by a comma, the result is all possible combinations of the rows of the two tables (a Cartesian product). This is known as a cross join.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 200 — #226 i
+
 SELECT ...
 FROM table1, table2 ...
 An inner join is created from a cross join by specifying a condition so that only rows that have matching values are returned (typically using a foreign key to match with a primary key). The condition may be specified within the WHERE clause (see Section 8.2.3), or as part of an INNER JOIN syntax as shown below.
@@ -66,14 +53,10 @@ SELECT ...
 FROM tablename alias1, tablename alias2 ...
 8.2.3 Selecting rows: The WHERE clause
 By default, all rows from a table, or from a combination of tables, are returned. However, if the WHERE clause is used to specify a condition, then only rows matching that condition will be returned.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 201 — #227 i
+
 Conditions may involve any column from any table that is included in the query. Conditions usually involve a comparison between a column and a constant value, or a comparison between two columns.
 A constant text value should be enclosed in single-quotes.
-Valid comparison operators include: equality (=), greater-than or less-than (>, <), greater-than or equal-to or less-than or equal-to (>=, <=), and in- equality (!= or <>).
+Valid comparison operators include: equality (=), greater-than or less-than (>, <), greater-than or equal-to or less-than or equal-to (>=, <=), and inequality (!= or <>).
            SELECT ...
                FROM ...
 WHERE colname = 0;
@@ -93,13 +76,7 @@ For the case where a column can match several possible values, the special IN ke
                FROM ...
 WHERE column1 IN (value1, value2);
 Comparison with text constants can be generalized to allow patterns using
-the special LIKE comparison operator. In this case, within the text constant,
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 202 — #228 i
-the underscore character, _, has a special meaning; it will match any single character. The percent character, %, is also special and it will match any number of characters of any sort.
+the special LIKE comparison operator. In this case, within the text constant, the underscore character, _, has a special meaning; it will match any single character. The percent character, %, is also special and it will match any number of characters of any sort.
            SELECT ...
                FROM ...
 WHERE stroke LIKE '%stroke';
@@ -111,17 +88,13 @@ The ORDER BY clause consists of one or more column names. The rows are ordered a
            SELECT ...
                FROM ...
 ORDER BY columnname ASC;
-The results can be ordered by the values in several columns simply by spec- ifying several column names, separated by commas. The results are ordered by the values in the first column, but if several rows in the first column have the same value, those rows are ordered by the values in the second column.
+The results can be ordered by the values in several columns simply by specifying several column names, separated by commas. The results are ordered by the values in the first column, but if several rows in the first column have the same value, those rows are ordered by the values in the second column.
            SELECT ...
                FROM ...
 ORDER BY column1 ASC, column2 DESC;
 8.2.5 Aggregating results: The GROUP BY clause
 The aggregation functions MAX, MIN, SUM, and AVG (see Section 8.2.1) all return a single value from a column. If a GROUP BY clause is included in the query, aggregated values are reported for each unique value of the column specified in the GROUP BY clause.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 203 — #229 i
+
 SELECT column1, SUM(column2) FROM ...
 GROUP BY column1;
 Results can be reported for combinations of unique values of several columns
@@ -138,10 +111,7 @@ SELECT column1 FROM table1
 WHERE column1 IN
 ( SELECT column2 FROM table2
 ... );
-￼￼￼ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 204 — #230 i
+
 8.3 Other SQL commands
 This section deals with SQL commands that perform other common useful actions on a database.
 We start with entering the data into a database.
@@ -159,11 +129,7 @@ col2name col2type) CONSTRAINT constraint1
 PRIMARY KEY (col1name) CONSTRAINT constraint2
 FOREIGN KEY (col2name) REFERENCES table2 (table2col);
 The primary key constraint specifies which column or columns make up the primary key for the table. The foreign key constraint specifies which column
-ii ii
-￼￼￼￼￼￼￼￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 205 — #231 i
+
 Table 8.1: Some common SQL data types.
 Type Description
 CHAR(n) Fixed-length text (n characters)
@@ -178,11 +144,7 @@ Having generated the table schema, values are entered into the table using the I
 INSERT INTO table VALUES (value1, value2);
 There should be as many values as there are columns in the table, with values separated from each other by commas. Text values should be enclosed within single-quotes.
 Most DBMS software also provides a way to read data values into a table from an external (text) file. For example, in SQLite, the special .import command can be used to read values from an external text file.
-￼￼￼￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 206 — #232 i
+
            CREATE TABLE date_table
                (ID    INTEGER NOT NULL,
                 date  DATE,
@@ -191,7 +153,7 @@ ii
                 CONSTRAINT date_table_pk PRIMARY KEY (ID));
            CREATE TABLE location_table
                (ID    INTEGER NOT NULL,
-￼￼￼     longitude
+     longitude
      latitude
      elevation
      CONSTRAINT location_table_pk PRIMARY KEY (ID));
@@ -225,10 +187,7 @@ REAL,
 REAL,
 REAL,
 REAL,
-ii ii
-￼￼￼￼
-ii
-i “itdt” — 2013/3/26 — 15:24 — page 207 — #233 i
+
 8.3.3 Modifying data
 Values in a database table may be modified using the UPDATE command.
 UPDATE table
@@ -248,17 +207,9 @@ SQL: The Complete Reference
 by James R. Groff and Paul N. Weinberg
 2nd Edition (2002) McGraw-Hill.
 Like the title says, a complete reference to SQL.
-ii ii
-￼￼￼￼￼￼￼￼￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 208 — #234 i
+
 Using SQL
 by Rafe Colburn
 Special Edition (1999) Que.
 Still a thorough treatment, but an easier read.
-￼￼￼ii ii
-￼￼￼￼
-￼￼i
-ii
-“itdt” — 2013/3/26 — 15:24 — page 209 — #235 i
+
