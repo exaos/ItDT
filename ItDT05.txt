@@ -8,7 +8,7 @@ There are several good reasons why researchers need to know about data storage o
 
 Another common situation is that we may have to transfer data between different applications or between different operating systems. This effectively involves temporary data storage, so it is useful to understand how to select an appropriate storage format.
 
-It is also possible to be involved in deciding the format for archiving a data set. There is no overall best storage format; the correct choice will depend on the size and complexity of the data set and what the data set will be used for. It is necessary to gain an overview of the relative merits of all of the data storage options in order to be able to make an informed decision for any particular situation.
+It is also possible to be involved in deciding the format for archiving a data set. There is no overall best storage format; the correct choice will depend on the size and complexity of the data set and what the data set will be used for. It is necessary to gain an overview of the relative merits oåf all of the data storage options in order to be able to make an informed decision for any particular situation.
 
 In this chapter, we will see a number of different data storage options and we will discuss the strengths and weaknesses of each.
 
