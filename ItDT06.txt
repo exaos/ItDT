@@ -35,8 +35,7 @@ The start tag may include attributes of the form attrName="attrValue". The attri
 
 The names of XML elements and XML attributes are case-sensitive.
 
-It is also possible to have an empty element, which consists of a single tag,
-with attributes. In this case, the tag has the form <elementName />.
+It is also possible to have an empty element, which consists of a single tag, with attributes. In this case, the tag has the form <elementName />.
 
 The following code shows an example of an empty XML element with two
 attributes.
@@ -106,10 +105,10 @@ The element may contain anything (other elements, plain text, or both).
 The element may contain plain text.
 
 (elementA)
-The element must contain exactly one elementA element. The paren- theses, ( and ), are essential in this example and all others below.
+The element must contain exactly one elementA element. The parentheses, ( and ), are essential in this example and all others below.
 
 (elementA*)
-The element may contain zero or more elementA elements. The aster- isk, *, indicates “zero or more”.
+The element may contain zero or more elementA elements. The asterisk, *, indicates “zero or more”.
 
 (elementA+)
 The element must contain one or more elementA elements. The plus sign, +, indicates “one or more”.
@@ -178,13 +177,11 @@ The DTD information is included within a DOCTYPE declaration following the XML d
     DTD code
 ]>
 
-An external DTD stored in a file called file.dtd would be referred to as
-follows:
+An external DTD stored in a file called file.dtd would be referred to as follows:
 
 <!DOCTYPE rootElementName SYSTEM "file.dtd">
 
-The name following the keyword DOCTYPE must match the name of the root
-element in the XML document.
+The name following the keyword DOCTYPE must match the name of the root element in the XML document.
 
 <?xml version="1.0"?>
 <!DOCTYPE temperatures [
