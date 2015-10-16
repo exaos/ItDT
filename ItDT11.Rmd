@@ -199,8 +199,16 @@ Some more realistic examples of the use of backreferences are given in Section 9
 
 ## 11.3 Further reading
 
-*Mastering Regular Expressions* by Jeffrey Friedl, 3rd Edition (2006) O’Reilly. Exhaustive treatment of regular expressions in all their various incarnations.
+*Mastering Regular Expressions*  
+by Jeffrey Friedl  
+3rd Edition (2006) O’Reilly.  
+Exhaustive treatment of regular expressions in all their various incarnations.
 
-*Regular Expression Pocket Reference* by Tony Stubblebine, 2nd Edition (2007) O’Reilly. Quick reference for regular expressions.
+*Regular Expression Pocket Reference*  
+by Tony Stubblebine  
+2nd Edition (2007) O’Reilly.  
+Quick reference for regular expressions.
 
-*Regular-Expressions.info* http://www.regular-expressions.info. Comprehensive online resource.
+*Regular-Expressions.info*  
+http://www.regular-expressions.info  
+Comprehensive online resource.
