@@ -1270,12 +1270,12 @@ In this table, the values in the ID column are all integers. The other columns a
 
 Tables within the same database can be related to each other using foreign keys. These are columns in one table that specify a value from the primary key in another table. For example, we can relate each book in the book\_table to a publisher in the publisher\_table by adding a foreign key to the book\_table. This foreign key consists of a column, pub, containing the appropriate publisher ID. The book_table now looks like this:
 
-ISBN        title                       author            pub
-----------  --------------------------  ----------------  ---
-0618260307  The Hobbit                  J. R. R. Tolkien  3
-0908606664  Slinky Malinki              Lynley Dodd       1
-0393310728  How to Lie with Statistics  Darrell Huff      2
-0908783116  Mechanical Harry            Bob Kerr          1
+ISBN        title                       author            pub  
+----------  --------------------------  ----------------  ---  
+0618260307  The Hobbit                  J. R. R. Tolkien  3  
+0908606664  Slinky Malinki              Lynley Dodd       1  
+0393310728  How to Lie with Statistics  Darrell Huff      2  
+0908783116  Mechanical Harry            Bob Kerr          1  
 
 Notice that two of the books in the book\_table have the same publisher, with a pub value of 1. This corresponds to the publisher with an ID value of 1 in the publisher_table, which is the publisher called Mallinson Rendel.
 
