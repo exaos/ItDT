@@ -1221,14 +1221,14 @@ The software that handles the representation of the data in computer memory, and
 
 The main benefits of databases for data storage derive from the fact that databases have a formal structure. We will spend much of this section describing and discussing how databases are designed, so that we can appreciate the benefits of storing data in a database and so that we know enough to be able to work with data that have been stored in a database.
 
-ISBN       title                                author           gender publisher        ctry 
----------- ------------------------------------ ---------------- ------ ---------------- ---- 
-0618260307 The Hobbit                           J. R. R. Tolkien male   Houghton Mifflin USA 
-0908606664 Slinky Malinki                       Lynley Dodd      female Mallinson Rendel NZ
-1908606206 Hairy Maclary from Donaldson's Dairy Lynley Dodd      female Mallinson Rendel NZ 
-0393310728 How to Lie with Statistics           Darrell Huff     male   W. W. Norton     USA 
-0908783116 Mechanical Harry                     Bob Kerr         male   Mallinson Rendel NZ 
-0908606273 My Cat Likes to Hide in Boxes        Lynley Dodd      female Mallinson Rendel NZ 
+ISBN       title                                author           gender publisher        ctry  
+---------- ------------------------------------ ---------------- ------ ---------------- ----  
+0618260307 The Hobbit                           J. R. R. Tolkien male   Houghton Mifflin USA  
+0908606664 Slinky Malinki                       Lynley Dodd      female Mallinson Rendel NZ  
+1908606206 Hairy Maclary from Donaldson's Dairy Lynley Dodd      female Mallinson Rendel NZ  
+0393310728 How to Lie with Statistics           Darrell Huff     male   W. W. Norton     USA  
+0908783116 Mechanical Harry                     Bob Kerr         male   Mallinson Rendel NZ  
+0908606273 My Cat Likes to Hide in Boxes        Lynley Dodd      female Mallinson Rendel NZ  
 0908606273 My Cat Likes to Hide in Boxes        Eve Sutton       female Mallinson Rendel NZ
 
 Figure 5.18: Information about a set of books, including the ISBN and title for the book, the author of the book and the author’s gender, the publisher of the book, and the publisher’s country of origin.
