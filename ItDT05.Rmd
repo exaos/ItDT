@@ -50,38 +50,40 @@ The choice of a clay tablet for recording the information on YBC 7289 was obviou
 
 The most obvious advantage of an electronic medium is that it is very easy to make copies. The curators in charge of YBC 7289 would no doubt love to be able to make identical copies of such a precious artifact, but truly identical copies are only really possible for electronic information.
 
+![Figure 5.1](/Users/rebeccastevens/GitHub/ItDT/tumblr_nkppo02cpa1qc38e9o1_400.png)
+
 Figure 5.1: Clay tablet YBC 7289 with an overlay to emphasize the markings on its surface. The cuneiform inscriptions demonstrate the derivation of the square root of 2.
 
 This leads us to the problem of how we produce an electronic record of the tablet YBC 7289. We will consider a number of possibilities in order to introduce some of the issues that will be important when discussing various data storage alternatives throughout this chapter.
 
 A straightforward approach to storing the information on this tablet would be to write a simple textual description of the tablet.
 
-YBC 7289 is a clay tablet with various cuneiform marks on it that describe the relationship between the length of the diagonal and the length of the sides of a square.
+    YBC 7289 is a clay tablet with various cuneiform marks on it that describe the relationship between the length of the diagonal and the length of the sides of a square.
 
 This approach has the advantages that it is easy to create and it is easy for a human to access the information. However, when we store electronic information, we should also be concerned about whether the information is easily accessible for computer software. This essentially means that we should supply clear labels so that individual pieces of information can be retrieved easily. For example, the label of the tablet is something that might be used to identify this tablet from all other cuneiform artifacts, so the label information should be clearly identified.
 
-label: YBC 7289
-description: A clay tablet with various cuneiform marks on it that describe the relationship between the length of the diagonal and the length of the sides of a square.
+    label: YBC 7289
+    description: A clay tablet with various cuneiform marks on it that describe the relationship between the length of the diagonal and the length of the sides of a square.
 
 Thinking about what sorts of questions will be asked of the data is a good way to guide the design of data storage. Another sort of information that people might go looking for is the set of cuneiform markings that occur on the tablet.
 
 The markings on the tablet are numbers, but they are also symbols, so it would probably be best to record both numeric and textual representations. There are three sets of markings and three values to record for each set; a common way to record this sort of information is with a row of information per set of markings, with three columns of values on each row.
 
-   <<<                    30            30
-     | <<|||| <<<<<| <     1 24 51 10    1.41421296
-<<<<|| <<||||| <<<|||||   42 25 35      42.4263889
+       <<<                    30            30
+         | <<|||| <<<<<| <     1 24 51 10    1.41421296
+    <<<<|| <<||||| <<<|||||   42 25 35      42.4263889
 
 When storing the lines of symbols and numbers, we have spaced out the information so that it is easy, for a human, to see where one sort of value ends and another begins. Again, this information is even more important for the computer. Another option is to use a special character, such as a comma, to indicate the start/end of separate values.
 
-values:
-cuneiform,sexagesimal,decimal
-<<<,30,30
-| <<|||| <<<<<| <,1 24 51 10,1.41421296
-<<<<|| <<||||| <<<|||||,42 25 35,42.4263889
+    values:
+    cuneiform,sexagesimal,decimal
+    <<<,30,30
+    | <<|||| <<<<<| <,1 24 51 10,1.41421296
+    <<<<|| <<||||| <<<|||||,42 25 35,42.4263889
 
 Something else we should add is information about how the values relate to each other. Someone who is unfamiliar with Babylonian history may have difficulty realizing how the three values on each line actually correspond to each other. This sort of encoding information is essential metadata— information about the data values.
 
-encoding: In cuneiform, a '<' stands for 10 and a '|' stands for 1. Sexagesimal values are base 60, with a sexagesimal point after the first digit; the first digit represents ones, the second digit is sixtieths, the third is three-thousand six-hundredths, and the fourth is two hundred and sixteen thousandths.
+    encoding: In cuneiform, a '<' stands for 10 and a '|' stands for 1. Sexagesimal values are base 60, with a sexagesimal point after the first digit; the first digit represents ones, the second digit is sixtieths, the third is three-thousand six-hundredths, and the fourth is two hundred and sixteen thousandths.
 
 The position of the markings on the tablet and the fact that there is also a square, with its diagonals inscribed, are all important information that contribute to a full understanding of the tablet. The best way to capture this information is with a photograph.
 
@@ -132,21 +134,21 @@ It is common for there to be several rows of general information about the data 
 
 A good example of a data set in a plain text format is the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1). Figure 5.2 shows how we would normally see this sort of plain text file if we view it in a text editor or a web browser.
 
-            VARIABLE : Mean TS from clear sky composite (kelvin)
-            FILENAME : ISCCPMonthly_avg.nc
-            FILEPATH : /usr/local/fer_data/data/
-            SUBSET   : 48 points (TIME)
-            LONGITUDE: 123.8W(-123.8)
-            LATITUDE : 48.8S
-                      123.8W 
-                       23
-16-JAN-1994 00 /  1:  278.9
-16-FEB-1994 00 /  2:  280.0
-16-MAR-1994 00 /  3:  278.9
-16-APR-1994 00 /  4:  278.9
-16-MAY-1994 00 /  5:  277.8
-16-JUN-1994 00 /  6:  276.1
-...
+                VARIABLE : Mean TS from clear sky composite (kelvin)
+                FILENAME : ISCCPMonthly_avg.nc
+                FILEPATH : /usr/local/fer_data/data/
+                SUBSET   : 48 points (TIME)
+                LONGITUDE: 123.8W(-123.8)
+                LATITUDE : 48.8S
+                          123.8W 
+                           23
+    16-JAN-1994 00 /  1:  278.9
+    16-FEB-1994 00 /  2:  280.0
+    16-MAR-1994 00 /  3:  278.9
+    16-APR-1994 00 /  4:  278.9
+    16-MAY-1994 00 /  5:  277.8
+    16-JUN-1994 00 /  6:  276.1
+    ...
 
 Figure 5.2: The first few lines of the plain text output from the LiveAccessServer for the surface temperature at Point Nemo. This is a reproduction of Figure 1.2.
 
@@ -154,13 +156,9 @@ This file has 8 lines of metadata at the start, followed by 48 lines of the core
 
 There are two main sub-types of plain text format, which differ in how separate values are identified within a row:
 
-Delimited formats:
+- Delimited formats: In a delimited format, values within a row are separated by a special character, or delimiter. For example, it is possible to view the file in Figure 5.2 as a delimited format, where each line after the header consists of two fields separated by a colon (the character ‘:’ is the delimiter). Alternatively, if we used whitespace (one or more spaces or tabs) as the delimiter, there would be five fields, as shown below.
 
-In a delimited format, values within a row are separated by a special character, or delimiter. For example, it is possible to view the file in Figure 5.2 as a delimited format, where each line after the header consists of two fields separated by a colon (the character ‘:’ is the delimiter). Alternatively, if we used whitespace (one or more spaces or tabs) as the delimiter, there would be five fields, as shown below.
-
-Fixed-width formats:
-
-In a fixed-width format, each value is allocated a fixed number of characters within every row. For example, it is possible to view the file in Figure 5.2 as a fixed-width format, where the first value uses the first 20 characters and the second value uses the next 8 characters. Alternatively, there are five values on each row using 12, 3, 2, 6, and 5 characters respectively, as shown in the diagram below.
+- Fixed-width formats:  In a fixed-width format, each value is allocated a fixed number of characters within every row. For example, it is possible to view the file in Figure 5.2 as a fixed-width format, where the first value uses the first 20 characters and the second value uses the next 8 characters. Alternatively, there are five values on each row using 12, 3, 2, 6, and 5 characters respectively, as shown in the diagram below.
 
 At the lowest level, the primary characteristic of a plain text format is that all of the information in the file, even numeric information, is stored as text.
 
@@ -184,14 +182,14 @@ A file format is a way of interpreting the bytes in a file. For example, in the 
 
 In order to visualize the idea of file formats, we will display a block of memory in the format shown below. This example shows the first 24 bytes from the PDF file for this book.
 
- 0  :  00100101 01010000 01000100 01000110  |  %PDF
- 4  :  00101101 00110001 00101110 00110100  |  -1.4
- 8  :  00001010 00110101 00100000 00110000  |  .5 0
-12  :  00100000 01101111 01100010 01101010  |   obj
-16  :  00001010 00111100 00111100 00100000  |  .<<
-20  :  00101111 01010011 00100000 00101111  |  /S /
+     0  :  00100101 01010000 01000100 01000110  |  %PDF
+     4  :  00101101 00110001 00101110 00110100  |  -1.4
+     8  :  00001010 00110101 00100000 00110000  |  .5 0
+    12  :  00100000 01101111 01100010 01101010  |   obj
+    16  :  00001010 00111100 00111100 00100000  |  .<<
+    20  :  00101111 01010011 00100000 00101111  |  /S /
 
-This display has three columns. On the left is a byte offset that indicates the memory location within the file for each row. The middle column displays the raw memory contents of the file, which is just a series of 0’s and 1’s. The right hand column displays an interpretation of the bytes. This display is split across several rows just so that it will fit onto the printed page. A block of computer memory is best thought of as one long line of 0’s and 1’s.
+This display has three columns. On the left is a byte offset that indicates the memory location within the file for each row. The middle column displays the raw memory contents of the file, which is just a series of 0s and 1s. The right hand column displays an interpretation of the bytes. This display is split across several rows just so that it will fit onto the printed page. A block of computer memory is best thought of as one long line of 0s and 1s.
 
 In this example, we are interpreting each byte of memory as a single character, so for each byte in the middle column, there is a corresponding character in the right-hand column. As specific examples, the first byte, 00100101, is being interpreted as the percent character, %, and and the second byte, 01010000, is being interpreted as the letter P.
 
@@ -199,26 +197,26 @@ In some cases, the byte of memory does not correspond to a printable character, 
 
 Because the binary code for computer memory takes up so much space, we will also sometimes display the central raw memory column using hexadecimal (base 16) code rather than binary. In this case, each byte of memory is just a pair of hexadecimal digits. The first 24 bytes of the PDF file for this book are shown again below, using hexadecimal code for the raw memory.
 
- 0 : 255044462d312e340a352030 | %PDF-1.4.50 
-12 : 206f626a0a3c3c202f53202f | obj.<</S/
+     0 : 255044462d312e340a352030 | %PDF-1.4.50 
+    12 : 206f626a0a3c3c202f53202f | obj.<</S/
 
 ### 5.2.3 Case study: Point Nemo (continued)
 
 We will now look at a low level at the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1), which is in a plain text format. To emphasize the format of this information in computer memory, the first 48 bytes of the file are displayed below. This display should be compared with Figure 5.2, which shows what we would normally see when we view the plain text file in a text editor or web browser.
 
- 0 : 202020202020202020202020 |
-12 : 205641524941424c45203a20 | VARIABLE: 
-24 : 4d65616e2054532066726f6d | MeanTSfrom 
-36 : 20636c65617220736b792063 | clearskyc
+     0 : 202020202020202020202020 |
+    12 : 205641524941424c45203a20 | VARIABLE: 
+    24 : 4d65616e2054532066726f6d | MeanTSfrom 
+    36 : 20636c65617220736b792063 | clearskyc
 
 This display clearly demonstrates that the Point Nemo information has been stored as a series of characters. The empty space at the start of the first line is a series of 13 spaces, with each space stored as a byte with the hexadecimal value 20. The letter V at the start of the word VARIABLE has been stored as a byte with the value 56.
 
 To further emphasize the character-based nature of a plain text format, another part of the file is shown below as raw computer memory, this time focusing on the part of the file that contains the core data—the dates and temperature values.
 
-336 : 2031362d4a414e2d31393934203030 | 16-JAN-199400
-351 : 202f2020313a20203237382e390d0a | / 1: 278.9.. 
-366 : 2031362d4645422d31393934203030 | 16-FEB-199400 
-381 : 202f2020323a20203238302e300d0a | / 2: 280.0..
+    336 : 2031362d4a414e2d31393934203030 | 16-JAN-199400
+    351 : 202f2020313a20203237382e390d0a | / 1: 278.9.. 
+    366 : 2031362d4645422d31393934203030 | 16-FEB-199400 
+    381 : 202f2020323a20203238302e300d0a | / 2: 280.0..
 
 The second line of this display shows that the number 278.9 is stored in this file as five characters—the digits 2, 7, 8, followed by a full stop, then the digit 9—with one byte per character. Another small detail that may not have been clear from previous views of these data is that each line starts with a space, represented by a byte with the value 20.
 
@@ -238,15 +236,15 @@ The low-level format of storing everything as characters, with one byte per char
 
 Consider a data set collected on two families, as depicted in Figure 5.3. What would this look like as a plain text file, with one row for all of the information about each person in the data set? One possible fixed-width format is shown below. In this format, each row records the information for one person. For each person, there is a column for the father’s name (if known), a column for the mother’s name (if known), the person’s own name, his or her age, and his or her gender.
 
-               John      33  male
-               Julia     32  female
-John   Julia   Jack       6  male
-John   Julia   Jill       4  female
-John   Julia   John jnr   2  male
-               David     45 male
-               Debbie    42  female
-David  Debbie  Donald    16  male
-David  Debbie  Dianne    12  female
+                   John      33  male
+                   Julia     32  female
+    John   Julia   Jack       6  male
+    John   Julia   Jill       4  female
+    John   Julia   John jnr   2  male
+                   David     45 male
+                   Debbie    42  female
+    David  Debbie  Donald    16  male
+    David  Debbie  Dianne    12  female
 
 This format for storing these data is not ideal for two reasons. Firstly, it is not efficient; the parent information is repeated over and over again. This repetition is also undesirable because it creates opportunities for errors and inconsistencies to creep in. Ideally, each individual piece of information would be stored exactly once; if more than one copy exists, then it is possible for the copies to disagree. The DRY principle (Section 2.7) applies to data as well as code.
 
@@ -282,14 +280,14 @@ The main rules for the CSV format are:
 
 CSV files are a common way to transfer data from a spreadsheet to other software.
 
-date,temp
-16-JAN-1994,278.9
-16-FEB-1994,280
-16-MAR-1994,278.9
-16-APR-1994,278.9
-16-MAY-1994,277.8
-16-JUN-1994,276.1
-...
+    date,temp
+    16-JAN-1994,278.9
+    16-FEB-1994,280
+    16-MAR-1994,278.9
+    16-APR-1994,278.9
+    16-MAY-1994,277.8
+    16-JUN-1994,276.1
+    ...
 
 Figure 5.4: The first few lines of the plain text output from the Live Access Server for the surface temperature at Point Nemo in Comma-Separated Value (CSV) format. On each line, there are two data values, a date and a temperature value, separated from each other by a comma. The first line provides a name for each column of data values.
 
@@ -307,15 +305,15 @@ The answer is that the end of a line in a text file is indicated by a special ch
 
 To demonstrate this idea, two lines from the file pointnemotemp.txt are reproduced below (as they appear when viewed in a text editor or web browser).
 
-16-JAN-1994 00 /  1:  278.9
-16-FEB-1994 00 /  2:  280.0
+    16-JAN-1994 00 /  1:  278.9
+    16-FEB-1994 00 /  2:  280.0
 
 The section of computer memory used to store these two lines is shown below.
 
-336 : 2031362d4a414e2d31393934203030 | 16-JAN-199400 
-351 : 202f2020313a20203237382e390d0a | / 1: 278.9.. 
-366 : 2031362d4645422d31393934203030 | 16-FEB-199400 
-381 : 202f2020323a20203238302e300d0a | / 2: 280.0..
+    336 : 2031362d4a414e2d31393934203030 | 16-JAN-199400 
+    351 : 202f2020313a20203237382e390d0a | / 1: 278.9.. 
+    366 : 2031362d4645422d31393934203030 | 16-FEB-199400 
+    381 : 202f2020323a20203238302e300d0a | / 2: 280.0..
 
 The feature to look for is the section of two bytes immediately after each temperature value. These two bytes have the values 0d and 0a, and this is the special byte sequence that is used to indicate the end of a line in a plain text file.
 
@@ -345,18 +343,18 @@ There are two main “encodings” that are used to store a UNICODE code point i
 
 For example, the text “just testing” is shown below saved via Microsoft’s Notepad with a plain text format, but using three different encodings: ASCII, UTF-16, and UTF-8.
 
-0 : 6a7573742074657374696e67 | just testing
+    0 : 6a7573742074657374696e67 | just testing
 
 The ASCII format contains exactly one byte per character.
 
- 0 : fffe6a007500730074002000 | ..j.u.s.t.. 
-12 : 740065007300740069006e00 | t.e.s.t.i.n. 
-24 : 67 00                    | g.
+     0 : fffe6a007500730074002000 | ..j.u.s.t.. 
+    12 : 740065007300740069006e00 | t.e.s.t.i.n. 
+    24 : 67 00                    | g.
 
 The UTF-16 format differs from the ASCII format in two ways. For every byte in the ASCII file, there are now two bytes, one containing the hexadecimal code we saw before followed by a byte containing all zeroes. There are also two additional bytes at the start. These are called a byte order mark (BOM) and indicate the order of the two bytes that make up each letter in the text, which is used by software when reading the file.
 
- 0 : efbbbf6a7573742074657374 | ...just test 
-12 : 696e67                   | ing
+     0 : efbbbf6a7573742074657374 | ...just test 
+    12 : 696e67                   | ing
 
 The UTF-8 format is mostly the same as the ASCII format; each letter has only one byte, with the same binary code as before because these are all common English letters. The difference is that there are three bytes at the start to act as a BOM. Notepad writes a BOM like this at the start of UTF-8 files, but not all software does this.
 
@@ -378,20 +376,20 @@ This data set demonstrates a number of advantages and limitations of a plain tex
 
 Figure 5.5: The geographic locations at which Live Access Server atmospheric data were obtained for the 2006 JSM Data Expo.
 
-            VARIABLE : Mean TS from clear sky composite (kelvin)
-            FILENAME : ISCCPMonthly_avg.nc
-            FILEPATH : /usr/local/fer_dsets/data/
-            SUBSET   : 24 by 24 points (LONGITUDE-LATITUDE)
-            TIME     : 16-JAN-1995 00:00
-             113.8W 111.2W 108.8W 106.2W 103.8W 101.2W 98.8W  ...
-              27     28     29     30     31     32     33    ...
-36.2N / 51:  272.7  270.9  270.9  269.7  273.2  275.6  277.3  ...
-33.8N / 50:  279.5  279.5  275.0  275.6  277.3  279.5  281.6  ...
-31.2N / 49:  284.7  284.7  281.6  281.6  280.5  282.2  284.7  ...
-28.8N / 48:  289.3  286.8  286.8  283.7  284.2  286.8  287.8  ...
-26.2N / 47:  292.2  293.2  287.8  287.8  285.8  288.8  291.7  ...
-23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
-...
+                VARIABLE : Mean TS from clear sky composite (kelvin)
+                FILENAME : ISCCPMonthly_avg.nc
+                FILEPATH : /usr/local/fer_dsets/data/
+                SUBSET   : 24 by 24 points (LONGITUDE-LATITUDE)
+                TIME     : 16-JAN-1995 00:00
+                 113.8W 111.2W 108.8W 106.2W 103.8W 101.2W 98.8W  ...
+                  27     28     29     30     31     32     33    ...
+    36.2N / 51:  272.7  270.9  270.9  269.7  273.2  275.6  277.3  ...
+    33.8N / 50:  279.5  279.5  275.0  275.6  277.3  279.5  281.6  ...
+    31.2N / 49:  284.7  284.7  281.6  281.6  280.5  282.2  284.7  ...
+    28.8N / 48:  289.3  286.8  286.8  283.7  284.2  286.8  287.8  ...
+    26.2N / 47:  292.2  293.2  287.8  287.8  285.8  288.8  291.7  ...
+    23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
+    ...
 
 Figure 5.6: The first few lines of output from the Live Access Server for the surface temperature of the earth for January 1995, over a coarse 24 by 24 grid of locations covering Central America.
 
@@ -447,11 +445,11 @@ Another way to interpret a byte of computer memory is as a real number. This is 
 
 In practice, a minimum of 4 bytes is used to store real numbers. The following example of raw computer memory shows the bit patterns corresponding to the numbers 0.1 to 0.5, where each number is stored as a real number using 4 bytes per number.
 
- 0  :  11001101 11001100 11001100 00111101  |  0.1
- 4  :  11001101 11001100 01001100 00111110  |  0.2
- 8  :  10011010 10011001 10011001 00111110  |  0.3
-12  :  11001101 11001100 11001100 00111110  |  0.4
-16  :  00000000 00000000 00000000 00111111  |  0.5
+     0  :  11001101 11001100 11001100 00111101  |  0.1
+     4  :  11001101 11001100 01001100 00111110  |  0.2
+     8  :  10011010 10011001 10011001 00111110  |  0.3
+    12  :  11001101 11001100 11001100 00111110  |  0.4
+    16  :  00000000 00000000 00000000 00111111  |  0.5
 
 The correspondence between the bit patterns and the real numbers being stored is far from intuitive, but this is another common way to make use of bytes of memory.
 
@@ -469,15 +467,15 @@ In summary, when information is stored in a binary format, the bytes of computer
 
 First, we treat each byte as a single character.
 
-0 : 74657374 | test
+    0 : 74657374 | test
 
 Next, we interpret the memory as two, two-byte integers.
 
-0 : 74657374 | 2597229811
+    0 : 74657374 | 2597229811
 
 Finally, we can also interpret the memory as a single, four-byte real number.
 
-0  :  74 65 73 74  |  7.713537e+31
+    0  :  74 65 73 74  |  7.713537e+31
 
 Which one of these is the correct interpretation? It depends on which particular binary format has been used to store the data.
 
@@ -501,11 +499,11 @@ We will learn more about this format below. For now, the only point to make is t
 
 Compared to a plain text file, this is a complete mess and we need software that understands the netCDF format in order to extract useful values from the file.
 
- 0 : 43444601000000000000000a | CDF......... 
-12 : 000000010000000454696d65 | ........Time 
-24 : 000000300000000000000000 | ...0........ 
-36 : 0000000b0000000200000004 | ............ 
-48 : 54696d650000000100000000 | Time........
+     0 : 43444601000000000000000a | CDF......... 
+    12 : 000000010000000454696d65 | ........Time 
+    24 : 000000300000000000000000 | ...0........ 
+    36 : 0000000b0000000200000004 | ............ 
+    48 : 54696d650000000100000000 | Time........
 
 Figure 5.7: The first 60 bytes of the netCDF format file that contains the surface temperatures at Point Nemo. The data are shown here as unstructured bytes to demonstrate that, without knowledge of the structure of the binary format, there is no way to determine where the different data values reside or what format the values have been stored in (apart from the fact that there is obviously some text values in the file).
 
@@ -523,11 +521,14 @@ Like most binary formats, the structure of a netCDF file consists of header info
 
 Figure 5.8 shows a structured view of the start of the netCDF format for the Point Nemo temperature data. This should be contrasted with the unstructured view in Figure 5.7.
 
- 0 : 43 44 46                | CDF 
- 3 : 01                      | 1
- 4 : 00 00 00 00 00 00 00 0a | 0 10 
-12 : 00 00 00 01 00 00 00 04 | 1  4
-20 : 54 69 6d 65             | Time
+     0 : 43 44 46                | CDF 
+    
+     3 : 01                      | 1
+    
+     4 : 00 00 00 00 00 00 00 0a | 0 10 
+    12 : 00 00 00 01 00 00 00 04 | 1  4
+    
+    20 : 54 69 6d 65             | Time
 
 Figure 5.8: The start of the header information in the netCDF file that contains the surface temperatures at Point Nemo, with the structure of the netCDF format revealed so that separate data fields can be observed. The first three bytes are characters, the fourth byte is a single-byte integer, the next sixteen bytes are four-byte integers, and the last four bytes are characters. This structured display should be compared to the unstructured bytes shown in Figure 5.7.
 
@@ -541,19 +542,19 @@ Figure 5.9 shows the raw computer memory starting at byte 624 that contains the 
 
 In order to emphasize the difference in formats, the display below shows the raw computer memory from the plain text format of the Point Nemo data set. Compare these five bytes, which store the number 278.9 as five characters, with the first eight bytes in Figure 5.9, which store the same number as an eight-byte real number.
 
-624 : 40716e6666666666 | 278.9 
-632 : 4071800000000000 | 280.0 
-640 : 40716e6666666666 | 278.9 
-648 : 40716e6666666666 | 278.9 
-656 : 40715ccccccccccd | 277.8 
-664 : 407141999999999a | 276.1 
-672 : 407141999999999a | 276.1 
-680 : 407139999999999a | 275.6
-...
+    624 : 40716e6666666666 | 278.9 
+    632 : 4071800000000000 | 280.0 
+    640 : 40716e6666666666 | 278.9 
+    648 : 40716e6666666666 | 278.9 
+    656 : 40715ccccccccccd | 277.8 
+    664 : 407141999999999a | 276.1 
+    672 : 407141999999999a | 276.1 
+    680 : 407139999999999a | 275.6
+    ...
 
 Figure 5.9: The block of bytes within the Point Nemo netCDF file that contains the surface temperature values. Each temperature values is an eight-byte real number.
 
-359 : 32 37 38 2e 39 | 278.9
+    359 : 32 37 38 2e 39 | 278.9
 
 The section of the file shown in Figure 5.9 also allows us to discuss the issue of speed of access to data stored in a binary format.
 
@@ -567,17 +568,17 @@ The difference is similar to finding a particular scene in a movie on a DVD disc
 
 In general, it is possible to jump directly to a specific location within a binary format file, whereas it is necessary to read a text-based format from the beginning and one character at a time. This feature of accessing binary formats is called random access and it is generally faster than the typical sequential access of text files.
 
-  0 : 646174652c74656d700a20 | date,temp. 
- 11 : 31362d4a414e2d31393934 | 16-JAN-1994 
- 22 : 2c3237382e390a2031362d | ,278.9.16- 
- 33 : 4645422d313939342c3238 | FEB-1994,28 
- 44 : 300a2031362d4d41522d31 | 0.16-MAR-1 
- 55 : 3939342c3237382e390a20 | 994,278.9. 
- 66 : 31362d4150522d31393934 | 16-APR-1994 
- 77 : 2c3237382e390a2031362d | ,278.9.16- 
- 88 : 4d41592d313939342c3237 | MAY-1994,27 
- 99 : 372e380a2031362d4a554e | 7.8.16-JUN
-110 : 2d313939342c3237362e31 | -1994,276.1
+      0 : 646174652c74656d700a20 | date,temp. 
+     11 : 31362d4a414e2d31393934 | 16-JAN-1994 
+     22 : 2c3237382e390a2031362d | ,278.9.16- 
+     33 : 4645422d313939342c3238 | FEB-1994,28 
+     44 : 300a2031362d4d41522d31 | 0.16-MAR-1 
+     55 : 3939342c3237382e390a20 | 994,278.9. 
+     66 : 31362d4150522d31393934 | 16-APR-1994 
+     77 : 2c3237382e390a2031362d | ,278.9.16- 
+     88 : 4d41592d313939342c3237 | MAY-1994,27 
+     99 : 372e380a2031362d4a554e | 7.8.16-JUN
+    110 : 2d313939342c3237362e31 | -1994,276.1
 
 Figure 5.10: A block of bytes from the start of the Point Nemo CSV file that contains the surface temperature values. Each character in the file occupies one byte.
 
@@ -693,7 +694,7 @@ Finally, data exploration in spreadsheet software is typically conducted via men
 
 ### 5.4.3 Case study: Over the limit
 
-The Lada Riva is one of the highest-selling car models of all time and the only model to be found on every continent in the world.
+    The Lada Riva is one of the highest-selling car models of all time and the only model to be found on every continent in the world.
 
 A study conducted by researchers from the Psychology Department at the University of Auckland [3] looked at whether informative road signs had any effect on the speed at which vehicles travelled along a busy urban road in Auckland.
 
@@ -731,11 +732,11 @@ This particular problem is a feature of this particular data set, but the genera
 
 It is a little unfair to point out these problems with a spreadsheet format example because most of these problems also exist for plain text files. The main point is that the spreadsheet format does not provide a great deal beyond much simpler format options and it introduces new problems of its own.
 
-## Recap
-
-Spreadsheet software is a useful tool for viewing and exploring data.
-
-A spreadsheet storage format does allow for a 3-dimensional cube of data rather than just a 2-dimensional table of data, but it requires specific software and is less efficient because it stores extraneous information.
+    Recap
+    
+    Spreadsheet software is a useful tool for viewing and exploring data.
+    
+    A spreadsheet storage format does allow for a 3-dimensional cube of data rather than just a 2-dimensional table of data, but it requires specific software and is less efficient because it stores extraneous information.
 
 ## 5.5 XML
 
@@ -761,39 +762,40 @@ In the next few sections, we will focus on the details of XML. In Section 5.5.1,
 
 The information in this section will be useful whether we are called upon to create an XML document ourselves or whether we just have to work with a data set that someone else has chosen to store in an XML format.
 
-<?xml version="1.0"?>
-<temperatures>
-    <variable>Mean TS from clear sky composite (kelvin)</variable>
-    <filename>ISCCPMonthly_avg.nc</filename>
-    <filepath>/usr/local/fer_dsets/data/</filepath>
-    <subset>48 points (TIME)</subset>
-    <longitude>123.8W(-123.8)</longitude>
-    <latitude>48.8S</latitude>
-    <case date="16-JAN-1994" temperature="278.9" />
-    <case date="16-FEB-1994" temperature="280" />
-    <case date="16-MAR-1994" temperature="278.9" />
-    <case date="16-APR-1994" temperature="278.9" />
-    <case date="16-MAY-1994" temperature="277.8" />
-    <case date="16-JUN-1994" temperature="276.1" />
+    <?xml version="1.0"?>
+    <temperatures>
+        <variable>Mean TS from clear sky composite (kelvin)</variable>
+        <filename>ISCCPMonthly_avg.nc</filename>
+        <filepath>/usr/local/fer_dsets/data/</filepath>
+        <subset>48 points (TIME)</subset>
+        <longitude>123.8W(-123.8)</longitude>
+        <latitude>48.8S</latitude>
+        <case date="16-JAN-1994" temperature="278.9" />
+        <case date="16-FEB-1994" temperature="280" />
+        <case date="16-MAR-1994" temperature="278.9" />
+        <case date="16-APR-1994" temperature="278.9" />
+        <case date="16-MAY-1994" temperature="277.8" />
+        <case date="16-JUN-1994" temperature="276.1" />
+        
+        ...
     
-    ...
+    </temperatures>
 
-</temperatures>
-            VARIABLE : Mean TS from clear sky composite (kelvin)
-            FILENAME : ISCCPMonthly_avg.nc
-            FILEPATH : /usr/local/fer_data/data/
-            SUBSET   : 48 points (TIME)
-            LONGITUDE: 123.8W(-123.8)
-            LATITUDE : 48.8S
-                      123.8W 
-                       23
-16-JAN-1994 00 /  1:  278.9
-16-FEB-1994 00 /  2:  280.0
-16-MAR-1994 00 /  3:  278.9
-16-APR-1994 00 /  4:  278.9
-16-MAY-1994 00 /  5:  277.8
-16-JUN-1994 00 /  6:  276.1
-...
+                VARIABLE : Mean TS from clear sky composite (kelvin)
+                FILENAME : ISCCPMonthly_avg.nc
+                FILEPATH : /usr/local/fer_data/data/
+                SUBSET   : 48 points (TIME)
+                LONGITUDE: 123.8W(-123.8)
+                LATITUDE : 48.8S
+                          123.8W 
+                           23
+    16-JAN-1994 00 /  1:  278.9
+    16-FEB-1994 00 /  2:  280.0
+    16-MAR-1994 00 /  3:  278.9
+    16-APR-1994 00 /  4:  278.9
+    16-MAY-1994 00 /  5:  277.8
+    16-JUN-1994 00 /  6:  276.1
+    ...
 
 Figure 5.13: The first few lines of the surface temperature at Point Nemo in two formats: an XML format (top) and the original plain text format (bottom).
 
@@ -805,23 +807,23 @@ We will use the XML format for the Point Nemo temperature data (Figure 5.13) to 
 
 The XML format of the data consists of two parts: XML markup and the actual data itself. For example, the information about the latitude at which these data were recorded is stored within XML tags, <latitude> and </latitude>. The combination of tags and content is together described as an XML element.
 
-<latitude>48.8S</latitude>
-
-   element: <latitude>48.8S</latitude>
- start tag: <latitude>
-data value: 48.8S
-   end tag: </latitude>
+    <latitude>48.8S</latitude>
+    
+       element: <latitude>48.8S</latitude>
+     start tag: <latitude>
+    data value: 48.8S
+       end tag: </latitude>
 
 Each temperature measurement in the XML file is contained within a case element, with the date and temperature data recorded as attributes of the element. The values of attributes must be contained within double-quotes.
 
-<case date="16-JAN-1994"
-      temperature="278.9" />
+    <case date="16-JAN-1994"
+          temperature="278.9" />
 
-   element name: <case
- attribute name: date
-attribute value: "16-JAN-1994"
- attribute name: temperature
-attribute value: "278.9"
+       element name: case
+     attribute name: date
+    attribute value: "16-JAN-1994"
+     attribute name: temperature
+    attribute value: "278.9"
 
 This should look very familiar because these are exactly the same notions of elements and attributes that we saw in HTML documents in Chapter 2. However, there are some important differences between XML syntax and HTML syntax. For example, XML is case-sensitive so the names in the start and end tags for an element must match exactly. Some other differences are detailed below.
 
@@ -829,11 +831,11 @@ This should look very familiar because these are exactly the same notions of ele
 
 The first line of an XML document must be a declaration that the file is an XML document and which version of XML is being used.
 
-<?xml version="1.0"?>
+    <?xml version="1.0"?>
 
 The declaration can also include information about the encoding of the XML document (see Section 5.2.7), which is important for any software that needs to read the document.
 
-<?xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8"?>
 
 Unlike HTML, where there is a fixed set of allowed elements, an XML document can include elements with any name whatsoever, as long as the elements are all nested cleanly and there is only one outer element, called the root element, that contains all other elements in the document.
 
@@ -841,7 +843,7 @@ In the example XML document in Figure 5.13, there is a single temperatures eleme
 
 Elements can be empty, which means that they consist only of a start tag (no content and no end tag), but these empty elements must end with />, rather than the normal >. The code below shows an example of an empty case element.
 
-<case date="16-JAN-1994" temperature="278.9" />
+    <case date="16-JAN-1994" temperature="278.9" />
 
 Although it is possible to use any element and attribute names in an XML document, in practice, data sets that are to be shared will adhere to an agreed-upon set of elements. We will discuss how an XML document can be restricted to a fixed set of elements later on in Section 5.5.3.
 
@@ -851,23 +853,23 @@ Because XML is a computer language, there is a clear structure within the XML co
 
 #### Escape sequences
 
-As with HTML, the characters <, >, and & (among others) are special and must be replaced with special escape sequences, &lt;, &gt;, and &amp; respectively.
+As with HTML, the characters <, >, and & (among others) are special and must be replaced with special escape sequences, \&lt;, \&gt;, and \&amp; respectively.
 
 These escape sequences can be very inconvenient when storing data values, so it is also possible to mark an entire section of an XML document as “plain text” by placing it within a special CDATA section, within which all characters lose their special meaning.
 
 As an example, shown below is one of the data values that we wanted to store for the clay tablet YBC 7289 in Section 5.1. These represent the markings that are etched into the clay tablet.
 
-| <<|||| <<<<<| <
+    | <<|||| <<<<<| <
 
 If we wanted to store this data within an XML document, we would have to escape every one of the < symbols. The following code shows what the data would look like within an XML document.
 
-| &lt;&lt;|||| &lt;&lt;&lt;&lt;&lt;| &lt;
+    | &lt;&lt;|||| &lt;&lt;&lt;&lt;&lt;| &lt;
 
 The special CDATA syntax allows us to avoid having to use these escape sequences. The following code shows what the XML code would look like within an XML document within a CDATA section.
 
-<![CDATA[
-  | <<|||| <<<<<| <
-]]>
+    <![CDATA[
+      | <<|||| <<<<<| <
+    ]]>
 
 #### Checking XML syntax
 
@@ -885,11 +887,11 @@ Although there are syntax rules that any XML document must follow, we still have
 
 For example, in Figure 5.13, each set of measurements, a date plus a temperature reading, is stored within a case element, using date and temperature attributes. The first set of measurements in this format is repeated below.
 
-<case date="16-JAN-1994" temperature="278.9" />
+    <case date="16-JAN-1994" temperature="278.9" />
 
 It would still be correct syntax to store these measurements using different element and attribute names, as in the code below.
 
-<record time="16-JAN-1994" temp="278.9" />
+    <record time="16-JAN-1994" temp="278.9" />
 
 It is important to choose names for elements and attributes that are meaningful, but in terms of XML syntax, there is no single best answer.
 
@@ -897,24 +899,24 @@ When we store a data set as XML, we have to decide which elements and attributes
 
 In this section, we will look at some of these questions and consider some solutions for how to design an XML document.
 
-<?xml version="1.0"?>
-<temperatures>
-    <variable>Mean TS from clear sky composite (kelvin)</variable>
-    <filename>ISCCPMonthly_avg.nc</filename>
-    <filepath>/usr/local/fer_dsets/data/</filepath>
-    <subset>93 points (TIME)</subset>
-    <longitude>123.8W(-123.8)</longitude>
-    <latitude>48.8S</latitude>
-    <cases>
-16-JAN-1994 278.9
-16-FEB-1994 280.0
-16-MAR-1994 278.9
-16-APR-1994 278.9
-16-MAY-1994 277.8
-16-JUN-1994 276.1
-    ...
-    </cases>
-</temperatures>
+    <?xml version="1.0"?>
+    <temperatures>
+        <variable>Mean TS from clear sky composite (kelvin)</variable>
+        <filename>ISCCPMonthly_avg.nc</filename>
+        <filepath>/usr/local/fer_dsets/data/</filepath>
+        <subset>93 points (TIME)</subset>
+        <longitude>123.8W(-123.8)</longitude>
+        <latitude>48.8S</latitude>
+        <cases>
+    16-JAN-1994 278.9
+    16-FEB-1994 280.0
+    16-MAR-1994 278.9
+    16-APR-1994 278.9
+    16-MAY-1994 277.8
+    16-JUN-1994 276.1
+        ...
+        </cases>
+    </temperatures>
 
 Figure 5.14: The first few lines of the surface temperature at Point Nemo in an alternative XML format. This format should be compared with the XML format in Figure 5.13.
 
@@ -944,8 +946,8 @@ For example, consider the family tree data set in Figure 5.15 (this is a reprodu
 
 In this case, there are obviously measurements taken on people, those measurements being names, ages, and genders. We could distinguish between parent objects and child objects, so we have elements for each of these.
 
-<parent gender="female" name="Julia" age="32" />
-<child gender="male" name="Jack" age="6" />
+    <parent gender="female" name="Julia" age="32" />
+    <child gender="male" name="Jack" age="6" />
 
 When a data set has a hierarchical structure, an XML document can be designed to store the information more efficiently and more appropriately by nesting elements to avoid repeating values.
 
@@ -953,29 +955,29 @@ Figure 5.15: An example of hierarchical data: a family tree containing data on p
 
 For example, there are two distinct families of people, so we could have elements to represent the different families and nest the relevant people within the appropriate family element to represent membership of a family.
 
-<family>
-  <parent gender="male" name="John" age="33" />
-  <parent gender="female" name="Julia" age="32" />
-  <child gender="male" name="Jack" age="6" />
-  <child gender="female" name="Jill" age="4" />
-  <child gender="male" name="John jnr" age="2" />
-</family>
-<family>
-  <parent gender="male" name="David" age="45" />
-  <parent gender="female" name="Debbie" age="42" />
-  <child gender="male" name="Donald" age="16" />
-  <child gender="female" name="Dianne" age="12" />
-</family>
+    <family>
+      <parent gender="male" name="John" age="33" />
+      <parent gender="female" name="Julia" age="32" />
+      <child gender="male" name="Jack" age="6" />
+      <child gender="female" name="Jill" age="4" />
+      <child gender="male" name="John jnr" age="2" />
+    </family>
+    <family>
+      <parent gender="male" name="David" age="45" />
+      <parent gender="female" name="Debbie" age="42" />
+      <child gender="male" name="Donald" age="16" />
+      <child gender="female" name="Dianne" age="12" />
+    </family>
 
 #### Elements versus attributes
 
 Another decision to make is whether to store data values as the values of attributes of XML elements or as the content of XML elements. For example, when storing the Point Nemo temperature data, we could store the temperature values as attributes of a case element as shown in Figure 5.13 and below.
 
-<case temperature="278.9" />
+    <case temperature="278.9" />
 
 Alternatively, we could store the temperature values as the content of a temperature element.
 
-<temperature>278.9</temperature>
+    <temperature>278.9</temperature>
 
 As demonstrated so far, one simple solution is to store all measurements as the values of attributes. Besides its simplicity, this approach also has the advantage of providing a simple translation between the XML format and a corresponding relational database design. We will return to this point in Section 5.6.7.
 
@@ -997,22 +999,22 @@ We need the design written down so that we can check that an XML document follow
 
 Yes, we need to learn another computer language.
 
-<?xml version="1.0"?>
-<temperatures>
-    <variable>Mean TS from clear sky composite (kelvin)</variable>
-    <filename>ISCCPMonthly_avg.nc</filename>
-    <filepath>/usr/local/fer_dsets/data/</filepath>
-    <subset>93 points (TIME)</subset>
-    <longitude>123.8W(-123.8)</longitude>
-    <latitude>48.8S</latitude>
-    <case date="16-JAN-1994" temperature="278.9" />
-    <case date="16-FEB-1994" temperature="280" />
-    <case date="16-MAR-1994" temperature="278.9" />
-    <case date="16-APR-1994" temperature="278.9" />
-    <case date="16-MAY-1994" temperature="277.8" />
-    <case date="16-JUN-1994" temperature="276.1" />
-    ...
-</temperatures>
+    <?xml version="1.0"?>
+    <temperatures>
+        <variable>Mean TS from clear sky composite (kelvin)</variable>
+        <filename>ISCCPMonthly_avg.nc</filename>
+        <filepath>/usr/local/fer_dsets/data/</filepath>
+        <subset>93 points (TIME)</subset>
+        <longitude>123.8W(-123.8)</longitude>
+        <latitude>48.8S</latitude>
+        <case date="16-JAN-1994" temperature="278.9" />
+        <case date="16-FEB-1994" temperature="280" />
+        <case date="16-MAR-1994" temperature="278.9" />
+        <case date="16-APR-1994" temperature="278.9" />
+        <case date="16-MAY-1994" temperature="277.8" />
+        <case date="16-JUN-1994" temperature="276.1" />
+        ...
+    </temperatures>
 
 Figure 5.16: The first few lines of the surface temperature at Point Nemo in an XML format. This is a reproduction of part of Figure 5.13.
 
@@ -1026,24 +1028,24 @@ Figure 5.16 shows the temperature data at Point Nemo in an XML format (this is a
 
 The structure of this XML document is as follows. There is a single overall temperatures element that contains all other elements. There are several elements containing various sorts of metadata: a variable element containing a description of the variable that has been measured; a filename element and a filepath element containing information about the file from which these data were extracted; and three elements, subset, longitude, and latitude, that together describe the temporal and spatial limits of this data set. Finally, there are a number of case elements that contain the core temperature data; each case element contains a temperature measurement and the date of the measurement as attributes.
 
-<!ELEMENT temperatures (variable,
-                        filename,
-                        filepath,
-                        subset,
-                        longitude,
-                        latitude,
-                        case*)>
-<!ELEMENT variable (#PCDATA)>
-<!ELEMENT filename (#PCDATA)>
-<!ELEMENT filepath (#PCDATA)>
-<!ELEMENT subset (#PCDATA)>
-<!ELEMENT longitude (#PCDATA)>
-<!ELEMENT latitude (#PCDATA)>
-<!ELEMENT case EMPTY>
-
-<!ATTLIST case
-    date        ID    #REQUIRED
-    temperature CDATA #IMPLIED>
+    <!ELEMENT temperatures (variable,
+                            filename,
+                            filepath,
+                            subset,
+                            longitude,
+                            latitude,
+                            case*)>
+    <!ELEMENT variable (#PCDATA)>
+    <!ELEMENT filename (#PCDATA)>
+    <!ELEMENT filepath (#PCDATA)>
+    <!ELEMENT subset (#PCDATA)>
+    <!ELEMENT longitude (#PCDATA)>
+    <!ELEMENT latitude (#PCDATA)>
+    <!ELEMENT case EMPTY>
+    
+    <!ATTLIST case
+        date        ID    #REQUIRED
+        temperature CDATA #IMPLIED>
 
 Figure 5.17: A DTD for the XML format used to store the surface temperature at Point Nemo (see Figure 5.16). The line numbers (in grey) are just for reference.
 
@@ -1053,31 +1055,31 @@ The DTD code consists of two types of declarations. There must be an <!ELEMENT> 
 
 The main purpose of the <!ELEMENT> declarations is to specify what is allowed as the content of a particular type of element. The simplest example of an <!ELEMENT> declaration is for case elements (line 14) because they are empty (they have no content), as indicated by the keyword EMPTY. The components of this declaration are shown below.
 
-     keyword: <!ELEMENT
-element name: case
-     keyword: EMPTY>
+         keyword: ELEMENT
+    element name: case
+         keyword: EMPTY
 
 The keywords ELEMENT and EMPTY will be the same for the declaration of any empty element. All that will change is the name of the element.
 
 Most other elements are similarly straightforward because their contents are just text, as indicated by the #PCDATA keyword (lines 8 to 13). These examples demonstrate that the declaration of the content of the element is specified within parentheses. The components of the declaration for the longitude element are shown below.
 
-        keyword: ELEMENT
-   element name: longitude
-    parentheses: ( )
-element content: #PCDATA
+            keyword: ELEMENT
+       element name: longitude
+        parentheses: ( )
+    element content: #PCDATA
 
 The temperatures element is more complex because it can contain other elements. The declaration given in Figure 5.17 (lines 1 to 7) specifies seven elements (separated by commas) that are allowed to be nested within a temperatures element. The order of these elements within the declaration is significant because this order is imposed on the elements in the XML document. The first six elements, variable to latitude, are compulsory because there are no modifiers after the element names; exactly one of each element must occur in the XML document. The case element, by contrast, has an asterisk, *, after it, which means that there can be zero or more case elements in the XML document.
 
 The purpose of the <!ATTLIST> declarations in a DTD is to specify which attributes each element is allowed to have. In this example, only the case elements have attributes, so there is only one <!ATTLIST> declaration (lines 16 to 18). This declaration specifies three things for each attribute: the name of the attribute, what sort of value the attribute can have, and whether the attribute is compulsory or optional. The components of this declaration are shown below.
 
-             keyword: ATTLIST
-        element name: case
-      attribute name: date
-     attribute value: ID
-compulsory attribute: #REQUIRED
-      attribute name: temperature
-     attribute value: CDATA
-  optional attribute: #IMPLIED
+                 keyword: ATTLIST
+            element name: case
+          attribute name: date
+         attribute value: ID
+    compulsory attribute: #REQUIRED
+          attribute name: temperature
+         attribute value: CDATA
+      optional attribute: #IMPLIED
 
 The date attribute for case elements is compulsory (#REQUIRED) and the value must be unique (ID). The temperature attribute is optional (#IMPLIED) and, if it occurs, the value can be any text (CDATA).
 
@@ -1085,21 +1087,21 @@ Section 6.2 describes the syntax and semantics of DTD files in more detail.
 
 The rules given in a DTD are associated with an XML document by adding a Document Type Declaration as the second line of the XML document. This can have one of two forms:
 
-DTD inline:
-   The DTD can be included within the XML document. In the Point Nemo example, it would look like this:
-   <?xml version="1.0"?>
-   <!DOCTYPE temperatures [
-       DTD code
-    ]>
-   <temperatures>
-       ...
+DTD inline:  The DTD can be included within the XML document. In the Point Nemo example, it would look like this:
 
-External DTD
-   The DTD can be in an external file, say pointnemotemp.dtd, and the XML document can refer to that file:
-   <?xml version="1.0"?>
-   <!DOCTYPE temperatures SYSTEM "pointnemotemp.dtd">
-   <temperatures>
-       ...
+    <?xml version="1.0"?>
+    <!DOCTYPE temperatures [
+        DTD code
+    ]>
+    <temperatures>
+        ...
+
+External DTD:  The DTD can be in an external file, say pointnemotemp.dtd, and the XML document can refer to that file:
+
+    <?xml version="1.0"?>
+    <!DOCTYPE temperatures SYSTEM "pointnemotemp.dtd">
+    <temperatures>
+        ...
 
 The DRY principle suggests that an external DTD is the most sensible approach because then the same DTD rules can be applied efficiently to many XML documents.
 
@@ -1125,53 +1127,53 @@ The core advantage of an XML document is that it is self-describing.
 
 The tags in an XML document provide information about where the data is stored within the document. This is an advantage because it means that humans can find information within the file easily. That is true of any plain text file, but it is especially true of XML files because the tags essentially provide a level of documentation for the human reader. For example, the XML element shown below not only makes it easy to determine that the value 48.8S constitutes a single data value within the file, but it also makes it clear that this value is a north–south geographic location.
 
-<latitude>48.8S</latitude>
+    <latitude>48.8S</latitude>
 
 The fact that an XML document is self-describing is an even greater advantage from the perspective of the computer. An XML document provides enough information for software to determine how to read the file, without any further human intervention. Look again at the line containing latitude information.
 
-<latitude>48.8S</latitude>
+    <latitude>48.8S</latitude>
 
 There is enough information for the computer to be able to detect the value 48.8S as a single data value, and the computer can also record the latitude label so that if a human user requests the information on latitude, the computer knows what to provide.
 
 One consequence of this feature that may not be immediately obvious is that it is much easier to modify the structure of data within an XML document compared to a plain text file. The location of information within an XML document is not so much dependent on where it occurs within the file, but where the tags occur within the file. As a trivial example, consider reversing the order of the following lines in the Point Nemo XML file.
 
-<longitude>123.8W(-123.8)</longitude>
-<latitude>48.8S</latitude>
+    <longitude>123.8W(-123.8)</longitude>
+    <latitude>48.8S</latitude>
 
 If the information were stored in the reverse order, as shown below, the task of retrieving the information on latitude would be exactly the same. This can be a huge advantage if larger modifications need to be made to a data set, such as adding an entire new variable.
 
-<latitude>48.8S</latitude>
-<longitude>123.8W(-123.8)</longitude>
+    <latitude>48.8S</latitude>
+    <longitude>123.8W(-123.8)</longitude>
 
-Representing complex data structures
+#### Representing complex data structures
 
 The second main advantage of the XML format is that it can accommodate complex data structures. Consider the hierarchical data set in Figure 5.15.
 
 Because XML elements can be nested within each other, this sort of data set can be stored in a sensible fashion with families grouped together to make parent–child relations implicit and avoid repetition of the parent data. The plain text representation of these data are reproduced from page 72 below along with a possible XML representation.
 
-               John      33  male
-               Julia     32  female
-John   Julia   Jack       6  male
-John   Julia   Jill       4  female
-John   Julia   John jnr   2  male
-               David     45  male
-               Debbie    42  female
-David  Debbie  Donald    16  male
-David  Debbie  Dianne    12  female
+                   John      33  male
+                   Julia     32  female
+    John   Julia   Jack       6  male
+    John   Julia   Jill       4  female
+    John   Julia   John jnr   2  male
+                   David     45  male
+                   Debbie    42  female
+    David  Debbie  Donald    16  male
+    David  Debbie  Dianne    12  female
 
-<family>
-  <parent gender="male" name="John" age="33" />
-  <parent gender="female" name="Julia" age="32" />
-  <child gender="male" name="Jack" age="6" />
-  <child gender="female" name="Jill" age="4" />
-  <child gender="male" name="John jnr" age="2" />
-</family>
-<family>
-  <parent gender="male" name="David" age="45" />
-  <parent gender="female" name="Debbie" age="42" />
-  <child gender="male" name="Donald" age="16" />
-  <child gender="female" name="Dianne" age="12" />
-</family>
+    <family>
+      <parent gender="male" name="John" age="33" />
+      <parent gender="female" name="Julia" age="32" />
+      <child gender="male" name="Jack" age="6" />
+      <child gender="female" name="Jill" age="4" />
+      <child gender="male" name="John jnr" age="2" />
+    </family>
+    <family>
+      <parent gender="male" name="David" age="45" />
+      <parent gender="female" name="Debbie" age="42" />
+      <child gender="male" name="Donald" age="16" />
+      <child gender="female" name="Dianne" age="12" />
+    </family>
 
 The XML format is superior in the sense that the information about each person is only recorded once. Another advantage is that it would be very easy to represent a wider range of situations using the XML format. For example, if we wanted to allow for a family unit to have a third parent (e.g., a step-parent), that would be straightforward in XML, but it would be much more awkward in the fixed rows-and-columns plain text format.
 
@@ -1279,7 +1281,7 @@ Notice that two of the books in the book\_table have the same publisher, with a 
 
 Also notice that a foreign key column in one table does not have to have the same name as the primary key column that it refers to in another table. The foreign key column in the book\_table is called pub, but it refers to the primary key column in the publisher_table called ID.
 
-5.6.2 Database notation
+### 5.6.2 Database notation
 
 The examples of database tables in the previous section have shown the contents of each database table. In the next section, on Database Design, it will be more important to describe the design, or structure, of a database table — the table schema. For this purpose, the contents of each row are not important; instead, we are most interested in how many tables there are and which columns are used to make up those tables.
 
@@ -1287,16 +1289,16 @@ We can describe a database design simply in terms of the names of tables, the na
 
 The notation that we will use is a simple text description, with primary keys and foreign keys indicated in square brackets. The description of a foreign key includes the name of the table and the name of the column that the foreign key refers to. For example, these are the schema for the publisher\_table and the book\_table in the book database:
 
-publisher_table  ( ID [PK], name, country )
-
-book_table  ( ISBN [PK], title, author,
-              pub [FK publisher_table.ID] )
+    publisher_table  ( ID [PK], name, country )
+    
+    book_table  ( ISBN [PK], title, author,
+                  pub [FK publisher_table.ID] )
 
 The diagram below shows one way that this design could be visualized. Each “box” in this diagram represents one table in the database, with the name of the table as the heading in the box. The other names in each box are the names of the columns within the table; if the name is bold, then that column is part of the primary key for the table and if the name is italic, then that column is a foreign key. Arrows are used to show the link between a foreign key in one table and the primary key in another table.
 
 The publisher_table has three columns and the column named ID is the primary key for the table.
 
-The book_table has four columns. In this table, the primary key is the ISBN column and the pub column is a foreign key that refers to the ID column in the publisher_table.
+The book\_table has four columns. In this table, the primary key is the ISBN column and the pub column is a foreign key that refers to the ID column in the publisher\_table.
 
 ### 5.6.3 Database design
 
@@ -1340,16 +1342,16 @@ What is the relationship between books and authors? An author can write several 
 
 A many-to-many relationship can only be represented by creating a new table in the database.
 
-For example, we can create a table, called the book_author_table, that contains the relationship between authors and books. This table contains a foreign key that refers to the author table and a foreign key that refers to the book table. The representation of book entities, author entities, and the relationship between them now consists of three tables, as shown below.
+For example, we can create a table, called the book\_author\_table, that contains the relationship between authors and books. This table contains a foreign key that refers to the author table and a foreign key that refers to the book table. The representation of book entities, author entities, and the relationship between them now consists of three tables, as shown below.
 
-author_table  ( ID [PK], name )
-
-book_table  ( ISBN [PK], title,
-              pub [FK publisher_table.ID] )
-
-book_author_table ( ID [PK],
-                    book [FK book_table.ISBN],
-                    author [FK author_table.ID] )
+    author_table  ( ID [PK], name )
+    
+    book_table  ( ISBN [PK], title,
+                  pub [FK publisher_table.ID] )
+    
+    book_author_table ( ID [PK],
+                        book [FK book_table.ISBN],
+                        author [FK author_table.ID] )
 
 The book database design, with author information included, is shown in the diagram below.
 
@@ -1379,16 +1381,16 @@ ID  book        author
 
 Notice that author 2 (Lynley Dodd) has written more than one book and book 0908606273 (My Cat Likes to Hide in Boxes) has more than one author.
 
-Designing for data integrity
+#### Designing for data integrity
 
 Another reason for creating a table in a database is for the purpose of constraining the set of possible values for an attribute. For example, if the table of authors records the gender of the author, it can be useful to have a separate table that contains the possible values of gender. The column in the author table then becomes a foreign key referring to the gender table and, because a foreign key must match the value of the corresponding primary key, we have a check on the validity of the gender values in the author table.
 
 The redesigned author table and gender table are described below.
 
-author_table  ( ID [PK], name,
-                gender [FK gender_table.ID] )
-
-gender_table ( ID [PK], gender )
+    author_table  ( ID [PK], name,
+                    gender [FK gender_table.ID] )
+    
+    gender_table ( ID [PK], gender )
 
 The gender_table only contains the set of possible gender values, as shown below.
 
@@ -1430,7 +1432,7 @@ The first column of this table is acceptable because it just contains one piece 
 
 The second part of the rule says that a table cannot have two columns containing the same information. For example, the following possible redesign of the book table provides a solution to the previous problem by having a separate column for each author of the book.
 
-book_table ( title, author1, author2 )
+    book_table ( title, author1, author2 )
 
 Two rows from this table are shown below.
 
@@ -1443,7 +1445,7 @@ This solves the problem of atomic columns because each column only contains the 
 
 A possible redesign that satisfies the requirement that each column is atomic and not duplicative is shown below. We now have just one column for the book title and one column for the names of the authors.
 
-book_table ( title, author )
+    book_table ( title, author )
 
 The contents of this table are shown below. Notice that the second book now occupies two rows because it has two authors.
 
@@ -1463,9 +1465,9 @@ We could combine the two columns to create a composite primary key. However, it 
 
 As described previously, for the case of information about books, a great candidate for a primary key is the book’s ISBN because it is guaranteed to be unique for a particular book. If we add an ISBN column to the table, we can finally satisfy first normal form, though it still has to be a composite primary key involving the combination of ISBN and author.
 
-book_table ( ISBN [PK],
-             title,
-             author [PK] )
+    book_table ( ISBN [PK],
+                 title,
+                 author [PK] )
 
 The contents of this table are shown below.
 
@@ -1485,7 +1487,7 @@ This rule formalizes the idea that there should be a table for each entity in th
 
 As a very basic example, consider the following table that contains information about authors and publishers. The primary key of this table is the author ID. In other words, each row of this table only concerns a single author.
 
-author_table ( ID [PK], name, publisher)
+    author_table ( ID [PK], name, publisher)
 
 Two rows from this table are shown below.
 
@@ -1498,9 +1500,9 @@ The name column of this table relates to the primary key (the ID); this is the n
 
 As a more subtle example, consider the table that we ended up with at the end of first normal form.
 
-book_table ( ISBN [PK],
-             title,
-             author [PK] )
+    book_table ( ISBN [PK],
+                 title,
+                 author [PK] )
 
 ISBN        title                          author
 ----------  -----------------------------  -----------
@@ -1514,8 +1516,8 @@ The title column relates to the ISBN; this is the title of the book. However, th
 
 The table needs to be split into two tables, one with the information about books and one with the information about authors. Shown below is the book-related information separated into its own table.
 
-book_table ( ISBN [PK],
-             title )
+    book_table ( ISBN [PK],
+                 title )
 
 ISBN        title
 ----------  -----------------------------
@@ -1524,8 +1526,8 @@ ISBN        title
 
 It is important to remember that each of the new tables that we create to satisfy second normal form must also satisfy first normal form. In this case, it would be wise to add an ID column to act as the primary key for the table of authors, as shown below, because it is entirely possible that two distinct authors could share the same name.
 
-author_table ( ID [PK],
-               author )
+    author_table ( ID [PK],
+                   author )
 
 ID  author
 --  -----------
@@ -1534,9 +1536,9 @@ ID  author
 
 As this example makes clear, having split a table into two or more pieces, it is very important to link the pieces together by adding one or more foreign keys, based on the relationships between the tables. In this case, the relationship is many-to-many, so the solution requires a third table to provide a link between books and authors.
 
-book_author_table ( ID [PK],
-                    book [FK book_table.ISBN],
-                    author [FK author_table.ID] )
+    book_author_table ( ID [PK],
+                        book [FK book_table.ISBN],
+                        author [FK author_table.ID] )
 
 ID  book        author
 --  ----------  ------
@@ -1550,10 +1552,10 @@ Third normal form requires that a table must be in second normal form and all co
 
 This rule further emphasizes the idea that there should be a separate table for each entity in the data set. For example, consider the following table for storing information about books.
 
-book_table ( ISBN [PK],
-             title,
-             publisher,
-             country )
+    book_table ( ISBN [PK],
+                 title,
+                 publisher,
+                 country )
 
 ISBN        title             publisher         country
 ----------  ----------------  ----------------  -------
@@ -1587,20 +1589,20 @@ These ideas are an expression of the DRY principle from Section 2.7. A well-desi
 
 The Data Expo data set consists of seven atmospheric variables recorded at 576 locations for 72 time points (every month for 6 years), plus elevation data for each location (see Section 5.2.8).
 
-            VARIABLE : Mean TS from clear sky composite (kelvin)
-            FILENAME : ISCCPMonthly_avg.nc
-            FILEPATH : /usr/local/fer_dsets/data/
-            SUBSET   : 24 by 24 points (LONGITUDE-LATITUDE)
-            TIME     : 16-JAN-1995 00:00
-             113.8W 111.2W 108.8W 106.2W 103.8W 101.2W 98.8W  ...
-              27     28     29     30     31     32     33    ...
-36.2N / 51:  272.7  270.9  270.9  269.7  273.2  275.6  277.3  ...
-33.8N / 50:  279.5  279.5  275.0  275.6  277.3  279.5  281.6  ...
-31.2N / 49:  284.7  284.7  281.6  281.6  280.5  282.2  284.7  ...
-28.8N / 48:  289.3  286.8  286.8  283.7  284.2  286.8  287.8  ...
-26.2N / 47:  292.2  293.2  287.8  287.8  285.8  288.8  291.7  ...
-23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
-...
+                VARIABLE : Mean TS from clear sky composite (kelvin)
+                FILENAME : ISCCPMonthly_avg.nc
+                FILEPATH : /usr/local/fer_dsets/data/
+                SUBSET   : 24 by 24 points (LONGITUDE-LATITUDE)
+                TIME     : 16-JAN-1995 00:00
+                 113.8W 111.2W 108.8W 106.2W 103.8W 101.2W 98.8W  ...
+                  27     28     29     30     31     32     33    ...
+    36.2N / 51:  272.7  270.9  270.9  269.7  273.2  275.6  277.3  ...
+    33.8N / 50:  279.5  279.5  275.0  275.6  277.3  279.5  281.6  ...
+    31.2N / 49:  284.7  284.7  281.6  281.6  280.5  282.2  284.7  ...
+    28.8N / 48:  289.3  286.8  286.8  283.7  284.2  286.8  287.8  ...
+    26.2N / 47:  292.2  293.2  287.8  287.8  285.8  288.8  291.7  ...
+    23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
+    ...
 
 Figure 5.19: One of the plain text files from the original format of the Data Expo data set, which contains data for one variable for one month. The file contains information on latitude and longitude that is repeated in every other plain text file in the original format (for each variable and for each month; in total, over 500 times).
 
@@ -1630,9 +1632,9 @@ Moving on to second normal form, the column elv (elevation) immediately fails. T
 
 The new table design and the first three rows of data are shown below.
 
-location_table ( longitude [PK],
-                 latitude [PK],
-                 elevation )
+    location_table ( longitude [PK],
+                     latitude [PK],
+                     elevation )
 
 lon     lat    elv
 ------  -----  ---
@@ -1650,41 +1652,41 @@ We have two tables, one representing atmospheric measurements, at various locati
 
 This means that the table of measurements should have a foreign key that references the primary key in the location table. The design could be expressed like this:
 
-location_table ( longitude [PK],
-                 latitude [PK],
-                 elevation )
-
-measure_table ( date [PK],
-                longitude [PK] [FK location_table.longitude],
-                latitude [PK] [FK location_table.latitude],
-                cloudhigh, cloudlow, cloudmid, ozone,
-                pressure, surftemp, temperature )
+    location_table ( longitude [PK],
+                     latitude [PK],
+                     elevation )
+    
+    measure_table ( date [PK],
+                    longitude [PK] [FK location_table.longitude],
+                    latitude [PK] [FK location_table.latitude],
+                    cloudhigh, cloudlow, cloudmid, ozone,
+                    pressure, surftemp, temperature )
 
 Both tables have composite primary keys. The measure\_table also has a composite foreign key, to refer to the composite primary key in the location\_table. Finally, the longitude and latitude columns have roles in both the primary key and the foreign key of the measure_table.
 
 A possible adjustment to the database design is to consider a surrogate auto-increment key — a column that just corresponds to the row number in the table — as the primary key for the location table, because the natural primary key is quite large and cumbersome. This leads to a final design that can be expressed as below.
 
-location_table ( ID [PK],
-                 longitude, latitude, elevation )
-
-measure_table ( date [PK],
-                location [PK] [FK location_table.ID],
-                cloudhigh, cloudlow, cloudmid, ozone,
-                pressure, surftemp, temperature )
+    location_table ( ID [PK],
+                     longitude, latitude, elevation )
+    
+    measure_table ( date [PK],
+                    location [PK] [FK location_table.ID],
+                    cloudhigh, cloudlow, cloudmid, ozone,
+                    pressure, surftemp, temperature )
 
 Another adjustment would be to break out the date column into a separate table. This is partly motivated by the idea of data integrity; a separate table for dates would ensure that all dates in the measure\_table are valid dates. Also, if the table for dates uses an auto-increment ID column, the date column in the measure\_table can become just a simple integer, rather than a lengthy date value. Finally, the table of date information can have the year and month information split into separate columns, which can make it more useful to work with the date information.
 
 The final Data Expo database design is shown below.
 
-date_table ( ID [PK], date, month, year )
-
-location_table ( ID [PK],
-                 longitude, latitude, elevation )
-
-measure_table ( date [PK] [FK date_table.ID],
-                location [PK] [FK location_table.ID],
-                cloudhigh, cloudlow, cloudmid, ozone,
-                pressure, surftemp, temperature )
+    date_table ( ID [PK], date, month, year )
+    
+    location_table ( ID [PK],
+                     longitude, latitude, elevation )
+    
+    measure_table ( date [PK] [FK date_table.ID],
+                    location [PK] [FK location_table.ID],
+                    cloudhigh, cloudlow, cloudmid, ozone,
+                    pressure, surftemp, temperature )
 
 As a final check, we should confirm that these tables all satisfy third normal form.
 
@@ -1728,15 +1730,15 @@ Simple one-to-one or many-to-one relationships can be represented in XML by nest
 
 The Data Expo data set consists of several atmospheric measurements taken at many different locations and at several time points. A database design that we developed for storing these data consisted of three tables: one for the location data, one for the time data, and one for the atmospheric measurements (see Section 5.6.5). The database schema is reproduced below for easy reference.
 
-date_table ( ID [PK], date, month, year )
-
-location_table ( ID [PK],
-                 longitude, latitude, elevation )
-
-measure_table ( date [PK] [FK date_table.ID],
-                location [PK] [FK location_table.ID],
-                cloudhigh, cloudlow, cloudmid, ozone,
-                pressure, surftemp, temperature )
+    date_table ( ID [PK], date, month, year )
+    
+    location_table ( ID [PK],
+                     longitude, latitude, elevation )
+    
+    measure_table ( date [PK] [FK date_table.ID],
+                    location [PK] [FK location_table.ID],
+                    cloudhigh, cloudlow, cloudmid, ozone,
+                    pressure, surftemp, temperature )
 
 We can translate this database design into an XML document design very simply, by creating a set of elements for each table, with attributes for each column of data. For example, the fact that there is a table for location information implies that we should have location elements, with an attribute for each column in the database table. The data for the first few locations are represented like this in a database table:
 
@@ -1748,26 +1750,26 @@ ID      lon  lat elv
 
 The same data could be represented in XML like this:
 
-<location id="1" longitude="-113.75" latitude="36.25"
-          elevation="1526.25" />
-<location id="2" longitude="-111.25" latitude="36.25"
-          elevation="1759.56" />
-<location id="3" longitude="-108.75" latitude="36.25"
-          elevation="1948.38" />
+    <location id="1" longitude="-113.75" latitude="36.25"
+              elevation="1526.25" />
+    <location id="2" longitude="-111.25" latitude="36.25"
+              elevation="1759.56" />
+    <location id="3" longitude="-108.75" latitude="36.25"
+              elevation="1948.38" />
 
 As an analogue of the primary keys in the database design, the DTD for this XML design could specify id as an ID attribute (see Section 6.2.2).
 An XML element for the first row from the date_table might look like this (again with id as an ID attribute in the DTD):
 
-<date id="1" date="1995-01-16"
-      month="January" year="1995" />
+    <date id="1" date="1995-01-16"
+          month="January" year="1995" />
 
 Because there is a many-to-many relationship between locations and dates, it would not make sense to nest the corresponding XML elements. Instead, the XML elements that correspond to the rows of the measure_table could include attributes that refer to the relevant location and date elements. The following code shows an example of what a measure XML element might look like.
 
-<measure date="1" location="1"
-         cloudhigh="26.0" cloudmid="34.5"
-         cloudlow="7.5" ozone="304.0"
-         pressure="835.0" surftemp="272.7"
-         temperature="272.1" />
+    <measure date="1" location="1"
+             cloudhigh="26.0" cloudmid="34.5"
+             cloudlow="7.5" ozone="304.0"
+             pressure="835.0" surftemp="272.7"
+             temperature="272.1" />
 
 In order to enforce the data integrity of the attributes date and location, the DTD for this XML design would specify these as IDREF attributes (see Section 6.2.2).
 
