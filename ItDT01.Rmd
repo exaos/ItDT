@@ -11,7 +11,7 @@ output: html_document
 
 ## 1.1 Case study: Point Nemo
 
-The Live Access Server is one of many services provided by the National Aeronautics and Space Administration (NASA) for gaining access to its enormous repositories of atmospheric and astronomical data. The Live Access Server [1] provides access to atmospheric data from NASA’s fleet of Earth-observing satellites, data that consist of coarsely gridded measurements of major atmospheric variables, such as ozone, cloud cover, pressure, and temperature. NASA provides a web site that allows researchers to select variables of interest, and geographic and temporal ranges, and then to download or view the relevant data (see Figure 1.1). Using this service, we can attempt to answer questions about atmospheric and weather conditions in different parts of the world.
+The Live Access Server is one of many services provided by the National Aeronautics and Space Administration (NASA) for gaining access to its enormous repositories of atmospheric and astronomical data. The Live Access Server [1] provides access to atmospheric data from NASA’s fleet of Earth-observing satellites, data that consist of coarsely gridded measurements of major atmospheric variables, such as ozone, cloud cover, pressure, and temperature. NASA provides a web site that allows researchers to select variables of interest, and geographic and temporal ranges, and then to download or view the relevant data (see **Figure 1.1**). Using this service, we can attempt to answer questions about atmospheric and weather conditions in different parts of the world.
 
 The Pacific Pole of Inaccessibility is a location in the Southern Pacific Ocean that is recognized as one of the most remote locations on Earth. Also known as Point Nemo, it is the point on the ocean that is farthest from any land mass. Its counterpart, the Eurasian Pole of Inaccessibility, in northern China, is the location on land that is farthest from any ocean.
 
@@ -20,6 +20,10 @@ These two geographical extremes — one in the southern hemisphere, over 2,500 k
 To make our task a little more manageable, for now we will restrict our attention to a comparison of the surface temperatures at each of the Poles of Inaccessibility. To be precise, we will look at monthly average temperatures at these locations from January 1994 to December 1997.
 
 In a book on data analysis, we would assume that the data are already in a form that can be conveniently loaded into statistical software, and the emphasis would be on how to analyze these data. However, that is not the focus of this book. Here, we are interested in all of the steps that must be taken before the data can be conveniently loaded into statistical software.
+
+As anyone who has worked with data knows, it often takes more time and effort to get the data ready than it takes to perform the data analysis. And yet there are many more books on how to analyze data than there are on how to prepare data for analysis. This book aims to redress that balance.
+
+In our example, the main data collection has already occurred; the data are measurements made by instruments on NASA satellites. However, we still need to collect the data from NASA’s Live Access Server. We will do this initially by entering the appropriate parameters on the Live Access Server web site. **Figure 1.2** shows the first few lines of data that the Live Access Server returns for the surface temperature at Point Nemo.
 
     VARIABLE : Mean TS from clear sky composite (kelvin)
     FILENAME : ISCCPMonthly_avg.nc
@@ -37,11 +41,7 @@ In a book on data analysis, we would assume that the data are already in a form 
     16-JUN-1994 00 /  6:  276.1
     ...
 
-Figure 1.2: The first few lines of plain text output from the Live Access Server for the surface temperature at Point Nemo.
-
-As anyone who has worked with data knows, it often takes more time and effort to get the data ready than it takes to perform the data analysis. And yet there are many more books on how to analyze data than there are on how to prepare data for analysis. This book aims to redress that balance.
-
-In our example, the main data collection has already occurred; the data are measurements made by instruments on NASA satellites. However, we still need to collect the data from NASA’s Live Access Server. We will do this initially by entering the appropriate parameters on the Live Access Server web site. Figure 1.2 shows the first few lines of data that the Live Access Server returns for the surface temperature at Point Nemo.
+**Figure 1.2**: The first few lines of plain text output from the Live Access Server for the surface temperature at Point Nemo.
 
 The first thing we should always do with a new data set is take a look at the raw data. Viewing the raw data is an important first step in becoming familiar with the data set. We should never automatically assume that the data are reliable or correct. We should always check with our own eyes. In this case, we are already in for a bit of a shock.
 
@@ -57,7 +57,7 @@ Having had a look at the raw data, the next step in familiarizing ourselves with
 
 The first step is to save the data. The Live Access Server will provide an ASCII file for us, or we can just copy-and-paste the data into a text editor and save it from there. Again, we should appreciate the fact that this step is quite straightforward and is likely to work no matter what sort of computer or operating system we are using. This is another feature of having data in a plain text format.
 
-Now we need to get the data into our statistical software. At this point, we encounter one of the disadvantages of a plain text format. Although we, as human readers, can see that the surface temperature values start on the ninth line and are the last value on each row (see Figure 1.2), there is no way that statistical software can figure this out on its own. We will have to describe the format of the data set to our statistical software.
+Now we need to get the data into our statistical software. At this point, we encounter one of the disadvantages of a plain text format. Although we, as human readers, can see that the surface temperature values start on the ninth line and are the last value on each row (see **Figure 1.2**), there is no way that statistical software can figure this out on its own. We will have to describe the format of the data set to our statistical software.
 
 In order to read the data into statistical software, we need to be able to express the following information: “skip the first 8 lines”; and “on each row, the values are separated by whitespace (one or more spaces or tabs)”; and “on each row, the date is the first value and the temperature is the last value (ignore the other three values)”. Here is one way to do this for the statistical software package R (Chapter 9 has much more to say about working with data in R):
 

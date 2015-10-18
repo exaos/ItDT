@@ -47,43 +47,11 @@ Section 2.7 introduces some more ideas about how to organize code and work effic
 
 ## 2.1 Case study: Point Nemo (continued)
 
-Figure 2.1 shows a simple web page that contains a very brief statistical report on the Poles of Inaccessibility data from Chapter 1. The report consists of paragraphs of text and an image (a plot), with different formatting applied to various parts of the text. The report heading is bold and larger than the other text, and the table of numerical summaries is displayed with a monospace font. Part of the heading and part of the supplementary material at the bottom of the page are italicized and also act as hyperlinks; a mouse click on the underlined text in the heading will navigate to the Wikipedia page on the Poles of Inaccessibility and a click on the underlined text at the bottom of the page will navigate to NASA’s Live Access Server home page.
+**Figure 2.1** shows a simple web page that contains a very brief statistical report on the Poles of Inaccessibility data from Chapter 1. The report consists of paragraphs of text and an image (a plot), with different formatting applied to various parts of the text. The report heading is bold and larger than the other text, and the table of numerical summaries is displayed with a monospace font. Part of the heading and part of the supplementary material at the bottom of the page are italicized and also act as hyperlinks; a mouse click on the underlined text in the heading will navigate to the Wikipedia page on the Poles of Inaccessibility and a click on the underlined text at the bottom of the page will navigate to NASA’s Live Access Server home page.
 
-The entire web page in Figure 2.1 is described using HTML. The web page consists of a simple text file called inaccessibility.html that contains HTML code. The HTML code is shown in Figure 2.2.
+**Figure 2.1**: A simple web page that displays information about the surface temperature data for the Pacific and Eurasian Poles of Inaccessibility (viewed with the Firefox web browser on Windows XP).
 
-We do not need to worry about the details of this HTML code yet. What is important is to notice that all of this code is just text. Some of it is the text that makes up the content of the report, and other parts are special HTML keywords that “mark up” the content and describe the nature and purpose of each part of the report. The keywords can be distinguished as the text that is surrounded by angled brackets. For example, the heading at the top of the page consists of two keywords, \<h3\> and \</h3\> surrounding the actual text of the heading (see lines 7 to 12).
-
-The HTML code is just text, so the overall document is just a text file. We will explore the differences between different sorts of files in more detail in Chapter 5. For now, it is just important to note that HTML code, and any other computer code that we write, should be written using software that creates plain text files. For example, do not write computer code using a word processor, such as Microsoft Word. We will return to this point in Section 2.4.1.
-
-Another feature of the code in Figure 2.2 is that it has a clear structure. For example, for every start tag, there is an end tag; the \<head\> start tag on line 3 is matched by the \</head\> closing tag on line 5. This rigid structure is an important feature of computer languages and reflects the fact that there are strict rules to follow for any computer language. It is vital that we observe this structure, but the discipline required will help us to be accurate, clear, and logical in how we think about tasks and in how we communicate our instructions to the computer. As we will see later in this chapter, it is also important that this structure is reflected in the layout of our code (as has been done in Figure 2.2).
-
-Figure 2.1: A simple web page that displays information about the surface temperature data for the Pacific and Eurasian Poles of Inaccessibility (viewed with the Firefox web browser on Windows XP).
-
-In this chapter we will learn the basics of HTML, with a focus on how the code itself is written and with an emphasis on the correct way to write computer code.
-
-## 2.2 Syntax
-
-The first thing we need to learn about a computer language is the correct syntax for the language.
-
-Syntax is essentially the punctuation and grammar rules for a computer language. Certain characters and words have special meanings and must appear in a particular order for the computer code to make any sense.
-
-A simple example from line 3 in Figure 2.2 is the piece of HTML code \<head\>. The \< character is special in HTML because it indicates the start of a keyword in HTML. The \> character is also special; it marks the end of the keyword. Also, this particular keyword, \<head\>, must appear at the very start of a piece of HTML code.
-
-These rules and special meanings for specific characters and words make up the syntax for a computer language.
-
-Computers are extremely fussy when it comes to syntax, so computer code will have to have all syntax rules perfectly correct before the code will work.
-
-The next section describes the basic syntax rules for the HTML language.
-
-### 2.2.1 HTML syntax
-
-HTML has a very simple syntax.
-
-HTML code consists of two basic components: elements, which are special
-
-HTML keywords, and content, which is just normal everyday text.
-
-There are a few elements that have to go in every HTML document — Figure 2.3 shows the smallest possible HTML document — and then it is up to the author to decide on the main contents of the web page.
+The entire web page in **Figure 2.1** is described using HTML. The web page consists of a simple text file called inaccessibility.html that contains HTML code. The HTML code is shown in **Figure 2.2**.
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
@@ -131,7 +99,39 @@ There are a few elements that have to go in every HTML document — Figure 2.3 s
       </body>
     </html>
 
-Figure 2.2: The file inaccessibility.html, which contains the HTML code behind the web page in Figure 2.1. The line numbers (in grey) are just for reference.
+**Figure 2.2**: The file inaccessibility.html, which contains the HTML code behind the web page in **Figure 2.1**. The line numbers (in grey) are just for reference.
+
+We do not need to worry about the details of this HTML code yet. What is important is to notice that all of this code is just text. Some of it is the text that makes up the content of the report, and other parts are special HTML keywords that “mark up” the content and describe the nature and purpose of each part of the report. The keywords can be distinguished as the text that is surrounded by angled brackets. For example, the heading at the top of the page consists of two keywords, \<h3\> and \</h3\> surrounding the actual text of the heading (see lines 7 to 12).
+
+The HTML code is just text, so the overall document is just a text file. We will explore the differences between different sorts of files in more detail in Chapter 5. For now, it is just important to note that HTML code, and any other computer code that we write, should be written using software that creates plain text files. For example, do not write computer code using a word processor, such as Microsoft Word. We will return to this point in Section 2.4.1.
+
+Another feature of the code in **Figure 2.2** is that it has a clear structure. For example, for every start tag, there is an end tag; the \<head\> start tag on line 3 is matched by the \</head\> closing tag on line 5. This rigid structure is an important feature of computer languages and reflects the fact that there are strict rules to follow for any computer language. It is vital that we observe this structure, but the discipline required will help us to be accurate, clear, and logical in how we think about tasks and in how we communicate our instructions to the computer. As we will see later in this chapter, it is also important that this structure is reflected in the layout of our code (as has been done in **Figure 2.2**).
+
+In this chapter we will learn the basics of HTML, with a focus on how the code itself is written and with an emphasis on the correct way to write computer code.
+
+## 2.2 Syntax
+
+The first thing we need to learn about a computer language is the correct syntax for the language.
+
+Syntax is essentially the punctuation and grammar rules for a computer language. Certain characters and words have special meanings and must appear in a particular order for the computer code to make any sense.
+
+A simple example from line 3 in **Figure 2.2** is the piece of HTML code \<head\>. The \< character is special in HTML because it indicates the start of a keyword in HTML. The \> character is also special; it marks the end of the keyword. Also, this particular keyword, \<head\>, must appear at the very start of a piece of HTML code.
+
+These rules and special meanings for specific characters and words make up the syntax for a computer language.
+
+Computers are extremely fussy when it comes to syntax, so computer code will have to have all syntax rules perfectly correct before the code will work.
+
+The next section describes the basic syntax rules for the HTML language.
+
+### 2.2.1 HTML syntax
+
+HTML has a very simple syntax.
+
+HTML code consists of two basic components: elements, which are special
+
+HTML keywords, and content, which is just normal everyday text.
+
+There are a few elements that have to go in every HTML document — **Figure 2.3** shows the smallest possible HTML document — and then it is up to the author to decide on the main contents of the web page.
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
@@ -142,11 +142,11 @@ Figure 2.2: The file inaccessibility.html, which contains the HTML code behind t
       </body>
     </html>
 
-Figure 2.3: A minimal HTML document. This is the basic code that must appear in any HTML document. The main content of the web page is described by adding further HTML elements within the body element.
+**Figure 2.3**: A minimal HTML document. This is the basic code that must appear in any HTML document. The main content of the web page is described by adding further HTML elements within the body element.
 
 An HTML element consists of a start tag, an end tag and some content in between.
 
-As an example, we will look closely at the title element from line 4 of Figure 2.2.
+As an example, we will look closely at the title element from line 4 of **Figure 2.2**.
 
     <title>Poles of Inaccessibility</title>
 
@@ -160,7 +160,7 @@ The greater-than and less-than signs have a special meaning in HTML code; they m
 
     special characters: <title>Poles of Inaccessibility</title>
 
-Some HTML elements may be empty, which means that they only consist of a start tag (no end tag and no content). An example is the img (short for “image”) element from Figure 2.2, which inserts the plot in the web page.
+Some HTML elements may be empty, which means that they only consist of a start tag (no end tag and no content). An example is the img (short for “image”) element from **Figure 2.2**, which inserts the plot in the web page.
 
     <img src="poleplot.png">
 
@@ -204,7 +204,7 @@ To be correct, the title element must start and end within the head element, as 
         </title>
     </head>
 
-Finally, there are a few elements that must occur in an HTML document: there must be a DOCTYPE declaration, which states what computer language we are using; there must be a single html element, with a single head element and a single body element inside; and the head element must contain a single title element. Figure 2.3 shows a minimal HTML document.
+Finally, there are a few elements that must occur in an HTML document: there must be a DOCTYPE declaration, which states what computer language we are using; there must be a single html element, with a single head element and a single body element inside; and the head element must contain a single title element. **Figure 2.3** shows a minimal HTML document.
 
 HTML is defined by a standard, so there is a single, public specification of HTML syntax. Unfortunately, as is often the case, there are several different versions of HTML, each with its own standard, so it is necessary to specify exactly which version of HTML we are working with. We will focus on HTML version 4.01 in this book. This is specified in the DOCTYPE declaration used in all examples.
 
@@ -254,9 +254,9 @@ The HTML 4.01 specification defines a fixed set of valid HTML elements and descr
 
 In this section, we will use the simple HTML page shown at the start of this chapter to demonstrate some of the basic HTML elements. Chapter 3 provides a larger list.
 
-Figure 2.1 shows what the web page looks like and 2.2 shows the underlying HTML code.
+**Figure 2.1** shows what the web page looks like and **Figure 2.2** shows the underlying HTML code.
 
-The main part of the HTML code in Figure 2.2 is contained within the body element (lines 6 to 44). This is the content of the web page — the information that will be displayed by the web browser.
+The main part of the HTML code in **Figure 2.2** is contained within the body element (lines 6 to 44). This is the content of the web page — the information that will be displayed by the web browser.
 
 In brief, this web page consists of: an h3 element to produce a heading; several p elements that produce paragraphs of text; two hr elements that produce horizontal lines; an img element that generates the plot; and a pre element that produces the table of numerical summaries.
 
@@ -320,7 +320,7 @@ line numbering: Some text editors automatically number each line of computer cod
 
 In the absence of everything else, Notepad is better than using a word processor. However, many useful (and free) text editors exist that do a much better job. Some examples are Crimson Editor on Windows [1] and Kate on Linux [2].
 
-Figure 2.4 demonstrates some of these ideas by showing the same code in Notepad and Crimson Editor.
+**Figure 2.4** demonstrates some of these ideas by showing the same code in Notepad and Crimson Editor.
 
 ### 2.4.3 Layout of code
 
@@ -399,9 +399,7 @@ This modification of the code, with extra spaces, is much easier on the eye.
 
     <table border="1" width="100%" bgcolor="#CCCCCC">
 
-Figure 2.5 shows two code chunks that demonstrate the usefulness of blank lines between code blocks to help expose the structure, particularly in large pieces of code.
-
-Again, exactly when to use spaces or blank lines depends on personal style.
+**Figure 2.5** shows two code chunks that demonstrate the usefulness of blank lines between code blocks to help expose the structure, particularly in large pieces of code.
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"> 
     <html>
@@ -482,7 +480,9 @@ Again, exactly when to use spaces or blank lines depends on personal style.
         </body> 
     </html>
 
-Figure 2.5: These two code chunks contain exactly the same code; all that differs is the use of several blank lines (whitespace) in the code on the right, which help to expose the structure of the code for a human reader.
+**Figure 2.5**: These two code chunks contain exactly the same code; all that differs is the use of several blank lines (whitespace) in the code on the right, which help to expose the structure of the code for a human reader.
+
+Again, exactly when to use spaces or blank lines depends on personal style.
 
 ### 2.4.7 Documenting code
 
@@ -530,6 +530,14 @@ In order to demonstrate the use of HTML Tidy, we will check the syntax of the fo
 
 For simple use of HTML Tidy, the only thing we need to know is the name of the HTML document and where that file is located. For example, the online services provide a button to select the location of an HTML file.
 
+To run HTML Tidy locally, the following command would be entered in a command window or terminal.
+
+    tidy broken.html
+
+HTML Tidy checks the syntax of HTML code, reports any problems that it finds, and produces a suggestion of what the correct code should look like.
+
+**Figure 2.7** shows part of the output from running HTML Tidy on the simple HTML code in **Figure 2.6**.
+
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
         <head>
@@ -539,7 +547,7 @@ For simple use of HTML Tidy, the only thing we need to know is the name of the H
         </body>
     </html>
 
-Figure 2.6: An HTML document that contains one deliberate mistake on line 4 (missing <\title> tag). The line numbers (in grey) are just for reference.
+**Figure 2.6**: An HTML document that contains one deliberate mistake on line 4 (missing <\title> tag). The line numbers (in grey) are just for reference.
 
     Parsing "broken.html"
     line 5 column 5 - Warning: missing </title> before </head>
@@ -548,15 +556,7 @@ Figure 2.6: An HTML document that contains one deliberate mistake on line 4 (mis
     Info: Document content looks like HTML 4.01 Transitional
     1 warning, 0 errors were found!
 
-Figure 2.7: Part of the output from running HTML Tidy on the HTML code in Figure 2.6.
-
-To run HTML Tidy locally, the following command would be entered in a command window or terminal.
-
-    tidy broken.html
-
-HTML Tidy checks the syntax of HTML code, reports any problems that it finds, and produces a suggestion of what the correct code should look like.
-
-Figure 2.7 shows part of the output from running HTML Tidy on the simple HTML code in Figure 2.6.
+**Figure 2.7**: Part of the output from running HTML Tidy on the HTML code in **Figure 2.6**.
 
 An important skill to develop for writing computer code is the ability to decipher warning and error messages that the computer displays. In this case, there is one error message.
 
@@ -566,7 +566,7 @@ The error (or warning) information provided by computer software is often very t
 
 In general, when the software checking our code encounters a series of errors, it is possible for the software to become confused. This can lead to more errors being reported than actually exist. It is always a good idea to tackle the first error first, and it is usually a good idea to recheck code after fixing each error. Fixing the first error will sometimes eliminate or at least modify subsequent error messages.
 
-The error from HTML Tidy in Figure 2.7 is this:
+The error from HTML Tidy in **Figure 2.7** is this:
 
     line 5 column 5 - Warning: missing </title> before </head>
 
@@ -640,17 +640,17 @@ It is often the case that debugging code takes much longer than writing the code
 
 The source of common bugs varies enormously with different computer languages, but there are some common steps we should take when fixing any sort of code:
 
-Do not blame the computer: There are two possible sources of problems: our code is wrong or the computer (or software used to run our code) is wrong. It will almost always be the case that our code is wrong. If we are completely convinced that our code is correct and the computer is wrong, we should go home, have a sleep, and come back the next day. The problem in our code will usually then become apparent.
+- Do not blame the computer: There are two possible sources of problems: our code is wrong or the computer (or software used to run our code) is wrong. It will almost always be the case that our code is wrong. If we are completely convinced that our code is correct and the computer is wrong, we should go home, have a sleep, and come back the next day. The problem in our code will usually then become apparent.
 
-Recheck the syntax: Whenever a change is made to the code, check the syntax again before trying to run the code again. If the syntax is wrong, there is no hope that the code will run correctly.
+- Recheck the syntax: Whenever a change is made to the code, check the syntax again before trying to run the code again. If the syntax is wrong, there is no hope that the code will run correctly.
 
-Develop code incrementally: Do not try to write an entire web page at once. Write a small piece of code and get that to work, then add more code and get that to work. When things stop working, it will be obvious which bit of code is broken.
+- Develop code incrementally: Do not try to write an entire web page at once. Write a small piece of code and get that to work, then add more code and get that to work. When things stop working, it will be obvious which bit of code is broken.
 
-Do one thing at a time: Do not make more than one change to the code at a time. If several changes are made, even if the problem is cured, it will be difficult to determine which change made the difference. A common problem is introducing new problems as part of a fix for an old problem. Make one change to the code and see if that corrects the behavior. If it does not, then revert that change before trying something else.
+- Do one thing at a time: Do not make more than one change to the code at a time. If several changes are made, even if the problem is cured, it will be difficult to determine which change made the difference. A common problem is introducing new problems as part of a fix for an old problem. Make one change to the code and see if that corrects the behavior. If it does not, then revert that change before trying something else.
 
-Read the documentation: For all of the computer languages that we will deal with in this book, there are official documents plus many tutorials and online forums that contain information and examples for writing code. Find them and read them.
+- Read the documentation: For all of the computer languages that we will deal with in this book, there are official documents plus many tutorials and online forums that contain information and examples for writing code. Find them and read them.
 
-Ask for help: In addition to the copious manuals and tutorials on the web, there are many forums for asking questions about computer languages. The friendliness of theses forums varies and it is important to read the documentation before taking this step.
+- Ask for help: In addition to the copious manuals and tutorials on the web, there are many forums for asking questions about computer languages. The friendliness of theses forums varies and it is important to read the documentation before taking this step.
 
 Chapter 3 provides some basic information about common HTML elements and Section 3.3 provides some good starting points for detailed documentation about HTML.
 
@@ -686,7 +686,7 @@ We will give a brief introduction to CSS and then go on to show how the proper u
 
 **CSS syntax**
 
-We have actually seen two examples of CSS already in the HTML code from the very start of this chapter. The CSS code occurs on lines 10 and 41 of Figure 2.2; these lines, plus their surrounding context, are reproduced below.
+We have actually seen two examples of CSS already in the HTML code from the very start of this chapter. The CSS code occurs on lines 10 and 41 of **Figure 2.2**; these lines, plus their surrounding context, are reproduced below.
 
     <a href="http://wikipedia.org/wiki/Pole_of_inaccessibility"
       style="font-style: italic">
@@ -706,19 +706,7 @@ One component of the CSS language is this idea of properties. The appearance of 
 
 One way to use CSS is to add CSS properties as attributes of individual HTML elements, as in the above example. However, this has the disadvantage of requiring us to add a CSS property to every HTML element that we want to control the appearance of.
 
-Figure 2.8 shows another way to use CSS properties; this is a small modification of the HTML code from Figure 2.2. The result in a web browser is exactly the same; all that has changed is how the CSS code is provided.
-
-The important differences in Figure 2.8 are that there is a style element in the head of the HTML code (lines 5 to 7) and the anchor elements (lines 12 and 13) no longer have a style attribute.
-
-The new style element in the head of the HTML code is reproduced below.
-
-    <style type="text/css">
-      a { font-style: italic; }
-    </style>
-
-One important point is that this CSS code no longer just consists of a CSS property. This CSS code is a complete CSS rule, which consists of a selector, plus one or more properties.
-
-The components of this CSS rule are shown below.
+**Figure 2.8** shows another way to use CSS properties; this is a small modification of the HTML code from **Figure 2.2**. The result in a web browser is exactly the same; all that has changed is how the CSS code is provided.
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
@@ -760,15 +748,27 @@ The components of this CSS rule are shown below.
       </body>
     </html>
 
-Figure 2.8: The file inaccessibilitystyle.html. This HTML code will produce the same web page as Figure 2.1 when viewed in a web browser. This code is similar to the code in Figure 2.2 except that the CSS code is within a style element in the head element, rather than being within a style attribute within the anchor element.
+**Figure 2.8**: The file inaccessibilitystyle.html. This HTML code will produce the same web page as **Figure 2.1** when viewed in a web browser. This code is similar to the code in **Figure 2.2** except that the CSS code is within a style element in the head element, rather than being within a style attribute within the anchor element.
 
-          selector:  a { font-style: italic; }
-      open bracket:  a { font-style: italic; }
-     property name:  a { font-style: italic; }
-             colon:  a { font-style: italic; }
-    property value:  a { font-style: italic; }
-        semi-colon:  a { font-style: italic; }
-     close bracket:  a { font-style: italic; }
+The important differences in **Figure 2.8** are that there is a style element in the head of the HTML code (lines 5 to 7) and the anchor elements (lines 12 and 13) no longer have a style attribute.
+
+The new style element in the head of the HTML code is reproduced below.
+
+    <style type="text/css">
+      a { font-style: italic; }
+    </style>
+
+One important point is that this CSS code no longer just consists of a CSS property. This CSS code is a complete CSS rule, which consists of a selector, plus one or more properties.
+
+The components of this CSS rule are shown below.
+
+          selector:  a
+      open bracket:  {
+     property name:  font-style
+             colon:  :
+    property value:  italic
+        semi-colon:  ;
+     close bracket:  }
 
 The brackets, the colon, and the semi-colon will be the same for any CSS rule.
 
@@ -782,16 +782,7 @@ This is good, but we can do even better.
 
 A third way to use CSS code is to create a separate text file containing just the CSS code and refer to that file from the HTML document.
 
-Figure 2.9 shows a modification of the code in Figure 2.8 that makes use of this approach.
-
-The important difference this time is that there is a link element in the head element (lines 5 and 6) rather than a style element. This new link element is reproduced below. Most of this element is standard for referencing a file of CSS code; the only piece that is specific to this example is the href attribute, which specifies the name of the file that contains the CSS code.
-
-    <link rel="stylesheet" href="reportstyle.css"
-          type="text/css">
-
-This link element tells a web browser to load the CSS code from the file reportstyle.css and apply the rules in that file. The contents of that file are shown in Figure 2.10.
-
-A CSS file can contain one or more CSS rules. In this case, there is just one rule, which applies to anchor elements and says that the text for hyperlinks should be italic.
+**Figure 2.9** shows a modification of the code in **Figure 2.8** that makes use of this approach.
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
@@ -831,13 +822,22 @@ A CSS file can contain one or more CSS rules. In this case, there is just one ru
       </body>
     </html>
 
-Figure 2.9: The file inaccessibilitycss.html. This HTML code will produce the same web page as Figure 2.1 when viewed in a web browser. This code is similar to the code in Figure 2.8 except that the CSS code is within a separate text file called reportstyle.css and there is a link element (rather than a style element) in the head element that refers to the file of CSS code.
+**Figure 2.9**: The file inaccessibilitycss.html. This HTML code will produce the same web page as **Figure 2.1** when viewed in a web browser. This code is similar to the code in **Figure 2.8** except that the CSS code is within a separate text file called reportstyle.css and there is a link element (rather than a style element) in the head element that refers to the file of CSS code.
+
+The important difference this time is that there is a link element in the head element (lines 5 and 6) rather than a style element. This new link element is reproduced below. Most of this element is standard for referencing a file of CSS code; the only piece that is specific to this example is the href attribute, which specifies the name of the file that contains the CSS code.
+
+    <link rel="stylesheet" href="reportstyle.css"
+          type="text/css">
+
+This link element tells a web browser to load the CSS code from the file reportstyle.css and apply the rules in that file. The contents of that file are shown in **Figure 2.10**.
 
     a {
         font-style: italic;
     }
 
-Figure 2.10: The file reportstyle.css, which contains CSS code to control the appearance of anchor elements within HTML documents. The line numbers (in grey) are just for reference.
+**Figure 2.10**: The file reportstyle.css, which contains CSS code to control the appearance of anchor elements within HTML documents. The line numbers (in grey) are just for reference.
+
+A CSS file can contain one or more CSS rules. In this case, there is just one rule, which applies to anchor elements and says that the text for hyperlinks should be italic.
 
 The advantage of having a separate file of CSS code like this is that now we can apply the CSS rule not just to all anchor elements in the HTML document inaccessibility.html, but to all anchor elements in any other HTML document as well. For example, if we want this style for all statistical reports that we write, then we can simply include a link element that refers to reportstyle.css in the HTML document for each report. This is a further example of the DRY principle as it applies to computer code; we have one copy of code that can be reused in many different places.
 
@@ -857,7 +857,10 @@ By having separate HTML and CSS files, it is easy and efficient to have several 
 
 ## 2.8 Further reading
 
-*Code Complete* by Steve McConnell, 2nd edition (2004) Microsoft Press. Exhaustive discussion of ways of writing good computer code. Includes languages and advanced topics way beyond the scope of this book.
+*Code Complete*  
+by Steve McConnell  
+2nd edition (2004) Microsoft Press.  
+Exhaustive discussion of ways of writing good computer code. Includes languages and advanced topics way beyond the scope of this book.
 
 ## Summary
 

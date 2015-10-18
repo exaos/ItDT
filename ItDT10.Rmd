@@ -716,7 +716,7 @@ Following a call to this function, the function fun will be run one expression a
 
 ## 10.4 Getting help
 
-The help() function is special in that it provides information about other functions. This function displays a help page, which is online documentation that describes what a function does. This includes an explanation of all of the arguments to the function and a description of the result produced by the function. Figure 10.1 shows the beginning of the help page for the Sys.sleep() function, which is obtained by typing help(Sys.sleep).
+The help() function is special in that it provides information about other functions. This function displays a help page, which is online documentation that describes what a function does. This includes an explanation of all of the arguments to the function and a description of the result produced by the function. **Figure 10.1** shows the beginning of the help page for the Sys.sleep() function, which is obtained by typing help(Sys.sleep).
 
     Sys.sleep                package:base            R Documentation
     Suspend Execution for a Time Interval
@@ -734,7 +734,7 @@ The help() function is special in that it provides information about other funct
         to set itself up and read its input files before R execution
         is resumed.
 
-Figure 10.1: The beginning of the help page for the function Sys.sleep() as displayed within an xterm on a Linux system. This help page is displayed by the expression help(Sys.sleep).
+**Figure 10.1**: The beginning of the help page for the function Sys.sleep() as displayed within an xterm on a Linux system. This help page is displayed by the expression help(Sys.sleep).
 
 A special shorthand using the question mark character, ?, is provided for getting the help page for a function. Instead of typing help(Sys.sleep), it is also possible to simply type ?Sys.sleep.
 
@@ -750,7 +750,7 @@ R functions are organized into collections of functions called packages. A numbe
 search()
 ```
 
-The top line of the help page for a function shows which package the function comes from. For example, Sys.sleep() comes from the base package (see Figure 10.1).
+The top line of the help page for a function shows which package the function comes from. For example, Sys.sleep() comes from the base package (see **Figure 10.1**).
 
 Other packages may be loaded using the library() function. For example, the foreign package provides functions for reading in data sets that have been stored in the native format of a different statistical software system. In order to use the read.spss() function from this package, the foreign package must be loaded as follows:
 

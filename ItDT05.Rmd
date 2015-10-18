@@ -37,7 +37,11 @@ Some of the earliest known examples of recorded information come from Mesopotami
 
 A particularly famous mathematical example of cuneiform is the clay tablet known as YBC 7289.
 
-This tablet is inscribed with a set of numbers using the Babylonian sexagesimal (base-60) system. In this system, an angled symbol, <, represents the value 10 and a vertical symbol, |, represents the value 1. For example, the value 30 is written (roughly) like this: <<<. This value can be seen along the top-left edge of YBC 7289 (see Figure 5.1).
+This tablet is inscribed with a set of numbers using the Babylonian sexagesimal (base-60) system. In this system, an angled symbol, <, represents the value 10 and a vertical symbol, |, represents the value 1. For example, the value 30 is written (roughly) like this: <<<. This value can be seen along the top-left edge of YBC 7289 (see **Figure 5.1**).
+
+![Figure 5.1](/Users/rebeccastevens/GitHub/ItDT/tumblr_nkppo02cpa1qc38e9o1_400.png)
+
+**Figure 5.1**: Clay tablet YBC 7289 with an overlay to emphasize the markings on its surface. The cuneiform inscriptions demonstrate the derivation of the square root of 2.
 
 The markings across the center of YBC 7289 consist of four digits: |, <<||||, <<<<<|, and <. Historians have suggested that these markings
 represent an estimate of the length of the diagonal of a unit square, which has a true value of sqrt(2) = 1.41421356 (to eight decimal places). The decimal interpretation of the sexagesimal digits is 1 + 24/60 + 51/3600 + 10/216000 = 1.41421296, which is amazingly close to the true value, considering that YBC 7289 has been dated to around 1600 BC.
@@ -49,10 +53,6 @@ What we are going to do with this ancient clay tablet is to treat it as informat
 The choice of a clay tablet for recording the information on YBC 7289 was obviously a good one in terms of the durability of the storage medium. Very few electronic media today have an expected lifetime of several thousand years. However, electronic media do have many other advantages.
 
 The most obvious advantage of an electronic medium is that it is very easy to make copies. The curators in charge of YBC 7289 would no doubt love to be able to make identical copies of such a precious artifact, but truly identical copies are only really possible for electronic information.
-
-![Figure 5.1](/Users/rebeccastevens/GitHub/ItDT/tumblr_nkppo02cpa1qc38e9o1_400.png)
-
-Figure 5.1: Clay tablet YBC 7289 with an overlay to emphasize the markings on its surface. The cuneiform inscriptions demonstrate the derivation of the square root of 2.
 
 This leads us to the problem of how we produce an electronic record of the tablet YBC 7289. We will consider a number of possibilities in order to introduce some of the issues that will be important when discussing various data storage alternatives throughout this chapter.
 
@@ -132,7 +132,7 @@ The basic conceptual structure of a plain text format is that the data are arran
 
 It is common for there to be several rows of general information about the data set, or metadata, at the start of the file. This is often referred to as a file header.
 
-A good example of a data set in a plain text format is the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1). Figure 5.2 shows how we would normally see this sort of plain text file if we view it in a text editor or a web browser.
+A good example of a data set in a plain text format is the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1). **Figure 5.2** shows how we would normally see this sort of plain text file if we view it in a text editor or a web browser.
 
                 VARIABLE : Mean TS from clear sky composite (kelvin)
                 FILENAME : ISCCPMonthly_avg.nc
@@ -150,15 +150,15 @@ A good example of a data set in a plain text format is the surface temperature d
     16-JUN-1994 00 /  6:  276.1
     ...
 
-Figure 5.2: The first few lines of the plain text output from the LiveAccessServer for the surface temperature at Point Nemo. This is a reproduction of Figure 1.2.
+**Figure 5.2**: The first few lines of the plain text output from the LiveAccessServer for the surface temperature at Point Nemo. This is a reproduction of **Figure 1.2**.
 
 This file has 8 lines of metadata at the start, followed by 48 lines of the core data values, with 2 values, a date and a temperature, on each row.
 
 There are two main sub-types of plain text format, which differ in how separate values are identified within a row:
 
-- Delimited formats: In a delimited format, values within a row are separated by a special character, or delimiter. For example, it is possible to view the file in Figure 5.2 as a delimited format, where each line after the header consists of two fields separated by a colon (the character ‘:’ is the delimiter). Alternatively, if we used whitespace (one or more spaces or tabs) as the delimiter, there would be five fields, as shown below.
+- Delimited formats: In a delimited format, values within a row are separated by a special character, or delimiter. For example, it is possible to view the file in **Figure 5.2** as a delimited format, where each line after the header consists of two fields separated by a colon (the character ‘:’ is the delimiter). Alternatively, if we used whitespace (one or more spaces or tabs) as the delimiter, there would be five fields, as shown below.
 
-- Fixed-width formats:  In a fixed-width format, each value is allocated a fixed number of characters within every row. For example, it is possible to view the file in Figure 5.2 as a fixed-width format, where the first value uses the first 20 characters and the second value uses the next 8 characters. Alternatively, there are five values on each row using 12, 3, 2, 6, and 5 characters respectively, as shown in the diagram below.
+- Fixed-width formats:  In a fixed-width format, each value is allocated a fixed number of characters within every row. For example, it is possible to view the file in **Figure 5.2** as a fixed-width format, where the first value uses the first 20 characters and the second value uses the next 8 characters. Alternatively, there are five values on each row using 12, 3, 2, 6, and 5 characters respectively, as shown in the diagram below.
 
 At the lowest level, the primary characteristic of a plain text format is that all of the information in the file, even numeric information, is stored as text.
 
@@ -202,7 +202,7 @@ Because the binary code for computer memory takes up so much space, we will also
 
 ### 5.2.3 Case study: Point Nemo (continued)
 
-We will now look at a low level at the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1), which is in a plain text format. To emphasize the format of this information in computer memory, the first 48 bytes of the file are displayed below. This display should be compared with Figure 5.2, which shows what we would normally see when we view the plain text file in a text editor or web browser.
+We will now look at a low level at the surface temperature data for the Pacific Pole of Inaccessibility (see Section 1.1), which is in a plain text format. To emphasize the format of this information in computer memory, the first 48 bytes of the file are displayed below. This display should be compared with **Figure 5.2**, which shows what we would normally see when we view the plain text file in a text editor or web browser.
 
      0 : 202020202020202020202020 |
     12 : 205641524941424c45203a20 | VARIABLE: 
@@ -234,7 +234,9 @@ The main disadvantage of plain text formats is also their simplicity. The basic 
 
 The low-level format of storing everything as characters, with one byte per character, can also be very inefficient in terms of the amount of computer memory required.
 
-Consider a data set collected on two families, as depicted in Figure 5.3. What would this look like as a plain text file, with one row for all of the information about each person in the data set? One possible fixed-width format is shown below. In this format, each row records the information for one person. For each person, there is a column for the father’s name (if known), a column for the mother’s name (if known), the person’s own name, his or her age, and his or her gender.
+Consider a data set collected on two families, as depicted in **Figure 5.3**. What would this look like as a plain text file, with one row for all of the information about each person in the data set? One possible fixed-width format is shown below. In this format, each row records the information for one person. For each person, there is a column for the father’s name (if known), a column for the mother’s name (if known), the person’s own name, his or her age, and his or her gender.
+
+**Figure 5.3**: An example of hierarchical data: a family tree containing data on parents (grey) and children (white).
 
                    John      33  male
                    Julia     32  female
@@ -250,13 +252,11 @@ This format for storing these data is not ideal for two reasons. Firstly, it is 
 
 The second problem is not as obvious, but is arguably much more important. The fundamental structure of most plain text file formats means that each line of the file contains exactly one record or case in the data set. This works well when a data set only contains information about one type of object, or, put another way, when the data set itself has a “flat” structure.
 
-The data set of family members does not have a flat structure. There is information about two different types of object, parents and children, and these objects have a definite relationship between them. We can say that the data set is hierarchical or multi-level or stratified (as is obvious from the view of the data in Figure 5.3). Any data set that is obtained using a non-trivial study design is likely to have a hierarchical structure like this.
+The data set of family members does not have a flat structure. There is information about two different types of object, parents and children, and these objects have a definite relationship between them. We can say that the data set is hierarchical or multi-level or stratified (as is obvious from the view of the data in **Figure 5.3**). Any data set that is obtained using a non-trivial study design is likely to have a hierarchical structure like this.
 
 In other words, a plain text file format does not allow for sophisticated data models. A plain text format is unable to provide an appropriate representation of a complex data structure. Later sections will provide examples of storage formats that are capable of storing complex data structures.
 
 Another major weakness of free-form text files is the lack of information within the file itself about the structure of the file. For example, plain text files do not usually contain information about which special character is being used to separate fields in a delimited file, or any information about the widths of fields with a fixed-width format. This means that the computer cannot automatically determine where different fields are within each row of a plain text file, or even how many fields there are.
-
-Figure 5.3: An example of hierarchical data: a family tree containing data on parents (grey) and children (white).
 
 A fixed-width format avoids this problem, but enforcing a fixed length for fields can create other difficulties if we do not know the maximum possible length for all variables. Also, if the values for a variable can have very different lengths, a fixed-width format can be inefficient because we store lots of empty space for short values.
 
@@ -280,6 +280,8 @@ The main rules for the CSV format are:
 
 CSV files are a common way to transfer data from a spreadsheet to other software.
 
+**Figure 5.4** shows what the Point Nemo temperature data might look like in a CSV format. Notice that most of the metadata cannot be included in the file when using this format.
+
     date,temp
     16-JAN-1994,278.9
     16-FEB-1994,280
@@ -289,13 +291,11 @@ CSV files are a common way to transfer data from a spreadsheet to other software
     16-JUN-1994,276.1
     ...
 
-Figure 5.4: The first few lines of the plain text output from the Live Access Server for the surface temperature at Point Nemo in Comma-Separated Value (CSV) format. On each line, there are two data values, a date and a temperature value, separated from each other by a comma. The first line provides a name for each column of data values.
-
-Figure 5.4 shows what the Point Nemo temperature data might look like in a CSV format. Notice that most of the metadata cannot be included in the file when using this format.
+**Figure 5.4**: The first few lines of the plain text output from the Live Access Server for the surface temperature at Point Nemo in Comma-Separated Value (CSV) format. On each line, there are two data values, a date and a temperature value, separated from each other by a comma. The first line provides a name for each column of data values.
 
 ### 5.2.6 Line endings
 
-A common feature of plain text files is that data values are usually arranged in rows, as we have seen in Figures 5.2 and 5.4.
+A common feature of plain text files is that data values are usually arranged in rows, as we have seen in **Figure 5.2** and **Figure 5.4**.
 
 We also know that plain text files are, at the low level of computer memory, just a series of characters.
 
@@ -368,13 +368,11 @@ The American Statistical Association (ASA) holds an annual conference called the
 
 One of the events sometimes held at this conference is a Data Exposition, where contestants are provided with a data set and must produce a poster demonstrating a comprehensive analysis of the data. For the Data Expo at the 2006 JSM [1], the data were geographic and atmospheric measures that were obtained from NASA’s Live Access Server (see Section 1.1).
 
-The variables in the data set are: elevation, temperature (surface and air), ozone, air pressure, and cloud cover (low, mid, and high). With the exception of elevation, all variables are monthly averages, with observations for January 1995 to December 2000. The data are measured at evenly spaced geographic locations on a very coarse 24 by 24 grid covering Central America (see Figure 5.5).
+The variables in the data set are: elevation, temperature (surface and air), ozone, air pressure, and cloud cover (low, mid, and high). With the exception of elevation, all variables are monthly averages, with observations for January 1995 to December 2000. The data are measured at evenly spaced geographic locations on a very coarse 24 by 24 grid covering Central America (see **Figure 5.5**).
 
-The data were downloaded from the Live Access Server in a plain text format with one file for each variable, for each month; this produced 72 files per atmospheric variable, plus 1 file for elevation, for a total of 505 files. Figure 5.6 shows the start of one of the surface temperature files.
+**Figure 5.5**: The geographic locations at which Live Access Server atmospheric data were obtained for the 2006 JSM Data Expo.
 
-This data set demonstrates a number of advantages and limitations of a plain text format for storing data. First of all, the data is very straightforward to access because it does not need sophisticated software. It is also easy for a human to view the data and understand what is in each file.
-
-Figure 5.5: The geographic locations at which Live Access Server atmospheric data were obtained for the 2006 JSM Data Expo.
+The data were downloaded from the Live Access Server in a plain text format with one file for each variable, for each month; this produced 72 files per atmospheric variable, plus 1 file for elevation, for a total of 505 files. **Figure 5.6** shows the start of one of the surface temperature files.
 
                 VARIABLE : Mean TS from clear sky composite (kelvin)
                 FILENAME : ISCCPMonthly_avg.nc
@@ -391,7 +389,9 @@ Figure 5.5: The geographic locations at which Live Access Server atmospheric dat
     23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
     ...
 
-Figure 5.6: The first few lines of output from the Live Access Server for the surface temperature of the earth for January 1995, over a coarse 24 by 24 grid of locations covering Central America.
+**Figure 5.6**: The first few lines of output from the Live Access Server for the surface temperature of the earth for January 1995, over a coarse 24 by 24 grid of locations covering Central America.
+
+This data set demonstrates a number of advantages and limitations of a plain text format for storing data. First of all, the data is very straightforward to access because it does not need sophisticated software. It is also easy for a human to view the data and understand what is in each file.
 
 However, the file format provides a classic demonstration of the typical lack of standardized structure in plain text files. For example, the raw data values only start on the eighth line of the file, but there is no indication of that fact within the file itself. This is not an issue for a human viewing the file, but a computer has no chance of detecting this structure automatically. Second, the raw data are arranged in a matrix, corresponding to a geographic grid of locations, but again there is no inherent indication of this structure. For example, only a human can tell that the first 11 characters on each line of raw data are row labels describing latitude.
 
@@ -401,7 +401,7 @@ Finally, there is the fact that the data reside in 505 separate files. This is e
 
 We will look at another way to store this information in Section 5.6.5.
 
-## Recap
+#### Recap
 
 A plain text format is a simple, lowest-common-denominator storage format.
 
@@ -493,11 +493,7 @@ The main point is that we require specific software to be able to work with data
 
 In this example, we will use the Point Nemo temperature data (see Section 1.1) again, but this time with the data stored in a binary format called netCDF.
 
-The first 60 bytes of the netCDF format file are shown in Figure 5.7, with each byte interpreted as a single character.
-
-We will learn more about this format below. For now, the only point to make is that, while we can see that some of the bytes in the file appear to be text values, it is not clear from this raw display of the data, where the text data starts and ends, what values the non-text bytes represent, and what each value is for.
-
-Compared to a plain text file, this is a complete mess and we need software that understands the netCDF format in order to extract useful values from the file.
+The first 60 bytes of the netCDF format file are shown in **Figure 5.7**, with each byte interpreted as a single character.
 
      0 : 43444601000000000000000a | CDF......... 
     12 : 000000010000000454696d65 | ........Time 
@@ -505,7 +501,11 @@ Compared to a plain text file, this is a complete mess and we need software that
     36 : 0000000b0000000200000004 | ............ 
     48 : 54696d650000000100000000 | Time........
 
-Figure 5.7: The first 60 bytes of the netCDF format file that contains the surface temperatures at Point Nemo. The data are shown here as unstructured bytes to demonstrate that, without knowledge of the structure of the binary format, there is no way to determine where the different data values reside or what format the values have been stored in (apart from the fact that there is obviously some text values in the file).
+**Figure 5.7**: The first 60 bytes of the netCDF format file that contains the surface temperatures at Point Nemo. The data are shown here as unstructured bytes to demonstrate that, without knowledge of the structure of the binary format, there is no way to determine where the different data values reside or what format the values have been stored in (apart from the fact that there is obviously some text values in the file).
+
+We will learn more about this format below. For now, the only point to make is that, while we can see that some of the bytes in the file appear to be text values, it is not clear from this raw display of the data, where the text data starts and ends, what values the non-text bytes represent, and what each value is for.
+
+Compared to a plain text file, this is a complete mess and we need software that understands the netCDF format in order to extract useful values from the file.
 
 ### 5.3.3 NetCDF
 
@@ -519,7 +519,7 @@ The first thing to note is that the structure of binary formats tends to be much
 
 Like most binary formats, the structure of a netCDF file consists of header information, followed by the raw data itself. The header information includes information about how many data values have been stored, what sorts of values they are, and where within the file the header ends and the data values begin.
 
-Figure 5.8 shows a structured view of the start of the netCDF format for the Point Nemo temperature data. This should be contrasted with the unstructured view in Figure 5.7.
+**Figure 5.8** shows a structured view of the start of the netCDF format for the Point Nemo temperature data. This should be contrasted with the unstructured view in **Figure 5.7**.
 
      0 : 43 44 46                | CDF 
     
@@ -530,17 +530,15 @@ Figure 5.8 shows a structured view of the start of the netCDF format for the Poi
     
     20 : 54 69 6d 65             | Time
 
-Figure 5.8: The start of the header information in the netCDF file that contains the surface temperatures at Point Nemo, with the structure of the netCDF format revealed so that separate data fields can be observed. The first three bytes are characters, the fourth byte is a single-byte integer, the next sixteen bytes are four-byte integers, and the last four bytes are characters. This structured display should be compared to the unstructured bytes shown in Figure 5.7.
+**Figure 5.8**: The start of the header information in the netCDF file that contains the surface temperatures at Point Nemo, with the structure of the netCDF format revealed so that separate data fields can be observed. The first three bytes are characters, the fourth byte is a single-byte integer, the next sixteen bytes are four-byte integers, and the last four bytes are characters. This structured display should be compared to the unstructured bytes shown in **Figure 5.7**.
 
 The netCDF file begins with three bytes that are interpreted as characters, specifically the three characters ‘C’, ‘D’, and ‘F’. This start to the file indicates that this is a netCDF file. The fourth byte in the file is a single-byte integer and specifies which version of netCDF is being used, in this case, version 1, or the “classic” netCDF format. This part of the file will be the same for any (classic) netCDF file.
 
 The next sixteen bytes in the file are all four-byte integers and the four bytes after that are each single-byte characters again. This demonstrates the idea of binary formats, where values are packed into memory next to each other, with different values using different numbers of bytes.
 
-Another classic feature of binary formats is that the header information contains pointers to the location of the raw data within the file and information about how the raw data values are stored. This information is not shown in Figure 5.8, but in this case, the raw data is located at byte 624 within the file and each temperature value is stored as an eight-byte real number.
+Another classic feature of binary formats is that the header information contains pointers to the location of the raw data within the file and information about how the raw data values are stored. This information is not shown in **Figure 5.8**, but in this case, the raw data is located at byte 624 within the file and each temperature value is stored as an eight-byte real number.
 
-Figure 5.9 shows the raw computer memory starting at byte 624 that contains the temperature values within the netCDF file. These are the first eight temperature values from the Point Nemo data set in a binary format.
-
-In order to emphasize the difference in formats, the display below shows the raw computer memory from the plain text format of the Point Nemo data set. Compare these five bytes, which store the number 278.9 as five characters, with the first eight bytes in Figure 5.9, which store the same number as an eight-byte real number.
+**Figure 5.9** shows the raw computer memory starting at byte 624 that contains the temperature values within the netCDF file. These are the first eight temperature values from the Point Nemo data set in a binary format.
 
     624 : 40716e6666666666 | 278.9 
     632 : 4071800000000000 | 280.0 
@@ -552,21 +550,17 @@ In order to emphasize the difference in formats, the display below shows the raw
     680 : 407139999999999a | 275.6
     ...
 
-Figure 5.9: The block of bytes within the Point Nemo netCDF file that contains the surface temperature values. Each temperature values is an eight-byte real number.
+**Figure 5.9**: The block of bytes within the Point Nemo netCDF file that contains the surface temperature values. Each temperature values is an eight-byte real number.
+
+In order to emphasize the difference in formats, the display below shows the raw computer memory from the plain text format of the Point Nemo data set. Compare these five bytes, which store the number 278.9 as five characters, with the first eight bytes in **Figure 5.9**, which store the same number as an eight-byte real number.
 
     359 : 32 37 38 2e 39 | 278.9
 
-The section of the file shown in Figure 5.9 also allows us to discuss the issue of speed of access to data stored in a binary format.
+The section of the file shown in **Figure 5.9** also allows us to discuss the issue of speed of access to data stored in a binary format.
 
 The fundamental issue is that it is possible to calculate the location of a data value within the file. For example, if we want to access the fifth temperature value, 277.8, within this file, we know with certainty, because the header information has told us, that this value is 8 bytes long and it starts at byte number 656: the offset of 624, plus 4 times 8 bytes (the size of each temperature value).
 
-Contrast this simple calculation with finding the fifth temperature value in a text-based format like the CSV format for the Point Nemo temperature data. The raw bytes representing the first few lines of the CSV format are shown in Figure 5.10.
-
-The fifth temperature value in this file starts at byte 98 within the file, but there is no simple way to calculate that fact. The only way to find that value is to start at the beginning of the file and read one character at a time until we have counted six commas (the field separators in a CSV file). Similarly, because not all data values have the same length, in terms of number of bytes of memory, the end of the data value can only be found by continuing to read characters until we find the end of the line (in this file, the byte 0a).
-
-The difference is similar to finding a particular scene in a movie on a DVD disc compared to a VHS tape.
-
-In general, it is possible to jump directly to a specific location within a binary format file, whereas it is necessary to read a text-based format from the beginning and one character at a time. This feature of accessing binary formats is called random access and it is generally faster than the typical sequential access of text files.
+Contrast this simple calculation with finding the fifth temperature value in a text-based format like the CSV format for the Point Nemo temperature data. The raw bytes representing the first few lines of the CSV format are shown in **Figure 5.10**.
 
       0 : 646174652c74656d700a20 | date,temp. 
      11 : 31362d4a414e2d31393934 | 16-JAN-1994 
@@ -580,7 +574,13 @@ In general, it is possible to jump directly to a specific location within a bina
      99 : 372e380a2031362d4a554e | 7.8.16-JUN
     110 : 2d313939342c3237362e31 | -1994,276.1
 
-Figure 5.10: A block of bytes from the start of the Point Nemo CSV file that contains the surface temperature values. Each character in the file occupies one byte.
+**Figure 5.10**: A block of bytes from the start of the Point Nemo CSV file that contains the surface temperature values. Each character in the file occupies one byte.
+
+The fifth temperature value in this file starts at byte 98 within the file, but there is no simple way to calculate that fact. The only way to find that value is to start at the beginning of the file and read one character at a time until we have counted six commas (the field separators in a CSV file). Similarly, because not all data values have the same length, in terms of number of bytes of memory, the end of the data value can only be found by continuing to read characters until we find the end of the line (in this file, the byte 0a).
+
+The difference is similar to finding a particular scene in a movie on a DVD disc compared to a VHS tape.
+
+In general, it is possible to jump directly to a specific location within a binary format file, whereas it is necessary to read a text-based format from the beginning and one character at a time. This feature of accessing binary formats is called random access and it is generally faster than the typical sequential access of text files.
 
 This example is just provided to give a demonstration of how it is possible for access to be faster to data stored in a binary file. This does not mean that access speeds are always faster and it certainly does not mean that access speed should necessarily be the deciding factor when choosing a data format. In some situations, a binary format will be a good choice because data can be accessed quickly.
 
@@ -646,7 +646,7 @@ The short answer is that each piece of metadata is just itself a data value, so,
 
 The larger question is how to store the metadata so that it is somehow connected to the raw data values. Deciding what data format to use for a particular data set should also take into account whether and how effectively metadata can be included alongside the core data values.
 
-## Recap
+#### Recap
 
 A block of bytes in computer memory can be interpreted in many ways. A binary format specifies how each byte or set of bytes in a file should be interpreted.
 
@@ -700,31 +700,31 @@ A study conducted by researchers from the Psychology Department at the Universit
 
 Data were collected for several days during a baseline period and for several days when each of five different signs were erected beside the road, for a total of six experimental stages. At each stage, the vehicle speeds were also collected for traffic traveling in the opposite direction along the road, to provide a set of “control” observations.
 
-The data were collected by the Waitakere City Council via detectors buried in the road and were delivered to the researchers in the form of Excel spreadsheets. Figure 5.11 shows a section of one of these spreadsheets.
+The data were collected by the Waitakere City Council via detectors buried in the road and were delivered to the researchers in the form of Excel spreadsheets. **Figure 5.11** shows a section of one of these spreadsheets.
+
+**Figure 5.11**: Part of the vehicle speed data, as it was delivered, in a spreadsheet format.
 
 As we have discussed, spreadsheets are not an ideal data storage format, but this is an example where the researchers had no control over the format in which data are provided. This is why it is important to have some knowledge of a variety of data storage formats.
 
 This figure demonstrates the fact that spreadsheet software displays the spreadsheet cells in a rectangular grid, which is very convenient for viewing the raw values in the data set. While it is not a replacement for proper data validation, taking a look at the raw values within a data set is never a bad thing.
 
-Figure 5.11 also shows that it is straightforward to include metadata in a spreadsheet (cells A1 to A3) because each cell in the spreadsheet can contain any sort of value. On the other hand, just like in plain text formats, there is no way to indicate the special role of these cells; nothing in the file indicates where the real data begin.
+**Figure 5.11** also shows that it is straightforward to include metadata in a spreadsheet (cells A1 to A3) because each cell in the spreadsheet can contain any sort of value. On the other hand, just like in plain text formats, there is no way to indicate the special role of these cells; nothing in the file indicates where the real data begin.
 
 Spreadsheets inherently provide a rows-and-columns view of the data, which, as we saw with plain text files, is not the most efficient way to represent data with a hierarchical structure.
 
-Figure 5.11: Part of the vehicle speed data, as it was delivered, in a spreadsheet format.
-
-In this case, the rows of the spreadsheet represent different times of the day and the columns represent different speed ranges. The actual data values are counts of the number of vehicles traveling within each speed range, within each time period. The spreadsheet shown in Figure 5.11 represents data from a single day of the study on one side of the road. How are the data for other days and data from the other side of the road stored?
+In this case, the rows of the spreadsheet represent different times of the day and the columns represent different speed ranges. The actual data values are counts of the number of vehicles traveling within each speed range, within each time period. The spreadsheet shown in **Figure 5.11** represents data from a single day of the study on one side of the road. How are the data for other days and data from the other side of the road stored?
 
 Another nice feature of most spreadsheet formats is that they allow for multiple sheets within a document. This effectively provides a 3-dimensional cube of data cells, rather than just a 2-dimensional table of cells. The vehicle speed study made use of this feature to store the data from each day on a separate sheet, so that all of the data from one stage of the experiment and on one side of the road are stored in a single spreadsheet.
 
-Figure 5.12 shows three sheets, representing three days’ worth of data, within one of the spreadsheet files.
+**Figure 5.12** shows three sheets, representing three days’ worth of data, within one of the spreadsheet files.
+
+**Figure 5.12**: Three of the sheets in vehicle speed data spreadsheet. Each sheet records speed data for one side of the road, for one day of the experiment.
 
 However, each experimental stage of the study was stored in a separate spreadsheet file, for a total of 12 spreadsheets. Once a data set becomes split across multiple files like this, there are issues of ensuring that all files retain the same structure, and there are issues with expressing the relationships between the separate files. For example, how do we know which files relate to the same side of the road?
 
-Figure 5.12: Three of the sheets in vehicle speed data spreadsheet. Each sheet records speed data for one side of the road, for one day of the experiment.
-
 In this case, the names of the files can be used to differentiate between the side of the road and the experimental stage, but this naming scheme needs to be documented and explained somewhere. The problem is that there is no formal support for the person storing the data to express the structure of the data set. We will see better ways to resolve this problem in the next section on relational databases.
 
-Another important problem is that spreadsheet cells are able to act independently of each other. Although the data in Figure 5.11 appear to have a useful structure, with each data value clearly associated with a time period and a speed range, this is in fact an illusion. The spreadsheet software does not, by default, place any significance on the fact that the values in row 6 all correspond to the time period from midnight to 1:00 a.m. Every cell in the spreadsheet is free to take any value regardless of which row or column it resides in.
+Another important problem is that spreadsheet cells are able to act independently of each other. Although the data in **Figure 5.11** appear to have a useful structure, with each data value clearly associated with a time period and a speed range, this is in fact an illusion. The spreadsheet software does not, by default, place any significance on the fact that the values in row 6 all correspond to the time period from midnight to 1:00 a.m. Every cell in the spreadsheet is free to take any value regardless of which row or column it resides in.
 
 This problem can be seen by looking at the time values in column A. To the human observer, it is clear that this column of values (apart from the the first three rows) corresponds to time intervals. However, the spreadsheet data model does not enforce any such constraint on the data, as the value in row 17 clearly shows. All of the values up to that point (rows 6 through 16) have been time values, but row 17 contains the value 7-8. To human eyes this is clearly the time period 7:00 a.m. to 8:00 a.m., but any software trying to read this column of values will almost certainly fail to make that intuitive leap.
 
@@ -732,11 +732,11 @@ This particular problem is a feature of this particular data set, but the genera
 
 It is a little unfair to point out these problems with a spreadsheet format example because most of these problems also exist for plain text files. The main point is that the spreadsheet format does not provide a great deal beyond much simpler format options and it introduces new problems of its own.
 
-    Recap
-    
-    Spreadsheet software is a useful tool for viewing and exploring data.
-    
-    A spreadsheet storage format does allow for a 3-dimensional cube of data rather than just a 2-dimensional table of data, but it requires specific software and is less efficient because it stores extraneous information.
+#### Recap
+
+Spreadsheet software is a useful tool for viewing and exploring data.
+
+A spreadsheet storage format does allow for a 3-dimensional cube of data rather than just a 2-dimensional table of data, but it requires specific software and is less efficient because it stores extraneous information.
 
 ## 5.5 XML
 
@@ -748,19 +748,7 @@ This section looks at the eXtensible Markup Language, XML, which provides a form
 
 Data stored in an XML document is stored as characters, just like in a plain text format, but the information is organized within the file in a much more sophisticated manner.
 
-As a simple example to get us started, Figure 5.13 shows the surface temperature data at the Pacific Pole of Inaccessibility (see Section 1.1) in two different formats: an XML format and the original plain text format.
-
-The major difference between these two storage formats is that, in the XML version, every single data value is distinctly labeled. This means that, for example, even without any background explanation of this data set, we could easily identify the “temperature” values within the XML file. By contrast, the same task would be impossible with the plain text format, unless additional information is provided about the data set and the arrangement of the values within the file. Importantly, the XML format allows a computer to perform this task completely automatically because it could detect the values with a label of temperature within the XML file.
-
-One fundamental similarity between these formats is that they are both just text. This is an important and beneficial property of XML; we can read it and manipulate it without any special skills or any specialized software.
-
-XML is a storage format that is still based on plain text but does not suffer from many of the problems of plain text files because it adds flexibility, rigor, and standardization.
-
-Many of the benefits of XML arise from the fact that it is a computer language. When we store a data set in XML format, we are writing computer code that expresses the data values to the computer. This is a huge step beyond free-form plain text files because we are able to communicate much more about the data set to the computer. However, the cost is that we need to learn the rules of XML so that we can communicate the data correctly.
-
-In the next few sections, we will focus on the details of XML. In Section 5.5.1, we will look briefly at the syntax rules of XML, which will allow us to store data correctly in an XML format. We will see that there is a great degree of choice when using XML to store a data set, so in Sections 5.5.2 and 5.5.3, we will discuss some ideas about how to store data sensibly in an XML format—some uses of XML are better than others. In Section 5.5.5 we will return to a more general discussion of how XML formats compare to other storage formats.
-
-The information in this section will be useful whether we are called upon to create an XML document ourselves or whether we just have to work with a data set that someone else has chosen to store in an XML format.
+As a simple example to get us started, **Figure 5.13** shows the surface temperature data at the Pacific Pole of Inaccessibility (see Section 1.1) in two different formats: an XML format and the original plain text format.
 
     <?xml version="1.0"?>
     <temperatures>
@@ -797,13 +785,25 @@ The information in this section will be useful whether we are called upon to cre
     16-JUN-1994 00 /  6:  276.1
     ...
 
-Figure 5.13: The first few lines of the surface temperature at Point Nemo in two formats: an XML format (top) and the original plain text format (bottom).
+**Figure 5.13**: The first few lines of the surface temperature at Point Nemo in two formats: an XML format (top) and the original plain text format (bottom).
+
+The major difference between these two storage formats is that, in the XML version, every single data value is distinctly labeled. This means that, for example, even without any background explanation of this data set, we could easily identify the “temperature” values within the XML file. By contrast, the same task would be impossible with the plain text format, unless additional information is provided about the data set and the arrangement of the values within the file. Importantly, the XML format allows a computer to perform this task completely automatically because it could detect the values with a label of temperature within the XML file.
+
+One fundamental similarity between these formats is that they are both just text. This is an important and beneficial property of XML; we can read it and manipulate it without any special skills or any specialized software.
+
+XML is a storage format that is still based on plain text but does not suffer from many of the problems of plain text files because it adds flexibility, rigor, and standardization.
+
+Many of the benefits of XML arise from the fact that it is a computer language. When we store a data set in XML format, we are writing computer code that expresses the data values to the computer. This is a huge step beyond free-form plain text files because we are able to communicate much more about the data set to the computer. However, the cost is that we need to learn the rules of XML so that we can communicate the data correctly.
+
+In the next few sections, we will focus on the details of XML. In Section 5.5.1, we will look briefly at the syntax rules of XML, which will allow us to store data correctly in an XML format. We will see that there is a great degree of choice when using XML to store a data set, so in Sections 5.5.2 and 5.5.3, we will discuss some ideas about how to store data sensibly in an XML format—some uses of XML are better than others. In Section 5.5.5 we will return to a more general discussion of how XML formats compare to other storage formats.
+
+The information in this section will be useful whether we are called upon to create an XML document ourselves or whether we just have to work with a data set that someone else has chosen to store in an XML format.
 
 ### 5.5.1 XML syntax
 
 As we saw in Chapter 2, the first thing we need to know about a computer language are the syntax rules, so that we can write code that is correct.
 
-We will use the XML format for the Point Nemo temperature data (Figure 5.13) to demonstrate some of the basic rules of XML syntax.
+We will use the XML format for the Point Nemo temperature data (**Figure 5.13**) to demonstrate some of the basic rules of XML syntax.
 
 The XML format of the data consists of two parts: XML markup and the actual data itself. For example, the information about the latitude at which these data were recorded is stored within XML tags, <latitude> and </latitude>. The combination of tags and content is together described as an XML element.
 
@@ -839,7 +839,7 @@ The declaration can also include information about the encoding of the XML docum
 
 Unlike HTML, where there is a fixed set of allowed elements, an XML document can include elements with any name whatsoever, as long as the elements are all nested cleanly and there is only one outer element, called the root element, that contains all other elements in the document.
 
-In the example XML document in Figure 5.13, there is a single temperatures element, with all other elements, e.g., variable and case elements, nested within that.
+In the example XML document in **Figure 5.13**, there is a single temperatures element, with all other elements, e.g., variable and case elements, nested within that.
 
 Elements can be empty, which means that they consist only of a start tag (no content and no end tag), but these empty elements must end with />, rather than the normal >. The code below shows an example of an empty case element.
 
@@ -885,7 +885,7 @@ There is no general software that “runs” XML code because the code does not 
 
 Although there are syntax rules that any XML document must follow, we still have a great deal of flexibility in how we choose to mark up a particular data set. It is possible to use any element names and any attribute names that we like.
 
-For example, in Figure 5.13, each set of measurements, a date plus a temperature reading, is stored within a case element, using date and temperature attributes. The first set of measurements in this format is repeated below.
+For example, in **Figure 5.13**, each set of measurements, a date plus a temperature reading, is stored within a case element, using date and temperature attributes. The first set of measurements in this format is repeated below.
 
     <case date="16-JAN-1994" temperature="278.9" />
 
@@ -898,6 +898,14 @@ It is important to choose names for elements and attributes that are meaningful,
 When we store a data set as XML, we have to decide which elements and attributes to use to store the data. We also have to consider how elements nest within each other, if at all. In other words, we have to decide upon a design for the XML document.
 
 In this section, we will look at some of these questions and consider some solutions for how to design an XML document.
+
+Even if, in practice, we are not often faced with the prospect of designing an XML format, this discussion will be useful in understanding why an XML document that we encounter has a particular structure. It will also be useful as an introduction to similar design ideas that we will discuss when we get to relational databases in Section 5.6.
+
+#### Marking up data
+
+The first XML design issue is to make sure that each value within a data set can be clearly identified. In other words, it should be trivial for a computer to extract each individual value. This means that every single value should be either the content of an element or the value of an attribute. The XML document shown in **Figure 5.13** demonstrates this idea.
+
+**Figure 5.14** shows another possible XML representation of the Pacific Pole of Inaccessibility temperature data.
 
     <?xml version="1.0"?>
     <temperatures>
@@ -918,15 +926,7 @@ In this section, we will look at some of these questions and consider some solut
         </cases>
     </temperatures>
 
-Figure 5.14: The first few lines of the surface temperature at Point Nemo in an alternative XML format. This format should be compared with the XML format in Figure 5.13.
-
-Even if, in practice, we are not often faced with the prospect of designing an XML format, this discussion will be useful in understanding why an XML document that we encounter has a particular structure. It will also be useful as an introduction to similar design ideas that we will discuss when we get to relational databases in Section 5.6.
-
-#### Marking up data
-
-The first XML design issue is to make sure that each value within a data set can be clearly identified. In other words, it should be trivial for a computer to extract each individual value. This means that every single value should be either the content of an element or the value of an attribute. The XML document shown in Figure 5.13 demonstrates this idea.
-
-Figure 5.14 shows another possible XML representation of the Pacific Pole of Inaccessibility temperature data.
+**Figure 5.14**: The first few lines of the surface temperature at Point Nemo in an alternative XML format. This format should be compared with the XML format in **Figure 5.13**.
 
 In this design, the irregular and one-off metadata values are individually identified within elements or attributes, but the regular and repetitive raw data values are not. This is not ideal from the point of view of labeling every individual data value within the file, but it may be a viable option when the raw data values have a very simple format (e.g., comma-delimited) and the data set is very large, in which case avoiding lengthy tags and attribute names would be a major saving.
 
@@ -942,7 +942,9 @@ When presented with a data set, the following questions should guide the design 
 
 A simple rule of thumb is then to have an element for each object in the data set (and a different type of element for each different type of object) and then have an attribute for each measurement in the data set.
 
-For example, consider the family tree data set in Figure 5.15 (this is a reproduction of Figure 5.3 for convenience). This data set contains demographic information about several related people.
+For example, consider the family tree data set in **Figure 5.15** (this is a reproduction of **Figure 5.3** for convenience). This data set contains demographic information about several related people.
+
+**Figure 5.15**: An example of hierarchical data: a family tree containing data on parents (grey) and children (white). This figure is a reproduction of **Figure 5.3**.
 
 In this case, there are obviously measurements taken on people, those measurements being names, ages, and genders. We could distinguish between parent objects and child objects, so we have elements for each of these.
 
@@ -950,8 +952,6 @@ In this case, there are obviously measurements taken on people, those measuremen
     <child gender="male" name="Jack" age="6" />
 
 When a data set has a hierarchical structure, an XML document can be designed to store the information more efficiently and more appropriately by nesting elements to avoid repeating values.
-
-Figure 5.15: An example of hierarchical data: a family tree containing data on parents (grey) and children (white). This figure is a reproduction of Figure 5.3.
 
 For example, there are two distinct families of people, so we could have elements to represent the different families and nest the relevant people within the appropriate family element to represent membership of a family.
 
@@ -971,7 +971,7 @@ For example, there are two distinct families of people, so we could have element
 
 #### Elements versus attributes
 
-Another decision to make is whether to store data values as the values of attributes of XML elements or as the content of XML elements. For example, when storing the Point Nemo temperature data, we could store the temperature values as attributes of a case element as shown in Figure 5.13 and below.
+Another decision to make is whether to store data values as the values of attributes of XML elements or as the content of XML elements. For example, when storing the Point Nemo temperature data, we could store the temperature values as attributes of a case element as shown in **Figure 5.13** and below.
 
     <case temperature="278.9" />
 
@@ -999,6 +999,14 @@ We need the design written down so that we can check that an XML document follow
 
 Yes, we need to learn another computer language.
 
+The way that the XML design can be specified is by creating a schema for an XML document, which is a description of the structure of the document. A number of technologies exist for specifying XML schema, but we will focus on the Document Type Definition (DTD) language.
+
+A DTD is a set of rules for an XML document. It contains element declarations that describe which elements are permitted within the XML document, in what order, and how they may be nested within each other. The DTD also contains attribute declarations that describe what attributes an element can have, whether attributes are optional or not, and what sort of values each attribute can have.
+
+### 5.5.4 Case study: Point Nemo (continued)
+
+**Figure 5.16** shows the temperature data at Point Nemo in an XML format (this is a reproduction of part of **Figure 5.13** for convenience).
+
     <?xml version="1.0"?>
     <temperatures>
         <variable>Mean TS from clear sky composite (kelvin)</variable>
@@ -1016,17 +1024,11 @@ Yes, we need to learn another computer language.
         ...
     </temperatures>
 
-Figure 5.16: The first few lines of the surface temperature at Point Nemo in an XML format. This is a reproduction of part of Figure 5.13.
-
-The way that the XML design can be specified is by creating a schema for an XML document, which is a description of the structure of the document. A number of technologies exist for specifying XML schema, but we will focus on the Document Type Definition (DTD) language.
-
-A DTD is a set of rules for an XML document. It contains element declarations that describe which elements are permitted within the XML document, in what order, and how they may be nested within each other. The DTD also contains attribute declarations that describe what attributes an element can have, whether attributes are optional or not, and what sort of values each attribute can have.
-
-### 5.5.4 Case study: Point Nemo (continued)
-
-Figure 5.16 shows the temperature data at Point Nemo in an XML format (this is a reproduction of part of Figure 5.13 for convenience).
+**Figure 5.16**: The first few lines of the surface temperature at Point Nemo in an XML format. This is a reproduction of part of **Figure 5.13**.
 
 The structure of this XML document is as follows. There is a single overall temperatures element that contains all other elements. There are several elements containing various sorts of metadata: a variable element containing a description of the variable that has been measured; a filename element and a filepath element containing information about the file from which these data were extracted; and three elements, subset, longitude, and latitude, that together describe the temporal and spatial limits of this data set. Finally, there are a number of case elements that contain the core temperature data; each case element contains a temperature measurement and the date of the measurement as attributes.
+
+A DTD describing this structure is shown in **Figure 5.17**.
 
     <!ELEMENT temperatures (variable,
                             filename,
@@ -1047,9 +1049,7 @@ The structure of this XML document is as follows. There is a single overall temp
         date        ID    #REQUIRED
         temperature CDATA #IMPLIED>
 
-Figure 5.17: A DTD for the XML format used to store the surface temperature at Point Nemo (see Figure 5.16). The line numbers (in grey) are just for reference.
-
-A DTD describing this structure is shown in Figure 5.17.
+**Figure 5.17**: A DTD for the XML format used to store the surface temperature at Point Nemo (see **Figure 5.16**). The line numbers (in grey) are just for reference.
 
 The DTD code consists of two types of declarations. There must be an <!ELEMENT> declaration for each type of element that appears in the XML design and there must be an <!ATTLIST> declaration for every element in the design that has one or more attributes.
 
@@ -1068,7 +1068,7 @@ Most other elements are similarly straightforward because their contents are jus
         parentheses: ( )
     element content: #PCDATA
 
-The temperatures element is more complex because it can contain other elements. The declaration given in Figure 5.17 (lines 1 to 7) specifies seven elements (separated by commas) that are allowed to be nested within a temperatures element. The order of these elements within the declaration is significant because this order is imposed on the elements in the XML document. The first six elements, variable to latitude, are compulsory because there are no modifiers after the element names; exactly one of each element must occur in the XML document. The case element, by contrast, has an asterisk, *, after it, which means that there can be zero or more case elements in the XML document.
+The temperatures element is more complex because it can contain other elements. The declaration given in **Figure 5.17** (lines 1 to 7) specifies seven elements (separated by commas) that are allowed to be nested within a temperatures element. The order of these elements within the declaration is significant because this order is imposed on the elements in the XML document. The first six elements, variable to latitude, are compulsory because there are no modifiers after the element names; exactly one of each element must occur in the XML document. The case element, by contrast, has an asterisk, *, after it, which means that there can be zero or more case elements in the XML document.
 
 The purpose of the <!ATTLIST> declarations in a DTD is to specify which attributes each element is allowed to have. In this example, only the case elements have attributes, so there is only one <!ATTLIST> declaration (lines 16 to 18). This declaration specifies three things for each attribute: the name of the attribute, what sort of value the attribute can have, and whether the attribute is compulsory or optional. The components of this declaration are shown below.
 
@@ -1147,7 +1147,7 @@ If the information were stored in the reverse order, as shown below, the task of
 
 #### Representing complex data structures
 
-The second main advantage of the XML format is that it can accommodate complex data structures. Consider the hierarchical data set in Figure 5.15.
+The second main advantage of the XML format is that it can accommodate complex data structures. Consider the hierarchical data set in **Figure 5.15**.
 
 Because XML elements can be nested within each other, this sort of data set can be stored in a sensible fashion with families grouped together to make parent–child relations implicit and avoid repetition of the parent data. The plain text representation of these data are reproduced from page 72 below along with a possible XML representation.
 
@@ -1197,7 +1197,7 @@ It should also be acknowledged that the additional sophistication of XML creates
 
 In summary, the fact that computers can read XML easily and effectively, plus the fact that computers can produce XML rapidly (verbosity is less of an issue for a computer), means that XML is an excellent format for transferring information between different software programs. XML is a good language for computers to use to talk to each other, with the added bonus that humans can still easily eavesdrop on the conversation.
 
-## Recap
+#### Recap
 
 XML is a language for describing a data set.
 
@@ -1221,6 +1221,14 @@ The software that handles the representation of the data in computer memory, and
 
 The main benefits of databases for data storage derive from the fact that databases have a formal structure. We will spend much of this section describing and discussing how databases are designed, so that we can appreciate the benefits of storing data in a database and so that we know enough to be able to work with data that have been stored in a database.
 
+#### 5.6.1 The database data model
+
+We are not concerned with the file formats that are used to store a database. Instead, we will deal with the conceptual components used to store data in a database.
+
+A relational database consists of a set of tables, where a table is conceptually just like a plain text file or a spreadsheet: a set of values arranged in rows and columns. The difference is that there are usually several tables in a single database, and the tables in a database have a much more formal structure than a plain text file or a spreadsheet.
+
+In order to demonstrate the concepts and terminology of databases, we will work with a simple example of storing information about books. The entire set of information is shown in **Figure 5.18**, but we will only consider specific subsets of book information at various stages throughout this section in order to demonstrate different ideas about databases.
+
 ISBN        title                                 author            gender  publisher         ctry  
 ----------  ------------------------------------  ----------------  ------  ----------------  ----  
 0618260307  The Hobbit                            J. R. R. Tolkien  male    Houghton Mifflin  USA    
@@ -1231,15 +1239,7 @@ ISBN        title                                 author            gender  publ
 0908606273  My Cat Likes to Hide in Boxes         Lynley Dodd       female  Mallinson Rendel  NZ    
 0908606273  My Cat Likes to Hide in Boxes         Eve Sutton        female  Mallinson Rendel  NZ
 
-Figure 5.18: Information about a set of books, including the ISBN and title for the book, the author of the book and the author’s gender, the publisher of the book, and the publisher’s country of origin.
-
-#### 5.6.1 The database data model
-
-We are not concerned with the file formats that are used to store a database. Instead, we will deal with the conceptual components used to store data in a database.
-
-A relational database consists of a set of tables, where a table is conceptually just like a plain text file or a spreadsheet: a set of values arranged in rows and columns. The difference is that there are usually several tables in a single database, and the tables in a database have a much more formal structure than a plain text file or a spreadsheet.
-
-In order to demonstrate the concepts and terminology of databases, we will work with a simple example of storing information about books. The entire set of information is shown in Figure 5.18, but we will only consider specific subsets of book information at various stages throughout this section in order to demonstrate different ideas about databases.
+**Figure 5.18**: Information about a set of books, including the ISBN and title for the book, the author of the book and the author’s gender, the publisher of the book, and the publisher’s country of origin.
 
 Shown below is a simple example of a database table that contains information about some of the books in our data set. This table has three columns — the ISBN of the book, the title of the book, and the author of the book — and four rows, with each row representing one book.
 
@@ -1589,6 +1589,8 @@ These ideas are an expression of the DRY principle from Section 2.7. A well-desi
 
 The Data Expo data set consists of seven atmospheric variables recorded at 576 locations for 72 time points (every month for 6 years), plus elevation data for each location (see Section 5.2.8).
 
+The data were originally stored as 505 plain text files, where each file contains the data for one variable for one month. **Figure 5.19** shows the first few lines from one of the plain text files.
+
                 VARIABLE : Mean TS from clear sky composite (kelvin)
                 FILENAME : ISCCPMonthly_avg.nc
                 FILEPATH : /usr/local/fer_dsets/data/
@@ -1604,9 +1606,7 @@ The Data Expo data set consists of seven atmospheric variables recorded at 576 l
     23.8N / 46:  294.1  295.0  296.5  286.8  286.8  285.2  289.8  ...
     ...
 
-Figure 5.19: One of the plain text files from the original format of the Data Expo data set, which contains data for one variable for one month. The file contains information on latitude and longitude that is repeated in every other plain text file in the original format (for each variable and for each month; in total, over 500 times).
-
-The data were originally stored as 505 plain text files, where each file contains the data for one variable for one month. Figure 5.19 shows the first few lines from one of the plain text files.
+**Figure 5.19**: One of the plain text files from the original format of the Data Expo data set, which contains data for one variable for one month. The file contains information on latitude and longitude that is repeated in every other plain text file in the original format (for each variable and for each month; in total, over 500 times).
 
 As we have discussed earlier in this chapter, this simple format makes the data very accessible. However, this is an example where a plain text format is quite inefficient, because many values are repeated. For example, the longitude and latitude information for each location in the data set is stored in every single file, which means that that information is repeated over 500 times! That not only takes up more storage space than is necessary, but it also violates the DRY principle, with all of the negative consequences that follow from that.
 
@@ -1785,7 +1785,7 @@ Section 7.2.14 provides a very brief introduction to SQLite.
 
 The major proprietary database systems include Oracle, Microsoft SQL Server, and Microsoft Access. The default user interface for these software products is based on menus and dialogs so they are beyond the scope and interest of this book. Nevertheless, in all of these, as with the default interfaces for the open source database software, it is possible to write computer code to access the data. Writing these data queries is the topic of the next chapter.
 
-## Recap
+#### Recap
 
 A database consists of one or more tables. Each column of a database table contains only one type of information, corresponding to one variable from a data set.
 

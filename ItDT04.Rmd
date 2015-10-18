@@ -248,16 +248,29 @@ Another way to get nice results is to make use of other people’s CSS code. For
 
 ## 4.5 Further reading
 
-*The W3C CSS Level 1 Specification*. The formal and official definition of CSS (level 1). Quite technical. http://www.w3.org/TR/CSS1
+*The W3C CSS Level 1 Specification*  
+http://www.w3.org/TR/CSS1  
+The formal and official definition of CSS (level 1). Quite technical. 
 
-*Adding a Touch of Style* by Dave Raggett. An introductory tutorial to CSS by one of the original designers of HTML. http://www.w3.org/MarkUp/Guide/Style.html
+*Adding a Touch of Style*  
+by Dave Raggett  
+http://www.w3.org/MarkUp/Guide/Style.html  
+An introductory tutorial to CSS by one of the original designers of HTML. 
 
-*The Web Design Group’s CSS web site*. A more friendly, user-oriented description of CSS. http://htmlhelp.com/reference/css/
+*The Web Design Group’s CSS web site*  
+http://htmlhelp.com/reference/css/  
+A more friendly, user-oriented description of CSS. 
 
-*The w3schools CSS Tutorial*. A tutorial-based introduction to CSS. http://www.w3schools.com/css/
+*The w3schools CSS Tutorial*  
+http://www.w3schools.com/css/  
+A tutorial-based introduction to CSS. 
 
-*The W3C CSS Validation Service*. A syntax checker for CSS code. http://jigsaw.w3.org/css-validator/
+*The W3C CSS Validation Service*  
+http://jigsaw.w3.org/css-validator/  
+A syntax checker for CSS code.
 
-*CSS Zen Garden*. A web site that demonstrates and evangelizes the flexibility and power of CSS beautifully. http://www.csszengarden.com/
+*CSS Zen Garden*  
+http://www.csszengarden.com/  
+A web site that demonstrates and evangelizes the flexibility and power of CSS beautifully. 
 
 [1] http://developer.yahoo.com/yui/
