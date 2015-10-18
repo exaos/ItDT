@@ -182,11 +182,11 @@ A file format is a way of interpreting the bytes in a file. For example, in the 
 
 In order to visualize the idea of file formats, we will display a block of memory in the format shown below. This example shows the first 24 bytes from the PDF file for this book.
 
-     0  :  00100101 01010000 01000100 01000110  |  %PDF
-     4  :  00101101 00110001 00101110 00110100  |  -1.4
-     8  :  00001010 00110101 00100000 00110000  |  .5 0
-    12  :  00100000 01101111 01100010 01101010  |   obj
-    16  :  00001010 00111100 00111100 00100000  |  .<<
+     0  :  00100101 01010000 01000100 01000110  |  %PDF  
+     4  :  00101101 00110001 00101110 00110100  |  -1.4  
+     8  :  00001010 00110101 00100000 00110000  |  .5 0  
+    12  :  00100000 01101111 01100010 01101010  |   obj  
+    16  :  00001010 00111100 00111100 00100000  |  .<<  
     20  :  00101111 01010011 00100000 00101111  |  /S /
 
 This display has three columns. On the left is a byte offset that indicates the memory location within the file for each row. The middle column displays the raw memory contents of the file, which is just a series of 0s and 1s. The right hand column displays an interpretation of the bytes. This display is split across several rows just so that it will fit onto the printed page. A block of computer memory is best thought of as one long line of 0s and 1s.
