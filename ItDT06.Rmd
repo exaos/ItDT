@@ -71,7 +71,7 @@ The following code shows a very small, but complete, XML document. The root elem
               temperature="278.9"/>
     </temperatures>
 
-Table 6.1: The predefined XML entities.
+**Table 6.1**: The predefined XML entities.
 
 Character Description       Entity
 --------- ----------------- -------
