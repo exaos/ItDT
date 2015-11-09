@@ -958,7 +958,7 @@ The list() function can be used to create a list explicitly. Like the c() functi
 
 In the following code, we generate a list similar to the previous one, containing the row and column names from the candy data frame.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 list(rownames = rownames(candy), colnames = colnames(candy))
 ```
 
@@ -976,7 +976,7 @@ As for lists, it is useful to know how to work with matrices because many R func
 
 A matrix can be created directly using the matrix() function. The following code creates a matrix from 6 values, with 3 columns and two rows; the values are used column-first.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 matrix(1:6, ncol = 3)
 ```
 
@@ -984,7 +984,7 @@ The array data structure extends the idea of a matrix to more than two dimension
 
 The array() function can be used to create an array. In the following code, a two-by-two-by-two, three-dimensional array is created.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 array(1:8, dim = c(2, 2, 2))
 ```
            
@@ -996,7 +996,7 @@ In that section, we discussed the fact that there are limits to the precision wi
 
 As a simple demonstration, consider the following condition.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 0.3 - 0.2 == 0.1
 ```
 
@@ -1006,7 +1006,7 @@ Comparisons between real values must be performed with care and tests for equali
 
 Another issue is the precision to which numbers are displayed. Consider the following simple arithmetic expression.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 1/3
 ```
 
@@ -1014,14 +1014,14 @@ The answer, to full precision, never ends, but R has only shown seven significan
 
 The following code uses the options() function to specify that R should display more significant digits.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 options(digits = 16)
 1/3
 ```
 
 The code below sets the option back to its default value.
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA}
 options(digits = 7)
 ```
 
@@ -1045,9 +1045,9 @@ One of the most basic ways that we can manipulate data structures is to subset t
 
 For example, we might want to answer the question: “what sort of candy was the most common in the bag of candy?” The following code produces the answer to this question using R’s subsetting capabilities.
 
-> candy[candy$counts == max(candy$counts), ]
-              shapes patterns shades counts
-           11   oval    plain   dark     11
+```{r comment=NA}
+candy[candy$counts == max(candy$counts), ]
+```
 
 R has very powerful mechanisms for subsetting. In this section, we will outline the basic format of these operations and many more examples will be demonstrated as we progress through the rest of the chapter.
 
@@ -1055,13 +1055,15 @@ We will start with subsetting vectors.
 
 A subset from a vector may be obtained by appending an index within square brackets to the end of a symbol name. As an example, recall the vector of candy counts, called counts.
 
-> counts
-            [1]  2  0  3  1  3  2  9  0  2  1 11  2
+```{r comment=NA}
+counts
+```
             
 We can extract fourth of these counts by specifying the index 4, as shown below.
 
-> counts[4]
-[1] 1
+```{r comment=NA}
+counts[4]
+```
 
 The components of this expression are shown below:
 
@@ -1071,20 +1073,23 @@ The components of this expression are shown below:
 
 The index can be a vector of any length. For example, the following code produces the first three counts (the number of light-shaded candies with a pattern).
 
-> counts[1:3]
-[1] 2 0 3
+```{r comment=NA}
+counts[1:3]
+```
 
 The diagram below illustrates how the values in the index vector are used to select elements from the counts vector to create a subset. Diagrams like this will be used throughout this chapter to help describe different data manipulation techniques; in each case, to save on space, the data values shown in the diagram will not necessarily correspond to the data values being discussed in the surrounding text.
 
 The index does not have to be a contiguous sequence, and it can include repetitions. The following example produces counts for all candies with a pattern. The elements we want are the first three and the seventh, eighth, and ninth. The index is constructed with the following code
 
-> c(1:3, 7:9)
-[1] 1 2 3 7 8 9
+```{r comment=NA}
+c(1:3, 7:9)
+```
 
 The subsetting operation is expressed as follows.
 
-> counts[c(1:3, 7:9)]
-[1] 2 0 3 9 0 2
+```{r comment=NA}
+counts[c(1:3, 7:9)]
+```
 
 This is an example of a slightly more complex R expression. It involves a function call, to the c() function, that generates a vector, and this vector is then used as an index to select the corresponding elements from the counts vector.
 
@@ -1096,15 +1101,16 @@ The components of this expression are shown below:
 
 As well as using integers for indices, we can use logical values. For example, a better way to express the idea that we want the counts for all candies with a pattern is to generate a logical vector first, as in the following code.
 
-> hasPattern <- patterns == "pattern"
-> hasPattern
- [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-[10] FALSE FALSE FALSE
+```{r comment=NA}
+hasPattern <- patterns == "pattern"
+hasPattern
+```
 
 This logical vector can be used as an index to return all of the counts where hasPattern is TRUE.
 
-> counts[hasPattern]
-[1] 2 0 3 9 0 2
+```{r comment=NA}
+counts[hasPattern]
+```
 
 The diagram below illustrates how an index of logical values selects elements from the complete object where the index value is TRUE.
 
@@ -1112,14 +1118,9 @@ It would be even better to work with the entire data frame and retain the patter
 
 A data frame can also be indexed using square brackets, though slightly differently because we have to specify both which rows and which columns we want. The following code extracts the patterns and counts variables, columns 2 and 4, from the data frame for all candies with a pattern:
 
-> candy[hasPattern, c(2, 4)]
-             patterns counts
-           1  pattern      2
-           2  pattern      0
-           3  pattern      3
-           7  pattern      9
-           8  pattern      0
-           9  pattern      2
+```{r comment=NA}
+candy[hasPattern, c(2, 4)]
+```
 
 The result is still a data frame, just a smaller one. 
 
@@ -1133,46 +1134,35 @@ The components of this expression are shown below:
 
 An even better way to select this subset is to refer to the appropriate columns by their names. When a data structure has named components, a subset may be selected using those names. For example, the previous subset could also be obtained with the following code.
 
-> candy[hasPattern, c("patterns", "counts")]
-             patterns counts
-           1  pattern      2
-           2  pattern      0
-           3  pattern      3
-           7  pattern      9
-           8  pattern      0
-           9  pattern      2
+```{r comment=NA}
+candy[hasPattern, c("patterns", "counts")]
+```
 
 The function subset() provides another way to subset a data frame. This function has a subset argument for specifying the rows and a select argument for specifying the columns.
 
-> subset(candy, subset = hasPattern,
-         select = c("patterns", "counts"))
-             patterns counts
-           1  pattern      2
-           2  pattern      0
-           3  pattern      3
-           7  pattern      9
-           8  pattern      0
-           9  pattern      2
+```{r comment=NA}
+subset(candy, subset = hasPattern, select = c("patterns", "counts"))
+```
 
 When subsetting using square brackets, it is possible to leave the row or column index completely empty. The result is that all rows or all columns, respectively, are returned. For example, the following code extracts all columns for the first three rows of the data frame (the light-shaded candies with a pattern).
 
-> candy[1:3, ]
-             shapes patterns shades counts
-           1  round  pattern  light      2
-           2   oval  pattern  light      0
-           3   long  pattern  light      3
+```{r comment=NA}
+candy[1:3, ]
+```
            
 If a single index is specified when subsetting a data frame with single square brackets, the effect is to extract the appropriate columns of the data frame and all rows are returned.
 
-> candy["counts"]
-counts 12 20 33 41 53 62 79 80 92 10 1 11 11 12 2
+```{r comment=NA}
+candy["counts"]
+```
 
 This result is one that we need to study more closely. This subsetting operation has extracted a single variable from a data frame. However, the result is a data frame containing a single column (i.e., a data set with one variable).
 
 Often what we will require is just the vector representing the values in the variable. This is achieved using a different sort of indexing that uses double square brackets, [[. For example, the following code extracts the first variable from the candy data frame as a vector.
 
-> candy[["counts"]]
-            [1]  2  0  3  1  3  2  9  0  2  1 11  2
+```{r comment=NA}
+candy[["counts"]]
+```
 
 The components of this expression are shown below:
 
@@ -1184,15 +1174,17 @@ Single square bracket subsetting on a data frame is like taking an egg container
 
 As with single square bracket subsetting, the index used for double square bracket subsetting can also be a number.
 
-> candy[[4]]
-            [1]  2  0  3  1  3  2  9  0  2  1 11  2
+```{r comment=NA}
+candy[[4]]
+```
             
 However, with double square bracket subsetting, the index must be a single value.
 
 There is also a short-hand equivalent for getting a single variable from a data frame. This involves appending a dollar sign, $, to the symbol, followed by the name of the variable.
 
-> candy$counts
-            [1]  2  0  3  1  3  2  9  0  2  1 11  2
+```{r comment=NA}
+candy$counts
+```
             
 The components of this expression are shown below:
 
@@ -1206,54 +1198,57 @@ The subsetting syntax can also be used to assign a new value to some portion of 
 
 As with extracting subsets, the index can be a numeric vector, a character vector, or a logical vector. In this case, we will first develop an expression that generates a logical vector telling us where the zeroes are.
 
-> counts == 0
-            [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
-           [10] FALSE FALSE FALSE
+```{r comment=NA}
+counts == 0
+```
            
 The zeroes are the second and eighth values in the vector.
 
 We can now use this expression as an index to specify which elements of the counts vector we want to modify. 
 
-> counts[counts == 0] <- NA
-> counts
-            [1]  2 NA  3  1  3  2  9 NA  2  1 11  2
+```{r comment=NA}
+counts[counts == 0] <- NA
+counts
+```
 
 We have replaced the original zero values with NAs.
 
 The following code reverses the process and replaces all NA values with zero. The is.na() function is used to find which values within the counts vector are NAs.
 
-> counts[is.na(counts)] <- 0
+```{r comment=NA}
+counts[is.na(counts)] <- 0
+counts
+```
 
 ### 9.5.2 Subsetting factors
 
 The case of subsetting a factor deserves special mention because, when we subset a factor, the levels of the factor are not altered. For example, consider the patterns variable in the candy data set.
 
-> candy$patterns
-            [1] pattern pattern pattern plain   plain   plain   pattern
-            [8] pattern pattern plain   plain   plain
-           Levels: pattern plain
+```{r comment=NA}
+candy$patterns
+```
            
 This factor has two levels, pattern and plain. If we subset just the first three values from this factor, the result only contains the value pattern, but there are still two levels.
 
-> candy$patterns[1:3]
-           [1] pattern pattern pattern
-           Levels: pattern plain
+```{r comment=NA}
+candy$patterns[1:3]
+```
 
 It is possible to force the unused levels to be dropped by specifying drop = TRUE within the square brackets, as shown below.
 
-> subPattern <- candy$patterns[1:3, drop=TRUE]
-> subPattern
-           [1] pattern pattern pattern
-           Levels: pattern
+```{r comment=NA}
+subPattern <- candy$patterns[1:3, drop = TRUE]
+subPattern
+```
            
 Assigning values to a subset of a factor is also a special case because only the current levels of the factor are allowed. A missing value is generated if the new value is not one of the current factor levels (and a warning is displayed).
 
 For example, in the following code, we attempt to assign a new value to the first element of a factor where the new value is not one of the levels of the factor, so the result is an NA value.
 
-> subPattern[1] <- "swirly"
-> subPattern
-           [1] <NA>    pattern pattern
-           Levels: pattern
+```{r comment=NA}
+subPattern[1] <- "swirly"
+subPattern
+```
            
 #### Recap
 
@@ -1277,8 +1272,9 @@ There is a general, but informal, rule in R that, in such cases, the shorter vec
 
 In the following code, a vector of length 3 is added to a vector of length 6.
 
-> c(1, 2, 3) + c(1, 2, 3, 4, 5, 6)
-[1] 2 4 6 5 7 9
+```{r comment=NA}
+c(1, 2, 3) + c(1, 2, 3, 4, 5, 6)
+```
 
 What happens is that the first vector is recycled to make a vector of length 6, and then element-wise addition can occur.
 
@@ -1290,20 +1286,24 @@ In the case study in Section 9.1, there was a step where we took the text repres
 
 We start with a character vector (containing just one character value).
 
-> popText
-[1] "6,617,746,521"
+```{r comment=NA}
+popText <- "6,617,746,521"
+popText
+```
 
 We remove the commas from the text, but we still have a character vector.
 
-> popNum <- gsub(",", "", popText)
-> popNum
-                 [1] "6617746521"
+```{r comment=NA}
+popNum <- gsub(",", "", popText)
+popNum
+```
                  
 Now, we convert the character vector to a numeric vector.
 
-> pop <- as.numeric(popNum)
-> pop
-[1] 6617746521
+```{r comment=NA}
+pop <- as.numeric(popNum)
+pop
+```
 
 The important part is the call to as.numeric(). This is the function that
 starts with a character value and converts it into a numeric value.
@@ -1316,20 +1316,21 @@ It is also important to keep in mind that many functions will automatically perf
 
 The shapes vector that we created first is a character vector. 
 
-> shapes
-            [1] "round" "oval"  "long"  "round" "oval"  "long"  "round"
-            [8] "oval"  "long"  "round" "oval"  "long"
+```{r comment=NA}
+shapes
+```
 
 We used this character vector, plus several others, to create the candy data frame, with a call to the data.frame() function.
 
-> candy <- data.frame(shapes, patterns, shades, counts)
+```{r comment=NA}
+candy <- data.frame(shapes, patterns, shades, counts)
+```
 
 What do we see if we extract the shapes column from the candy data frame?
 
-> candy$shapes
-            [1] round oval  long  round oval  long  round oval  long
-           [10] round oval  long
-           Levels: long oval round
+```{r comment=NA}
+candy$shapes
+```
 
 This is a factor, not a character vector!
 
@@ -1349,39 +1350,9 @@ In particular, when coercing a factor that has levels consisting entirely of dig
 
 Consider the candy data frame again. 
 
-> candy
-              shapes patterns shades counts
-           1   round  pattern  light      2
-2
-3
-4
-5
-6
-7
-8
-9
-10  round
-11   oval
-12   long
-pattern  light      0
-pattern  light      3
-  plain  light      1
-  plain  light      3
-  plain  light      2
-pattern   dark      9
-pattern   dark      0
-pattern   dark      2
-  plain   dark      1
-  plain   dark     11
-  plain   dark      2
-oval
- long
-round
- oval
- long
-round
- oval
- long
+```{r comment=NA}
+candy
+```
 
 This data set consists of four variables that record how many candies were counted for each combination of shape, pattern, and shade. These variables are stored in the data frame as three factors and a numeric vector.
 
@@ -1395,10 +1366,9 @@ In this case, the data frame has an attribute containing the row names and anoth
 
 As another example, consider the factor shapesFactor that we created on page 257.
 
-> shapesFactor
- [1] round oval  long  round oval  long  round oval  long
-[10] round oval  long
-Levels: round oval long
+```{r comment=NA}
+shapesFactor
+```
 
 Again, there are the actual data values, plus there is metadata that records the set of valid data values—the levels of the factor. This levels information is stored in an attribute. The diagram below illustrates the idea of a factor, on the left, with a single attribute that contains the valid levels of the factor, on the right.
 
@@ -1408,13 +1378,9 @@ However, some R functions produce a result that has important information stored
 
 The attributes() function can be used to view all attributes of a data structure. For example, the following code extracts the attributes from the candy data frame (we will talk about the class attribute later).
 
-> attributes(candy)
-           $names
-           [1] "shapes"   "patterns" "shades"   "counts"
-           $row.names
-            [1]  1  2  3  4  5  6  7  8  9 10 11 12
-           $class
-           [1] "data.frame"
+```{r comment=NA}
+attributes(candy)
+```
 
 This is another result that we should look at very closely. What sort of data structure is it?
 
@@ -1424,20 +1390,23 @@ Each component of this list, each attribute of the data frame, has a name; the c
 
 The attr() function can be used to get just one specific attribute from a data structure. For example, the following code just gets the names attribute from the candy data frame.
 
-> attr(candy, "names")
-           [1] "shapes"   "patterns" "shades"   "counts"
+```{r comment=NA}
+attr(candy, "names")
+```
 
 Because many different data structures have a names attribute, there is a special function, names(), for extracting just that attribute.
 
-> names(candy)
-           [1] "shapes"   "patterns" "shades"   "counts"
+```{r comment=NA}
+names(candy)
+```
 
 For the case of a data frame, we could also use the colnames() function to get this attribute, and there is a rownames() function for obtaining the row names.
 
 Similarly, there is a special function, levels(), for obtaining the levels of a factor.
 
-> levels(shapesFactor)
-           [1] "round" "oval"  "long"
+```{r comment=NA}
+levels(shapesFactor)
+```
            
 Section 9.9.3 contains an example where it is necessary to directly access the attributes of a data structure.
 
@@ -1447,28 +1416,30 @@ We can often get some idea of what sort of data structure we are working with by
 
 For example, the data structure that has been assigned to the symbol candy is a data frame.
 
-> class(candy)
-[1] "data.frame"
+```{r comment=NA}
+class(candy)
+```
 
 The shapes variable within the candy data frame is a factor.
 
-> class(candy$shapes)
-[1] "factor"
+```{r comment=NA}
+class(candy$shapes)
+```
 
 Many R functions return a data structure that is not one of the basic data structures that we have already seen. For example, consider the following code, which generates a table of counts of the number of candies of each different shape (summing across shades and patterns).
 
 We will describe the xtabs() function later in Section 9.8.4. For now, we are just interested in the data structure that is produced by this function.
 
-> shapeCount <- xtabs(counts ~ shapes, data=candy)
-> shapeCount
-           shapes
-            long  oval round
-9 14 13
+```{r comment=NA}
+shapeCount <- xtabs(counts ~ shapes, data = candy)
+shapeCount
+```
 
 What sort of data structure is this? The best way to find out is to use the class() function.
 
-> class(shapeCount)
-           [1] "xtabs" "table"
+```{r comment=NA}
+class(shapeCount)
+```
 
 The result is an "xtabs" data structure, which is a special sort of "table" data structure.
 
@@ -1476,23 +1447,21 @@ We have not seen either of these data structures before. However, much of what w
 
 For example, it is usually possible to subset any class using the standard square bracket syntax. For example, in the following code, we extract the first element from the table.
 
-> shapeCount[1]
-long 9
+```{r comment=NA}
+shapeCount[1]
+```
 
 Where appropriate, arithmetic and comparisons will also generally work. In the code below, we are calculating which elements of the table are greater than 10.
 
-> shapeCount > 10
-           shapes
-            long  oval round
-           FALSE  TRUE  TRUE
+```{r comment=NA}
+shapeCount > 10
+```
 
 Furthermore, if necessary, we can often resort to coercing a class to something more standard and familiar. The following code converts the table data structure into a data frame, where the rows of the original table have been converted into columns in the data frame, with appropriate column names automatically provided.
 
-> as.data.frame(shapeCount)
-             shapes Freq
-           1   long    9
-           2   oval   14
-           3  round   13
+```{r comment=NA}
+as.data.frame(shapeCount)
+```
 
 In summary, although we will encounter a wide variety of data structures, the standard techniques that we learn in this chapter for working with basic data structures, such as subsetting, will also be useful for working with other classes.
 
@@ -1502,25 +1471,29 @@ Dates are an important example of a special data structure. Representing dates a
 
 As an example, we will make use of the Sys.Date() function, which returns the current date.
 
-> today <- Sys.Date()
-> today
-           [1] "2008-09-29"
+```{r comment=NA}
+today <- Sys.Date()
+today
+```
 
 This looks like it is a character vector, but it is not. It is a Date data structure.
 
-           > class(today)
-[1] "Date"
+```{r comment=NA}
+class(today)
+```
 
 Having a special class for dates means that we can perform tasks with dates, such as arithmetic and comparisons, in a meaningful way, something we could not do if we stored the date as just a character value. For example, the manuscript for this book was due at the publisher on September 30th 2008. The following code calculates whether the manuscript was late. The as.Date() function converts a character value, in this case "2008-09-30", into a date.
 
-> deadline <- as.Date("2008-09-30")
-> today > deadline
-[1] FALSE
+```{r comment=NA}
+deadline <- as.Date("2008-09-30")
+today > deadline
+```
 
 The following code calculates how many days remain before the deadline (or how late the manuscript is).
 
-> deadline - today
-Time difference of 1 days
+```{r comment=NA}
+deadline - today
+```
 
 The Date class stores date values as integer values, representing the number of days since January 1st 1970, and automatically converts the numbers to a readable text value to display the dates on the screen.
 
@@ -1533,8 +1506,9 @@ to describe relationships using symbols.
 
 We saw an example on page 281 that looked like this:
 
-> counts ~ shapes
-           counts ~ shapes
+```{r comment=NA}
+counts ~ shapes
+```
 
 The components of this expression are show below:
 
@@ -1548,11 +1522,9 @@ Each side of a formula can have more than one symbol, with the symbols separated
 
 For example, the following call to the xtabs() function combines two symbols on the right-hand side of the formula to produce a two-way table of counts.
 
-> xtabs(counts ~ patterns + shades, data=candy)
-         shades
-patterns  dark light
-  pattern   11     5
-  plain     14     6
+```{r comment=NA}
+xtabs(counts ~ patterns + shades, data = candy)
+```
 
 Formulas are mainly used to express statistical models in R, but they are also used in other contexts, such as the xtabs() function shown above and in Section 9.6.4. We will see another use of formulas in Section 9.8.11.
 
@@ -1562,39 +1534,29 @@ When working with anything but tiny data sets, basic features of the data set ca
 
 The summary() function produces summary information for a data structure. For example, it will provide numerical summary data for each variable in a data frame.
 
-> summary(candy)
-   shapes     patterns   shades
- long :4   pattern:6   dark :6
- oval :4   plain  :6   light:6
- round:4
-counts Min.:0 1st Qu.: 1 Median : 2 Mean :3 3rd Qu.: 3 Max. :11
+```{r comment=NA}
+summary(candy)
+```
 
 The length() function is useful for determining the number of values in a vector or the number of components in a list. Similarly, the dim() function will give the number of rows and columns in a matrix or data frame.
 
-> dim(candy)
-[1]12 4
+```{r comment=NA}
+dim(candy)
+```
 
 The str() function (short for “structure”) is useful when dealing with large objects because it only shows a sample of the values in each part of the object, although the display is very low-level so it may not always make things clearer.
 
 The following code displays the low-level structure of the candy data frame. 
 
-> str(candy)
-'data.frame': 12 obs. of 4 variables:
-$ shapes : Factor w/ 3 levels "long","oval",..: 3 2 1 3 .. $ patterns: Factor w/ 2 levels "pattern","plain": 1 1 1 2.. $ shades : Factor w/ 2 levels "dark","light": 2 2 2 2 2 .. $counts :num 2031329021...
+```{r comment=NA}
+str(candy)
+```
 
 Another function that is useful for inspecting a large object is the head() function. This just shows the first few elements of an object, so we can see the basic structure without seeing all of the values. The code below uses head() to display only the first six rows of the candy data frame.
 
-> head(candy)
-             shapes patterns shades counts
-           1  round  pattern  light      2
-           2   oval  pattern  light      0
-           3   long  pattern  light      3
-4  round
-5   oval
-6   long
-plain  light      1
-plain  light      3
-plain  light      2
+```{r comment=NA}
+head(candy)
+```
 
 There is also a tail() function for viewing the last few elements of an object.
 
@@ -1602,25 +1564,29 @@ There is also a tail() function for viewing the last few elements of an object.
 
 In Section 9.6.2, we saw that some functions automatically perform type coercion. An example is the paste() function, which combines text values. If we give it a value that is not text, it will automatically coerce it to text. For example, the following code returns a number (the total number of candies in the candy data frame).
 
-> sum(candy$counts)
-[1] 36
+```{r comment=NA}
+sum(candy$counts)
+```
 
 If we use this value as an argument to the paste() function, the number is automatically coerced to a text value to become part of the overall text result.
 
-> paste("There are", sum(candy$counts), "long candies")
-           [1] "There are 36 long candies"
+```{r comment=NA}
+paste("There are", sum(candy$counts), "long candies")
+```
 
 Generic functions are similar in that they will accept many different data structures as arguments. However, instead of forcing the argument to be what the function wants it to be, a generic function adapts itself to the data structure it is given. Generic functions do different things when given different data structures.
 
 An example of a generic function is the summary() function. The result of a call to summary() will depend on what sort of data structure we provide. The summary information for a factor is a table giving how many times each level of the factor appears.
 
-> summary(candy$shapes)
-long oval round 444
+```{r comment=NA}
+summary(candy$shapes)
+```
 
 If we provide a numeric vector, the result is a five-number summary, plus the mean.
 
-> summary(candy$counts)
-Min. 1st Qu. Median Mean 3rd Qu. Max. 0 1 2 3 3 11
+```{r comment=NA}
+summary(candy$counts)
+```
 
 Generic functions are another reason why it is easy to work with data in R; a single function will produce a sensible result no matter what data structure we provide.
 
@@ -1668,8 +1634,9 @@ A filename is just a character value, e.g., "pointnemotemp.txt", but specifying 
 
 The best way to specify a path in R is via the file.path() function because this avoids the differences between path descriptions on different operating systems. For example, the following code generates a path to the file pointnemotemp.txt within the directory LAS (on a Linux system).
 
-> file.path("LAS", "pointnemotemp.txt")
-           [1] "LAS/pointnemotemp.txt"
+```{r comment=NA}
+file.path("~/GitHub/ItDT", "pointnemotemp.txt")
+```
 
 The file.choose() function can be used to allow interactive selection of a file. This is particularly effective on Windows because it provides a familiar file selection dialog box.
 
@@ -1701,38 +1668,31 @@ The temperature data obtained from NASA’s Live Access Server for the Pacific P
 
 One way to view the format of the file in Figure 9.5 is that the data start on the ninth line and data values within each row are separated by whitespace. This means that we can use the read.table() function to read the Point Nemo temperature information, as shown below.
 
-> pointnemodelim <-
-    read.table(file.path("LAS", "pointnemotemp.txt"),
-skip=8)
-> pointnemodelim
-                            V1 V2 V3 V4    V5
-                 1 16-JAN-1994  0  / 1: 278.9
-                 2 16-FEB-1994  0  / 2: 280.0
-                 3 16-MAR-1994  0  / 3: 278.9
-                 4 16-APR-1994  0  / 4: 278.9
-                 5 16-MAY-1994  0  / 5: 277.8
-                 6 16-JUN-1994  0  / 6: 276.1
-...
+```{r comment=NA}
+pointnemodelim <- read.table(file.path("~/GitHub/ItDT", "pointnemotemp.txt"),
+                             skip = 8)
+head(pointnemodelim)
+```
 
 In the above example, and in a number of examples throughout the rest of the chapter, the output displayed by R has been manually truncated to avoid wasting too much space on the page. This truncation is indicated by the use of ... at the end of a line of output, to indicate that there are further columns that are not shown, or ... on a line by itself, to indicate that there are further rows that are not shown.
 
 By default, read.table() assumes that the text file contains a data set with one case on each row and that each row contains multiple values, with each value separated by whitespace (one or more spaces or tabs). The skip argument is used to ignore the first few lines of a file when, for example, there is header information or metadata at the start of the file before the core data values.
 
-           VARIABLE : Mean TS from clear sky composite (kelvin)
-           FILENAME : ISCCPMonthly_avg.nc
-           FILEPATH : /usr/local/fer_data/data/
-           SUBSET   : 48 points (TIME)
-           LONGITUDE: 123.8W(-123.8)
-           LATITUDE : 48.8S
-                      123.8W 
-                       23
-16-JAN-1994 00 /  1:  278.9
-16-FEB-1994 00 /  2:  280.0
-16-MAR-1994 00 /  3:  278.9
-16-APR-1994 00 /  4:  278.9
-16-MAY-1994 00 /  5:  277.8
-16-JUN-1994 00 /  6:  276.1
-...
+               VARIABLE : Mean TS from clear sky composite (kelvin)
+               FILENAME : ISCCPMonthly_avg.nc
+               FILEPATH : /usr/local/fer_data/data/
+               SUBSET   : 48 points (TIME)
+               LONGITUDE: 123.8W(-123.8)
+               LATITUDE : 48.8S
+                          123.8W 
+                           23
+    16-JAN-1994 00 /  1:  278.9
+    16-FEB-1994 00 /  2:  280.0
+    16-MAR-1994 00 /  3:  278.9
+    16-APR-1994 00 /  4:  278.9
+    16-MAY-1994 00 /  5:  277.8
+    16-JUN-1994 00 /  6:  276.1
+    ...
 
 Figure9.5: The first few lines of the plain text output from the LiveAccessServer for the surface temperature at Point Nemo. This is a reproduction of Figure 1.2.
 
@@ -1744,23 +1704,15 @@ The names of the variables in the data frame can be read from the file, or speci
 
 The result in this case is not perfect because we end up with several columns of junk that we do not want (V2 to V4). We can use a few more arguments to read.table() to improve things greatly.
 
-> pointnemodelim <-
-    read.table(file.path("LAS", "pointnemotemp.txt"),
-                         skip=8,
-                         colClasses=c("character",
-                                       "NULL", "NULL", "NULL",
-                                       "numeric"),
-                         col.names=c("date", "", "", "", "temp"))
-
-> pointnemodelim
-                    date  temp
-           1 16-JAN-1994 278.9
-           2 16-FEB-1994 280.0
-           3 16-MAR-1994 278.9
-           4 16-APR-1994 278.9
-           5 16-MAY-1994 277.8
-           6 16-JUN-1994 276.1
-...
+```{r comment=NA}
+pointnemodelim <- read.table(file.path("~/GitHub/ItDT", "pointnemotemp.txt"),
+                             skip = 8,
+                             colClasses = c("character",
+                                            "NULL", "NULL", "NULL",
+                                            "numeric"),
+                             col.names = c("date", "", "", "", "temp"))
+head(pointnemodelim)
+```
 
 The colClasses argument allows us to control the types of the variables explicitly. In this case, we have forced the first variable to be just text (these values are dates, not categories). There are five columns of values in the text file (treating whitespace as a column break), but we are not interested in the middle three, so we use "NULL" to indicate that these columns should just be ignored. The last column, the temperature values, is numeric.
 
@@ -1768,26 +1720,19 @@ It is common for the names of the variables to be included as the first line of 
 
 The dates can be converted from character values to date values in a separate step using the as.Date() function.
 
-> pointnemodelim$date <- as.Date(pointnemodelim$date,
-                                 format="%d-%b-%Y")
-> pointnemodelim
-                   date  temp
-           1 1994-01-16 278.9
-           2 1994-02-16 280.0
-           3 1994-03-16 278.9
-           4 1994-04-16 278.9
-           5 1994-05-16 277.8
-           6 1994-06-16 276.1
-...
+```{r comment=NA}
+pointnemodelim$date <- as.Date(pointnemodelim$date, format = "%d-%b-%Y")
+head(pointnemodelim)
+```
 
 The format argument contains special sequences that tell as.Date() where the various components of the date are within the character values. The %d means that there are two digits for the day, the %b means that the month is given as an abbreviated month name, and the %Y means that there are four digits for the year. The dashes are literal dash characters.
 
 The way that these components map to the original character value for the first date is shown below.
 
-         two-digit day, %d: 16
-abbreviated month name, %b: JAN
-       four-digit year, %Y: 1994
-            literal dashes: - -
+             two-digit day, %d: 16
+    abbreviated month name, %b: JAN
+           four-digit year, %Y: 1994
+                literal dashes: - -
 
 Thus, for example, the original character value 16-JAN-1994 becomes the date value 1994-01-16.
 
@@ -1795,21 +1740,14 @@ Thus, for example, the original character value 16-JAN-1994 becomes the date val
 
 Another way to view the Point Nemo text file in Figure 9.5 is as a fixed-width format file. For example, the date values always reside in the first 12 characters of each line and the temperature values are always between character 24 and character 28. This means that we could also read the file using read.fwf(), as shown below.
 
-> pointnemofwf <-
-       read.fwf(file.path("LAS", "pointnemotemp.txt"),
-                skip=8,
-                widths=c(-1, 11, -11, 5),
-                colClasses=c("character", "numeric"),
-                col.names=c("date", "temp"))
-> pointnemofwf
-         date  temp
-1 16-JAN-1994 278.9
-2 16-FEB-1994 280.0
-3 16-MAR-1994 278.9
-4 16-APR-1994 278.9
-5 16-MAY-1994 277.8
-6 16-JUN-1994 276.1
-...
+```{r comment=NA}
+pointnemofwf <- read.fwf(file.path("~/GitHub/ItDT", "pointnemotemp.txt"),
+                         skip = 8,
+                         widths = c(-1, 11, -11, 5),
+                         colClasses = c("character", "numeric"),
+                         col.names = c("date", "temp"))
+head(pointnemofwf)
+```
 
 Again, the result is a data frame. As for the call to read.table(), we have specified the data type for each column, via the colClasses argument, and a name for each column, via col.names.
 
@@ -1823,34 +1761,20 @@ The two examples so far have demonstrated reading in the raw data for this data 
 
 The readLines() function can help us here, at least in terms of getting raw text into R. The following code reads the first eight lines of the text file into a character vector.
 
-> readLines(file.path("LAS", "pointnemotemp.txt"),
-                        n=8)
-[1] "
-[2] "
-[3] "
-[4] "
-[5] "
-[6] "
-[7] "
-[8] "
-VARIABLE : Mean TS from clear sky composite (kelvin)"
-FILENAME : ISCCPMonthly_avg.nc"
-FILEPATH : /usr/local/fer_data/data/"
-SUBSET   : 48 points (TIME)"
-LONGITUDE: 123.8W(-123.8)"
-LATITUDE : 48.8S"
-123.8W " 23"
+```{r comment=NA}
+readLines(file.path("~/GitHub/ItDT", "pointnemotemp.txt"), n = 8)
+```
 
 Section 9.9 will describe some tools that could be used to extract the metadata values from this text.
 
-date,temp
-1994-01-16,278.9
-1994-02-16,280
-1994-03-16,278.9
-1994-04-16,278.9
-1994-05-16,277.8
-1994-06-16,276.1
-...
+    date,temp
+    1994-01-16,278.9
+    1994-02-16,280
+    1994-03-16,278.9
+    1994-04-16,278.9
+    1994-05-16,277.8
+    1994-06-16,276.1
+    ...
 
 Figure 9.6: The first few lines of the plain text output from the Live Access Server for the surface temperature at Point Nemo in Comma-Separated Value (CSV) format. This is a reproduction of Figure 5.4.
 
@@ -1860,9 +1784,11 @@ As a simple demonstration of the use of functions that can write plain text file
 
 The following code uses the write.csv() function to create a file called "pointnemoplain.csv" that contains the Point Nemo data (see Figure 9.6).
 
-> write.csv(pointnemodelim, "pointnemoplain.csv",
-            quote=FALSE, row.names=FALSE)
-                        
+```{r comment=NA}
+write.csv(pointnemodelim, "pointnemoplain.csv", quote = FALSE, 
+          row.names = FALSE)
+```
+
 The first argument in this function call is the data frame of values. The second argument is the name of the file to create.
 
 The quote argument controls whether quote-marks are printed around character values and the row.names argument controls whether an extra column of unique names is printed at the start of each line. In both cases, we have turned these features off by specifying the value FALSE.
@@ -1878,45 +1804,38 @@ A number of R packages exist for reading particular binary formats. For example,
 We will look again at the Point Nemo temperature data (see Section 1.1), this time in a netCDF format, to demonstrate a simple use of the ncdf package.
 The following code loads the ncdf package and reads the file pointnemotemp.nc.
 
-> library("ncdf")
-> nemonc <- open.ncdf(file.path("LAS", "pointnemotemp.nc"))
+```{r comment=NA}
+library("ncdf")
+nemonc <- open.ncdf(file.path("~/GitHub/ItDT", "pointnemotemp.nc"))
+```
 
 One difference with this example compared to the functions in the previous section is that the result of reading the netCDF file is not a data frame.
 
-> class(nemonc)
-[1] "ncdf"
+```{r comment=NA}
+class(nemonc)
+```
 
 This data structure is essentially a list that contains the information from the netCDF file. We can extract components of this list by hand, but a more convenient approach is to use several other functions provided by the ncdf package to extract the most important pieces of information from the ncdf data structure.
 
 If we display the nemonc data structure, we can see that the file contains a single variable called Temperature.
 
-> nemonc
-           file LAS/pointnemotemp.nc has 1 dimensions:
-           Time   Size: 48
-           ------------------------
-           file LAS/pointnemotemp.nc has 1 variables:
-           double Temperature[Time]  Longname:Temperature
+```{r comment=NA}
+nemonc
+```
 
-We can extract that variable from the file with the function get.var.ncdf(). > nemoTemps <- get.var.ncdf(nemonc, "Temperature")
+We can extract that variable from the file with the function get.var.ncdf(). 
 
-> nemoTemps
-            [1] 278.9 280.0 278.9 278.9 277.8 276.1 276.1 275.6 275.6
-           [10] 277.3 276.7 278.9 281.6 281.1 280.0 278.9 277.8 276.7
-           [19] 277.3 276.1 276.1 276.7 278.4 277.8 281.1 283.2 281.1
-           [28] 279.5 278.4 276.7 276.1 275.6 275.6 276.1 277.3 278.9
-           [37] 280.5 281.6 280.0 278.9 278.4 276.7 275.6 275.6 277.3
-           [46] 276.7 278.4 279.5
+```{r comment=NA}
+nemoTemps <- get.var.ncdf(nemonc, "Temperature")
+nemoTemps
+```
 
 The netCDF file of Point Nemo data also contains information about the date that each temperature value corresponds to. This variable is called "Time". The following code reads this information from the file.
 
-> nemoTimes <- get.var.ncdf(nemonc, "Time")
-> nemoTimes
-            [1]  8781  8812  8840  8871  8901  8932  8962  8993  9024
-           [10]  9054  9085  9115  9146  9177  9205  9236  9266  9297
-           [19]  9327  9358  9389  9419  9450  9480  9511  9542  9571
-           [28]  9602  9632  9663  9693  9724  9755  9785  9816  9846
-           [37]  9877  9908  9936  9967  9997 10028 10058 10089 10120
-           [46] 10150 10181 10211
+```{r comment=NA}
+nemoTimes <- get.var.ncdf(nemonc, "Time")
+nemoTimes
+```
            
 Unfortunately, these do not look very much like dates.
 
@@ -1924,20 +1843,16 @@ This demonstrates that, even with binary file formats, it is often necessary to 
 
 The netCDF format only allows numbers or text to be stored, so this date information has been stored in the file as numbers. However, additional information, metadata, can be stored along with the variable data in a netCDF file; netCDF calls this additional information “attributes”. In this case, the meaning of these numbers representing dates has been stored as the “units” attribute of this variable and the following code uses the att.get.ncdf() function to extract that attribute from the file.
 
-> att.get.ncdf(nemonc, "Time", "units")
-           $hasatt
-           [1] TRUE
-           $value
-           [1] "number of days since 1970-01-01"
+```{r comment=NA}
+att.get.ncdf(nemonc, "Time", "units")
+```
 
 This tells us that the dates were stored as a number of days since January 1st 1970. Using this information, we can convert the numbers from the file back into real dates with the as.Date() function. The origin argument allows us to specify the meaning of the numbers.
 
-> nemoDates <- as.Date(nemoTimes, origin="1970-01-01")
-> nemoDates
-            [1] "1994-01-16" "1994-02-16" "1994-03-16" "1994-04-16"
-            [5] "1994-05-16" "1994-06-16" "1994-07-16" "1994-08-16"
-            [9] "1994-09-16" "1994-10-16" "1994-11-16" "1994-12-16"
-...
+```{r comment=NA}
+nemoDates <- as.Date(nemoTimes, origin = "1970-01-01")
+head(nemoDates)
+```
 
 In most cases, where a function exists to read a particular binary format, there will also be a function to write data out in that format. For example, the ncdf package also provides functions to save data from RAM to an external file in netCDF format.
 
@@ -1957,16 +1872,14 @@ Figure 9.7 shows a screen shot of the Point Nemo temperature data (see Section 1
 
 These data can be read into R using the following code. 
 
-> library("xlsReadWrite")
-> read.xls("temperatures.xls", colNames=FALSE)
-                V1    V2
-           1 34350 278.9
-           2 34381 280.0
-           3 34409 278.9
-           4 34440 278.9
-           5 34470 277.8
-           6 34501 276.1
-...
+```{r comment=NA}
+#library("xlsReadWrite")
+#read.xls("temperatures.xls", colNames = FALSE)
+library(XLConnect)
+wb <- loadWorkbook("pointnemotemp.xls")
+temps <- readWorksheet(wb, sheet = "temperatures", header = FALSE)
+head(temps)
+```
 
 Notice that the date information has come across as numbers. This is another example of the type coercion that can easily occur when transferring between different formats.
 
@@ -1974,12 +1887,10 @@ Figure 9.7: Part of the Excel spreadsheet containing the surface temperatures at
 
 As before, we can easily convert the numbers to dates if we know the reference date for these numbers. Excel represents dates as the number of days since the 0th of January 1900, so we can recover the real dates with the following code.
 
-> dates <- as.Date(temps$V1 - 2, origin="1900-01-01")
-> dates
-            [1] "1994-01-16" "1994-02-16" "1994-03-16" "1994-04-16"
-            [5] "1994-05-16" "1994-06-16" "1994-07-16" "1994-08-16"
-            [9] "1994-09-16" "1994-10-16" "1994-11-16" "1994-12-16"
-...
+```{r comment=NA}
+dates <- as.Date(temps$Col1 - 2, origin = "1900-01-01")
+head(dates)
+```
 
 We have to subtract 2 in this calculation because the Excel count starts from the 0th rather than the 1st of January and because Excel thinks that 1900 was a leap year (apparently to be compatible with the Lotus 123 spreadsheet software). Sometimes, computer technology is not straightforward.
 
@@ -1997,22 +1908,22 @@ Fortunately, there is an R package called XML that contains functions for readin
 
 We will use the Point Nemo temperature data, in an XML format, to demonstrate some of the functions from the XML package. Figure 9.8 shows one possible XML format for the the Point Nemo temperature data.
 
-<?xml version="1.0"?>
-<temperatures>
-    <variable>Mean TS from clear sky composite (kelvin)</variable>
-    <filename>ISCCPMonthly_avg.nc</filename>
-    <filepath>/usr/local/fer_dsets/data/</filepath>
-    <subset>93 points (TIME)</subset>
-    <longitude>123.8W(-123.8)</longitude>
-    <latitude>48.8S</latitude>
-    <case date="16-JAN-1994" temperature="278.9" />
-    <case date="16-FEB-1994" temperature="280" />
-    <case date="16-MAR-1994" temperature="278.9" />
-    <case date="16-APR-1994" temperature="278.9" />
-    <case date="16-MAY-1994" temperature="277.8" />
-    <case date="16-JUN-1994" temperature="276.1" />
-    ...
-</temperatures>
+    <?xml version="1.0"?>
+    <temperatures>
+        <variable>Mean TS from clear sky composite (kelvin)</variable>
+        <filename>ISCCPMonthly_avg.nc</filename>
+        <filepath>/usr/local/fer_dsets/data/</filepath>
+        <subset>93 points (TIME)</subset>
+        <longitude>123.8W(-123.8)</longitude>
+        <latitude>48.8S</latitude>
+        <case date="16-JAN-1994" temperature="278.9" />
+        <case date="16-FEB-1994" temperature="280" />
+        <case date="16-MAR-1994" temperature="278.9" />
+        <case date="16-APR-1994" temperature="278.9" />
+        <case date="16-MAY-1994" temperature="277.8" />
+        <case date="16-JUN-1994" temperature="276.1" />
+        ...
+    </temperatures>
 
 Figure 9.8: The first few lines of the surface temperature at Point Nemo in an XML format. This is a reproduction of Figure 5.16.
 
@@ -2020,15 +1931,17 @@ There are several approaches to working with XML documents in R using the XML pa
 
 The first thing to do is to read the XML document into R using the function xmlTreeParse().
 
-> library("XML")
-> nemoDoc <- xmlParse(file.path("LAS", "pointnemotemp.xml"))
+```{r comment=NA}
+library(XML)
+nemoDoc <- xmlParse(file.path("~/GitHub/ItDT", "pointnemotemp.xml"))
+```
 
 The main argument to this function is the name and location of the XML file.
 It is important to point out that the data structure that is created in RAM by this code, nemoDoc, is not a data frame. 
 
-> class(nemoDoc)
-           [1] "XMLInternalDocument" "XMLAbstractDocument"
-           [3] "oldClass"
+```{r comment=NA}
+class(nemoDoc)
+```
 
 We must use other special functions from the XML package to work with this data structure.
 
@@ -2036,15 +1949,12 @@ In particular, the getNodeSet() function allows us to select elements from this 
 
 In the following example, we extract the temperature attribute values from all case elements in the XML document. The XPath expression "/temperatures/case/@temperature" selects all of the temperature attributes of the case elements within the root temperatures element.
 
-> nemoDocTempText <-
-                  unlist(getNodeSet(nemoDoc,
-                                    "/temperatures/case/@temperature"),
-                         use.names=FALSE)
-> nemoDocTempText
-            [1] "278.9" "280"   "278.9" "278.9" "277.8" "276.1" "276.1"
-            [8] "275.6" "275.6" "277.3" "276.7" "278.9" "281.6" "281.1"
-           [15] "280"   "278.9" "277.8" "276.7" "277.3" "276.1" "276.1"
-           ...
+```{r comment=NA}
+nemoDocTempText <- unlist(getNodeSet(nemoDoc,
+                                     "/temperatures/case/@temperature"),
+                          use.names = FALSE)
+head(nemoDocTempText)
+```
 
 The first argument to getNodeSet() is the data structure previously created by xmlParse() and the second argument is the XPath expression. The result of the call to getNodeSet() is a list and the call to unlist() converts the list to a vector.
 
@@ -2052,32 +1962,25 @@ One important point about the above result, nemoDocTempText, is that it is a cha
 
 Before we do that, the following code shows how to extract the date values from the XML document as well. The only difference from the previous call is the XPath that we use.
 
-> nemoDocDateText <-
-                  unlist(getNodeSet(nemoDoc,
-                                    "/temperatures/case/@date"),
-                         use.names=FALSE)
-> nemoDocDateText
-            [1] "16-JAN-1994" "16-FEB-1994" "16-MAR-1994" "16-APR-1994"
-            [5] "16-MAY-1994" "16-JUN-1994" "16-JUL-1994" "16-AUG-1994"
-            [9] "16-SEP-1994" "16-OCT-1994" "16-NOV-1994" "16-DEC-1994"
-...
+```{r comment=NA}
+nemoDocDateText <- unlist(getNodeSet(nemoDoc,
+                                     "/temperatures/case/@date"),
+                          use.names = FALSE)
+head(nemoDocDateText)
+```
 
 Again, the values are all text, so we need to coerce them to dates. The following code performs the appropriate type coercions and combines the dates and temperatures into a data frame.
 
-> data.frame(date=as.Date(nemoDocDateText, "%d-%b-%Y"),
-             temp=as.numeric(nemoDocTempText))
-                   date  temp
-           1 1994-01-16 278.9
-           2 1994-02-16 280.0
-           3 1994-03-16 278.9
-           4 1994-04-16 278.9
-           5 1994-05-16 277.8
-           6 1994-06-16 276.1
-...
+```{r comment=NA}
+head(data.frame(date = as.Date(nemoDocDateText, "%d-%b-%Y"),
+                temp = as.numeric(nemoDocTempText)))
+```
 
 With this approach to reading XML files, there is one final step: we need to signal that we are finished with the file by calling the free() function.
 
-> free(nemoDoc)
+```{r comment=NA}
+free(nemoDoc)
+```
 
 ### 9.7.8 Databases
 
@@ -2119,30 +2022,32 @@ The Data Expo data set (see Section 5.2.8) contains several different atmospheri
 
 The following SQL code extracts information for the first two locations in the location table.
 
-SELECT *
-    FROM location_table
-    WHERE ID = 1 OR ID = 2;
+    SELECT *
+        FROM location_table
+        WHERE ID = 1 OR ID = 2;
 
 The following code carries out this query from within R. The first step is to connect to the database.
 
-> library("RSQLite")
-> con <- dbConnect(dbDriver("SQLite"), dbname="NASA/dataexpo")
+```{r comment=NA}
+library(RSQLite)
+con <- dbConnect(dbDriver("SQLite"), dbname = "dataexpo")
+```
 
 Having established the connection, we can send SQL code to the DBMS.
 
-> result <- dbGetQuery(con,
-                       "SELECT *
-                            FROM location_table
-                            WHERE ID = 1 OR ID = 2") 
-> result
-  ID longitude latitude elevation
-1  1   -113.75    36.25   1526.25
-2  2   -111.25    36.25   1759.56
+```{r comment=NA}
+result <- dbGetQuery(con,
+                     "SELECT *
+                      FROM location_table
+                      WHERE ID = 1 OR ID = 2") 
+result
+```
 
 Notice that the result is a data frame. The final step is to release our connection to SQLite.
 
-> dbDisconnect(con)
-[1] TRUE
+```{r comment=NA}
+dbDisconnect(con)
+```
 
 #### Recap
 
@@ -2186,44 +2091,18 @@ These data have been stored in CSV format in a file called schools.csv (see Figu
 
 Using functions from the last section, we can easily read this information into R and store it as a data frame called schools. The as.is argument is used to ensure that the school names are kept as text and are not treated as a factor.
 
-> schools <- read.csv(file.path("Schools", "schools.csv"), as.is=2)
-
-           "ID","Name","City","Auth","Dec","Roll"
-           1015,"Hora Hora School","Whangarei","State",2,318
-           1052,"Morningside School","Whangarei","State",3,200
-           1062,"Onerahi School","Whangarei","State",4,455
-           1092,"Raurimu Avenue School","Whangarei","State",2,86
-           1130,"Whangarei School","Whangarei","State",4,577
-           1018,"Hurupaki School","Whangarei","State",8,329
-           1029,"Kamo Intermediate","Whangarei","State",5,637
-           1030,"Kamo School","Whangarei","State",5,395
-           ...
+```{r comment=NA}
+schools <- read.csv(file.path("~/GitHub/ItDT", "schools.csv"), as.is = 2)
+head(schools)
+```
 
 Figure 9.9: The first few lines of the file schools.csv. This file contains information for all primary and secondary schools in New Zealand, in a CSV format.
 
-> schools
-               ID                  Name      City  Auth Dec Roll
-                                                          2  318
-                                                          3  200
-                                                          4  455
-                                                          2   86
-                                                          4  577
-                                                          8  329
-1 1015
-2 1052
-3 1062
-4 1092 Raurimu Avenue School Whangarei State
-5 1130      Whangarei School Whangarei State
-6 1018       Hurupaki School Whangarei State
-...
-  Hora Hora School Whangarei State
-Morningside School Whangarei State
-    Onerahi School Whangarei State
-
 In cases like this, where the data set is much too large to view all at once, we can make use of functions to explore the basic characteristics of the data set. For example, it is useful to know just how large the data set is. The following code tells us the number of rows and columns in the data frame.
 
-> dim(schools)
-[1] 2571 6
+```{r comment=NA}
+dim(schools)
+```
 
 There are 6 variables measured on 2,571 schools.
 
@@ -2235,18 +2114,17 @@ A common task in data preparation is to create new variables from an existing da
 
 This new variable will be based on the median school roll. Any school with a roll greater than the median will be “large”.
 
-> rollMed <- median(schools$Roll)
-> rollMed
-[1] 193
+```{r comment=NA}
+rollMed <- median(schools$Roll)
+rollMed
+```
 
 We can use the ifelse() function to generate a character vector recording "large" and "small". The first argument to this function, called test, is a logical vector. The second argument, called yes, provides the result wherever the test argument is TRUE and the third argument, called no, provides the result wherever the test argument is FALSE.
 
-> size <- ifelse(test=schools$Roll > rollMed,
-                             yes="large", no="small")
-> size
-            [1] "large" "large" "large" "small" "large" "large" "large"
-            [8] "large" "large" "large" "large" "large" "small" "large"
-           ...
+```{r comment=NA}
+size <- ifelse(test = schools$Roll > rollMed, yes = "large", no = "small")
+head(size)
+```
 
 The diagram below illustrates that the ifelse() function selects elements from the yes argument when the test argument is TRUE and from the no argument when test is FALSE.
 
@@ -2254,33 +2132,23 @@ We will now add this new variable to the original data frame to maintain the cor
 
 This can be done in several ways. The simplest is to assign a new variable to the data frame, as shown in the following code. The data frame does not have an existing column called Size, so this assignment adds a new column.
 
-> schools$Size <- size
-> schools
-                ID                  Name      City  Auth Dec Roll  Size
-                                                           2  318 large
-                                                           3  200 large
-                                                           4  455 large
-                                                           2   86 small
-                                                           4  577 large
-                                                           8  329 large
-1 1015
-2 1052
-3 1062
-4 1092 Raurimu Avenue School Whangarei State
-5 1130      Whangarei School Whangarei State
-6 1018       Hurupaki School Whangarei State
-...
-  Hora Hora School Whangarei State
-Morningside School Whangarei State
-    Onerahi School Whangarei State
+```{r comment=NA}
+schools$Size <- size
+head(schools)
+```
 
 Another approach, which gives the same result, is to use the transform() function.
 
-> schools <- transform(schools, Size=size)
+```{r comment=NA}
+schools <- transform(schools, Size = size)
+head(schools)
+```
 
 If we want to remove a variable from a data frame, we can assign the value NULL to the appropriate column.
 
-> schools$size <- NULL
+```{r comment=NA}
+schools$size <- NULL
+```
 
 Alternatively, we can use subsetting to retain certain columns or leave out certain columns. This approach is better if more than one column needs to be removed. For example, the following code removes the new, seventh column from the data frame.
 
