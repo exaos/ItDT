@@ -2152,25 +2152,10 @@ schools$size <- NULL
 
 Alternatively, we can use subsetting to retain certain columns or leave out certain columns. This approach is better if more than one column needs to be removed. For example, the following code removes the new, seventh column from the data frame.
 
-> schools <- schools[, -7]
-> schools
-               ID                  Name      City  Auth Dec Roll
-                                                          2  318
-                                                          3  200
-                                                          4  455
-                                                          2   86
-                                                          4  577
-                                                          8  329
-1 1015
-2 1052
-3 1062
-4 1092 Raurimu Avenue School Whangarei State
-5 1130      Whangarei School Whangarei State
-6 1018       Hurupaki School Whangarei State
-...
-  Hora Hora School Whangarei State
-Morningside School Whangarei State
-    Onerahi School Whangarei State
+```{r comment=NA}
+schools <- schools[ , -7]
+head(schools)
+```
     
 #### Binning
 
@@ -2178,27 +2163,26 @@ The previous example converted a numeric variable into two categories, small and
 
 For example, rather than just dividing the schools into large and small, we could group the schools into five different size categories. This sort of transformation is possible using the cut() function.
 
-> rollSize <-
-       cut(schools$Roll, 5,
-           labels=c("tiny", "small", "medium",
-                    "large", "huge"))
+```{r comment=NA}
+rollSize <- cut(schools$Roll, 5, 
+                labels = c("tiny", "small", "medium", "large", "huge"))
+```
 
 The first argument to this function is the numeric vector to convert. The second argument says that the range of the numeric vector should be broken into five equal-sized intervals. The schools are then categorized according to which interval their roll lies within. The labels argument is used to provide levels for the resulting factor.
 
 Only the first few schools are shown below and they are all tiny; the important point is that the result is a factor with five levels.
 
-> head(rollSize)
-[1] tiny tiny tiny tiny tiny tiny
-Levels: tiny small medium large huge
+```{r comment=NA}
+head(rollSize)
+```
 
 A better view of the result can be obtained by counting how many schools there are of each size. This is what the following code does; we will see more about functions to create tables of counts in Section 9.8.4.
 
-> table(rollSize)
-           rollSize
-             tiny  small medium  large   huge
-             2487     75      8      0      1
+```{r comment=NA}
+table(rollSize)
+```
 
-9.8.3 Sorting
+### 9.8.3 Sorting
 
 Another common task that we can perform is to sort a set of values into ascending or descending order.
 
@@ -2208,83 +2192,42 @@ As an example, the information on New Zealand schools is roughly ordered by regi
 
 The following code sorts the Roll variable by itself. 
 
-> sort(schools$Roll)
-[1] 5 5 6 6 6 7 7 7 7 8 9 9 9 9 9 9 9 ...
+```{r comment=NA}
+head(sort(schools$Roll))
+```
 
 There are clearly some very small schools in New Zealand.
 
 It is also easy to sort in decreasing order, which reveals that the largest school is the largest by quite some margin.
 
-> sort(schools$Roll, decreasing=TRUE)
-            [1] 5546 3022 2613 2588 2476 2452 2417 2315 2266 2170 ...
+```{r comment=NA}
+head(sort(schools$Roll, decreasing = TRUE))
+```
 
 However, what would be much more useful would be to know which schools these are. That is, we would like to sort not just the school rolls, but the entire schools data frame.
 
 To do this, we use the order() function, as shown in the following code. 
 
-> rollOrder <- order(schools$Roll, decreasing=TRUE)
-> rollOrder
-            [1] 1726  301  376 2307  615  199  467  373  389  241 ...
+```{r comment=NA}
+rollOrder <- order(schools$Roll, decreasing = TRUE)
+head(rollOrder)
+```
 
 This result says that, in order to sort the data frame in descending roll order, we should use row 1726 first, then row 301, then row 376, and so on.
 
 These values can be used as indices for subsetting the entire schools data frame, as shown in the following code. Recall that, by only specifying a row index and by leaving the column index blank, we will get all columns of the schools data frame.
 
-> schools[rollOrder, ]
-      ID
-1726 498
-301   28
-376   78
-2307 319
-615   41
-199   43
-467   54
-                             Name
-            Correspondence School
-                Rangitoto College
-                 Avondale College
-...
-                             City  Auth Dec Roll
-                       Wellington State  NA 5546
-                         Auckland State  10 3022
-                         Auckland State   4 2613
-Burnside High School Christchurch State   8 2588
-                 Macleans College
-               Massey High School
-                 Auckland Grammar
-373   69 Mt Albert Grammar School
-389   74       Mt Roskill Grammar
-Auckland State  10 2476
-Auckland State   5 2452
-Auckland State  10 2417
-Auckland State   7 2315
-Auckland State   4 2266
+```{r comment=NA}
+head(schools[rollOrder, ])
+```
 
 The largest body of New Zealand school students represents those gaining public education via correspondence (from the governmental base in Wellington), but most of the other large schools are in Auckland, which is the largest city in New Zealand.
 
 The other advantage of using the order() function is that more than one vector of values may be given and any ties in the first vector will be broken by ordering on the second vector. For example, the following code sorts the rows of the schools data frame first by city and then by number of students (in decreasing order). In the case of the City variable, which is a character vector, the order is alphabetic. Again, we are specifying decreasing=TRUE to get descending order.
 
-> schools[order(schools$City, schools$Roll,
-                            decreasing=TRUE), ]
-                                           Name      City  Auth Dec Roll
-                                Menzies College   Wyndham State   4  356
-       ID
-2548  401
-2549 4054
-1611 2742
-1630 2640
-2041 3600
-                     Wyndham School   Wyndham State
-                   Woodville School Woodville State
-                    Papatawa School Woodville State
-                     Woodend School   Woodend State
-1601  399 Central Southland College    Winton State
-...
-5   94
-3  147
-7   27
-9  375
-7  549
+```{r comment=NA}
+head(schools[order(schools$City, schools$Roll, decreasing = TRUE), ])
+```
 
 The first two schools are both in Wyndham, with the larger school first and the smaller school second, then there are two schools from Woodville, larger first and smaller second, and so on.
 
@@ -2292,34 +2235,34 @@ The first two schools are both in Wyndham, with the larger school first and the 
 
 Continuing our exploration of the New Zealand schools data set, we might be interested in how many schools are private and how many are state-owned. This is an example where we want to obtain a table of counts for a categorical variable. The function table() may be used for this task.
 
-> authTable <- table(schools$Auth)
-> authTable
-           Other          Private            State State Integrated
-               1               99             2144              327
+```{r comment=NA}
+authTable <- table(schools$Auth)
+authTable
+```
 
 This result shows the number of times that each different value occurs in the Auth variable. As expected, most schools are public schools, owned by the state.
 
 As usual, we should take notice of the data structure that this function has returned.
 
-> class(authTable)
-[1] "table"
+```{r comment=NA}
+class(authTable)
+```
 
 This is not one of the basic data structures that we have focused on. However, tables in R behave very much like arrays, so we can use what we already know about working with arrays. For example, we can subset a table just like we subset an array. If we need to, we can also convert a table to an array, or even to a data frame.
 
 As a brief side track, the table of counts above also shows that there is only one school in the category "Other". How do we find that school? One approach is to generate a logical vector and use that to subscript the data frame, as in the following code.
 
-> schools[schools$Auth == "Other", ]
-                 ID            Name         City  Auth Dec Roll
-           2315 518 Kingslea School Christchurch Other   1   51
+```{r comment=NA}
+schools[schools$Auth == "Other", ]
+```
 
 It turns out that this school is not state-owned, but still receives its funding from the government because it provides education for students with learning or social difficulties.
 
 Getting back to tables of counts, another question we might ask is how the school decile relates to the school ownership. If we give the table() function more than one argument, it will cross-tabulate the arguments, as the following code demonstrates.
 
-> table(Dec=schools$Dec, Auth=schools$Auth)
-               Auth
-           Dec  Other Private State State Integrated
-110259 12 200230 22 302208 35 406219 28 502214 38 602215 34 706188 45 8 0 11200 45 9 0 12205 37 10038205 31
+```{r comment=NA}
+table(Dec = schools$Dec, Auth = schools$Auth)
+```
 
 Again, the result of this function call is a table data structure. This time it is a two-dimensional table, which is very similar to a two-dimensional array.
 
@@ -2333,7 +2276,9 @@ Another function that can be used to generate tables of counts is the xtabs() fu
 
 The two-dimensional table above could also be generated with the following code.
 
-> xtabs( ~ Dec + Auth, data = schools)
+```{r comment=NA}
+xtabs( ~ Dec + Auth, data = schools)
+```
 
 One advantage of this approach is that the symbols used in the formula are automatically found in the data frame provided in the data argument, so, for example, there is no need to specify the Auth variable as schools$Auth, as we had to do in the previous call to the table() function.
 
@@ -2341,14 +2286,16 @@ One advantage of this approach is that the symbols used in the formula are autom
 
 R provides many functions for calculating numeric summaries of data. For example, the min() and max() functions calculate minimum and maximum values for a vector, sum() calculates the sum, and the mean() function calculates the average value. The following code calculates the average value of the number of students enrolled at New Zealand schools.
 
-> mean(schools$Roll)
-[1] 295.4737
+```{r comment=NA}
+mean(schools$Roll)
+```
 
 This “grand mean” value is not very interesting by itself. What would be more interesting would be to calculate the average enrollment for different types of schools and compare, for example, state schools and private schools.
 We could calculate these values individually, by extracting the relevant subset of the data. For example, the following code extracts just the enrollments for private schools and calculates the mean for those values.
 
-> mean(schools$Roll[schools$Auth == "Private"])
-[1] 308.798
+```{r comment=NA}
+mean(schools$Roll[schools$Auth == "Private"])
+```
 
 However, a better way to work is to let R determine the subsets and calculate all of the means in one go. The aggregate() function provides one way to perform this sort of task.
 
@@ -2356,14 +2303,11 @@ The following code uses aggregate() to calculate the average enrollment for New 
 
 There are four different values of schools$Auth, so the result is four averages. We can easily check the answer for Other schools because there is only one such school and we saw on page 321 that this school has a roll of 51.
 
-> aggregate(schools["Roll"],
-            by=list(Ownership=schools$Auth),
-            FUN=mean)
-                    Ownership     Roll
-                        Other  51.0000
-                      Private 308.7980
-                        State 300.6301
-           4 State Integrated 258.3792
+```{r comment=NA}
+aggregate(schools["Roll"],
+          by = list(Ownership = schools$Auth),
+          FUN = mean)
+```
 
 This result shows that the average school size is remarkably similar for all types of school ownership (ignoring the "Other" case because there is only one such school).
 
@@ -2385,62 +2329,49 @@ Another point to make about the aggregate() function is that the value returned 
 
 We will now look at a slightly more complicated use of the aggregate() function. For this example, we will generate a new vector called rich that records whether each school’s decile is greater than 5. The following code creates the new vector.
 
-> rich <- schools$Dec > 5
-> rich
-           [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE ...
+```{r comment=NA}
+rich <- schools$Dec > 5
+head(rich)
+```
 
 The vector rich provides a crude measure of whether each school is in a wealthy area or not. We will now use this variable in a more complicated call to aggregate().
 
 Because the by argument to aggregate() is a list, it is possible to provide more than one factor. This means that we can produce a result for all possible combinations of two or more factors. In the following code, we provide a list of two factors as the by argument, so the result will be the average enrolments broken down by both the type of school ownership and whether the school is in a wealthy area.
 
-> aggregate(schools["Roll"],
-            by = list(Ownership = schools$Auth, Rich = rich),
-            FUN = mean)
-         Ownership  Rich     Roll
-             Other FALSE  51.0000
-           Private FALSE 151.4000
-             State FALSE 261.7487
-4 State Integrated FALSE 183.2370
-5          Private  TRUE 402.5362
-6            State  TRUE 338.8243
-7 State Integrated  TRUE 311.2135
-1 2 3
+```{r comment=NA}
+aggregate(schools["Roll"],
+          by = list(Ownership = schools$Auth, Rich = rich),
+          FUN = mean)
+```
 
 The result of the aggregation is again a data frame, but this time there are three columns. The first two columns indicate the different groups and the third gives the average for each group.
 
 The result suggests that, on average, schools in wealthier areas have more students.
 
-One limitation of the aggregate() function is that it only works with functions that return a single value. If we want to calculate, for example, the range of enrollments for each type of school—the minimum and the maximum together—the range() function will perform the calculation for us, but we cannot use range() with aggregate() because it returns two values. Instead, we need to use the by() function.
+One limitation of the aggregate() function is that it only works with functions that return a single value. If we want to calculate, for example, the range of enrollments for each type of school — the minimum and the maximum together — the range() function will perform the calculation for us, but we cannot use range() with aggregate() because it returns two values. Instead, we need to use the by() function.
 
 The following code calculates the range of enrollments for all New Zealand schools, demonstrating that the result is a numeric vector containing two values, 5 and 5546.
 
-> range(schools$Roll)
-           [1]    5 5546
+```{r comment=NA}
+range(schools$Roll)
+```
 
 The following code uses the by() function to generate the range of enrollments broken down by school ownership.
 
-> rollRanges <- by(schools["Roll"],
-                   INDICES = list(Ownership = schools$Auth),
-                   FUN = range)
-> rollRanges
-           Ownership: Other
-           [1] 51 51
-           ---------------------------------------------
-           Ownership: Private
-           [1]    7 1663
-           ---------------------------------------------
-           Ownership: State
-           [1]    5 5546
-           ---------------------------------------------
-           Ownership: State Integrated
-           [1]   18 1475
+```{r comment=NA}
+rollRanges <- by(schools["Roll"],
+                 INDICES = list(Ownership = schools$Auth),
+                 FUN = range)
+rollRanges
+```
 
 The arguments to the by() function are very similar to the arguments for aggregate() (with some variation in the argument names) and the effect is also very similar: the first argument is broken into subsets, with one subset for each different value in the second argument, and the third argument provides a function to call on each subset.
 
 However, the result of by() is not a data frame like for aggregate(). It is a very different sort of data structure.
 
-> class(rollRanges)
-           [1] "by"
+```{r comment=NA}
+class(rollRanges)
+```
 
 We have not seen this sort of data structure before, but a by object behaves very much like a list, so we can work with this result just like a list.
 
@@ -2458,49 +2389,22 @@ The data are stored in a plain text, colon-delimited format, in a file called NC
 
 The following code uses the read.table() function to read these data into a data frame called NCEA. We have to specify the colon delimiter via sep=":". Also, because some school names have an apostrophe, we need to specify quote="". Otherwise, the apostrophes are interpreted as the start of a text field. The last two arguments specify that the first line of the file contains the variable names (header=TRUE) and that the first column of school names should be treated as character data (not as a factor).
 
-Name:Level1:Level2:Level3
-Al-Madinah School:61.5:75:0
-Alfriston College:53.9:44.1:0
-Ambury Park Centre for Riding Therapy:33.3:20:0
-Aorere College:39.5:50.2:30.6
-Auckland Girls' Grammar School:71.2:78.9:55.5 
-Auckland Grammar:22.1:30.8:26.3
-Auckland Seventh-Day Adventist H S:50.8:34.8:48.9 
-Avondale College:57.3:49.8:44.6
-Baradene College:89.3:89.7:88.6
-...
+```{r comment=NA}
+NCEA <- read.table(file.path("~/GitHub/ItDT", "NCEA2007.txt"),
+                   sep = ":", quote = "",
+                   header = TRUE, as.is = TRUE)
+head(NCEA)
+```
 
 Figure 9.10: The first few lines of the file NCEA2007.txt. This file contains information about the percentage of students gaining NCEA qualifications at New Zealand secondary schools in 2007. This is a plain text, colon-delimited format.
-
-
-> NCEA <- read.table(file.path("Schools", "NCEA2007.txt"),
-                     sep = ":", quote = "",
-                     header = TRUE, as.is = TRUE)
-> NCEA
-
-             Name Level1 Level2 Level3
-1                     Al-Madinah School
-2                     Alfriston College
-3 Ambury Park Centre for Riding Therapy
-61.5   75.0    0.0
-53.9   44.1    0.0
-33.3   20.0    0.0
-39.5   50.2   30.6
-71.2   78.9   55.5
-22.1   30.8   26.3
-50.8   34.8   48.9
-4
-5
-6
-7 ...
-Aorere College Auckland Girls' Grammar School Auckland Grammar Auckland Seventh-Day Adventist H S
 
 As with the schools data frame, the data set is too large to view all at once, so we will only show a few rows for most examples in the following sections.
 
 The dim() function tells us that, in total, there are 88 schools and 4 variables in this data set. This data set only has Auckland schools.
 
-> dim(NCEA)
-[1]88 4
+```{r comment=NA}
+dim(NCEA)
+```
 
 We will now explore this data set in order to demonstrate some more data manipulation techniques.
 
@@ -2510,16 +2414,17 @@ The NCEA data frame contains three columns of numeric data—the percentage of s
 
 One way to look at these averages is to extract each column and calculate an average for each column. For example, the following code calculates the average achievement percentage for NCEA Level 1.
 
-> mean(NCEA$Level1)
-[1] 62.26705
+```{r comment=NA}
+mean(NCEA$Level1)
+```
 
 However, as in the aggregation case, there is a smarter way to work, which is to let R extract the columns and calculate a mean for all columns in a single function call. This sort of task is performed by the apply() function.
 
 The following code uses the apply() function to calculate the average achievement percentage for each NCEA level.
 
-> apply(NCEA[2:4], MARGIN=2, FUN=mean)
-             Level1   Level2   Level3
-           62.26705 61.06818 47.97614
+```{r comment=NA}
+apply(NCEA[2:4], MARGIN = 2, FUN = mean)
+```
 
 The result suggests that a slightly lower percentage of students achieve NCEA Level 3 compared to the other NCEA levels.
 
@@ -2540,11 +2445,10 @@ The diagram below provides a conceptual view of how apply() works when MARGIN = 
 The data structure returned by apply() depends on how many values are returned by the function FUN. In the last example, we used the function mean(), which returns just a single value, so the overall result was a numeric vector, but if FUN returns more than one value, the result will be a matrix.
 
 For example, the following code calls apply() with the range() function to get the range of percentages at each NCEA level. The range() function returns two values for each NCEA level, so the result is a matrix with three columns (one for each NCEA level) and two rows—the minimum and maximum percentage at each level.
-           
-> apply(NCEA[2:4], 2, range)
-                Level1 Level2 Level3
-           [1,]    2.8    0.0    0.0
-           [2,]   97.4   95.7   95.7
+
+```{r comment=NA}
+apply(NCEA[2:4], 2, range)
+```
 
 The basic idea of apply() has similarities with the aggregate() and by() functions that we saw in the previous section. In all of these cases, we are breaking a larger data structure into smaller pieces, calling a function on each of the smaller pieces and then putting the results back together again to create a new data structure.
 
@@ -2556,13 +2460,9 @@ In order to demonstrate the use of lapply(), we will repeat the task we just per
 
 The following code calls lapply() to calculate the average percentage of students achieving each NCEA level.
 
-> lapply(NCEA[2:4], FUN = mean)
-           $Level1
-           [1] 62.26705
-           $Level2
-           [1] 61.06818
-           $Level3
-           [1] 47.97614
+```{r comment=NA}
+lapply(NCEA[2:4], FUN = mean)
+```
 
 The lapply() function has only two main arguments. The first argument is a list. As with the apply() example, we have supplied a data frame— the second, third, and fourth columns of the NCEA data frame—rather than supplying a list. The lapply() function silently converts the data frame to a list, which is a natural conversion if we treat each variable within the data frame as a component of the list.
 
@@ -2572,27 +2472,20 @@ The result of lapply() is a list data structure. The numeric results, the averag
 
 Like apply(), the lapply() function comfortably handles functions that return more than a single value. For example, the following code calculates the range of percentages for each NCEA level.
 
-> lapply(NCEA[2:4], FUN=range)
-           $Level1
-           [1]  2.8 97.4
-           $Level2
-           [1]  0.0 95.7
-           $Level3
-           [1]  0.0 95.7
+```{r comment=NA}
+lapply(NCEA[2:4], FUN = range)
+```
 
 These results from lapply() are very similar to the previous results from apply(); all that has changed is that the values are stored in a different sort of data structure (a list rather than a matrix).
 
 Whether to use apply() or lapply() will depend on what sort of data structure we are starting with and what we want to do with the result. For example, if we start with a list data structure, then lapply() is the appropriate function to use. However, if we start with a data frame, we can often use either apply() or lapply() and the choice will depend on whether we want the answer as a list or as a matrix.
 
 The sapply() function provides a slight variation on lapply(). This function behaves just like lapply() except that it attempts to simplify the result by returning a simpler data structure than a list, if that is possible. For example, if we use sapply() rather than lapply() for the previous examples, we get a vector and a matrix as the result, rather than lists.
-           
-> sapply(NCEA[2:4], mean)
-             Level1   Level2   Level3
-           62.26705 61.06818 47.97614
-> sapply(NCEA[2:4], range)
-                Level1 Level2 Level3
-           [1,]    2.8    0.0    0.0
-           [2,]   97.4   95.7   95.7
+
+```{r comment=NA}
+sapply(NCEA[2:4], mean)
+sapply(NCEA[2:4], range)
+```
 
 ### 9.8.8 Merging
 
@@ -2601,27 +2494,23 @@ In this section, we will look at the problem of combining data structures.
 For simple situations, the functions c(), cbind(), and rbind() are all that
 we need. For example, consider the two numeric vectors below.
 
-> 1:3
-[1] 1 2 3
-> 4:6
-[1] 4 5 6
+```{r comment=NA}
+1:3
+4:6
+```
 
 The c() function is useful for combining vectors or lists to make a longer vector or a longer list.
 
-> c(1:3, 4:6)
-[1] 1 2 3 4 5 6
+```{r comment=NA}
+c(1:3, 4:6)
+```
 
 The functions cbind() and rbind() can be used to combine vectors, matrices, or data frames with similar dimensions. The cbind() function creates a matrix or data frame by combining data structures side-by-side (a “column” bind) and rbind() combines data structures one above the other (a “row” bind).
-           
-> cbind(1:3, 4:6)
-                [,1] [,2]
-           [1,]    1    4
-           [2,]    2    5
-           [3,]    3    6
-> rbind(1:3, 4:6)
-                [,1] [,2] [,3]
-           [1,]    1    2    3
-           [2,]    4    5    6
+
+```{r comment=NA}
+cbind(1:3, 4:6)
+rbind(1:3, 4:6)
+```
 
 A more difficult problem arises if we want to combine two data structures that do not have the same dimensions.
 
@@ -2637,20 +2526,12 @@ The merge() function can be used to combine data sets like this.
 
 The following code creates a new data frame, aucklandSchools, that contains information from the schools data frame and from the NCEA data frame for Auckland secondary schools.
 
-> aucklandSchools <- merge(schools, NCEA,
-                           by.x = "Name", by.y = "Name",
-                           all.x=FALSE, all.y=FALSE)
-> aucklandSchools
-
-                               Name ID      City    Auth Dec Roll Level1 Level2 Level3
-35  Mahurangi College 24 Warkworth
-48      Orewa College 25     Orewa
-32   Long Bay College 27  Auckland
-55  Rangitoto College 28  Auckland   State  10 3022   85.0   81.7   71.6
-30     Kristin School 29  Auckland Private  10 1624   93.4   27.8   36.7
-19  Glenfield College 30  Auckland   State   7  972   58.4   65.5   45.6
-10 Birkenhead College 31  Auckland   State   6  896   59.8   65.7   50.4
-...
+```{r comment=NA}
+aucklandSchools <- merge(schools, NCEA,
+                         by.x = "Name", by.y = "Name",
+                         all.x = FALSE, all.y = FALSE)
+head(aucklandSchools)
+```
 
 The first two arguments to the merge() function are the data frames to be merged, in this case, schools and NCEA.
 
@@ -2660,7 +2541,10 @@ The all.x argument says that the result should only include schools from the sch
 
 By default, merge() will match on any variable names that the two data frames have in common, and it will only include rows in the final result if there is a match between the data frames. In this case, we could have just used the following expression to get the same result:
 
-> merge(schools, NCEA)
+```{r comment=NA}
+aucklandSchools <- merge(schools, NCEA)
+head(aucklandSchools)
+```
 
 ### 9.8.9 Flashback: Database joins
 
@@ -2670,15 +2554,9 @@ In relational database terms, by.x and by.y correspond to a primary-key/foreign-
 
 The merge() call above roughly corresponds to the following SQL query.
 
-SELECT *
-    FROM schools INNER JOIN NCEA
-        ON schools.Name = NCEA.Name;
-State   8 1095
-State   9 1696
-State  10 1611
-71.9   66.2   55.9
-75.2   81.0   54.9
-74.5   84.2   67.2
+    SELECT *
+        FROM schools INNER JOIN NCEA
+            ON schools.Name = NCEA.Name;
 
 ### 9.8.10 Splitting
 
@@ -2692,29 +2570,21 @@ The result is effectively several subsets of the original data frame, but with t
 
 In the following code, the Rolls variable from the schools data frame is broken into four pieces based on the Auth variable.
 
-> schoolRollsByAuth <- split(schools$Roll, schools$Auth)
+```{r comment=NA}
+schoolRollsByAuth <- split(schools$Roll, schools$Auth)
+```
 
 The resulting list, schoolRollsByAuth, has four components, each named after one level of the Auth variable and each containing the number of students enrolled at schools of the appropriate type. The following code uses the str() function that we saw in Section 9.6.7 to show a brief view of the basic structure of this list.
 
-> str(schoolRollsByAuth)
-List of 4
- $ Other
- $ Private
- $ State
-: int 51
-: int [1:99] 255 39 154 73 83 25 95 85 ..
-: int [1:2144] 318 200 455 86 577 329 6..
- $ State Integrated: int [1:327] 438 26 191 560 151 114 12..
+```{r comment=NA}
+str(schoolRollsByAuth)
+```
 
 Because the result of split() is a list, it is often used in conjunction with lapply() to perform a task on each component of the resulting list. For example, we can calculate the average roll for each type of school ownership with the following code.
 
-> lapply(schoolRollsByAuth, mean)
-$Other [1] 51
-$Private
-[1] 308.798
-$State
-[1] 300.6301
-$`State Integrated` [1] 258.3792
+```{r comment=NA}
+lapply(schoolRollsByAuth, mean)
+```
 
 This result can be compared to the result we got using the aggregate() function on page 323.
 
@@ -2730,46 +2600,23 @@ For some data processing tasks, it is useful to have the data in wide format, bu
 
 The NCEA data frame that we have been using is in wide format because it has a row for each school and a column for each NCEA level. There is one row per school and three observations on each row.
 
-> NCEA
-1                     Al-Madinah School
-2                     Alfriston College
-3 Ambury Park Centre for Riding Therapy
-61.5   75.0
-53.9   44.1
-33.3   20.0
-39.5   50.2
-71.2   78.9
-22.1   30.8
-50.8   34.8
-0.0 0.0 0.0
-   30.6
-   55.5
-   26.3
-   48.9
-4
-5
-6
-7 ...
-Aorere College Auckland Girls' Grammar School Auckland Grammar Auckland Seventh-Day Adventist H S
+```{r comment=NA}
+head(NCEA)
+```
 
 In the long format of the NCEA data set, each school would have three rows, one for each NCEA level. What this format looks like is shown below.  We will go on to show how to obtain this format.
 
-Name Level1 Level2 Level3
-
-
-                                              Name variable value
-           1                     Alfriston College   Level1  53.9
-           2                     Alfriston College   Level2  44.1
-           3                     Alfriston College   Level3   0.0
-           4                     Al-Madinah School   Level1  61.5
-           5                     Al-Madinah School   Level2  75.0
-           6                     Al-Madinah School   Level3   0.0
-           7 Ambury Park Centre for Riding Therapy   Level1  33.3
-...
+```{r comment=NA, echo=FALSE}
+library(reshape)
+longNCEA <- melt(NCEA, id.var = "Name")
+head(longNCEA)
+```
 
 There are several ways to perform the transformation between wide and long formats in R, but we will focus in this section on the reshape package because it provides a wider range of options and a more intuitive set of arguments.
-           
-> library("reshape")
+
+```{r comment=NA}
+library(reshape)
+```
 
 The two main functions in the reshape package are called melt() and cast(). The melt() function is used to convert a data frame into long format, and the cast() function can then be used to reshape the data into a variety of other forms.
 
@@ -2777,28 +2624,25 @@ The two main functions in the reshape package are called melt() and cast(). The 
 
 The following code creates the long format version of the NCEA data frame using the melt() function.
 
-> longNCEA <- melt(NCEA, measure.var=2:4)
+```{r comment=NA}
+longNCEA <- melt(NCEA, measure.var = 2:4)
+```
 
 The melt() function typically requires two arguments. The first argument provides the data frame to melt. The second argument is either measure.var to specify which columns of the data frame are observations (reshape calls them “measured” variables) or id.var to specify which columns of the data frame are just values that identify the individual or case (reshape calls these “id” variables).
 
 In the example above, we have specified that the second, third, and fourth columns are observations. The melt() function infers that the first column is therefore an “id” variable. The following code produces an identical result, using the id.var argument instead. In this case, we have specified that the Name variable is an “id” variable and the melt() function will treat all other columns as “measured” variables. This code also demonstrates that columns in the data frame can be specified by name as well as by number.
 
-> longNCEA <- melt(NCEA, id.var="Name")
-                                              Name variable value
-           1                     Alfriston College   Level1  53.9
-           2                     Alfriston College   Level2  44.1
-           3                     Alfriston College   Level3   0.0
-           4                     Al-Madinah School   Level1  61.5
-           5                     Al-Madinah School   Level2  75.0
-           6                     Al-Madinah School   Level3   0.0
-           7 Ambury Park Centre for Riding Therapy   Level1  33.3
-...
+```{r comment=NA}
+longNCEA <- melt(NCEA, id.var = "Name")
+head(longNCEA)
+```
 
 The longNCEA data frame has 264 rows because each of the original 88
 schools now occupies three rows.
 
-> dim(longNCEA)
-[1] 264 3
+```{r comment=NA}
+dim(longNCEA)
+```
 
 The original four columns in NCEA have become three columns in longNCEA. The first column in longNCEA is the same as the first column of NCEA, except that all of the values repeat three times.
 
@@ -2812,22 +2656,9 @@ We now turn our attention to the other main function in the reshape package, the
 
 As a simple demonstration of the cast() function, we will use it to recreate the original wide format of the NCEA data set. The following code performs this transformation.
 
-> cast(longNCEA, Name ~ variable)
-1                     Alfriston College
-2                     Al-Madinah School
-3 Ambury Park Centre for Riding Therapy
-53.9   44.1    0.0
-61.5   75.0    0.0
-33.3   20.0    0.0
-39.5   50.2   30.6
-71.2   78.9   55.5
-22.1   30.8   26.3
-50.8   34.8   48.9
-4
-5
-6
-7 ...
-Aorere College Auckland Girls' Grammar School Auckland Grammar Auckland Seventh-Day Adventist H S
+```{r comment=NA}
+head(cast(longNCEA, Name ~ variable))
+```
 
 The first argument to cast() is a data frame in long format. 
 
@@ -2837,38 +2668,16 @@ Variables on the left-hand side of this formula are used to form the rows of the
 
 The following code uses a different formula to demonstrate the power that cast() provides for reshaping data. In this case, the data set has been transposed so that each column is now a different school and each row corresponds to one of the NCEA levels.
 
-> tNCEA <- cast(longNCEA, variable ~ Name)
-> tNCEA
-1 2 3
-Level1              53.9
-Level2              44.1
-Level3               0.0
-61.5 ...
-75.0 ...
- 0.0 ...
-variable Alfriston College Al-Madinah School ...
-
-Name Level1 Level2 Level3
-
-start   therms  gas KWHs
-elect   temp    days
-                   10-Jun-98       9
-                   20-Jul-98       6
-                   18-Aug-98       7
-                   16-Sep-98       42
-                   19-Oct-98       105
-                   17-Nov-98       106
-                   17-Dec-98       200
-                   19-Jan-99       144
-                   18-Feb-99       179
-...
-
-Figure 9.12: The first few lines of the Utilities data set in a plain text, white-space-delimited format.
+```{r comment=NA}
+tNCEA <- cast(longNCEA, variable ~ Name)
+head(tNCEA)
+```
 
 This data structure has 3 rows and 89 columns: one row for each NCEA level and one column for each school, plus an extra column containing the names of the NCEA levels.
 
-> dim(tNCEA)
-[1] 389
+```{r comment=NA}
+dim(tNCEA)
+```
 
 Now that we have seen a number of techniques for manipulating data sets, the next section presents a larger case study that combines several of these techniques to perform a more complex exploration of a data set.
 
@@ -2890,80 +2699,21 @@ The events were:
 
 The text file containing the energy usage can be read conveniently using the read.table() function, with the header=TRUE argument specified to use the variable names on the first line of the file. We also use as.is=TRUE to keep the dates as text for now.
 
-> utilities <- read.table(file.path("Utilities", "baltimore.txt"),
-                          header = TRUE, as.is = TRUE)
-> utilities
+```{r comment=NA}
+utilities <- read.table(file.path("~/GitHub/ItDT", "baltimore.txt"),
+                        header = TRUE, as.is = TRUE)
+head(utilities)
+```
 
-16.84   613
-15.29   721
-15.73   597
-35.81   460
-77.28   314
-77.01   342
-136.66  298
-107.28  278
-122.80  253
-63.80   75      40
-74.21   76      29
-62.22   76      29
-43.98   70      33
-31.45   57      29
-33.86   48      30
-30.08   40      33
-28.37   37      30
-26.21   39      29
-
-
-
-
-                 start therms   gas KWHs elect temp days
-1 10-Jun-98
-2 20-Jul-98
-3 18-Aug-98
-4 16-Sep-98
-5 19-Oct-98
-6 17-Nov-98
-...
-  9 16.84  613 63.80
-  6 15.29  721 74.21
-  7 15.73  597 62.22
- 42 35.81  460 43.98
-105 77.28  314 31.45
-106 77.01  342 33.86
-75   40
-76   29
-76   29
-70   33
-57   29
-48   30
+Figure 9.12: The first few lines of the Utilities data set in a plain text, white-space-delimited format.
 
 The first thing we want to do is to convert the first variable into actual
 dates. This will allow us to perform calculations and comparisons on the date values.
 
-> utilities$start <- as.Date(utilities$start,
-                              "%d-%b-%y")
-> utilities
-       start therms   gas KWHs elect temp days
-
-1 1998-06-10
-2 1998-07-20
-3 1998-08-18
-4 1998-09-16
-5 1998-10-19
-6 1998-11-17
-...
-  9 16.84  613 63.80
-  6 15.29  721 74.21
-  7 15.73  597 62.22
- 42 35.81  460 43.98
-105 77.28  314 31.45
-106 77.01  342 33.86
-75   40
-76   29
-76   29
-70   33
-57   29
-48   30
+```{r comment=NA}
+utilities$start <- as.Date(utilities$start, "%d-%b-%y")
+head(utilities)
+```
 
 The next thing that we will do is break the data set into five different time “phases,” using the four significant events as breakpoints; we will be interested in the average daily charges for each of these phases.
 
@@ -2971,13 +2721,13 @@ To keep things simple, we will just determine the phase based on whether the bil
 
 The six critical dates that we will use to categorize each billing period are the start of the first billing period, the dates at which the significant events occurred, and the start of the last billing period.
 
-> breakpoints <- c(min(utilities$start),
-                   as.Date(c("1999-07-31", "2004-04-22",
-                             "2004-09-01", "2005-12-18")),
-                   max(utilities$start))
-> breakpoints
-           [1] "1998-06-10" "1999-07-31" "2004-04-22" "2004-09-01"
-           [5] "2005-12-18" "2006-08-17"
+```{r comment=NA}
+breakpoints <- c(min(utilities$start),
+                 as.Date(c("1999-07-31", "2004-04-22", 
+                           "2004-09-01", "2005-12-18")),
+                 max(utilities$start))
+breakpoints
+```
 
 We can use the cut() function to convert the start variable, which contains the billing period start dates, into a phase variable, which is a factor.
            
