@@ -3601,7 +3601,7 @@ Standard data processing tasks include: reading data from external files into RA
 
 [1] http://cran.r-project.org/
 
-[2] The data were originally obtained from http://www.minedu.govt.nz/web/ downloadable/dl6434_v1/directory-schools-web.xls and similar files are now available from http://www.educationcounts.govt.nz/statistics/tertiary_education/27436.
+[2] The data were originally obtained from http://www.minedu.govt.nz/web/downloadable/dl6434_v1/directory-schools-web.xls and similar files are now available from http://www.educationcounts.govt.nz/statistics/tertiary_education/27436.
 
 [3] Thanks to David Gouache, Arvalis—Institut du V ́eg ́etal.
 
