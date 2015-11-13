@@ -386,9 +386,7 @@ The most important point for now is that we should save any code that we write; 
 
 The features of R are organized into separate bundles called packages. The standard R installation includes about 25 of these packages, but many more can be downloaded from CRAN and installed to expand the things that R can do. For example, there is a package called XML that adds features for working with XML documents in R. We can install that package by typing the following code.
 
-```{r comment=NA}
-install.packages("XML")
-```
+    install.packages("XML")
 
 Once a package has been installed, it must then be loaded within an R session to make the extra features available. For example, to make use of the XML package, we need to type the following code.
 
@@ -1947,7 +1945,7 @@ We must use other special functions from the XML package to work with this data 
 
 In particular, the getNodeSet() function allows us to select elements from this data structure using XPath expressions.
 
-In the following example, we extract the temperature attribute values from all case elements in the XML document. The XPath expression "/temperatures/case/@temperature" selects all of the temperature attributes of the case elements within the root temperatures element.
+In the following example, we extract the temperature attribute values from all case elements in the XML document. The XPath expression \"/temperatures/case/@temperature" selects all of the temperature attributes of the case elements within the root temperatures element.
 
 ```{r comment=NA}
 nemoDocTempText <- unlist(getNodeSet(nemoDoc,
@@ -2730,11 +2728,12 @@ breakpoints
 ```
 
 We can use the cut() function to convert the start variable, which contains the billing period start dates, into a phase variable, which is a factor.
-           
-> phase <- cut(utilities$start, breakpoints,
-               include.lowest = TRUE, labels = FALSE)
-> phase
-[1] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 [29] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 [57] 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 4 4 4 4 4 5 4 4 4 4 4 4 [85] 4 4 4 4 4 5 5 5 5 5 5 5
+
+```{r comment=NA}
+phase <- cut(utilities$start, breakpoints,
+             include.lowest = TRUE, labels = FALSE)
+phase
+```
 
 Each billing period now has a corresponding phase.
 
@@ -2742,57 +2741,38 @@ One important point to notice about these phase values is that they are not stri
 
 Now that we have each billing period assigned to a corresponding phase, we can sum the energy usage and costs for each phase. This is an application of the aggregate() function. The following code subsets the utilities data frame to remove the first column, the billing period start dates, and then sums the values in all of the remaining columns for each different phase.
 
-> phaseSums <- aggregate(utilities[c("therms", "gas", "KWHs",
-                                                 "elect", "days")],
-                                     list(phase=phase), sum)
-
-> phaseSums
-             phase therms     gas  KWHs   elect days
-1 1
-2 2
-3 3
-4     4   1737 2350.63  5872  567.91  483
-5     5    577  847.38  3608  448.61  245
- 875  703.27  5883  602.84  406
-5682 5364.23 24173 2269.14 1671
-  28   76.89  1605  170.27  124
+```{r comment=NA}
+phaseSums <- aggregate(utilities[c("therms", "gas", "KWHs", "elect", "days")],
+                       list(phase = phase), sum)
+phaseSums
+```
 
 We can now divide the totals for each phase by the number of days in each phase to obtain an average usage and cost per day for each phase.
 
-> phaseAvgs <- phaseSums[2:5]/phaseSums$days
+```{r comment=NA}
+phaseAvgs <- phaseSums[2:5]/phaseSums$days
+```
 
 For inspecting these values, it helps if we round the values to two significant figures.
 
-> signif(phaseAvgs, 2)
-  therms  gas KWHs elect
-1 2.20 1.70
-2 3.40 3.20
-3 0.23 0.62
-4 3.60 4.90
-5 2.40 3.50
-14   1.5
-14   1.4
-13   1.4
-12   1.2
-15   1.8
+```{r comment=NA}
+signif(phaseAvgs, 2)
+```
 
 The division step above works because when a data frame is divided by a vector, each variable in the data frame gets divided by the vector. This is not necessarily obvious from the code; a more explicit way to perform the operation is to use the sweep() function, which forces us to explicitly state that, for each row of the data frame (MARGIN=1), we are dividing (FUN="/") by the corresponding value from a vector (STAT=phase$days).
 
-> phaseSweep <- sweep(phaseSums[2:5],
-                       MARGIN=1, STAT=phaseSums$days, FUN="/")
+```{r comment=NA}
+phaseSweep <- sweep(phaseSums[2:5], MARGIN=1, 
+                    STAT = phaseSums$days, FUN = "/")
+```
 
 Looking at the average daily energy values for each phase, the values that stand out are the gas usage and cost during phase 3 (after the first two storm windows were replaced, but before the second set of four storm windows were replaced). The naive interpretation is that the first two storm windows were incredibly effective, but the next four storm windows actually made things worse again!
 
 At first sight this appears strange, but it is easily explained by the fact that phase 3 coincided with summer months, as shown below using the table() function. This code produces a rough count of how many times each month occurred in each phase. The function months() extracts the names of the months from the dates in the start variable; each billing period is assigned to a particular month based on the month that the period started in (which is why this is a rough count).
-           
-> table(months(utilities$start), phase)[month.name, ]
 
-phase 12345
-January 15011 February 15011 March 05011 April 15011 May 13111 June 24111 July 24111 August 15111 September 1 5 0 2 0
-October
-November
-December
-15020 14020 15020
+```{r comment=NA}
+table(months(utilities$start), phase)[month.name, ]
+```
 
 Subsetting the resulting table by the predefined symbol month.name just rearranges the order of the rows of the table; this ensures that the months are reported in calendar order rather than alphabetical order.
 
@@ -2800,52 +2780,27 @@ We would expect the gas usage (for heating) to be a lot lower during summer. Thi
 
 Again we must take care to get the answer in calendar order; this time we do that by creating a factor that is based on converting the start of each billing period into a month, with the order of the levels of this factor explicitly set to be month.name.
 
-> billingMonths <- factor(months(utilities$start),
-                           levels=month.name)
+```{r comment=NA}
+billingMonths <- factor(months(utilities$start), levels = month.name)
+```
 
 We then use aggregate() to sum the usage, costs, and days for the billing periods, grouped by this billingMonths factor.
 
-> months <- aggregate(utilities[c("therms", "gas", "KWHs", "elect", "days")],
-                      list(month=billingMonths), sum)
+```{r comment=NA}
+months <- aggregate(utilities[c("therms", "gas", "KWHs", "elect", "days")],
+                    list(month = billingMonths), sum)
+```
 
 Finally, we divide the usage and cost totals by the number of days in the billing periods. So that we can easily comprehend the results, we cbind() the month names on to the averages and round the averages using signif().
 
-> cbind(month = months$month,
-        signif(months[c("therms", "gas", "KWHs", "elect")]/months$days, 2))
-                  month therms  gas KWHs elect
-1    January
-2   February
-3      March
-4      April
-5        May
-6       June
-7       July
-8     August
-9  September   1.20 1.30   14   1.3
-10   October   3.40 3.50   12   1.1
-11  November   5.40 5.50   14   1.2
-12  December   7.20 7.10   13   1.2
+```{r comment=NA}
+cbind(month = months$month,
+      signif(months[c("therms", "gas", "KWHs", "elect")]/months$days, 2))
+```
 
 These results are presented graphically in Figure 9.13.
 
 This example has demonstrated a number of data manipulation techniques in a more realistic setting. The simple averages that we have calculated serve to show that any attempt to determine whether the significant events led to a significant change in energy consumption and cost for this household is clearly going to require careful analysis.
-
-7.80 7.50
-5.90 5.90
-3.90 4.00
-1.70 1.90
-0.65 0.99
-0.22 0.57
-0.21 0.59
-0.23 0.60
-13   1.2
-11   1.0
-12   1.1
-11   1.0
-12   1.3
-16   1.8
-22   2.3
-17   1.8
 
 Figure 9.13: A plot of the average daily energy usage, by month, for the Utilities data set. Gas usage is represented by the solid line and electricity usage is represented by the dashed line.
 
@@ -2875,7 +2830,7 @@ We will introduce some of the basic text processing ideas via a simple example.
 
 One of the longest placenames in the world is attributed to a hill in the Hawke’s Bay region of New Zealand. The name (in Maori) is ...
 
-Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
+    Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
 
 ... which means “The hilltop where Tamatea with big knees, conqueror of mountains, eater of land, traveler over land and sea, played his koauau [flute] to his beloved.”
 
@@ -2883,15 +2838,17 @@ Children at an Auckland primary school were given a homework assignment that inc
 
 Counting the number of characters in a piece of text is something that any programming language will do. Assuming that the name has been saved into a text file called placename.txt, here is how to use the scan() function to read the name into R, as a character vector of length 1.
 
-> placename <- scan(file.path("Placename", "placename.txt"),
-                    "character")
+```{r comment=NA}
+placename <- scan(file.path("~/GitHub/ItDT", "placename.txt"), "character")
+```
 
 The first argument provides the name and location of the file and the second argument specifies what sort of data type is in the file. In this case, we are reading a single character value from a file.
 
 We can now use the nchar() function to count the number of characters in this text.
 
-> nchar(placename)
-[1] 85
+```{r comment=NA}
+nchar(placename)
+```
 
 Counting characters is a very simple text processing task, though even with something that simple, performing the task using a computer is much more likely to get the right answer. We will now look at some more complex text processing tasks.
 
@@ -2899,86 +2856,77 @@ The homework assignment went on to say that, in Maori, the combinations ‘ng’
 
 For the first approach, we could try counting all of the ‘ng’s and ‘wh’s as single letters by searching through the text and converting all of them into single characters and then redoing the count. In R, we can perform this search-and-replace task using the gsub() function, which takes three arguments: a pattern to search for, a replacement value, and the text to search within. The result is the original text with the pattern replaced. Because we are only counting letters, it does not matter which letter we choose as a replacement. First, we replace occurrences of ‘ng’ with an underscore character.
 
-> replacengs <- gsub("ng", "_", placename)
-> replacengs
-[1] "Taumatawhakata_iha_akoauauotamateaturipukakapikimau_ahoronukupokaiwhenuakitanatahu"
+```{r comment=NA}
+replacengs <- gsub("ng", "_", placename)
+replacengs
+```
 
 Next, we replace the occurrences of ‘wh’ with an underscore character. 
 
-> replacewhs <- gsub("wh", "_", replacengs)
-> replacewhs
-[1] "Taumata_akata_iha_akoauauotamateaturipukakapikimau_ahoronukupokai_enuakitanatahu"
+```{r comment=NA}
+replacewhs <- gsub("wh", "_", replacengs)
+replacewhs
+```
 
 Finally, we count the number of letters in the resulting text.
 
-> nchar(replacewhs)
-[1] 80
+```{r comment=NA}
+nchar(replacewhs)
+```
 
 The alternative approach involves just finding out how many ‘ng’s and ‘wh’s are in the text and subtracting that number from the original count. This simple step of searching within text for a pattern is yet another common text processing task. There are several R functions that perform variations on this task, but for this example we need the function gregexpr() because it returns all of the matches within a piece of text. This function takes two arguments: a pattern to search for and the text to search within. The result is a vector of the starting positions of the pattern within the text, with an attribute that gives the lengths of each match. Figure 9.14 includes a diagram that illustrates how this function works.
 
-> ngmatches <- gregexpr("ng", placename)[[1]]
-> ngmatches
-           [1] 15 20 54
-           attr(,"match.length")
-           [1] 2 2 2
-           attr(,"useBytes")
-           [1] TRUE
+```{r comment=NA}
+ngmatches <- gregexpr("ng", placename)[[1]]
+ngmatches
+```
 
 This result shows that the pattern ‘ng’ occurs three times in the placename, starting at character positions 15, 20, and 54, respectively, and that the length of the match is 2 characters in each case. Here is the result of searching for occurrences of ‘wh’:
 
-> whmatches <- gregexpr("wh", placename)[[1]]
-> whmatches
-[1] 870 attr(,"match.length") [1] 2 2 attr(,"useBytes")
-[1] TRUE
+```{r comment=NA}
+whmatches <- gregexpr("wh", placename)[[1]]
+whmatches
+```
 
 The return value of gregexpr() is a list to allow for more than one piece of text to be searched at once. In this case, we are only searching a single piece of text, so we just need the first component of the result.
 
 We can use the length() function to count how many matches there were in the text.
 
-> length(ngmatches)
-           [1] 3
-> length(whmatches)
-[1] 2
+```{r comment=NA}
+length(ngmatches)
+length(whmatches)
+```
 
 The final answer is simple arithmetic.
 
-> nchar(placename) - (length(ngmatches) + length(whmatches))
-[1] 80
+```{r comment=NA}
+nchar(placename) - (length(ngmatches) + length(whmatches))
+```
 
 For the final question in the homework assignment, the students had to count how many times each letter appeared in the placename (treating ‘wh’ and ‘ng’ as separate letters again).
 
 One way to do this in R is by breaking the placename into individual characters and creating a table of counts. Once again, we have a standard text processing task: breaking a single piece of text into multiple pieces. The strsplit() function performs this task in R. It takes two arguments: the text to break up and a pattern which is used to decide where to split the text. If we give the value NULL as the second argument, the text is split at each character. Figure 9.14 includes a diagram that illustrates how this function works.
 
-> nameLetters <- strsplit(placename, NULL)[[1]]
-> nameLetters
-            [1] "T" "a" "u" "m" "a" "t" "a" "w" "h" "a" "k" "a" "t" "a"
-           [15] "n" "g" "i" "h" "a" "n" "g" "a" "k" "o" "a" "u" "a" "u"
-           [29] "o" "t" "a" "m" "a" "t" "e" "a" "t" "u" "r" "i" "p" "u"
-           [43] "k" "a" "k" "a" "p" "i" "k" "i" "m" "a" "u" "n" "g" "a"
-           [57] "h" "o" "r" "o" "n" "u" "k" "u" "p" "o" "k" "a" "i" "w"
-           [71] "h" "e" "n" "u" "a" "k" "i" "t" "a" "n" "a" "t" "a" "h"
-           [85] "u"
+```{r comment=NA}
+nameLetters <- strsplit(placename, NULL)[[1]]
+nameLetters
+```
 
 Again, the result is a list to allow for breaking up multiple pieces of text at once. In this case, because we only have one piece of text, we are only interested in the first component of the list.
 
 One minor complication is that we want the uppercase ‘T’ to be counted as a lowercase ‘t’. The function tolower() performs this task.
 
-> lowerNameLetters <- tolower(nameLetters)
-> lowerNameLetters
-            [1] "t" "a" "u" "m" "a" "t" "a" "w" "h" "a" "k" "a" "t" "a"
-           [15] "n" "g" "i" "h" "a" "n" "g" "a" "k" "o" "a" "u" "a" "u"
-           [29] "o" "t" "a" "m" "a" "t" "e" "a" "t" "u" "r" "i" "p" "u"
-           [43] "k" "a" "k" "a" "p" "i" "k" "i" "m" "a" "u" "n" "g" "a"
-           [57] "h" "o" "r" "o" "n" "u" "k" "u" "p" "o" "k" "a" "i" "w"
-           [71] "h" "e" "n" "u" "a" "k" "i" "t" "a" "n" "a" "t" "a" "h"
-           [85] "u"
+```{r comment=NA}
+lowerNameLetters <- tolower(nameLetters)
+lowerNameLetters
+```
 
 Now it is a simple matter of calling the tablefunction to produce a table of counts of the letters.
 
-> letterCounts <- table(lowerNameLetters)
-> letterCounts
-lowerNameLetters aeghikmnoprtuw
-22 2 3 5 6 8 3 6 5 3 2 8 10 2
+```{r comment=NA}
+letterCounts <- table(lowerNameLetters)
+letterCounts
+```
 
 As well as pulling text apart into smaller pieces as we have done so far, we also need to be able to put several pieces of text together to make a single larger piece of text.
 
@@ -2988,19 +2936,15 @@ The paste() function can be used to combine separate character vectors or to com
 
 We have a character vector containing 85 separate character values.
 
-> nameLetters
-            [1] "T" "a" "u" "m" "a" "t" "a" "w" "h" "a" "k" "a" "t" "a"
-           [15] "n" "g" "i" "h" "a" "n" "g" "a" "k" "o" "a" "u" "a" "u"
-           [29] "o" "t" "a" "m" "a" "t" "e" "a" "t" "u" "r" "i" "p" "u"
-           [43] "k" "a" "k" "a" "p" "i" "k" "i" "m" "a" "u" "n" "g" "a"
-           [57] "h" "o" "r" "o" "n" "u" "k" "u" "p" "o" "k" "a" "i" "w"
-           [71] "h" "e" "n" "u" "a" "k" "i" "t" "a" "n" "a" "t" "a" "h"
-           [85] "u"
+```{r comment=NA}
+nameLetters
+```
 
-The following code combines the individual character values to make the complete placename. The collapse argument specifies that the character vector should be collapsed into a single character value with, in this case (collapse=""), nothing in between each character.
+The following code combines the individual character values to make the complete placename. The collapse argument specifies that the character vector should be collapsed into a single character value with, in this case (collapse= ""), nothing in between each character.
 
-> paste(nameLetters, collapse="")
-[1] "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu"
+```{r comment=NA}
+paste(nameLetters, collapse = "")
+```
 
 This section has introduced a number of functions for counting letters in text, transforming text, breaking text apart, and putting it back together again. More examples of the use of these functions are given in the next section and in case studies later on.
 
@@ -3010,8 +2954,9 @@ Two of the tasks we looked at when working with the long Maori placename in the 
 
 With the placename in the variable called placename, converting both ‘ng’ and ‘wh’ to underscores in a single step is achieved as follows:
 
-> gsub("ng|wh", "_", placename)
-[1] "Taumata_akata_iha_akoauauotamateaturipukakapikimau_ahoronukupokai_enuakitanatahu"
+```{r comment=NA}
+gsub("ng|wh", "_", placename)
+```
 
 The regular expression we are using, ng|wh, describes a pattern: the character ‘n’ followed by the character ‘g’ or the character ‘w’ followed by the character ‘h’. The vertical bar, |, is a metacharacter. It does not have its normal meaning, but instead denotes an optional pattern; a match will occur if the text contains either the pattern to the left of the vertical bar or the pattern to the right of the vertical bar. The characters ‘n’, ‘g’, ‘w’, and ‘h’ are all literals; they have their normal meaning.
 
@@ -3055,55 +3000,40 @@ For this small set of recordings, the data could be extracted by hand. However, 
 
 The first step is to get the data into R. We can do this using the readLines() function, which will create a character vector with one element for each line of recordings.
 
-lema, rb 2%
-rb 2%
-rb 3%
-rb 4%
-rb 3%
-rb 2%,mineuse
-rb
-rb
-rb 12
-rb
-rj 30%
-rb
-rb
-rb 25%
-rb
-rb
-rb
-rj 10, rb 4
+    lema, rb 2%
+    rb 2%
+    rb 3%
+    rb 4%
+    rb 3%
+    rb 2%,mineuse
+    rb
+    rb
+    rb 12
+    rb
+    rj 30%
+    rb
+    rb
+    rb 25%
+    rb
+    rb
+    rb
+    rj 10, rb 4
 
 Figure 9.15: Data recording the occurrence of brown or yellow rust diseases on wheat plants, in a largely unstructured plain text format. Each line represents one wheat plant. The text rb followed by a number represents an amount of brown rust and the text rj followed by a number represents an amount of yellow rust.
 
-> wheat <- readLines(file.path("Wheat", "wheat.txt"))
-> wheat
- [1] "lema, rb 2%"
- [4] "rb 4%"
- [7] "rb"
-[10] "rb"
-[13] "rb"
-[16] "rb"
-"rb 2%"
-"rb 3%"
-"rb"
-"rj 30%"
-"rb 25%"
-"rb"
-"rb 3%"
-"rb 2%,mineuse"
-"rb 12"
-"rb"
-"rb"
-"rj 10, rb 4"
+```{r comment=NA}
+wheat <- readLines(file.path("~/GitHub/ItDT", "wheat.txt"))
+wheat
+```
 
 What we want to end up with are two variables, one recording the amount of brown rust on each plant and one recording the amount of yellow rust.
 
 Starting with brown rust, the first thing we could do is find out which plants have any brown rust on them. The following code does this using the grep() function. The result is a vector of indices that tells us which lines contain the pattern we are searching for. Figure 9.14 includes a diagram that illustrates how this function works.
 
-> rbLines <- grep("rb [0-9]+", wheat)
-> rbLines
-[1]  1  2  3  4  5  6  9 14 18
+```{r comment=NA}
+rbLines <- grep("rb [0-9]+", wheat)
+rbLines
+```
 
 The regular expression in this call demonstrates two more important examples of meta-characters. The square brackets, ‘[’ and ‘]’, are used to describe a character set that will be matched. Within the brackets we can specify individual characters or, as in this case, ranges of characters; 0-9 means any character between ‘0’ and ‘9’.
 
@@ -3113,25 +3043,18 @@ The letters ‘r’, ‘b’, and the space are all literal, so the entire regul
 
 Having found which lines contain information about brown rust, we want to extract the information from those lines. The indices from the call to grep() can be used to subset out just the relevant lines of data.
 
-> wheat[rbLines]
-[1] "lema, rb 2%"
-[4] "rb 4%"
-[7] "rb 12"
-"rb 2%"
-"rb 3%"
-"rb 25%"
-"rb 3%"
-"rb 2%,mineuse"
-"rj 10, rb 4"
+```{r comment=NA}
+wheat[rbLines]
+```
 
 We will extract just the brown rust information from these lines in two steps, partly so that we can explore more about regular expressions, and partly because we have to in order to cater for plants that have been afflicted by both brown and yellow rust.
 
 The first step is to reduce the line down to just the information about brown rust. In other words, we want to discard everything except the pattern that we are looking for, rb followed by a space, followed by one or more digits. The following code performs this step.
 
-> rbOnly <- gsub("^.*(rb [0-9]+).*$", "\\1",
-                  wheat[rbLines])
-> rbOnly
-[1]"rb2" "rb2" "rb3" "rb4" "rb3" "rb2" "rb12" [8] "rb 25" "rb 4"
+```{r comment=NA}
+rbOnly <- gsub("^.*(rb [0-9]+).*$", "\\1", wheat[rbLines])
+rbOnly
+```
 
 The overall strategy being used here is to match the entire line of text, from the first character to the last, but within that line we want to identify and isolate the important component of the line, the brown rust part, so that we can retain just that part.
 
@@ -3153,15 +3076,17 @@ Now that we have character values that contain only the brown rust information, 
 
 One approach is to take the text values that contain just the brown rust information and throw away everything except the numbers. The following code does this using a regular expression.
 
-> gsub("[^0-9]", "", rbOnly)
-           [1] "2"  "2"  "3"  "4"  "3"  "2"  "12" "25" "4"
+```{r comment=NA}
+gsub("[^0-9]", "", rbOnly)
+```
 
 The point about this regular expression is that it uses ^ as the first character within the square brackets. This has the effect of negating the set of characters within the brackets, so [^0-9] means any character that is not a digit. The effect of the complete gsub() call is to replace anything that is not a digit with an empty piece of text, so only the digits remain.
 
 An alternative approach is to recognize that the text values that we are dealing with have a very regular structure. In fact, all we need to do is drop the first three characters from each piece of text. The following code does this with a simple call to substring().
 
-> substring(rbOnly, 4)
-           [1] "2"  "2"  "3"  "4"  "3"  "2"  "12" "25" "4"
+```{r comment=NA}
+substring(rbOnly, 4)
+```
 
 The first argument to substring() is the text to reduce and the second argument specifies which character to start from. In this case, the first character we want is character 4. There is an optional third argument that specifies which character to stop at, but if, as in this example, the third argument is not specified, then we keep going to the end of the text.
 
@@ -3169,28 +3094,28 @@ The name of this function comes from the fact that text values, or character val
 
 The final approach that we will consider works with the entire original text, wheat[rbLines], and uses a regular expression containing an extra set of parentheses to isolate just the numeric content of the brown rust information as a sub-pattern of its own. The replacement text refers to this second sub-pattern, "\\2", so it reduces the entire line to only the part of the line that is the numbers within the brown rust information, in a single step.
 
-> gsub("^.*(rb ([0-9]+)).*$", "\\2", wheat[rbLines])
-           [1] "2"  "2"  "3"  "4"  "3"  "2"  "12" "25" "4"
+```{r comment=NA}
+gsub("^.*(rb ([0-9]+)).*$", "\\2", wheat[rbLines])
+```
 
 We are not quite finished because we want to produce a variable that contains the brown rust information for all plants. We will use NA for plants that were not afflicted.
 
 A simple way to do this is to create a vector of NAs and then fill in the rows for which we have brown rust information. The other important detail in the following code is the conversion of the textual information into numeric values using as.numeric().
 
-> rb <- rep(NA, length(wheat))
-> rb[rbLines] <- as.numeric(gsub("^.*(rb ([0-9]+)).*$",
-                                             "\\2", wheat[rbLines]))
-> rb
-[1] 2 2 3 4 3 2NANA12NANANANA25NANANA 4
+```{r comment=NA}
+rb <- rep(NA, length(wheat))
+rb[rbLines] <- as.numeric(gsub("^.*(rb ([0-9]+)).*$", "\\2", wheat[rbLines]))
+rb
+```
 
 To complete the exercise, we need to repeat the process for yellow rust. Rather than repeat the approach used for brown rust, we will investigate a different solution, which will again allow us to demonstrate more text processing techniques.
 
 This time, we will use regexpr() rather than grep() to find the lines that we want. We are now searching for the lines containing yellow rust data. 
 
-> rjData <- regexpr("rj [0-9]+", wheat)
-> rjData
-[1]-1-1-1-1-1-1-1-1-1-1 1-1-1-1-1-1-1 1 attr(,"match.length")
-[1]-1-1-1-1-1-1-1-1-1-1 5-1-1-1-1-1-1 5 attr(,"useBytes")
-[1] TRUE
+```{r comment=NA}
+rjData <- regexpr("rj [0-9]+", wheat)
+rjData
+```
 
 The result is a numeric vector with a positive number for lines that contain yellow rust data and -1 otherwise. The number indicates the character where the data start. Figure 9.14 includes a diagram that illustrates how this function works.
 
@@ -3198,24 +3123,19 @@ In this case, there are only two lines containing yellow rust data (lines 11 and
 
 The result also has an attribute called match.length, which contains the number of characters that produced the match with the regular expression that we were searching for. In both cases, the pattern matched a total of 5 characters: the letters r and j, followed by a space, followed by two digits. This length information is particularly useful because it will allow us to extract the yellow rust data immediately using substring(). This time we specify both a start and an end character for the subset of the text.
 
-> rjText <- substring(wheat, rjData,
-                                  attr(rjData, "match.length"))
-> rjText
-[1]"" "" "" "" "" "" ""
-            [8] ""      ""      ""      "rj 30" ""      ""      ""
-           [15] ""      ""      ""      "rj 10"
+```{r comment=NA}
+rjText <- substring(wheat, rjData, attr(rjData, "match.length"))
+rjText
+```
 
 Obtaining the actual numeric data can be carried out using any of the techniques we described above for the brown rust case.
 
 The following code produces the final result, including both brown and yellow rust as a data frame.
 
-> rj <- as.numeric(substring(rjText, 4))
-> data.frame(rb=rb, rj=rj)
-rb rj 1 2NA 2 2NA 3 3NA 4 4NA 5 3NA 6 2NA
-7 NANA
-8 NANA
-9 12NA
-10 NA NA 11 NA 30 12 NA NA 13 NA NA 14 25 NA 15 NA NA 16 NA NA 17 NA NA 18 410
+```{r comment=NA}
+rj <- as.numeric(substring(rjText, 4))
+data.frame(rb = rb, rj = rj)
+```
 
 #### Recap
 
@@ -3241,10 +3161,10 @@ In this section we will work with a subset of the temperature values from the Po
 
 The temperature values have previously been read into R as the temp variable in the data frame called pointnemodelim (see Section 9.7.4). In this section, we will only work with the first 12 of these temperature values, which represent the first year’s worth of monthly temperature recordings.
 
-> twelveTemps <- pointnemodelim$temp[1:12]
-> twelveTemps
-                  [1] 278.9 280.0 278.9 278.9 277.8 276.1 276.1 275.6 275.6
-                 [10] 277.3 276.7 278.9
+```{r comment=NA}
+twelveTemps <- pointnemodelim$temp[1:12]
+twelveTemps
+```
 
 The data structure that we are dealing with is a numeric vector. The values in twelveTemps are stored in RAM as numbers.
 
@@ -3252,16 +3172,17 @@ However, the display that we see on screen is text. The values are numeric, so t
 
 The function that displays text versions of data values on screen is called print(). This function gets called automatically to display the result of an R expression, but we can also call it directly, as shown below. The display is exactly the same as when we type the name of the symbol by itself.
 
-> print(twelveTemps)
-                  [1] 278.9 280.0 278.9 278.9 277.8 276.1 276.1 275.6 275.6
-                 [10] 277.3 276.7 278.9
+```{r comment=NA}
+print(twelveTemps)
+```
 
 One reason for calling print() directly is that this function has arguments that control how values are displayed on screen. For example, when displaying numeric values, there is an argument digits that controls how many significant digits are displayed.
 
 In the following code, we use the digits argument to only display three digits for each temperature value. This has no effect on the values in RAM; it only affects how the numbers are converted to text for display on the screen.
 
-> print(twelveTemps, digits=3)
-            [1] 279 280 279 279 278 276 276 276 276 277 277 279
+```{r comment=NA}
+print(twelveTemps, digits = 3)
+```
 
 The print() function is a generic function (see Section 9.6.8), so what gets displayed on screen is very different for different sorts of data structures; the arguments that provide control over the details of the display will also vary.
 
@@ -3271,9 +3192,9 @@ If we want to have complete control over what gets displayed on the screen, we n
 
 For simple cases, the cat() function will automatically coerce values to a character vector. For example, the following code uses cat() to display the twelveTemps numeric vector on screen. The fill argument says that a new line should be started after 60 characters have been used.
 
-> cat(twelveTemps, fill=60)
-           278.9 280 278.9 278.9 277.8 276.1 276.1 275.6 275.6 277.3
-           276.7 278.9
+```{r comment=NA}
+cat(twelveTemps, fill = 60)
+```
 
 The difference between this display and what print() displays is that there is no index at the start of each row. This is the usefulness of cat(): it just displays values and does not perform any formatting of its own. This means that we can control the formatting when we generate text values and then just use cat() to get the text values displayed on screen.
 
@@ -3287,9 +3208,9 @@ We have previously seen two ways to convert data values to character values: som
 
 The following code coerces the twelveTemps numeric vector to a character vector using as.character().
 
-> as.character(twelveTemps)
-                  [1] "278.9" "280"   "278.9" "278.9" "277.8" "276.1" "276.1"
-                  [8] "275.6" "275.6" "277.3" "276.7" "278.9"
+```{r comment=NA}
+as.character(twelveTemps)
+```
 
 One thing to notice about this result is that the second value, "280", is only three characters long, whereas all of the other values are five characters long.
 
@@ -3299,9 +3220,9 @@ There are several functions in R that we can use to resolve this problem.
 
 The format() function produces character values that have a “common format.” What that means depends on what sorts of values are being formatted, but in the case of a numeric vector, it means that the resulting character values are all of the same length. In the following result, the second value is five characters long, just like all of the other values.
 
-> format(twelveTemps)
-                  [1] "278.9" "280.0" "278.9" "278.9" "277.8" "276.1" "276.1"
-                  [8] "275.6" "275.6" "277.3" "276.7" "278.9"
+```{r comment=NA}
+format(twelveTemps)
+```
 
 The format() function has several arguments that provide some flexibility in the result, but its main benefit is that it displays all values with a common appearance.
 
@@ -3309,22 +3230,9 @@ For complete control over the conversion to text values, there is the sprintf() 
 
 The following code provides an example of the use of sprintf() that converts the twelveTemps numeric vector into a character vector where every numeric value is converted to a character value with two decimal places and a total of nine characters, followed by a space and a capital letter ‘K’ (for degrees Kelvin).
 
-> sprintf(fmt="%9.2f K", twelveTemps)
-[1] "
-[5] "
-[9] "
-278.90 K" "
-277.80 K" "
-275.60 K" "
-280.00 K" "
-276.10 K" "
-277.30 K" "
-278.90 K" "
-276.10 K" "
-276.70 K" "
-278.90 K"
-275.60 K"
-278.90 K"
+```{r comment=NA}
+sprintf(fmt="%9.2f K", twelveTemps)
+```
 
 The first argument to sprintf(), called fmt, defines the formatting of the values. The value of this argument can include special codes, like %9.2f. The first special code within the fmt argument is used to format the second argument to sprintf(), in this case the numeric vector twelveTemps.
 
@@ -3338,16 +3246,10 @@ nine characters in total: 9
 
 With the twelveTemps formatted like this, we can now use cat() to display the values on the screen in a format that is quite different from the display produced by print().
 
-> twelveTemps
- [1] 278.9 280.0 278.9 278.9 277.8 276.1 276.1 275.6 275.6
-[10] 277.3 276.7 278.9
-> cat(sprintf("%9.2f K", twelveTemps), fill=60)
-278.90 K
-276.10 K
-276.70 K
-280.00 K    278.90 K    278.90 K    277.80 K
-276.10 K    275.60 K    275.60 K    277.30 K
-278.90 K
+```{r comment=NA}
+twelveTemps
+cat(sprintf("%9.2f K", twelveTemps), fill = 60)
+```
 
 This sort of formatting can also be useful if we need to generate a plain text file with a particular format. Having generated a character vector as above, this can easily be written to an external text file using the writeLines() function or by specifying a filename for cat() to write to. If the file argument is specified in a call to cat(), then output is written to an external file rather than being displayed on the screen.
 
@@ -3359,20 +3261,20 @@ For example, way back in Section 2.1, we saw a very basic web page report about 
 
 This web page includes a summary table showing the range of temperature values for both Poles of Inaccessibility. R code that generates the table of ranges is shown below.
 
-> pointnemotemps <- read.fwf(file.path("LAS", "pointnemotemp.txt"),
-                           skip=8, widths=c(-23, 5),
-                           col.names=c("temp"))
-> eurasiantemps <- read.fwf(file.path("LAS", "eurasiantemp.txt"),
-                           skip=8, widths=c(-23, 5),
-                           col.names=c("temp"))
-> allTemps <- cbind(pacific=pointnemotemps$temp,
-                                eurasian=eurasiantemps$temp)
-> ranges <- round(rbind(min=apply(allTemps, 2, min),
-> ranges
-    pacific eurasian
-min     276      252
-max     283      307
-max=apply(allTemps, 2, max)))
+```{r comment=NA}
+pointnemotemps <- read.fwf(file.path("~/GitHub/ItDT", "pointnemotemp.txt"),
+                           skip = 8, widths = c(-23, 5),
+                           col.names = c("temp"))
+#eurasiantemps <- read.fwf(file.path("~/GitHub/ItDT", "eurasiantemp.txt"),
+#                          skip = 8, widths = c(-23, 5),
+#                          col.names = c("temp"))
+#allTemps <- cbind(pacific = pointnemotemps$temp,
+#                  eurasian = eurasiantemps$temp)
+allTemps <- cbind(pacific = pointnemotemps$temp)
+ranges <- round(rbind(min = apply(allTemps, 2, min), 
+                      max = apply(allTemps, 2, max)))
+ranges
+```
 
 The HTML code that includes this table in the web page is reproduced below. This is the most basic way to make use of R output; simply copy the R display directly into another document, with a monospace font.
 
@@ -3389,16 +3291,10 @@ However, this approach produces a very plain display. A more sophisticated appro
 
 Several R packages provide functions to carry out this task. For example, the hwriter package has an hwrite() function that converts an R table into text describing an HTML table.
 
-> library(hwriter)
-> cat(hwrite(ranges))
-           <table border="1">
-           <tr>
-           <td></td><td>pacific</td><td>eurasian</td></tr>
-           <tr>
-           <td>min</td><td>276</td><td>252</td></tr>
-           <tr>
-           <td>max</td><td>283</td><td>307</td></tr>
-           </table>
+```{r comment=NA}
+library(hwriter)
+cat(hwrite(ranges))
+```
 
 This approach allows us to integrate R results within a report more naturally and more aesthetically.
 
@@ -3422,7 +3318,7 @@ It is possible to format the display of R data structures so that they can be in
 
 A computer program is often described as “data structures + algorithms.”
 
-Most of this chapter has been concerned with data structures—how information is stored in computer memory—and a number of tools that allow us to convert one data structure into another sort of data structure in a single step.
+Most of this chapter has been concerned with data structures — how information is stored in computer memory — and a number of tools that allow us to convert one data structure into another sort of data structure in a single step.
 
 Algorithms are the series of steps that we take in order to carry out more complex tasks. Algorithms are what we use to combine smaller tasks into computer programs.
 
@@ -3432,20 +3328,20 @@ However, as we perform more complex data processing tasks, it becomes useful to 
 
 In this section, we will look at some slightly more advanced ideas for writing computer code. This treatment will barely scratch the surface of the topics available; the aim is to provide a very brief introduction to some useful ideas for writing larger amounts of more complex programming code.
 
-            VARIABLE : Mean Near-surface air temperature (kelvin)
-            FILENAME : ISCCPMonthly_avg.nc
-            FILEPATH : /usr/local/fer_data/data/
-            SUBSET   : 24 by 24 points (LONGITUDE-LATITUDE)
-            TIME     : 16-JAN-1995 00:00
-             113.8W 111.2W 108.8W 106.2W 103.8W 101.2W 98.8W  ...
-              27     28     29     30     31     32     33    ...
-36.2N / 51:  272.1  270.3  270.3  270.9  271.5  275.6  278.4  ...
-33.8N / 50:  282.2  282.2  272.7  272.7  271.5  280.0  281.6  ...
-31.2N / 49:  285.2  285.2  276.1  275.0  278.9  281.6  283.7  ...
-28.8N / 48:  290.7  286.8  286.8  276.7  277.3  283.2  287.3  ...
-26.2N / 47:  292.7  293.6  284.2  284.2  279.5  281.1  289.3  ...
-23.8N / 46:  293.6  295.0  295.5  282.7  282.7  281.6  285.2  ...
-...
+                VARIABLE : Mean Near-surface air temperature (kelvin)
+                FILENAME : ISCCPMonthly_avg.nc
+                FILEPATH : /usr/local/fer_data/data/
+                SUBSET   : 24 by 24 points (LONGITUDE-LATITUDE)
+                TIME     : 16-JAN-1995 00:00
+                 113.8W 111.2W 108.8W 106.2W 103.8W 101.2W 98.8W  ...  
+                  27     28     29     30     31     32     33    ...  
+    36.2N / 51:  272.1  270.3  270.3  270.9  271.5  275.6  278.4  ...  
+    33.8N / 50:  282.2  282.2  272.7  272.7  271.5  280.0  281.6  ...  
+    31.2N / 49:  285.2  285.2  276.1  275.0  278.9  281.6  283.7  ...  
+    28.8N / 48:  290.7  286.8  286.8  276.7  277.3  283.2  287.3  ...  
+    26.2N / 47:  292.7  293.6  284.2  284.2  279.5  281.1  289.3  ...  
+    23.8N / 46:  293.6  295.0  295.5  282.7  282.7  281.6  285.2  ...  
+    ...
 
 Figure 9.17: The first few lines of output from the Live Access Server for the near-surface air temperature of the earth for January 1995, over a coarse 24 by 24 grid of locations covering Central America.
 
@@ -3459,26 +3355,22 @@ Seventy-two of those files contain near-surface air temperature measurements, wi
 
 With the data expo files stored in a local directory, NASA/Files, the complete set of 72 filenames for the files containing temperature recordings can be generated by the following code (only the first six filenames are shown).
 
-> nasaAirTempFiles <- file.path("NASA", "Files",
-                                paste("temperature", 1:72, ".txt", sep = ""))
-> head(nasaAirTempFiles)
-           [1] "NASA/Files/temperature1.txt"
-           [2] "NASA/Files/temperature2.txt"
-           [3] "NASA/Files/temperature3.txt"
-           [4] "NASA/Files/temperature4.txt"
-           [5] "NASA/Files/temperature5.txt"
-           [6] "NASA/Files/temperature6.txt"
+```{r comment=NA}
+nasaAirTempFiles <- file.path("~/GitHub/ItDT",
+                              paste("temperature", 1:72, ".txt", sep = ""))
+head(nasaAirTempFiles)
+```
 
 We will conduct a simple task with these data: calculating the near-surface air temperature for each month, averaged over all locations. In other words, we will calculate a single average temperature from each file. The result will be a vector of 72 monthly averages.
 
 As a starting point, the following code reads in the data from just a single file, using the first filename, temperature1.txt, and averages all of the temperatures in that file.
 
-> tempDF <- read.fwf(nasaAirTempFiles[1],
-                             skip=7,
-                             widths=c(-12, rep(7, 24)))
-> tempMatrix <- as.matrix(tempDF)
-> mean(tempMatrix)
-[1] 295.1849
+```{r comment=NA}
+tempDF <- read.fwf(nasaAirTempFiles[1], skip = 7,
+                   widths = c(-12, rep(7, 24)))
+tempMatrix <- as.matrix(tempDF)
+mean(tempMatrix)
+```
 
 The call to read.fwf() ignores the first 7 lines of the file and the first 12 characters on each of the remaining lines of the file. This just leaves the temperature values, which are stored in RAM as a data frame, tempDF. This data frame is then converted into a matrix, tempMatrix, so that, in the final step, the mean() function can calculate the average across all of the temperature values.
 
@@ -3492,8 +3384,8 @@ In a programming language, if our code contains more than one expression, the ex
 
 For example, consider the following two expressions from the code in the previous section.
 
-tempMatrix <- as.matrix(tempDF)
-mean(tempMatrix)
+    tempMatrix <- as.matrix(tempDF)
+    mean(tempMatrix)
 
 In this code, the expression mean(tempMatrix) relies on the fact that the previous expression has already been run and that there is a matrix data structure stored in RAM for it to access via the symbol tempMatrix.
 
@@ -3501,30 +3393,31 @@ However, programming languages also provide ways to modify this basic rule and t
 
 Returning to our example of calculating an average value for each of 72 different files, the following code shows how to calculate these averages using a loop in R.
 
-> avgTemp <- numeric(72)
-> for (i in 1:72) {
-  tempDF <- read.fwf(nasaAirTempFiles[i],
-                     skip = 7,
+```{r comment=NA}
+avgTemp <- numeric(72)
+for (i in 1:72) {
+  tempDF <- read.fwf(nasaAirTempFiles[i], skip = 7,
                      widths = c(-12, rep(7, 24)))
   tempMatrix <- as.matrix(tempDF)
   avgTemp[i] <- mean(tempMatrix)
 }
+```
 
 The first expression is just a setup step that creates a vector of 72 zeroes. This vector will be used to store the 72 average values as we calculate them.
 
 The components of the actual loop are shown below.
 
-          keywords: for
-       parentheses: ( )
-       loop symbol: i
-loop symbol values: 1:72
-      open bracket: {
-         loop body:  tempDF <- read.fwf(nasaAirTempFiles[i],
-                                        skip = 7,
-                                        widths = c(-12, rep(7, 24)))
-                     tempMatrix <- as.matrix(tempDF)
-                     avgTemp[i] <- mean(tempMatrix)
-     close bracket: }
+              keywords: for
+           parentheses: ( )
+           loop symbol: i
+    loop symbol values: 1:72
+          open bracket: {
+             loop body:  tempDF <- read.fwf(nasaAirTempFiles[i],
+                                            skip = 7,
+                                            widths = c(-12, rep(7, 24)))
+                         tempMatrix <- as.matrix(tempDF)
+                         avgTemp[i] <- mean(tempMatrix)
+         close bracket: }
 
 The keywords, for and in, the brackets, and the parentheses will be the same in any loop that we write. The most important bits are the loop symbol, in this case the symbol i, and the values that the loop symbol can take, in this case, 1:72.
 
@@ -3538,19 +3431,9 @@ The important idea is that, although the code in the body of the loop remains co
 
 The overall result is that we read all 72 files, calculate an average from each one, and store the 72 averages in the vector avgTemp, which is shown below. 
 
-> avgTemp
-            [1] 295.1849 295.3175 296.3335 296.9587 297.7286 298.5809
-            [7] 299.1863 299.0660 298.4634 298.0564 296.7019 295.9568
-           [13] 295.3915 296.1486 296.1087 297.1007 298.3694 298.1970
-           [19] 298.4031 298.0682 298.3148 297.3823 296.1304 295.5917
-           [25] 295.5562 295.6438 296.8922 297.0823 298.4793 299.3575
-           [31] 299.7984 299.7314 299.6090 298.4970 297.9872 296.8453
-           [37] 296.9569 296.9354 297.0240 298.0668 299.1821 300.7290
-           [43] 300.6998 300.3715 300.1036 299.2269 297.8642 297.2729
-           [49] 296.8823 297.4288 297.5762 298.2859 299.1076 299.1938
-           [55] 299.0599 299.5424 298.9135 298.2849 297.0981 296.2639
-           [61] 296.1943 296.5868 297.5510 298.6106 299.7425 299.5219
-           [67] 299.7422 300.3411 299.5781 298.6965 297.0830 296.3813
+```{r comment=NA}
+avgTemp
+```
 
 ### 9.11.3 Writing functions
 
@@ -3564,7 +3447,7 @@ What we can do in this case is use sapply() to call a function once for each of 
 
 The call to the sapply() function that we would like to make is shown below.
 
-sapply(nasaAirTempFiles, calcMonthAvg)
+    sapply(nasaAirTempFiles, calcMonthAvg)
 
 The bad news is that the function calcMonthAvg() does not exist! There is no predefined function that can read a NASA air temperature file and return the average of all of the values in the file.
 
@@ -3572,43 +3455,39 @@ The good news is that we can very easily create this function ourselves.
 
 Here is code that creates a function called calcMonthAvg() to perform this task.
 
-> calcMonthAvg <- function(filename) {
-  tempDF <- read.fwf(filename,
-                     skip = 7,
-                     widths=c(-12, rep(7, 24)))
+```{r comment=NA}
+calcMonthAvg <- function(filename) {
+  tempDF <- read.fwf(filename, skip = 7,
+                     widths = c(-12, rep(7, 24)))
   tempMatrix <- as.matrix(tempDF)
   mean(tempMatrix)
 }
+```
 
 This code creates a function and assigns it to the symbol calcMonthAvg. In most examples in this chapter, we have stored data structures in RAM, but in this case, we have stored a function in RAM; we have stored some computer code in RAM. Just like with any other symbol, we can retrieve the function from RAM by referring to the symbol calcMonthAvg.
 
-> calcMonthAvg
-           function (filename)
-           {
-               tempDF <- read.fwf(filename, skip = 7,
-                   widths = c(-12, rep(7, 24)))
-               tempMatrix <- as.matrix(tempDF)
-               mean(tempMatrix)
-           }
+```{r comment=NA}
+calcMonthAvg
+```
 
 However, because this is a function, we can do more than just retrieve its value; we can also call the function. This is done just like any other function call we have ever made. We append parentheses to the symbol name and include arguments within the parentheses. The following code calls our new function to calculate the average for the first air temperature file.
-           
-> calcMonthAvg(nasaAirTempFiles[1])
-[1] 295.1849
+
+```{r comment=NA}
+calcMonthAvg(nasaAirTempFiles[1])
+```
 
 In order to understand what happens when we call our function, we need to take a closer look at the components of the code that was used to create the function.
 
-  function name: calcMonthAvg 
-        keyword: function
-    parentheses: ( )
-argument symbol: filename
-   open bracket: {
-  function body:   tempDF <- read.fwf(filename,
-                                      skip = 7,
-                                      widths = c(-12, rep(7, 24)))
-                   tempMatrix <- as.matrix(tempDF)
-                   mean(tempMatrix)
-  close bracket: }
+      function name: calcMonthAvg 
+            keyword: function
+        parentheses: ( )
+    argument symbol: filename
+       open bracket: {
+      function body:   tempDF <- read.fwf(filename, skip = 7,
+                                          widths = c(-12, rep(7, 24)))
+                       tempMatrix <- as.matrix(tempDF)
+                       mean(tempMatrix)
+      close bracket: }
 
 The keyword function, the brackets, and the parentheses will be the same for every function that we write. The important bits are the name we choose for the function and the argument symbols that we choose for the function.
 
@@ -3620,35 +3499,26 @@ The value returned by a function is the value of the last expression within the 
 
 As a simple example, the following code is a call to our calcMonthAvg() function that calculates the overall average temperature from the contents of the file temperature1.txt.
 
-> calcMonthAvg(nasaAirTempFiles[1])
-[1] 295.1849
+```{r comment=NA}
+calcMonthAvg(nasaAirTempFiles[1])
+```
 
 That function call produces exactly the same result as the following code.
 
-> tempDF <- read.fwf(nasaAirTempFiles[1],
-                     skip = 7,
-                     widths = c(-12, rep(7, 24)))
-> tempMatrix <- as.matrix(tempDF)
-> mean(tempMatrix)
+```{r comment=NA}
+tempDF <- read.fwf(nasaAirTempFiles[1], skip = 7,
+                   widths = c(-12, rep(7, 24)))
+tempMatrix <- as.matrix(tempDF)
+mean(tempMatrix)
+```
 
 The advantage of having defined the function calcMonthAvg() is that it is now possible to calculate the monthly averages from all of the temperature files using sapply().
 
 We supply the vector of filenames, nasaAirTempFiles, and our new function, calcMonthAvg(), and sapply() calls our function for each filename. The USE.NAMES argument is employed here to avoid having large, messy names on each element of the result.
 
-> sapply(nasaAirTempFiles, calcMonthAvg,
-                     USE.NAMES=FALSE)
-            [1] 295.1849 295.3175 296.3335 296.9587 297.7286 298.5809
-            [7] 299.1863 299.0660 298.4634 298.0564 296.7019 295.9568
-           [13] 295.3915 296.1486 296.1087 297.1007 298.3694 298.1970
-           [19] 298.4031 298.0682 298.3148 297.3823 296.1304 295.5917
-           [25] 295.5562 295.6438 296.8922 297.0823 298.4793 299.3575
-           [31] 299.7984 299.7314 299.6090 298.4970 297.9872 296.8453
-           [37] 296.9569 296.9354 297.0240 298.0668 299.1821 300.7290
-           [43] 300.6998 300.3715 300.1036 299.2269 297.8642 297.2729
-           [49] 296.8823 297.4288 297.5762 298.2859 299.1076 299.1938
-           [55] 299.0599 299.5424 298.9135 298.2849 297.0981 296.2639
-           [61] 296.1943 296.5868 297.5510 298.6106 299.7425 299.5219
-           [67] 299.7422 300.3411 299.5781 298.6965 297.0830 296.3813
+```{r comment=NA}
+sapply(nasaAirTempFiles, calcMonthAvg, USE.NAMES = FALSE)
+```
 
 This is the same as the result that was produced from an explicit loop (see page 382), but it uses only a single call to sapply().
 
@@ -3658,19 +3528,18 @@ The previous example demonstrates that it is useful to be able to define our own
 
 For example, the code below reproduces the loop that we wrote in Section 9.11.2, which calculates all 72 monthly averages.
 
-for (i in 1:72) {
-  tempDF <- read.fwf(nasaAirTempFiles[i],
-                     skip = 7,
-                     widths = c(-12, rep(7, 24)))
-  tempMatrix <- as.matrix(tempDF)
-  avgTemp[i] <- mean(tempMatrix)
-}
+    for (i in 1:72) {
+      tempDF <- read.fwf(nasaAirTempFiles[i], skip = 7,
+                         widths = c(-12, rep(7, 24)))
+      tempMatrix <- as.matrix(tempDF)
+      avgTemp[i] <- mean(tempMatrix)
+    }
 
 We can use the calcMonthAvg() function to make this code much simpler and easier to read.
 
-for (i in 1:72) {
-  avgTemp[i] <- calcMonthAvg(nasaAirTempFiles[i])
-}
+    for (i in 1:72) {
+      avgTemp[i] <- calcMonthAvg(nasaAirTempFiles[i])
+    }
 
 This sort of use for functions is just an extension of the ideas of laying out and documenting code for the benefit of human readers that we saw in Section 2.4.
 
@@ -3720,7 +3589,7 @@ There are many alternative programming languages, such as C, Perl, Python, and J
 
 It is also worth mentioning that many simple software tools exist, especially for processing text files. In particular, on Linux systems, there are programs such as sort for sorting files, grep for finding patterns in files, cut for removing pieces from each line of a file, and sed and awk for more powerful rearrangements of file contents. These tools are not as flexible or powerful as R, but they are extremely fast and will work on files of virtually any size. The Cygwin project [5] makes these tools available on Windows.
 
-Summary
+#### Summary
 
 A programming language provides great flexibility and power because it can be used to control the computer hardware, including accessing data from mass storage, processing data values within RAM, and displaying data on screen.
 
